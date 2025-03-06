@@ -332,4 +332,8 @@ export default {
   'filelist.modal.rename.placeholder': '请输入新的名称',
   'filelist.modal.rename.ok': '确定',
   'filelist.modal.rename.cancel': '取消',
+  'common.unknown': '未知',
+  'common.speed': '速度',
+  'common.timeSpent': '已用时间',
+  'common.remaining': '剩余时间',
 }; 

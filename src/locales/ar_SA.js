@@ -200,5 +200,9 @@ export default {
   'security.diagram.key': 'المفتاح',
   'security.diagram.aes.encryption': 'تشفير AES',
   'security.diagram.xor.operation': 'عملية XOR',
-  'security.diagram.iv': 'متجه التهيئة'
+  'security.diagram.iv': 'متجه التهيئة',
+  'common.unknown': 'غير معروف',
+  'common.speed': 'السرعة',
+  'common.timeSpent': 'الوقت المستغرق',
+  'common.remaining': 'المتبقي'
 }; 

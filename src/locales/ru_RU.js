@@ -186,5 +186,9 @@ export default {
   'decrypt.message.saveCancel': 'Сохранение файла {filename} отменено',
   'decrypt.message.downloadSuccess': 'Файл {filename} сохранен в папку загрузок',
   'decrypt.message.decryptError': 'Ошибка расшифровки файла {filename}: {error}',
-  'decrypt.message.batchError': 'Ошибка пакетной расшифровки, попробуйте снова'
+  'decrypt.message.batchError': 'Ошибка пакетной расшифровки, попробуйте снова',
+  'common.unknown': 'Неизвестно',
+  'common.speed': 'Скорость',
+  'common.timeSpent': 'Затраченное время',
+  'common.remaining': 'Осталось'
 }; 
