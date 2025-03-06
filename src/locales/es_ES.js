@@ -186,5 +186,12 @@ export default {
   'decrypt.message.saveCancel': 'Se canceló el guardado del archivo {filename}',
   'decrypt.message.downloadSuccess': 'El archivo {filename} se ha guardado en la carpeta de descargas',
   'decrypt.message.decryptError': 'Error al descifrar el archivo {filename}: {error}',
-  'decrypt.message.batchError': 'Error en el descifrado por lotes, por favor inténtalo de nuevo'
+  'decrypt.message.batchError': 'Error en el descifrado por lotes, por favor inténtalo de nuevo',
+  'sideMenu.storageInfo.title': 'Espacio de almacenamiento',
+  'sideMenu.storageInfo.usage': 'Usado {used} / Total {total}',
+  'sideMenu.storageStats.title': 'Estadísticas de almacenamiento',
+  'sideMenu.storageStats.overview': 'Resumen',
+  'sideMenu.storageStats.totalFiles': 'Total de archivos',
+  'sideMenu.storageStats.totalSize': 'Capacidad total',
+  'sideMenu.storageStats.fileTypes': 'Distribución por tipo de archivo'
 }; 

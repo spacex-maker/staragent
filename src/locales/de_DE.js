@@ -258,5 +258,12 @@ export default {
   'filelist.modal.rename.title': 'Umbenennen',
   'filelist.modal.rename.placeholder': 'Neuen Namen eingeben',
   'filelist.modal.rename.ok': 'OK',
-  'filelist.modal.rename.cancel': 'Abbrechen'
+  'filelist.modal.rename.cancel': 'Abbrechen',
+  'sideMenu.storageInfo.title': 'Speicherplatz',
+  'sideMenu.storageInfo.usage': 'Verwendet {used} / Gesamt {total}',
+  'sideMenu.storageStats.title': 'Speicherstatistik',
+  'sideMenu.storageStats.overview': 'Übersicht',
+  'sideMenu.storageStats.totalFiles': 'Gesamtanzahl Dateien',
+  'sideMenu.storageStats.totalSize': 'Gesamtkapazität',
+  'sideMenu.storageStats.fileTypes': 'Dateityp-Verteilung'
 }; 

@@ -283,5 +283,12 @@ export default {
   'decrypt.message.saveCancel': 'Cancelled saving file {filename}',
   'decrypt.message.downloadSuccess': 'File {filename} has been saved to downloads',
   'decrypt.message.decryptError': 'Failed to decrypt file {filename}: {error}',
-  'decrypt.message.batchError': 'Batch decryption failed, please try again'
+  'decrypt.message.batchError': 'Batch decryption failed, please try again',
+  'sideMenu.storageInfo.title': 'Storage Space',
+  'sideMenu.storageInfo.usage': 'Used {used} / Total {total}',
+  'sideMenu.storageStats.title': 'Storage Statistics',
+  'sideMenu.storageStats.overview': 'Overview',
+  'sideMenu.storageStats.totalFiles': 'Total Files',
+  'sideMenu.storageStats.totalSize': 'Total Size',
+  'sideMenu.storageStats.fileTypes': 'File Type Distribution'
 }; 

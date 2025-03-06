@@ -273,5 +273,12 @@ export default {
   'modal.newFolder.title': 'Nouveau dossier',
   'modal.newFolder.placeholder': 'Entrez le nom du dossier',
   'modal.newFolder.ok': 'Créer',
-  'modal.newFolder.cancel': 'Annuler'
+  'modal.newFolder.cancel': 'Annuler',
+  'sideMenu.storageInfo.title': 'Espace de stockage',
+  'sideMenu.storageInfo.usage': 'Utilisé {used} / Total {total}',
+  'sideMenu.storageStats.title': 'Statistiques de stockage',
+  'sideMenu.storageStats.overview': 'Aperçu',
+  'sideMenu.storageStats.totalFiles': 'Nombre total de fichiers',
+  'sideMenu.storageStats.totalSize': 'Capacité totale',
+  'sideMenu.storageStats.fileTypes': 'Distribution par type de fichier'
 }; 

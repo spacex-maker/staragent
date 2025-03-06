@@ -190,5 +190,12 @@ export default {
   'common.unknown': 'Неизвестно',
   'common.speed': 'Скорость',
   'common.timeSpent': 'Затраченное время',
-  'common.remaining': 'Осталось'
+  'common.remaining': 'Осталось',
+  'sideMenu.storageInfo.title': 'Объем хранилища',
+  'sideMenu.storageInfo.usage': 'Использовано {used} / Всего {total}',
+  'sideMenu.storageStats.title': 'Статистика хранилища',
+  'sideMenu.storageStats.overview': 'Обзор',
+  'sideMenu.storageStats.totalFiles': 'Всего файлов',
+  'sideMenu.storageStats.totalSize': 'Общий объем',
+  'sideMenu.storageStats.fileTypes': 'Распределение по типам файлов'
 }; 

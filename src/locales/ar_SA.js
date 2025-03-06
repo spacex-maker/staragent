@@ -204,5 +204,12 @@ export default {
   'common.unknown': 'غير معروف',
   'common.speed': 'السرعة',
   'common.timeSpent': 'الوقت المستغرق',
-  'common.remaining': 'المتبقي'
+  'common.remaining': 'المتبقي',
+  'sideMenu.storageInfo.title': 'مساحة التخزين',
+  'sideMenu.storageInfo.usage': 'مستخدم {used} / الإجمالي {total}',
+  'sideMenu.storageStats.title': 'إحصائيات التخزين',
+  'sideMenu.storageStats.overview': 'نظرة عامة',
+  'sideMenu.storageStats.totalFiles': 'إجمالي الملفات',
+  'sideMenu.storageStats.totalSize': 'السعة الإجمالية',
+  'sideMenu.storageStats.fileTypes': 'توزيع أنواع الملفات'
 }; 

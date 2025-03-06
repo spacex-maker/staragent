@@ -336,4 +336,11 @@ export default {
   'common.speed': '速度',
   'common.timeSpent': '已用时间',
   'common.remaining': '剩余时间',
+  'sideMenu.storageInfo.title': '存储空间',
+  'sideMenu.storageInfo.usage': '已使用 {used} / 共 {total}',
+  'sideMenu.storageStats.title': '存储空间统计',
+  'sideMenu.storageStats.overview': '总览',
+  'sideMenu.storageStats.totalFiles': '文件总数',
+  'sideMenu.storageStats.totalSize': '总容量',
+  'sideMenu.storageStats.fileTypes': '文件类型分布',
 }; 

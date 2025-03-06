@@ -278,5 +278,12 @@ export default {
   'filelist.modal.rename.title': '名前変更',
   'filelist.modal.rename.placeholder': '新しい名前を入力',
   'filelist.modal.rename.ok': 'OK',
-  'filelist.modal.rename.cancel': 'キャンセル'
+  'filelist.modal.rename.cancel': 'キャンセル',
+  'sideMenu.storageInfo.title': 'ストレージ容量',
+  'sideMenu.storageInfo.usage': '使用中 {used} / 合計 {total}',
+  'sideMenu.storageStats.title': 'ストレージ統計',
+  'sideMenu.storageStats.overview': '概要',
+  'sideMenu.storageStats.totalFiles': 'ファイル総数',
+  'sideMenu.storageStats.totalSize': '総容量',
+  'sideMenu.storageStats.fileTypes': 'ファイルタイプ分布'
 }; 

@@ -208,5 +208,12 @@ export default {
   'decrypt.message.saveCancel': 'Salvataggio del file {filename} annullato',
   'decrypt.message.downloadSuccess': 'Il file {filename} è stato salvato nella cartella download',
   'decrypt.message.decryptError': 'Errore durante la decrittazione del file {filename}: {error}',
-  'decrypt.message.batchError': 'Decrittazione in batch fallita, riprova'
+  'decrypt.message.batchError': 'Decrittazione in batch fallita, riprova',
+  'sideMenu.storageInfo.title': 'Spazio di archiviazione',
+  'sideMenu.storageInfo.usage': 'Utilizzato {used} / Totale {total}',
+  'sideMenu.storageStats.title': 'Statistiche di archiviazione',
+  'sideMenu.storageStats.overview': 'Panoramica',
+  'sideMenu.storageStats.totalFiles': 'Totale file',
+  'sideMenu.storageStats.totalSize': 'Capacità totale',
+  'sideMenu.storageStats.fileTypes': 'Distribuzione per tipo di file'
 }; 

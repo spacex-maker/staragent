@@ -19,6 +19,7 @@ import ProductLogModal from 'components/modals/ProductLogModal';
 import { useNavigate } from 'react-router-dom';
 import { CollapseTrigger, Overlay } from '../styles/StyledComponents';
 import styled from 'styled-components';
+import StorageInfo from './StorageInfo';
 
 const { Sider } = Layout;
 
@@ -229,6 +230,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ selectedKeys, onSelect, collapsed, 
           items={bottomMenuItems}
           onSelect={handleMenuSelect}
         />
+        {!collapsed && <StorageInfo />}
       </StyledSider>
 
       <CollapseTrigger

@@ -259,5 +259,12 @@ export default {
   'decrypt.fileInfo.timeSpent': '소요 시간',
   'decrypt.fileInfo.error': '오류 메시지',
   'page.decrypt.title': '복호화 도구',
-  'page.decrypt.subtitle': '파일을 안전하고 빠르게 복호화'
+  'page.decrypt.subtitle': '파일을 안전하고 빠르게 복호화',
+  'sideMenu.storageInfo.title': '저장 공간',
+  'sideMenu.storageInfo.usage': '사용 {used} / 전체 {total}',
+  'sideMenu.storageStats.title': '저장소 통계',
+  'sideMenu.storageStats.overview': '개요',
+  'sideMenu.storageStats.totalFiles': '총 파일 수',
+  'sideMenu.storageStats.totalSize': '총 용량',
+  'sideMenu.storageStats.fileTypes': '파일 유형 분포'
 }; 
