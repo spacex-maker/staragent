@@ -3,8 +3,6 @@ import { Modal, Button, Progress, Table, Space, Badge, Tooltip, Typography, mess
 import type { ColumnsType } from 'antd/es/table';
 import type { TableRowSelection } from 'antd/es/table/interface';
 import type { AlignType } from 'rc-table/lib/interface';
-import type { ButtonType } from 'antd/es/button';
-import type { BaseButtonProps } from 'antd/es/button/button';
 import { 
   WarningFilled,
   DeleteOutlined,

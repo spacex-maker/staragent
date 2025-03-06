@@ -53,6 +53,11 @@ class COSService {
         }
       }
 
+      // 添加控制台输出
+      console.log(`开始上传文件: ${file.name}`);
+      console.log(`上传方式: ${useChunkUpload ? '分片上传' : '普通上传'}`);
+      console.log(`文件大小: ${(file.size / (1024 * 1024)).toFixed(2)}MB`);
+
       return new Promise((resolve, reject) => {
         const key = path ? `${path}${file.name}` : file.name;
         let lastProgress = resumeData ? resumeData.progress : 0;
