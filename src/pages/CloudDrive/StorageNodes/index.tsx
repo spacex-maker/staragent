@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { CloudServerOutlined, LineChartOutlined, DollarOutlined } from '@ant-design/icons';
+import { CloudServerOutlined, LineChartOutlined, DollarOutlined, CloudOutlined } from '@ant-design/icons';
 import NodeRecommendation from './components/NodeRecommendation';
 import NodeComparison from './components/NodeComparison';
 import CloudPriceComparison from './components/CloudPriceComparison';
+import CloudProviders from './components/CloudProviders';
 
 const { TabPane } = Tabs;
 
@@ -97,6 +98,17 @@ const StorageNodes: React.FC = () => {
         key="price"
       >
         <CloudPriceComparison />
+      </TabPane>
+      <TabPane
+        tab={
+          <span>
+            <CloudOutlined style={{ marginRight: 8 }} />
+            <FormattedMessage id="storageNodes.tab.providers" defaultMessage="云厂商" />
+          </span>
+        }
+        key="providers"
+      >
+        <CloudProviders />
       </TabPane>
     </StyledTabs>
   );
