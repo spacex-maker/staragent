@@ -41,6 +41,13 @@ interface CloudProviderRegion {
   status: string;
 }
 
+interface CountryFlag {
+  name: string;
+  localName: string | null;
+  code: string;
+  flagImageUrl: string;
+}
+
 export const getStorageInfo = async (): Promise<{
   success: boolean;
   message: string;
@@ -106,6 +113,22 @@ export const getCloudProviderRegions = async (providerId: number, countryCode?: 
     return {
       success: false,
       message: error.response?.data?.message || '获取云厂商地域信息失败'
+    };
+  }
+};
+
+export const getAllCountryFlags = async (): Promise<{
+  success: boolean;
+  message: string;
+  data?: CountryFlag[];
+}> => {
+  try {
+    const response = await instance.get('/base/countries/list-all-flag');
+    return response.data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response?.data?.message || '获取国家国旗信息失败'
     };
   }
 }; 

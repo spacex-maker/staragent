@@ -5,12 +5,10 @@ import styled from 'styled-components';
 import { 
   CloudServerOutlined, 
   GlobalOutlined,
-  AliyunOutlined,
-  GoogleOutlined,
-  AmazonOutlined,
-  EnvironmentOutlined
+  EnvironmentOutlined,
+  RightOutlined
 } from '@ant-design/icons';
-import { getActiveCloudProviders, getCloudProviderRegions } from 'services/storageService';
+import { getActiveCloudProviders, getCloudProviderRegions, getAllCountryFlags } from 'services/storageService';
 
 const { Title, Text } = Typography;
 
@@ -51,6 +49,7 @@ const StyledCard = styled(Card)`
 
 const ProviderCard = styled(Card)`
   height: 100%;
+  margin: 4px 0;
   background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.02)' : '#fff'};
   border: 1px solid ${props => props.theme.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.08)'
@@ -61,26 +60,40 @@ const ProviderCard = styled(Card)`
   &:hover {
     border-color: #1677ff;
     transform: translateY(-2px);
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08);
   }
 
   .ant-card-body {
     padding: 20px;
+    height: 100%;
   }
 `;
 
+const ProviderHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+`;
+
+const ProviderTitleWrapper = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
 const ProviderLogo = styled.div`
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
   background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : '#f0f2f5'};
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
   overflow: hidden;
 
   .anticon {
-    font-size: 32px;
+    font-size: 24px;
     color: #1677ff;
   }
 
@@ -88,33 +101,66 @@ const ProviderLogo = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 12px;
+    padding: 8px;
   }
 `;
 
-const ProviderName = styled(Title)`
-  margin: 0 0 8px 0 !important;
-  font-size: 18px !important;
+const ProviderContent = styled.div`
+  flex: 1;
+  min-width: 0;
 `;
 
-const ProviderInfo = styled(Text)`
-  display: block;
-  margin-bottom: 4px;
+const ProviderName = styled(Title)`
+  margin: 0 0 4px 0 !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  
+  /* 确保长标题不会换行 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const WebsiteIcon = styled.a`
   color: ${props => props.theme.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.45)'
     : 'rgba(0, 0, 0, 0.45)'};
-`;
-
-const WebsiteLink = styled.a`
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  color: #1677ff;
-  margin-top: 12px;
   transition: all 0.3s ease;
 
   &:hover {
-    opacity: 0.8;
+    color: #1677ff;
+  }
+`;
+
+const ProviderInfo = styled(Text)`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  color: ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.45)'
+    : 'rgba(0, 0, 0, 0.45)'};
+  font-size: 13px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-label {
+    flex-shrink: 0;
+    color: ${props => props.theme.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.65)'
+      : 'rgba(0, 0, 0, 0.65)'};
+  }
+
+  .info-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
@@ -168,6 +214,15 @@ const StyledList = styled(List)`
   }
 `;
 
+const CountryFlag = styled.img`
+  width: 24px;
+  height: 16px;
+  border-radius: 2px;
+  object-fit: cover;
+  margin-right: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+`;
+
 const RegionHeader = styled.div`
   display: flex;
   align-items: center;
@@ -181,6 +236,11 @@ const RegionHeader = styled.div`
   .anticon {
     color: #1677ff;
     font-size: 18px;
+  }
+
+  .country-info {
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -231,14 +291,70 @@ const SelectedProviderInfo = styled.div`
   margin-bottom: 24px;
 `;
 
+const ScrollContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+
+  /* 隐藏滚动条但保持可滚动 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+`;
+
+const FixedWidthRow = styled(Row)`
+  flex-wrap: nowrap;
+  width: max-content;
+  min-width: 100%;
+`;
+
+const FixedWidthCol = styled(Col)`
+  width: 300px;
+  flex: 0 0 300px;
+`;
+
+const ScrollHint = styled.div`
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)'};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.65)' : 'rgba(0, 0, 0, 0.45)'};
+  animation: fadeInOut 2s infinite;
+  pointer-events: none;
+  z-index: 1;
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .anticon {
+    font-size: 16px;
+  }
+`;
+
+const ScrollWrapper = styled.div`
+  position: relative;
+`;
+
 const getProviderIcon = (providerName: string) => {
   const icons: Record<string, string> = {
     'Alibaba Cloud': 'https://img.alicdn.com/tfs/TB1_ZXuNcfpK1RjSZFOXXa6nFXa-32-32.ico',
     'Tencent Cloud': 'https://cloud.tencent.com/favicon.ico',
     'Huawei Cloud': 'https://www.huaweicloud.com/favicon.ico',
     'Baidu AI Cloud': 'https://bce.bdstatic.com/img/favicon.ico',
-    'AWS': 'https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico',
-    'Google Cloud': 'https://www.gstatic.com/devrel-devsite/prod/v45f61267e22826169cf5d5f452882f7812c8cfb5f8b103a48c0d88727908b295/cloud/images/favicons/onecloud/favicon.ico',
+    'Amazon Web Services (AWS)': 'https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico',
+    'Google Cloud': 'https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/favicon.ico',
     'Microsoft Azure': 'https://azure.microsoft.com/favicon.ico',
   };
 
@@ -251,34 +367,45 @@ const CloudProviders: React.FC = () => {
   const [selectedProvider, setSelectedProvider] = useState<any>(null);
   const [regions, setRegions] = useState<any[]>([]);
   const [regionsLoading, setRegionsLoading] = useState(false);
+  const [countryFlags, setCountryFlags] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const fetchProviders = async () => {
+    const fetchData = async () => {
       try {
-        const response = await getActiveCloudProviders();
-        if (response.success && response.data) {
-          setProviders(response.data);
+        const [providersResponse, flagsResponse] = await Promise.all([
+          getActiveCloudProviders(),
+          getAllCountryFlags()
+        ]);
+
+        if (providersResponse.success && providersResponse.data) {
+          setProviders(providersResponse.data);
+          if (providersResponse.data.length > 0) {
+            const firstProvider = providersResponse.data[0];
+            setSelectedProvider(firstProvider);
+            fetchRegions(firstProvider);
+          }
         } else {
-          message.error(response.message);
+          message.error(providersResponse.message);
+        }
+
+        if (flagsResponse.success && flagsResponse.data) {
+          const flagsMap = flagsResponse.data.reduce((acc, country) => {
+            acc[country.code] = country.flagImageUrl;
+            return acc;
+          }, {} as Record<string, string>);
+          setCountryFlags(flagsMap);
         }
       } catch (error) {
-        message.error('获取云厂商信息失败');
+        message.error('获取数据失败');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProviders();
+    fetchData();
   }, []);
 
-  const handleProviderClick = async (provider: any) => {
-    if (selectedProvider?.id === provider.id) {
-      setSelectedProvider(null);
-      setRegions([]);
-      return;
-    }
-
-    setSelectedProvider(provider);
+  const fetchRegions = async (provider: any) => {
     setRegionsLoading(true);
     try {
       const response = await getCloudProviderRegions(provider.id);
@@ -299,6 +426,17 @@ const CloudProviders: React.FC = () => {
     } finally {
       setRegionsLoading(false);
     }
+  };
+
+  const handleProviderClick = async (provider: any) => {
+    if (selectedProvider?.id === provider.id) {
+      setSelectedProvider(null);
+      setRegions([]);
+      return;
+    }
+
+    setSelectedProvider(provider);
+    await fetchRegions(provider);
   };
 
   const renderProviderLogo = (provider: any) => {
@@ -340,14 +478,18 @@ const CloudProviders: React.FC = () => {
             dataSource={regions}
             renderItem={item => {
               const [countryCode, regionList] = item as [string, any[]];
+              const flagUrl = countryFlags[countryCode];
               return (
                 <List.Item>
                   <div style={{ width: '100%' }}>
                     <RegionHeader>
                       <EnvironmentOutlined />
-                      <Title level={5} style={{ margin: 0 }}>
-                        {countryCode}
-                      </Title>
+                      <div className="country-info">
+                        {flagUrl && <CountryFlag src={flagUrl} alt={countryCode} />}
+                        <Title level={5} style={{ margin: 0 }}>
+                          {countryCode}
+                        </Title>
+                      </div>
                       <Text type="secondary" style={{ marginLeft: 'auto' }}>
                         {regionList.length} <FormattedMessage id="cloudProviders.regions" defaultMessage="个地域" />
                       </Text>
@@ -405,37 +547,63 @@ const CloudProviders: React.FC = () => {
 
       {providers.length > 0 ? (
         <>
-          <Row gutter={[24, 24]}>
-            {providers.map(provider => (
-              <Col xs={24} sm={12} md={8} lg={6} key={provider.id}>
-                <ProviderCard 
-                  onClick={() => handleProviderClick(provider)} 
-                  style={{ 
-                    cursor: 'pointer',
-                    borderColor: selectedProvider?.id === provider.id ? '#1677ff' : undefined
-                  }}
-                >
-                  {renderProviderLogo(provider)}
-                  <ProviderName level={5}>{provider.providerName}</ProviderName>
-                  <ProviderInfo>
-                    <FormattedMessage id="cloudProviders.country" defaultMessage="国家/地区" />: {provider.countryCode}
-                  </ProviderInfo>
-                  <ProviderInfo>
-                    <FormattedMessage id="cloudProviders.type" defaultMessage="服务类型" />: {provider.serviceType}
-                  </ProviderInfo>
-                  <WebsiteLink 
-                    href={provider.website} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <GlobalOutlined />
-                    <FormattedMessage id="cloudProviders.website" defaultMessage="访问官网" />
-                  </WebsiteLink>
-                </ProviderCard>
-              </Col>
-            ))}
-          </Row>
+          <ScrollWrapper>
+            <ScrollContainer>
+              <FixedWidthRow gutter={[24, 24]}>
+                {providers.map(provider => (
+                  <FixedWidthCol key={provider.id}>
+                    <ProviderCard 
+                      onClick={() => handleProviderClick(provider)} 
+                      style={{ 
+                        cursor: 'pointer',
+                        borderColor: selectedProvider?.id === provider.id ? '#1677ff' : undefined
+                      }}
+                    >
+                      <ProviderHeader>
+                        {renderProviderLogo(provider)}
+                        <ProviderTitleWrapper>
+                          <ProviderName level={5} title={provider.providerName}>
+                            {provider.providerName}
+                          </ProviderName>
+                          {provider.website && (
+                            <Tooltip title={<FormattedMessage id="cloudProviders.website" defaultMessage="访问官网" />}>
+                              <WebsiteIcon
+                                href={provider.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <GlobalOutlined />
+                              </WebsiteIcon>
+                            </Tooltip>
+                          )}
+                        </ProviderTitleWrapper>
+                      </ProviderHeader>
+                      <ProviderContent>
+                        <ProviderInfo>
+                          <span className="info-label">
+                            <FormattedMessage id="cloudProviders.country" defaultMessage="国家/地区" />:
+                          </span>
+                          <span className="info-value">{provider.countryCode}</span>
+                        </ProviderInfo>
+                        <ProviderInfo>
+                          <span className="info-label">
+                            <FormattedMessage id="cloudProviders.type" defaultMessage="服务类型" />:
+                          </span>
+                          <span className="info-value">{provider.serviceType}</span>
+                        </ProviderInfo>
+                      </ProviderContent>
+                    </ProviderCard>
+                  </FixedWidthCol>
+                ))}
+              </FixedWidthRow>
+            </ScrollContainer>
+            {providers.length > 4 && (
+              <ScrollHint>
+                <RightOutlined />
+              </ScrollHint>
+            )}
+          </ScrollWrapper>
           {renderRegions()}
         </>
       ) : (
