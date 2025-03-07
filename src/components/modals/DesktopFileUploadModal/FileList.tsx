@@ -51,8 +51,7 @@ const FileList: React.FC<FileListProps> = ({
       dataIndex: 'name',
       key: 'name',
       align: 'left' as AlignType,
-      width: '70%',
-      ellipsis: true,
+      width: 'auto',
       render: (text: string, record: UploadFile) => (
         <FileNameCell record={record} />
       ),
@@ -61,7 +60,7 @@ const FileList: React.FC<FileListProps> = ({
       title: <FormattedMessage id="modal.fileUpload.table.status" />,
       dataIndex: 'status',
       key: 'status',
-      width: 100,
+      width: 120,
       align: 'center' as AlignType,
       render: (_: any, record: UploadFile) => (
         <StatusCell status={record.status} isDuplicate={record.isDuplicate} />
@@ -70,7 +69,7 @@ const FileList: React.FC<FileListProps> = ({
     {
       title: <FormattedMessage id="modal.fileUpload.table.actions" />,
       key: 'actions',
-      width: 100,
+      width: 80,
       align: 'center' as AlignType,
       fixed: 'right' as const,
       render: (_: any, record: UploadFile) => {
@@ -140,7 +139,7 @@ const FileList: React.FC<FileListProps> = ({
       }))}
       pagination={false}
       size="small"
-      scroll={{ y: 350, x: 'max-content' }}
+      scroll={{ y: 350, x: '100%' }}
       locale={{
         emptyText: '没有选择文件'
       }}

@@ -6,6 +6,7 @@ import { formatFileSize } from 'utils/format';
 import FileItem from '../FileItem';
 import FileActions from '../FileActions';
 import FileSize from '../FileSize';
+import { Grid } from 'antd';
 
 interface FileHandlers {
   onFolderClick: (record: FileModel) => void;
@@ -30,13 +31,17 @@ export const useColumns = ({
   handlers,
   deletingIds,
 }: UseColumnsProps) => {
+  const screens = Grid.useBreakpoint();
+
   const columns: ColumnsType<FileModel> = useMemo(() => [
     {
       title: <FormattedMessage id="filelist.column.name" />,
       dataIndex: 'name',
       key: 'name',
       ellipsis: true,
-      width: '50%',
+      width: screens.md ? '60%' : '50%',
+      align: 'center',
+      titleAlign: 'left',
       render: (_, record: FileModel) => (
         <FileItem
           file={record}
@@ -48,7 +53,8 @@ export const useColumns = ({
       title: <FormattedMessage id="filelist.column.size" />,
       dataIndex: 'size',
       key: 'size',
-      width: 120,
+      width: screens.md ? 100 : 90,
+      align: 'center',
       render: (_, record: FileModel) => <FileSize file={record} />,
       sorter: (a: FileModel, b: FileModel) => {
         if (a.size == null) return -1;
@@ -61,13 +67,15 @@ export const useColumns = ({
       title: <FormattedMessage id="filelist.column.updateTime" />,
       dataIndex: 'updateTime',
       key: 'updateTime',
-      width: 180,
+      width: screens.md ? 160 : 140,
+      align: 'center',
     },
     {
       title: <FormattedMessage id="filelist.column.actions" />,
       key: 'actions',
       fixed: 'right',
-      width: 80,
+      width: screens.md ? 90 : 80,
+      align: 'center',
       render: (_, record: FileModel) => (
         <FileActions
           record={record}
@@ -78,7 +86,7 @@ export const useColumns = ({
         />
       ),
     },
-  ], [handlers, deletingIds]);
+  ], [handlers, deletingIds, screens]);
 
   return columns;
 }; 

@@ -7,6 +7,7 @@ import { formatFileSize } from 'utils/format';
 import FileItem from '../../AllFiles/components/FileItem';
 import { TableWrapper } from './styles';
 import type { FileModel } from 'models/file/FileModel';
+import { useMediaQuery } from 'react-responsive';
 
 interface FileTableProps {
   loading: boolean;
@@ -33,14 +34,17 @@ const FileTable: React.FC<FileTableProps> = ({
   onRestore,
   onDelete
 }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   const columns: ColumnsType<FileModel> = [
     {
       title: <FormattedMessage id="filelist.column.name" />,
       dataIndex: 'name',
       key: 'name',
       ellipsis: true,
-      width: '50%',
-      render: (_, record: FileModel) => (
+      width: isMobile ? '60%' : 'auto',
+      flex: isMobile ? undefined : 1,
+      render: (_: string, record: FileModel) => (
         <FileItem file={record} />
       ),
     },
@@ -48,14 +52,16 @@ const FileTable: React.FC<FileTableProps> = ({
       title: <FormattedMessage id="filelist.column.size" />,
       dataIndex: 'size',
       key: 'size',
-      width: 120,
+      width: isMobile ? '40%' : 100,
+      align: 'center',
       render: (size: number) => formatFileSize(size),
     },
-    {
+    !isMobile && {
       title: <FormattedMessage id="filelist.column.actions" />,
       key: 'actions',
-      width: 120,
-      render: (_, record: FileModel) => (
+      width: 80,
+      align: 'center',
+      render: (_: unknown, record: FileModel) => (
         <Space size={4}>
           <Button
             type="text"
@@ -73,7 +79,7 @@ const FileTable: React.FC<FileTableProps> = ({
         </Space>
       ),
     },
-  ];
+  ].filter(Boolean) as ColumnsType<FileModel>;
 
   return (
     <TableWrapper>
@@ -95,8 +101,9 @@ const FileTable: React.FC<FileTableProps> = ({
           pageSize: pagination.pageSize,
           total: pagination.total,
           onChange: onPageChange,
-          showSizeChanger: true,
-          showQuickJumper: true,
+          showSizeChanger: !isMobile,
+          showQuickJumper: !isMobile,
+          size: isMobile ? 'small' : 'default',
           showTotal: (total) => `共 ${total} 项`
         }}
       />

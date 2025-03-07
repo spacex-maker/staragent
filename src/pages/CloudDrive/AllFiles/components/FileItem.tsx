@@ -7,7 +7,6 @@ import { useIntl } from 'react-intl';
 import RenameModal from './RenameModal';
 import FileIcon from './FileIcon';
 import FileName from './FileName';
-import FileSize from './FileSize';
 
 const FileItemWrapper = styled.div`
   display: flex;
@@ -25,8 +24,25 @@ const FileInfo = styled.div`
   flex: 1;
   min-width: 0;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+`;
+
+const FileNameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+`;
+
+const FileNameWrapper = styled.div`
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+`;
+
+const ActionButton = styled(Button)`
+  flex-shrink: 0;
+  margin-left: 4px;
 `;
 
 interface FileItemProps {
@@ -45,11 +61,13 @@ const FileItem: React.FC<FileItemProps> = ({
     <FileItemWrapper>
       <FileIcon file={file} />
       <FileInfo>
-        <Space>
-          <FileName file={file} onClick={onFolderClick} />
+        <FileNameContainer>
+          <FileNameWrapper>
+            <FileName file={file} onClick={onFolderClick} />
+          </FileNameWrapper>
           {file.isDirectory && (
             <Tooltip title={intl.formatMessage({ id: 'filelist.action.rename' })}>
-              <Button
+              <ActionButton
                 type="text"
                 icon={<EditOutlined />}
                 size="small"
@@ -60,7 +78,7 @@ const FileItem: React.FC<FileItemProps> = ({
               />
             </Tooltip>
           )}
-        </Space>
+        </FileNameContainer>
       </FileInfo>
 
       <RenameModal

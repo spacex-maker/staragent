@@ -10,6 +10,7 @@ import AllFiles from './AllFiles';
 import Starred from './Starred';
 import Folders from './Folders';
 import Trash from './Trash';
+import StorageNodes from './StorageNodes';
 
 const { Content, Sider } = Layout;
 
@@ -58,6 +59,8 @@ const CloudDrivePage = () => {
         return <Folders />;
       case 'trash':
         return <Trash />;
+      case 'storageNodes':
+        return <StorageNodes />;
       default:
         return <AllFiles />;
     }

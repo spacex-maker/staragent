@@ -11,6 +11,7 @@ import {
   MenuUnfoldOutlined,
   LockOutlined,
   HistoryOutlined,
+  CloudServerOutlined,
 } from '@ant-design/icons';
 import { FormattedMessage } from 'react-intl';
 import FeedbackModalEntry from 'components/modals/FeedbackModalEntry';
@@ -133,27 +134,32 @@ const SideMenu: React.FC<SideMenuProps> = ({ selectedKeys, onSelect, collapsed, 
   const mainMenuItems = [
     {
       key: 'all',
-      icon: <CloudOutlined />,
+      icon: <CloudOutlined style={{ color: '#3b82f6' }} />,
       label: <FormattedMessage id="sidebar.allFiles" />
     },
     {
       key: 'starred',
-      icon: <StarOutlined />,
+      icon: <StarOutlined style={{ color: '#f59e0b' }} />,
       label: <FormattedMessage id="sidebar.starred" />
     },
     {
       key: 'folders',
-      icon: <FolderOutlined />,
+      icon: <FolderOutlined style={{ color: '#10b981' }} />,
       label: <FormattedMessage id="sidebar.folders" />
     },
     {
       key: 'trash',
-      icon: <DeleteOutlined />,
+      icon: <DeleteOutlined style={{ color: '#ef4444' }} />,
       label: <FormattedMessage id="sidebar.trash" />
     },
     {
+      key: 'storageNodes',
+      icon: <CloudServerOutlined style={{ color: '#8b5cf6' }} />,
+      label: <FormattedMessage id="sidebar.storageNodes" defaultMessage="存储节点" />
+    },
+    {
       key: 'decrypt',
-      icon: <LockOutlined />,
+      icon: <LockOutlined style={{ color: '#8b5cf6' }} />,
       label: <FormattedMessage id="sidebar.decrypt" />
     }
   ];
@@ -161,17 +167,17 @@ const SideMenu: React.FC<SideMenuProps> = ({ selectedKeys, onSelect, collapsed, 
   const bottomMenuItems = [
     {
       key: 'productLog',
-      icon: <HistoryOutlined />,
+      icon: <HistoryOutlined style={{ color: '#6b7280' }} />,
       label: <FormattedMessage id="sidebar.productLog" defaultMessage="产品日志" />
     },
     {
       key: 'feedback',
-      icon: <CommentOutlined />,
+      icon: <CommentOutlined style={{ color: '#6b7280' }} />,
       label: <FormattedMessage id="sidebar.feedback" />
     },
     {
       key: 'about',
-      icon: <InfoCircleOutlined />,
+      icon: <InfoCircleOutlined style={{ color: '#6b7280' }} />,
       label: <FormattedMessage id="sidebar.about" />
     }
   ];
@@ -237,7 +243,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ selectedKeys, onSelect, collapsed, 
         onClick={() => onCollapse(!collapsed)}
         collapsed={collapsed}
       >
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        {collapsed ? 
+          <MenuUnfoldOutlined style={{ color: '#3b82f6' }} /> : 
+          <MenuFoldOutlined style={{ color: '#3b82f6' }} />
+        }
       </CollapseTrigger>
 
       <Overlay 

@@ -23,6 +23,7 @@ import { Helmet } from 'react-helmet';
 import FileDecryptPage from './pages/FileDecrypt';
 import TestCrypto from './pages/TestCrypto';
 import HomePage from './pages/Home';
+import StorageNodes from './pages/CloudDrive/StorageNodes';
 
 // 语言配置映射
 const localeMap = {
@@ -255,6 +256,16 @@ export default function App() {
               } />
               <Route path="/decrypt" element={<FileDecryptPage />} />
               <Route path="/test-crypto" element={<TestCrypto />} />
+              <Route
+                path="/cloud-drive/storage-nodes"
+                element={
+                  <PrivateRoute>
+                    <CloudDrivePage>
+                      <StorageNodes />
+                    </CloudDrivePage>
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </Router>
         </ConfigProvider>

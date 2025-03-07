@@ -35,6 +35,8 @@ const ToolBar: React.FC<ToolBarProps> = ({
       <RoundedButton
         icon={<UndoOutlined />}
         onClick={onBatchRestore}
+        block={isMobile}
+        size={isMobile ? "large" : "middle"}
       >
         还原
       </RoundedButton>
@@ -42,6 +44,8 @@ const ToolBar: React.FC<ToolBarProps> = ({
         danger
         icon={<DeleteOutlined />}
         onClick={onBatchDelete}
+        block={isMobile}
+        size={isMobile ? "large" : "middle"}
       >
         永久删除
       </RoundedButton>
@@ -55,13 +59,14 @@ const ToolBar: React.FC<ToolBarProps> = ({
     <>
       <ToolBarWrapper>
         <Space size={8}>
-          <RoundedButton
+          <Button
             icon={<ReloadOutlined />}
             onClick={onRefresh}
             loading={loading}
+            size={isMobile ? "middle" : "middle"}
           >
             <FormattedMessage id="filelist.action.refresh" />
-          </RoundedButton>
+          </Button>
           {!isMobile && actionButtons}
         </Space>
         <RoundedSearch
@@ -70,7 +75,7 @@ const ToolBar: React.FC<ToolBarProps> = ({
           value={searchText}
           onChange={e => onSearch(e.target.value)}
           allowClear
-          style={{ width: 200 }}
+          style={{ width: isMobile ? 160 : 200 }}
         />
       </ToolBarWrapper>
       {isMobile && selectedCount > 0 && (
