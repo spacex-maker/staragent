@@ -257,6 +257,15 @@ export default {
   'sideMenu.storageStats.title': 'Estatísticas de armazenamento',
   'sideMenu.storageStats.overview': 'Visão geral',
   'sideMenu.storageStats.totalFiles': 'Total de arquivos',
-  'sideMenu.storageStats.totalSize': 'Capacidade total',
-  'sideMenu.storageStats.fileTypes': 'Distribuição por tipo de arquivo'
+  'sideMenu.storageStats.totalSize': 'Tamanho total',
+  'sideMenu.storageStats.fileTypes': 'Distribuição de tipos de arquivo',
+  'sideMenu.storageStats.providers': 'Provedores de serviço',
+  'common.default': 'Padrão',
+  'common.regionCode': 'Código da região',
+  'common.nodeType': 'Tipo de nó',
+  'common.storageUsed': 'Espaço usado',
+  'common.storageAvailable': 'Espaço disponível',
+  'common.storageLimit': 'Capacidade total',
+  'common.storageUsageDetail': 'Usado {used} / Total {total}',
+  'common.defaultNode': 'Nó padrão'
 }; 

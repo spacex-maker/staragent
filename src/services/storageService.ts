@@ -1,5 +1,11 @@
 import instance from 'api/axios';
 
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data?: T;
+}
+
 interface StorageInfo {
   storageLimit: number;
   storageUsed: number;
@@ -22,7 +28,7 @@ interface StorageStatsResponse {
   totalSize: number;
 }
 
-interface CloudProvider {
+export interface CloudProvider {
   createTime: string;
   updateTime: string;
   id: number;
@@ -31,6 +37,8 @@ interface CloudProvider {
   serviceType: string;
   status: string;
   website: string;
+  isDefault: boolean;
+  iconImg?: string;
 }
 
 interface CloudProviderRegion {
@@ -48,11 +56,20 @@ interface CountryFlag {
   flagImageUrl: string;
 }
 
-export const getStorageInfo = async (): Promise<{
-  success: boolean;
-  message: string;
-  data?: StorageInfo;
-}> => {
+export interface UserStorageNode {
+  id: number;
+  nodeName: string;
+  nodeCloud: string;
+  nodeType: string;
+  nodeRegion: string;
+  storageLimit: number;
+  storageUsed: number;
+  storageAvailable: number;
+  usagePercentage: number;
+  isDefault: boolean;
+}
+
+export const getStorageInfo = async (): Promise<ApiResponse<StorageInfo>> => {
   try {
     const response = await instance.get('/productx/user-storage/info');
     return response.data;
@@ -64,11 +81,7 @@ export const getStorageInfo = async (): Promise<{
   }
 };
 
-export const getStorageStats = async (): Promise<{
-  success: boolean;
-  message: string;
-  data?: StorageStatsResponse;
-}> => {
+export const getStorageStats = async (): Promise<ApiResponse<StorageStatsResponse>> => {
   try {
     const response = await instance.get('/productx/file-storage/type-statistics');
     return response.data;
@@ -80,11 +93,7 @@ export const getStorageStats = async (): Promise<{
   }
 };
 
-export const getActiveCloudProviders = async (): Promise<{
-  success: boolean;
-  message: string;
-  data?: CloudProvider[];
-}> => {
+export const getActiveCloudProviders = async (): Promise<ApiResponse<CloudProvider[]>> => {
   try {
     const response = await instance.get('/productx/cloud-providers/active');
     return response.data;
@@ -96,11 +105,7 @@ export const getActiveCloudProviders = async (): Promise<{
   }
 };
 
-export const getCloudProviderRegions = async (providerId: number, countryCode?: string): Promise<{
-  success: boolean;
-  message: string;
-  data?: CloudProviderRegion[];
-}> => {
+export const getCloudProviderRegions = async (providerId: number, countryCode?: string): Promise<ApiResponse<CloudProviderRegion[]>> => {
   try {
     const params = new URLSearchParams();
     params.append('providerId', providerId.toString());
@@ -117,11 +122,7 @@ export const getCloudProviderRegions = async (providerId: number, countryCode?: 
   }
 };
 
-export const getAllCountryFlags = async (): Promise<{
-  success: boolean;
-  message: string;
-  data?: CountryFlag[];
-}> => {
+export const getAllCountryFlags = async (): Promise<ApiResponse<CountryFlag[]>> => {
   try {
     const response = await instance.get('/base/countries/list-all-flag');
     return response.data;
@@ -129,6 +130,18 @@ export const getAllCountryFlags = async (): Promise<{
     return {
       success: false,
       message: error.response?.data?.message || '获取国家国旗信息失败'
+    };
+  }
+};
+
+export const getUserStorageNodes = async (): Promise<ApiResponse<UserStorageNode[]>> => {
+  try {
+    const response = await instance.get('/productx/user-storage/nodes');
+    return response.data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response?.data?.message || '获取用户存储节点失败'
     };
   }
 }; 

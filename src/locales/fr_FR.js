@@ -278,7 +278,16 @@ export default {
   'sideMenu.storageInfo.usage': 'Utilisé {used} / Total {total}',
   'sideMenu.storageStats.title': 'Statistiques de stockage',
   'sideMenu.storageStats.overview': 'Aperçu',
-  'sideMenu.storageStats.totalFiles': 'Nombre total de fichiers',
-  'sideMenu.storageStats.totalSize': 'Capacité totale',
-  'sideMenu.storageStats.fileTypes': 'Distribution par type de fichier'
+  'sideMenu.storageStats.totalFiles': 'Total des fichiers',
+  'sideMenu.storageStats.totalSize': 'Taille totale',
+  'sideMenu.storageStats.fileTypes': 'Distribution des types de fichiers',
+  'sideMenu.storageStats.providers': 'Fournisseurs de services',
+  'common.default': 'Par défaut',
+  'common.regionCode': 'Code de région',
+  'common.nodeType': 'Type de nœud',
+  'common.storageUsed': 'Espace utilisé',
+  'common.storageAvailable': 'Espace disponible',
+  'common.storageLimit': 'Capacité totale',
+  'common.storageUsageDetail': 'Utilisé {used} / Total {total}',
+  'common.defaultNode': 'Nœud par défaut'
 }; 

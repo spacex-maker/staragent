@@ -283,7 +283,16 @@ export default {
   'sideMenu.storageInfo.usage': '使用中 {used} / 合計 {total}',
   'sideMenu.storageStats.title': 'ストレージ統計',
   'sideMenu.storageStats.overview': '概要',
-  'sideMenu.storageStats.totalFiles': 'ファイル総数',
+  'sideMenu.storageStats.totalFiles': '総ファイル数',
   'sideMenu.storageStats.totalSize': '総容量',
-  'sideMenu.storageStats.fileTypes': 'ファイルタイプ分布'
+  'sideMenu.storageStats.fileTypes': 'ファイルタイプ分布',
+  'sideMenu.storageStats.providers': 'サービスプロバイダー',
+  'common.default': 'デフォルト',
+  'common.regionCode': 'リージョンコード',
+  'common.nodeType': 'ノードタイプ',
+  'common.storageUsed': '使用済み容量',
+  'common.storageAvailable': '利用可能容量',
+  'common.storageLimit': '総容量',
+  'common.storageUsageDetail': '使用中 {used} / 合計 {total}',
+  'common.defaultNode': 'デフォルトノード'
 }; 

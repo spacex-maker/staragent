@@ -343,4 +343,13 @@ export default {
   'sideMenu.storageStats.totalFiles': '文件总数',
   'sideMenu.storageStats.totalSize': '总容量',
   'sideMenu.storageStats.fileTypes': '文件类型分布',
+  'sideMenu.storageStats.providers': '服务提供商',
+  'common.default': '默认',
+  'common.regionCode': '地域代码',
+  'common.nodeType': '节点类型',
+  'common.storageUsed': '已用空间',
+  'common.storageAvailable': '可用空间',
+  'common.storageLimit': '总容量',
+  'common.storageUsageDetail': '已用 {used} / 总容量 {total}',
+  'common.defaultNode': '默认节点',
 }; 

@@ -262,9 +262,18 @@ export default {
   'page.decrypt.subtitle': '파일을 안전하고 빠르게 복호화',
   'sideMenu.storageInfo.title': '저장 공간',
   'sideMenu.storageInfo.usage': '사용 {used} / 전체 {total}',
-  'sideMenu.storageStats.title': '저장소 통계',
+  'sideMenu.storageStats.title': '스토리지 통계',
   'sideMenu.storageStats.overview': '개요',
   'sideMenu.storageStats.totalFiles': '총 파일 수',
   'sideMenu.storageStats.totalSize': '총 용량',
-  'sideMenu.storageStats.fileTypes': '파일 유형 분포'
+  'sideMenu.storageStats.fileTypes': '파일 유형 분포',
+  'sideMenu.storageStats.providers': '서비스 제공업체',
+  'common.default': '기본값',
+  'common.regionCode': '지역 코드',
+  'common.nodeType': '노드 유형',
+  'common.storageUsed': '사용된 공간',
+  'common.storageAvailable': '사용 가능한 공간',
+  'common.storageLimit': '총 용량',
+  'common.storageUsageDetail': '사용 {used} / 전체 {total}',
+  'common.defaultNode': '기본 노드'
 }; 

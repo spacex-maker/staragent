@@ -210,6 +210,15 @@ export default {
   'sideMenu.storageStats.title': 'إحصائيات التخزين',
   'sideMenu.storageStats.overview': 'نظرة عامة',
   'sideMenu.storageStats.totalFiles': 'إجمالي الملفات',
-  'sideMenu.storageStats.totalSize': 'السعة الإجمالية',
-  'sideMenu.storageStats.fileTypes': 'توزيع أنواع الملفات'
+  'sideMenu.storageStats.totalSize': 'الحجم الإجمالي',
+  'sideMenu.storageStats.fileTypes': 'توزيع أنواع الملفات',
+  'sideMenu.storageStats.providers': 'مزودي الخدمة',
+  'common.default': 'افتراضي',
+  'common.regionCode': 'رمز المنطقة',
+  'common.nodeType': 'نوع العقدة',
+  'common.storageUsed': 'المساحة المستخدمة',
+  'common.storageAvailable': 'المساحة المتاحة',
+  'common.storageLimit': 'السعة الإجمالية',
+  'common.storageUsageDetail': 'مستخدم {used} / الإجمالي {total}',
+  'common.defaultNode': 'العقدة الافتراضية'
 }; 

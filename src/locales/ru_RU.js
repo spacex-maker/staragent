@@ -196,6 +196,15 @@ export default {
   'sideMenu.storageStats.title': 'Статистика хранилища',
   'sideMenu.storageStats.overview': 'Обзор',
   'sideMenu.storageStats.totalFiles': 'Всего файлов',
-  'sideMenu.storageStats.totalSize': 'Общий объем',
-  'sideMenu.storageStats.fileTypes': 'Распределение по типам файлов'
+  'sideMenu.storageStats.totalSize': 'Общий размер',
+  'sideMenu.storageStats.fileTypes': 'Распределение типов файлов',
+  'sideMenu.storageStats.providers': 'Поставщики услуг',
+  'common.default': 'По умолчанию',
+  'common.regionCode': 'Код региона',
+  'common.nodeType': 'Тип узла',
+  'common.storageUsed': 'Использовано',
+  'common.storageAvailable': 'Доступно',
+  'common.storageLimit': 'Общая емкость',
+  'common.storageUsageDetail': 'Использовано {used} / Всего {total}',
+  'common.defaultNode': 'Узел по умолчанию'
 }; 

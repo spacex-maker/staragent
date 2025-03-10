@@ -264,6 +264,15 @@ export default {
   'sideMenu.storageStats.title': 'Speicherstatistik',
   'sideMenu.storageStats.overview': 'Übersicht',
   'sideMenu.storageStats.totalFiles': 'Gesamtanzahl Dateien',
-  'sideMenu.storageStats.totalSize': 'Gesamtkapazität',
-  'sideMenu.storageStats.fileTypes': 'Dateityp-Verteilung'
+  'sideMenu.storageStats.totalSize': 'Gesamtgröße',
+  'sideMenu.storageStats.fileTypes': 'Dateitypenverteilung',
+  'sideMenu.storageStats.providers': 'Dienstanbieter',
+  'common.default': 'Standard',
+  'common.regionCode': 'Regionscode',
+  'common.nodeType': 'Knotentyp',
+  'common.storageUsed': 'Belegter Speicher',
+  'common.storageAvailable': 'Verfügbarer Speicher',
+  'common.storageLimit': 'Gesamtkapazität',
+  'common.storageUsageDetail': 'Belegt {used} / Gesamt {total}',
+  'common.defaultNode': 'Standardknoten'
 }; 

@@ -290,5 +290,14 @@ export default {
   'sideMenu.storageStats.overview': 'Overview',
   'sideMenu.storageStats.totalFiles': 'Total Files',
   'sideMenu.storageStats.totalSize': 'Total Size',
-  'sideMenu.storageStats.fileTypes': 'File Type Distribution'
+  'sideMenu.storageStats.fileTypes': 'File Type Distribution',
+  'sideMenu.storageStats.providers': 'Service Providers',
+  'common.default': 'Default',
+  'common.regionCode': 'Region Code',
+  'common.nodeType': 'Node Type',
+  'common.storageUsed': 'Used Space',
+  'common.storageAvailable': 'Available Space',
+  'common.storageLimit': 'Total Capacity',
+  'common.storageUsageDetail': 'Used {used} / Total {total}',
+  'common.defaultNode': 'Default Node'
 }; 
