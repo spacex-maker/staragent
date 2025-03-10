@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Upload, Space, Grid } from 'antd';
-import type { TablePaginationConfig } from 'antd/es/table';
 import {
   FolderOutlined,
   CloudUploadOutlined,
   SearchOutlined,
   ReloadOutlined,
+  SwapOutlined,
 } from '@ant-design/icons';
 import { message } from 'antd';
 import FileList from './components/FileList';
 import PathHistory from '../components/PathHistory';
 import { fetchRootDirectory, loadFiles } from 'services/fileService';
+import { 
+  getUserStorageNodes,
+  updateUserStorageNode
+} from 'services/storageService';
+import type { UserStorageNode } from 'services/storageService';
 import FileUploadModal from 'components/modals/FileUploadModal';
 import FileEncryptModal from 'components/modals/FileEncryptModal';
 import DownloadManager from 'components/modals/DownloadManager';
-import { formatFileSize } from 'utils/format';
+import NodeSelectModal from '../components/NodeSelectModal';
 import { ActionBar, RoundedButton, RoundedSearch } from '../components/styles/StyledComponents';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { FileProvider } from 'contexts/FileContext';
@@ -68,14 +73,9 @@ const AllFiles = () => {
   });
   const screens = Grid.useBreakpoint();
   const intl = useIntl();
-
-  // 获取用户信息
-  useEffect(() => {
-    const storedUserInfo = localStorage.getItem('userInfo');
-    if (storedUserInfo) {
-      setUserInfo(JSON.parse(storedUserInfo));
-    }
-  }, []);
+  const [nodeSelectModalVisible, setNodeSelectModalVisible] = useState(false);
+  const [userNodes, setUserNodes] = useState<UserStorageNode[]>([]);
+  const [selectedNodeId, setSelectedNodeId] = useState<number | null>(null);
 
   // Initialize custom hooks
   const { searchText, filteredFiles, setFilteredFiles, handleSearch, setSearchText } = useSearch(files);
@@ -101,7 +101,8 @@ const AllFiles = () => {
     setLoading,
     setFiles,
     setFilteredFiles,
-    setSearchText
+    setSearchText,
+    selectedNodeId
   );
 
   const {
@@ -127,7 +128,6 @@ const AllFiles = () => {
     setNewFolderModalVisible,
     newFolderName,
     setNewFolderName,
-    creatingFolder,
     pathHistory,
     handleCreateFolder,
     handleFolderClick,
@@ -149,7 +149,6 @@ const AllFiles = () => {
 
   const {
     downloadTasks,
-    downloadManagerVisible,
     setDownloadManagerVisible,
     startDownload,
     handleCancelDownload,
@@ -157,23 +156,69 @@ const AllFiles = () => {
     handleBatchDownload
   } = useDownload();
 
-  const handleDownloadCollapse = (collapsed: boolean) => {
-    setDownloadManagerVisible(!collapsed);
-  };
-
+  // 获取用户信息和节点信息
   useEffect(() => {
-    fetchRootDirectory(
-      setLoading,
-      setRootDirectoryId,
-      setCurrentParentId,
-      setFiles,
-      setFilteredFiles,
-      setSearchText,
-      setPagination,
-      pagination
-    );
+    const init = async () => {
+      try {
+        // 1. 获取用户信息
+        const storedUserInfo = localStorage.getItem('userInfo');
+        if (storedUserInfo) {
+          setUserInfo(JSON.parse(storedUserInfo));
+        }
+
+        // 2. 获取用户节点信息
+        const response = await getUserStorageNodes();
+        if (response.success && response.data) {
+          setUserNodes(response.data);
+          // 设置默认节点
+          const defaultNode = response.data.find(node => node.isDefault);
+          const nodeId = defaultNode ? defaultNode.id : response.data[0]?.id;
+          
+          if (nodeId) {
+            setSelectedNodeId(nodeId);
+            // 3. 获取根目录和文件列表
+            await fetchRootDirectory(
+              setLoading,
+              setRootDirectoryId,
+              setCurrentParentId,
+              setFiles,
+              setFilteredFiles,
+              setSearchText,
+              setPagination,
+              pagination,
+              nodeId
+            );
+          } else {
+            message.warning('没有可用的存储节点');
+          }
+        }
+      } catch (error) {
+        console.error('初始化失败:', error);
+        message.error('初始化失败，请刷新页面重试');
+      }
+    };
+
+    init();
   }, []);
 
+  // 修改 loadFiles 调用，添加 nodeId 参数
+  const handleLoadFiles = (parentId: number) => {
+    loadFiles(
+      parentId,
+      { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination },
+      selectedNodeId
+    );
+  };
+
+  // 处理节点选择
+  const handleNodeSelect = (nodeId: number) => {
+    setSelectedNodeId(nodeId);
+    setNodeSelectModalVisible(false);
+    // 重新加载当前目录的文件
+    handleLoadFiles(currentParentId);
+  };
+
+  // 修改 handlePageChange
   const handlePageChange = (page: number, pageSize: number) => {
     setPagination(prev => ({
       ...prev,
@@ -183,8 +228,13 @@ const AllFiles = () => {
     
     loadFiles(
       currentParentId,
-      { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination: { currentPage: page, pageSize: pageSize } }
+      { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination: { currentPage: page, pageSize: pageSize } },
+      selectedNodeId
     );
+  };
+
+  const handleDownloadCollapse = (collapsed: boolean) => {
+    setDownloadManagerVisible(!collapsed);
   };
 
   const handleCloseUploadModal = () => {
@@ -193,9 +243,6 @@ const AllFiles = () => {
     }
   };
 
-  const handleCloseEncryptModal = () => {
-    setFileEncryptModalProps(null);
-  };
 
   const handleEncryptComplete = (encryptedFiles: EncryptedFile[], originalFiles: File[]) => {
     const newFiles = new Map();
@@ -228,6 +275,29 @@ const AllFiles = () => {
     message.success('文件加密成功');
   };
 
+  // 处理节点更新
+  const handleNodeUpdate = async (nodeId: number, values: { nodeName: string }) => {
+    try {
+      const response = await updateUserStorageNode(nodeId, values);
+      if (response.success) {
+        message.success('节点信息更新成功');
+        // 重新获取节点列表
+        const nodesResponse = await getUserStorageNodes();
+        if (nodesResponse.success && nodesResponse.data) {
+          setUserNodes(nodesResponse.data);
+        }
+        return true;
+      } else {
+        message.error(response.message || '更新失败');
+        return false;
+      }
+    } catch (error) {
+      console.error('更新节点信息失败:', error);
+      message.error('更新节点信息失败');
+      return false;
+    }
+  };
+
   return (
     <Content style={{ 
       display: 'flex',
@@ -239,10 +309,23 @@ const AllFiles = () => {
       <FileProvider initialParentId={rootDirectoryId || 0}>
         <ActionBar>
           <Space size={screens.md ? 8 : 4} className="flex-nowrap">
+            <RoundedButton
+              icon={<SwapOutlined />}
+              onClick={() => setNodeSelectModalVisible(true)}
+              disabled={!userNodes.length}
+            >
+              <span className="action-button-text">
+                <FormattedMessage id="filelist.action.switchNode" defaultMessage="切换节点" />
+              </span>
+            </RoundedButton>
             <Upload
               multiple
               showUploadList={false}
               beforeUpload={(file, fileList) => {
+                if (!selectedNodeId) {
+                  message.warning('请先选择存储节点');
+                  return false;
+                }
                 if (!file || !fileList || fileList.length === 0) {
                   return false;
                 }
@@ -255,12 +338,13 @@ const AllFiles = () => {
                 setFileUploadModalVisible(true);
                 return false;
               }}
-              disabled={uploadStates.isUploading}
+              disabled={uploadStates.isUploading || !selectedNodeId}
             >
               <RoundedButton
                 type="primary"
                 icon={<CloudUploadOutlined />}
                 loading={uploadStates.isUploading}
+                disabled={!selectedNodeId}
               >
                 <span className="action-button-text">
                   <FormattedMessage id="filelist.action.upload" />
@@ -270,6 +354,7 @@ const AllFiles = () => {
             <RoundedButton
               icon={<FolderOutlined />}
               onClick={() => setNewFolderModalVisible(true)}
+              disabled={!selectedNodeId}
             >
               <span className="action-button-text">
                 <FormattedMessage id="filelist.action.newFolder" />
@@ -277,11 +362,9 @@ const AllFiles = () => {
             </RoundedButton>
             <RoundedButton
               icon={<ReloadOutlined />}
-              onClick={() => loadFiles(
-                currentParentId, 
-                { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination }
-              )}
+              onClick={() => handleLoadFiles(currentParentId)}
               loading={loading}
+              disabled={!selectedNodeId}
             >
               <span className="action-button-text">
                 <FormattedMessage id="filelist.action.refresh" />
@@ -352,10 +435,7 @@ const AllFiles = () => {
           onResumeUpload={handleResumeUpload}
           setUploadStates={setUploadStates}
           onUploadComplete={() => {
-            loadFiles(
-              currentParentId,
-              { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination }
-            );
+            handleLoadFiles(currentParentId);
           }}
         />
 
@@ -368,6 +448,15 @@ const AllFiles = () => {
           onCancel={handleCancelDownload}
           onClear={handleClearDownloads}
           onCollapse={handleDownloadCollapse}
+        />
+
+        <NodeSelectModal
+          open={nodeSelectModalVisible}
+          onClose={() => setNodeSelectModalVisible(false)}
+          nodes={userNodes}
+          selectedNodeId={selectedNodeId}
+          onNodeSelect={handleNodeSelect}
+          onNodeUpdate={handleNodeUpdate}
         />
       </FileProvider>
     </Content>

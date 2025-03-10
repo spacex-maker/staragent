@@ -13,7 +13,8 @@ export const fetchRootDirectory = async (
   setFilteredFiles, 
   setSearchText,
   setPagination,
-  pagination
+  pagination,
+  nodeId
 ) => {
   try {
     setLoading(true);
@@ -21,7 +22,8 @@ export const fetchRootDirectory = async (
     // 请求根目录信息（父级 ID 为 0）
     const response = await instance.post('/productx/file-storage/list', { 
       parentId: 0, 
-      status: 'ACTIVE' 
+      status: 'ACTIVE',
+      nodeId: nodeId
     });
     
     if (response.data && response.data.success) {
@@ -39,7 +41,8 @@ export const fetchRootDirectory = async (
           const secondLevelResponse = await instance.post('/productx/file-storage/list', { 
             parentId: rootDir.id,
             pageSize: pagination.pageSize,
-            currentPage: pagination.currentPage
+            currentPage: pagination.currentPage,
+            nodeId: nodeId
           });
           
           if (secondLevelResponse.data && secondLevelResponse.data.success) {
@@ -58,7 +61,8 @@ export const fetchRootDirectory = async (
               updateTime: file.updateTime ? new Date(file.updateTime).toLocaleString() : '-',
               storagePath: file.storagePath,
               isDirectory: file.isDirectory,
-              extension: file.extension
+              extension: file.extension,
+              nodeId: file.nodeId
             }));
             
             // 设置文件列表
@@ -85,7 +89,7 @@ export const fetchRootDirectory = async (
         console.warn('未找到根目录');
         setRootDirectoryId(null);
         // 直接加载 parentId 为 0 的内容，并传入分页参数
-        loadFiles(0, { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination });
+        loadFiles(0, { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination }, nodeId);
       }
     } else {
       throw new Error(response.data.message || '获取根目录信息失败');
@@ -94,14 +98,14 @@ export const fetchRootDirectory = async (
     console.error('获取根目录信息失败:', error);
     message.error('获取根目录信息失败: ' + (error.message || '未知错误'));
     // 加载 parentId 为 0 的内容时也传入分页参数
-    loadFiles(0, { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination });
+    loadFiles(0, { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination }, nodeId);
   } finally {
     setLoading(false);
   }
 };
 
 // 修改加载文件的函数以支持分页
-export const loadFiles = async (parentId, state) => {
+export const loadFiles = async (parentId, state, nodeId) => {
   const {
     setLoading,
     setFiles,
@@ -116,7 +120,8 @@ export const loadFiles = async (parentId, state) => {
     const response = await instance.post('/productx/file-storage/list', {
       parentId: parentId,
       pageSize: pagination.pageSize,
-      currentPage: pagination.currentPage
+      currentPage: pagination.currentPage,
+      nodeId: nodeId
     });
 
     if (response.data && response.data.success) {
@@ -125,21 +130,21 @@ export const loadFiles = async (parentId, state) => {
         id: file.id,
         name: file.name,
         size: file.size,
-        rawSize: file.size,  // 保存原始大小
+        rawSize: file.size,
         type: file.isDirectory ? 'folder' : 'file',
         createTime: file.createTime ? new Date(file.createTime).toLocaleString() : '-',
         updateTime: file.updateTime ? new Date(file.updateTime).toLocaleString() : '-',
         downloadUrl: file.downloadUrl,
         storagePath: file.storagePath,
         isDirectory: file.isDirectory,
-        extension: file.extension
+        extension: file.extension,
+        nodeId: file.nodeId
       }));
 
       setFiles(fileList);
       setFilteredFiles(fileList);
       setSearchText('');
       
-      // 更新分页信息
       setPagination({
         ...pagination,
         total: response.data.data.totalNum,

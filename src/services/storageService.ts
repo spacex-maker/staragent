@@ -144,4 +144,19 @@ export const getUserStorageNodes = async (): Promise<ApiResponse<UserStorageNode
       message: error.response?.data?.message || '获取用户存储节点失败'
     };
   }
+};
+
+export const updateUserStorageNode = async (nodeId: number, data: { nodeName: string }): Promise<ApiResponse<any>> => {
+  try {
+    const response = await instance.post('/productx/user-storage/update', {
+      id: nodeId,
+      name: data.nodeName
+    });
+    return response.data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response?.data?.message || '更新节点信息失败'
+    };
+  }
 }; 

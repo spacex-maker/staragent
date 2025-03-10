@@ -15,7 +15,8 @@ export const useUpload = (
   setLoading,
   setFiles,
   setFilteredFiles,
-  setSearchText
+  setSearchText,
+  nodeId
 ) => {
   const [uploadStates, setUploadStates] = useState({
     files: new Map(),
@@ -63,9 +64,15 @@ export const useUpload = (
       return;
     }
 
+    if (!nodeId) {
+      message.error('请先选择存储节点');
+      return;
+    }
+
     console.log('开始上传文件:');
     console.log('- 目标文件夹ID:', currentParentId);
     console.log('- 目标文件夹名称:', currentFolder?.name || '根目录');
+    console.log('- 存储节点ID:', nodeId);
     console.log('- 上传的文件:', filesToUpload.map(file => {
       const fileObj = file instanceof File ? file : file.file;
       return `${fileObj.name} (${formatFileSize(fileObj.size)})`;
@@ -208,6 +215,7 @@ export const useUpload = (
 
           await instance.post('/productx/file-storage/create-directory', {
             parentId: currentParentId,
+            nodeId: nodeId,
             isDirectory: false,
             name: fileState.file.name,
             extension: fileState.file.name.split('.').pop(),
@@ -268,7 +276,8 @@ export const useUpload = (
       
       await loadFiles(
         currentParentId, 
-        { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination }
+        { setLoading, setFiles, setFilteredFiles, setSearchText, setPagination, pagination },
+        nodeId
       );
     } catch (error) {
       console.error('上传过程中发生错误:', error);
