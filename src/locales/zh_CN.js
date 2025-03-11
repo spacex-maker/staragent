@@ -87,6 +87,7 @@ export default {
   'filelist.column.name': '名称',
   'filelist.column.size': '大小',
   'filelist.column.updateTime': '修改时间',
+  'filelist.column.recycletime': '回收时间',
   'filelist.column.actions': '操作',
   'filelist.total': '共 {total} 项',
   'filelist.action.upload': '上传文件',

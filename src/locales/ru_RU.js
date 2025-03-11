@@ -77,6 +77,7 @@ export default {
   'filelist.column.name': 'Имя',
   'filelist.column.size': 'Размер',
   'filelist.column.updateTime': 'Изменен',
+  'filelist.column.recycletime': 'Дата удаления',
   'filelist.column.actions': 'Действия',
   'filelist.total': 'Всего {total} элементов',
   'filelist.action.upload': 'Загрузить',

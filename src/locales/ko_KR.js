@@ -77,6 +77,7 @@ export default {
   'filelist.column.name': '이름',
   'filelist.column.size': '크기',
   'filelist.column.updateTime': '수정일',
+  'filelist.column.recycletime': '삭제일',
   'filelist.column.actions': '작업',
   'filelist.total': '총 {total}개 항목',
   'filelist.action.upload': '업로드',

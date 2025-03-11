@@ -16,6 +16,10 @@ export const TableWrapper = styled.div`
         : 'rgba(24, 144, 255, 0.04)'} !important;
     }
   }
+
+  .ant-table-thead .ant-table-cell {
+    white-space: nowrap;
+  }
 `;
 
 export const ToolBarWrapper = styled.div`

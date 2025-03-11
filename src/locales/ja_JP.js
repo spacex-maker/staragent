@@ -83,6 +83,7 @@ export default {
   'filelist.column.name': '名前',
   'filelist.column.size': 'サイズ',
   'filelist.column.updateTime': '更新日時',
+  'filelist.column.recycletime': '削除日時',
   'filelist.column.actions': '操作',
   'filelist.total': '合計 {total} 件',
   'filelist.action.upload': 'アップロード',

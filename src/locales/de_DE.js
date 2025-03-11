@@ -77,6 +77,7 @@ export default {
   'filelist.column.name': 'Name',
   'filelist.column.size': 'Größe',
   'filelist.column.updateTime': 'Geändert',
+  'filelist.column.recycletime': 'Gelöscht am',
   'filelist.column.actions': 'Aktionen',
   'filelist.total': 'Insgesamt {total} Elemente',
   'filelist.action.upload': 'Hochladen',

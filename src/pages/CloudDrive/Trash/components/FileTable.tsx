@@ -1,13 +1,14 @@
 import React from 'react';
 import { Table, Space, Button } from 'antd';
 import { UndoOutlined, DeleteOutlined } from '@ant-design/icons';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import type { ColumnsType } from 'antd/es/table';
 import { formatFileSize } from 'utils/format';
 import FileItem from '../../AllFiles/components/FileItem';
 import { TableWrapper } from './styles';
 import type { FileModel } from 'models/file/FileModel';
 import { useMediaQuery } from 'react-responsive';
+import dayjs from 'dayjs';
 
 interface FileTableProps {
   loading: boolean;
@@ -35,6 +36,12 @@ const FileTable: React.FC<FileTableProps> = ({
   onDelete
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const intl = useIntl();
+  
+  // 获取操作列表头文字
+  const actionColumnTitle = intl.formatMessage({ id: 'filelist.column.actions' });
+  // 根据文字长度计算宽度，每个字符按15px计算，最小90px
+  const actionColumnWidth = Math.max(90, actionColumnTitle.length * 15);
 
   const columns: ColumnsType<FileModel> = [
     {
@@ -57,9 +64,17 @@ const FileTable: React.FC<FileTableProps> = ({
       render: (size: number) => formatFileSize(size),
     },
     !isMobile && {
+      title: <FormattedMessage id="filelist.column.recycletime" />,
+      dataIndex: 'recycleTime',
+      key: 'recycleTime',
+      width: 180,
+      align: 'center',
+      render: (recycleTime: string) => dayjs(recycleTime).format('YYYY-MM-DD HH:mm:ss'),
+    },
+    !isMobile && {
       title: <FormattedMessage id="filelist.column.actions" />,
       key: 'actions',
-      width: 80,
+      width: actionColumnWidth,
       align: 'center',
       render: (_: unknown, record: FileModel) => (
         <Space size={4}>

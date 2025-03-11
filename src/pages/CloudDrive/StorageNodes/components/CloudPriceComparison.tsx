@@ -207,6 +207,13 @@ const CloudPriceComparison: React.FC = () => {
       archive: '0.035',
       note: '价格较稳定',
     },
+    {
+      provider: 'Google Cloud Storage',
+      standard: '0.11',
+      lowFreq: '0.07',
+      archive: '0.025',
+      note: '美国多地区',
+    },
   ];
 
   const requestData = [
@@ -245,6 +252,12 @@ const CloudPriceComparison: React.FC = () => {
       getRequest: '0.01',
       putRequest: '0.01',
       note: '标准价格',
+    },
+    {
+      provider: 'Google Cloud Storage',
+      getRequest: '0.008',
+      putRequest: '0.01',
+      note: '分区域定价',
     },
   ];
 
@@ -291,6 +304,22 @@ const CloudPriceComparison: React.FC = () => {
       traffic50to100: '0.41',
       trafficOver100: '协商',
     },
+    {
+      provider: 'Google Cloud Storage',
+      traffic0to1: '0.45',
+      traffic1to50: '0.43',
+      traffic50to100: '0.41',
+      trafficOver100: '0.38',
+    },
+  ];
+
+  const promotionData = [
+    <FormattedMessage id="cloudPrice.promotion.aliyun" defaultMessage="阿里云：新用户有免费试用额度" />,
+    <FormattedMessage id="cloudPrice.promotion.tencent" defaultMessage="腾讯云：新用户有免费试用额度" />,
+    <FormattedMessage id="cloudPrice.promotion.huawei" defaultMessage="华为云：新用户有免费试用额度" />,
+    <FormattedMessage id="cloudPrice.promotion.qiniu" defaultMessage="七牛云：新用户送存储空间和流量" />,
+    <FormattedMessage id="cloudPrice.promotion.upyun" defaultMessage="又拍云：新用户送储存空间" />,
+    <FormattedMessage id="cloudPrice.promotion.google" defaultMessage="谷歌云：新用户赠送300美元额度" />,
   ];
 
   return (
@@ -368,13 +397,7 @@ const CloudPriceComparison: React.FC = () => {
           <FormattedMessage id="cloudPrice.promotion.title" defaultMessage="优惠政策" />
         </Title>
         <List
-          dataSource={[
-            <FormattedMessage id="cloudPrice.promotion.aliyun" defaultMessage="阿里云：新用户有免费试用额度" />,
-            <FormattedMessage id="cloudPrice.promotion.tencent" defaultMessage="腾讯云：新用户有免费试用额度" />,
-            <FormattedMessage id="cloudPrice.promotion.huawei" defaultMessage="华为云：新用户有免费试用额度" />,
-            <FormattedMessage id="cloudPrice.promotion.qiniu" defaultMessage="七牛云：新用户送存储空间和流量" />,
-            <FormattedMessage id="cloudPrice.promotion.upyun" defaultMessage="又拍云：新用户送储存空间" />,
-          ]}
+          dataSource={promotionData}
           renderItem={item => (
             <List.Item>
               <Space>

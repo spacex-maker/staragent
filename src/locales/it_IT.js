@@ -77,6 +77,7 @@ export default {
   'filelist.column.name': 'Nome',
   'filelist.column.size': 'Dimensione',
   'filelist.column.updateTime': 'Modificato',
+  'filelist.column.recycletime': 'Data eliminazione',
   'filelist.column.actions': 'Azioni',
   'filelist.total': 'Totale {total} elementi',
   'filelist.action.upload': 'Carica',

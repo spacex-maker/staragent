@@ -86,6 +86,7 @@ export default {
   'filelist.column.name': 'Name',
   'filelist.column.size': 'Size',
   'filelist.column.updateTime': 'Modified',
+  'filelist.column.recycletime': 'Recycle Time',
   'filelist.column.actions': 'Actions',
   'filelist.total': 'Total {total} items',
   'filelist.action.upload': 'Upload',
