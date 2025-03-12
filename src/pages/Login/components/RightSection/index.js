@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { 
@@ -64,6 +64,24 @@ export const RightSection = ({
   const [passwordFocused, setPasswordFocused] = useState(false);
   const dropdownRef = useRef(null);
   const emailSuffixButtonRef = useRef(null);
+  const inputWrapperRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        inputWrapperRef.current &&
+        !inputWrapperRef.current.contains(event.target) &&
+        !emailSuffixButtonRef.current?.contains(event.target)
+      ) {
+        setShowSuffixDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -97,7 +115,7 @@ export const RightSection = ({
         </Logo>
         <Form onSubmit={handleSubmit} autoComplete="off">
           <FormItem>
-            <InputWrapper>
+            <InputWrapper ref={inputWrapperRef}>
               <Input
                 type="text"
                 value={email}

@@ -78,4 +78,8 @@ export const DuplicateTag = styled.span`
 
 export const ChunkUploadTag = styled(DuplicateTag)`
   color: #1890ff;
+`;
+
+export const AccelerateTag = styled(DuplicateTag)`
+  color: #722ed1;
 `; 

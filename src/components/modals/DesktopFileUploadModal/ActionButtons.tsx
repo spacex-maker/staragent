@@ -3,6 +3,7 @@ import { Space, Button } from 'antd';
 import { 
   LockOutlined,
   CloudUploadOutlined,
+  RocketOutlined
 } from '@ant-design/icons';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,6 +13,7 @@ interface ActionButtonsProps {
   onEncrypt: () => void;
   onClear: () => void;
   onMarkChunkUpload: () => void;
+  onMarkAccelerate: () => void;
   onCancel: () => void;
   onStartUpload: () => void;
   canStartUpload: boolean;
@@ -23,6 +25,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   onEncrypt,
   onClear,
   onMarkChunkUpload,
+  onMarkAccelerate,
   onCancel,
   onStartUpload,
   canStartUpload
@@ -53,6 +56,13 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           disabled={isUploading || selectedCount === 0}
         >
           <FormattedMessage id="modal.fileUpload.markChunkUpload" defaultMessage="分片上传" />
+        </Button>
+        <Button
+          icon={<RocketOutlined />}
+          onClick={onMarkAccelerate}
+          disabled={isUploading || selectedCount === 0}
+        >
+          <FormattedMessage id="modal.fileUpload.markAccelerate" defaultMessage="全球加速" />
         </Button>
       </Space>
       <Space size="middle">

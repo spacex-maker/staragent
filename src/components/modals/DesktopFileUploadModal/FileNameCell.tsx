@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Space, Progress, Tooltip, Typography, theme } from 'antd';
-import { LockOutlined, WarningFilled, CloudUploadOutlined } from '@ant-design/icons';
+import { LockOutlined, WarningFilled, CloudUploadOutlined, RocketOutlined } from '@ant-design/icons';
 import { getFileIcon } from '../../../utils/fileIcon';
 import { formatFileSize, formatSpeed, getDynamicEllipsisFileName } from '../../../utils/format';
-import { FileName, FileSize, ProgressText, DuplicateTag, ChunkUploadTag } from './styles';
+import { FileName, FileSize, ProgressText, DuplicateTag, ChunkUploadTag, AccelerateTag } from './styles';
 
 const { Text } = Typography;
 
@@ -17,6 +17,7 @@ interface UploadFile {
   isDuplicate?: boolean;
   isEncrypted?: boolean;
   useChunkUpload?: boolean;
+  useAccelerate?: boolean;
 }
 
 interface FileNameCellProps {
@@ -36,7 +37,8 @@ const FileNameCell: React.FC<FileNameCellProps> = ({ record }) => {
     speed,
     isDuplicate,
     isEncrypted,
-    useChunkUpload 
+    useChunkUpload,
+    useAccelerate 
   } = record;
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const FileNameCell: React.FC<FileNameCellProps> = ({ record }) => {
       // - 图标右边距 (8px)
       // - 标签容器预留宽度 (根据实际标签数量动态计算)
       // - 安全边距 (16px)
-      const tagCount = [isDuplicate, isEncrypted, useChunkUpload].filter(Boolean).length;
+      const tagCount = [isDuplicate, isEncrypted, useChunkUpload, useAccelerate].filter(Boolean).length;
       const tagsWidth = tagCount > 0 ? (tagCount * 85) : 0; // 每个标签约85px宽
       const availableWidth = Math.max(200, containerWidth - 48 - tagsWidth);
       
@@ -58,9 +60,9 @@ const FileNameCell: React.FC<FileNameCellProps> = ({ record }) => {
       const truncatedName = getDynamicEllipsisFileName(name, availableWidth, {
         font: containerRef.current ? window.getComputedStyle(containerRef.current).font : 
               '14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial',
-        minFrontChars: 12,    // 增加最小保留前缀字符数
-        minEndChars: 8,      // 增加最小保留后缀字符数
-        ellipsisWidth: 16,   // 调整省略号宽度
+        minFrontChars: 12,
+        minEndChars: 8,
+        ellipsisWidth: 16,
         keepExt: true
       });
       
@@ -69,7 +71,7 @@ const FileNameCell: React.FC<FileNameCellProps> = ({ record }) => {
 
     resizeObserver.observe(containerRef.current);
     return () => resizeObserver.disconnect();
-  }, [name, isDuplicate, isEncrypted, useChunkUpload]); // 添加依赖项
+  }, [name, isDuplicate, isEncrypted, useChunkUpload, useAccelerate]);
 
   return (
     <FileName>
@@ -100,6 +102,12 @@ const FileNameCell: React.FC<FileNameCellProps> = ({ record }) => {
             <CloudUploadOutlined />
             分片上传
           </ChunkUploadTag>
+        )}
+        {useAccelerate && (
+          <AccelerateTag>
+            <RocketOutlined />
+            全球加速
+          </AccelerateTag>
         )}
       </div>
       <div className="file-info">

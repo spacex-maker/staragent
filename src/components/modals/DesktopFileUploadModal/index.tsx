@@ -75,6 +75,7 @@ const DesktopFileUploadModal: React.FC<DesktopFileUploadModalProps> = ({
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [encryptModalVisible, setEncryptModalVisible] = useState(false);
   const [selectedFilesToEncrypt, setSelectedFilesToEncrypt] = useState<File[]>([]);
+  const [useAccelerate, setUseAccelerate] = useState(false);
 
   // 监听文件列表变化，设置全选状态
   useEffect(() => {
@@ -225,6 +226,31 @@ const DesktopFileUploadModal: React.FC<DesktopFileUploadModalProps> = ({
     message.success('已标记选中文件为分片上传');
   };
 
+  // 处理全球加速标记
+  const handleMarkAccelerate = () => {
+    if (selectedRowKeys.length === 0) {
+      message.warning('请选择要标记的文件');
+      return;
+    }
+
+    const newFiles = new Map(uploadingFiles);
+    selectedRowKeys.forEach(fileName => {
+      const file = newFiles.get(fileName.toString());
+      if (file) {
+        newFiles.set(fileName.toString(), {
+          ...file,
+          useAccelerate: true
+        });
+      }
+    });
+
+    setUploadStates(prev => ({
+      ...prev,
+      files: newFiles
+    }));
+    message.success('已标记选中文件为全球加速上传');
+  };
+
   // 计算是否可以开始上传
   const canStartUpload = useMemo(() => {
     return !isUploading && Array.from(uploadingFiles.values()).some(file => 
@@ -248,6 +274,7 @@ const DesktopFileUploadModal: React.FC<DesktopFileUploadModalProps> = ({
             onEncrypt={handleEncryptFiles}
             onClear={handleBatchRemove}
             onMarkChunkUpload={handleMarkChunkUpload}
+            onMarkAccelerate={handleMarkAccelerate}
             onCancel={onCancel}
             onStartUpload={onStartUpload}
             canStartUpload={canStartUpload}
@@ -281,11 +308,18 @@ const DesktopFileUploadModal: React.FC<DesktopFileUploadModalProps> = ({
                 const filesWithDuplicateFlag = fileList.map(file => ({
                   file,
                   isDuplicate: existingFiles.some(existingFile => existingFile.name === file.name) ||
-                              Array.from(uploadingFiles.keys()).includes(file.name)
+                              Array.from(uploadingFiles.keys()).includes(file.name),
+                  useChunkUpload: false, // 默认不使用分片上传
+                  useAccelerate: false // 默认不使用全球加速
                 }));
                 onAddFiles(filesWithDuplicateFlag);
               } else {
-                onAddFiles(fileList.map(file => ({ file, isDuplicate: false })));
+                onAddFiles(fileList.map(file => ({ 
+                  file, 
+                  isDuplicate: false,
+                  useChunkUpload: false, // 默认不使用分片上传
+                  useAccelerate: false // 默认不使用全球加速
+                })));
               }
               return false;
             }}

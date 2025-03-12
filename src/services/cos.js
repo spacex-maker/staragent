@@ -8,7 +8,7 @@ class COSService {
     this.uploadTasks = new Map(); // 存储上传任务
   }
 
-  async init() {
+  async init(useAccelerate = false) {
     try {
       const { data } = await axios.get('/productx/tencent/cos-credential', {
         params: { bucketName: 'px-1258150206' },
@@ -24,30 +24,51 @@ class COSService {
       if (data.success) {
         const { secretId, secretKey, sessionToken, host } = data.data;
         
+        // 根据是否使用全球加速选择不同的域名
+        const domain = useAccelerate 
+          ? `px-1258150206.cos.accelerate.myqcloud.com`
+          : `px-1258150206.cos.ap-nanjing.myqcloud.com`;
+        
         this.cos = new COS({
           SecretId: secretId,
           SecretKey: secretKey,
           SecurityToken: sessionToken,
-          UseAccelerate: true,
-          Protocol: window.location.protocol.slice(0, -1),
-          Domain: host.replace(/^https?:\/\//, ''),
-          WithCredentials: true
+          UseAccelerate: useAccelerate, // 动态设置是否使用全球加速
+          Protocol: 'https:', // 强制使用 HTTPS
+          Domain: domain, // 动态设置域名
+          UploadCheckContentMd5: true, // 开启上传MD5校验
+          ConnectionTimeout: 120000, // 连接超时时间
+          SocketTimeout: 120000, // Socket超时时间
+          ProgressInterval: 1000, // 进度回调间隔
+          Retry: true, // 开启自动重试
+          RetryCount: 3, // 重试次数
+          EnableTracker: true, // 开启数据万象
+          AutoSwitchHost: true, // 开启自动切换域名
+          FileParallelLimit: 3, // 同时上传的文件数
+          ChunkParallelLimit: 8, // 同一个文件下同时上传的分片数
+          ChunkSize: 1024 * 1024 * 8, // 分片大小
+          ChunkRetryTimes: 3 // 分片重试次数
         });
         
         this.host = host;
+        console.log('COS 初始化成功，配置:', {
+          accelerate: useAccelerate,
+          protocol: 'https:',
+          domain: domain
+        });
         return true;
       }
       return false;
     } catch (error) {
-      console.error('初始化 COS 失败:', error.response?.data?.message || '获取临时密钥失败');
+      console.error('初始化 COS 失败:', error.response?.data?.message || '获取临时密钥失败', error);
       return false;
     }
   }
 
-  async uploadFile(file, path = '', onProgress, useChunkUpload = false, resumeData = null) {
+  async uploadFile(file, path = '', onProgress, useChunkUpload = false, useAccelerate = false, resumeData = null) {
     try {
-      if (!this.cos) {
-        const initialized = await this.init();
+      if (!this.cos || (this.cos.options.UseAccelerate !== useAccelerate)) {
+        const initialized = await this.init(useAccelerate);
         if (!initialized) {
           throw new Error('COS 初始化失败');
         }
@@ -56,6 +77,7 @@ class COSService {
       // 添加控制台输出
       console.log(`开始上传文件: ${file.name}`);
       console.log(`上传方式: ${useChunkUpload ? '分片上传' : '普通上传'}`);
+      console.log(`全球加速: ${useAccelerate ? '是' : '否'}`);
       console.log(`文件大小: ${(file.size / (1024 * 1024)).toFixed(2)}MB`);
 
       return new Promise((resolve, reject) => {
@@ -97,9 +119,12 @@ class COSService {
             }
 
             const now = Date.now();
-            const timeDiff = (now - lastUpdateTime) / 1000; // 转换为秒
+            const timeDiff = (now - lastUpdateTime) / 1000;
             
-            if (timeDiff >= 0.5) { // 至少每500ms更新一次
+            // 对于大文件，减少进度更新频率，避免UI卡顿
+            const updateInterval = file.size > 100 * 1024 * 1024 ? 1000 : 500; // 大于100MB的文件每秒更新一次
+            
+            if (timeDiff >= updateInterval / 1000) {
               const percent = Math.min(Math.round(progressData.percent * 100), 100);
               const taskInfo = this.uploadTasks.get(taskId);
               
@@ -107,6 +132,15 @@ class COSService {
                 const currentBytes = (percent / 100) * file.size;
                 const bytesDiff = currentBytes - taskInfo.uploadedBytes;
                 const speed = bytesDiff / timeDiff; // 字节/秒
+                
+                // 添加更详细的日志
+                console.log('上传进度:', {
+                  fileName: file.name,
+                  progress: percent,
+                  speed: (speed / (1024 * 1024)).toFixed(2) + 'MB/s',
+                  uploaded: (currentBytes / (1024 * 1024)).toFixed(2) + 'MB',
+                  total: (file.size / (1024 * 1024)).toFixed(2) + 'MB'
+                });
                 
                 taskInfo.progress = percent;
                 taskInfo.speed = speed;
@@ -121,24 +155,29 @@ class COSService {
           }
         };
 
-        // 如果使用分片上传，添加分片相关配置
+        // 仅在使用分片上传时添加分片相关配置
         if (useChunkUpload) {
           Object.assign(uploadOptions, {
-            ChunkSize: 1024 * 1024 * 50, // 50MB 分片大小
-            AsyncLimit: 3, // 并发数
+            ChunkSize: 1024 * 1024 * 5, // 5MB 分片大小
+            AsyncLimit: 5, // 并发数
             ChunkParallel: true,
-            SliceSize: 1024 * 1024 * 50,
+            SliceSize: 1024 * 1024 * 5,
             RetryTimes: 3,
+            ProgressInterval: 1000,
+            Timeout: 60000,
             onTaskReady: (tid) => {
               const taskInfo = this.uploadTasks.get(taskId);
               if (taskInfo) {
                 taskInfo.tid = tid;
                 taskInfo.status = 'uploading';
+                console.log('分片上传任务已就绪，tid:', tid);
               }
+            },
+            onHashProgress: (progressData) => {
+              console.log('计算文件hash进度:', progressData);
             }
           });
 
-          // 如果有续传数据，添加到上传选项中
           if (resumeData?.uploadId) {
             uploadOptions.UploadId = resumeData.uploadId;
             uploadOptions.PartNumber = resumeData.partNumber;
@@ -254,7 +293,7 @@ class COSService {
         this.uploadTasks.delete(taskId);
         
         // 开始新的上传，传入续传数据
-        this.uploadFile(taskInfo.file, taskInfo.path, taskInfo.onProgress, taskInfo.useChunkUpload, resumeData)
+        this.uploadFile(taskInfo.file, taskInfo.path, taskInfo.onProgress, taskInfo.useChunkUpload, taskInfo.useAccelerate, resumeData)
           .then(() => {
             console.log('恢复上传成功');
           })
