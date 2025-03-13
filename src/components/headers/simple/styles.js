@@ -33,8 +33,8 @@ export const Header = styled.header`
   left: 0;
   right: 0;
   width: 100%;
-  height: 72px;
-  z-index: 100;
+  height: 64px;
+  z-index: 1000;
   background: ${props => props.theme.mode === 'dark' 
     ? 'rgba(0, 0, 0, 0.3)'
     : 'rgba(255, 255, 255, 0.3)'};
@@ -43,7 +43,6 @@ export const Header = styled.header`
   border-bottom: 1px solid ${props => props.theme.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.05)'
     : 'rgba(0, 0, 0, 0.05)'};
-  padding: 0 35px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: ${props => props.scrolled
     ? props.theme.mode === 'dark'
@@ -73,7 +72,7 @@ export const Header = styled.header`
   }
 
   @media (max-width: 768px) {
-    padding: 0 24px;
+    padding: 0 16px;
   }
 `;
 
@@ -81,22 +80,27 @@ export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 72px;
+  height: 100%;
   width: 100%;
   position: relative;
   z-index: 1;
+  padding: 0 48px;
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
 `;
 
 export const LeftSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 24px;
 `;
 
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 `;
 
 export const NavLink = styled(Link)`

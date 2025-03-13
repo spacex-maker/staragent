@@ -4,26 +4,16 @@ import GlobalStyles from './styles/GlobalStyles';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider, theme, message } from 'antd';
 import { ThemeProvider } from 'styled-components';
-import SaaSProductLandingPage from "./demos/SaaSProductLandingPage";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import ResetPasswordPage from "./pages/ResetPassword";
-import JoinUs from "pages/JoinUs";
-import Navigation from "pages/Navigation";
-import ProfilePage from "pages/Profile";
-import About from "pages/About";
-import PartnerSurvey from "pages/PartnerSurvey";
-import CloudDrivePage from "./pages/CloudDrive"; // 新增云盘页面组件
+import AgentPage from "./pages/Agent";
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
 import koKR from 'antd/locale/ko_KR';
 import { LocaleProvider } from './contexts/LocaleContext';
 import { Helmet } from 'react-helmet';
-import FileDecryptPage from './pages/FileDecrypt';
-import TestCrypto from './pages/TestCrypto';
-import HomePage from './pages/Home';
-import StorageNodes from './pages/CloudDrive/StorageNodes';
 
 // 语言配置映射
 const localeMap = {
@@ -42,7 +32,7 @@ const PrivateRoute = ({ children }) => {
 // 根路径路由组件
 const RootRoute = () => {
   const isAuthenticated = localStorage.getItem('token'); // 检查用户是否已登录
-  return isAuthenticated ? <Navigate to="/drive" /> : <HomePage />;
+  return isAuthenticated ? <Navigate to="/agent" /> : <Navigate to="/login" />;
 };
 
 export default function App() {
@@ -244,28 +234,11 @@ export default function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/drive" element={
+              <Route path="/agent" element={
                 <PrivateRoute>
-                  <CloudDrivePage />
+                  <AgentPage />
                 </PrivateRoute>
               } />
-              <Route path="/profile" element={
-                <PrivateRoute>
-                  <ProfilePage />
-                </PrivateRoute>
-              } />
-              <Route path="/decrypt" element={<FileDecryptPage />} />
-              <Route path="/test-crypto" element={<TestCrypto />} />
-              <Route
-                path="/cloud-drive/storage-nodes"
-                element={
-                  <PrivateRoute>
-                    <CloudDrivePage>
-                      <StorageNodes />
-                    </CloudDrivePage>
-                  </PrivateRoute>
-                }
-              />
             </Routes>
           </Router>
         </ConfigProvider>
