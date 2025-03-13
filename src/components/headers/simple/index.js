@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "styled-components";
 import { auth } from "../../../api/auth.js";
 import { base } from "../../../api/base.js";
-import { useLocale } from 'contexts/LocaleContext';
+import { useLocale } from '../../../contexts/LocaleContext';
 import Logo from './Logo';
 import DarkModeToggle from './DarkModeToggle';
 import LanguageSelector from './LanguageSelector';
@@ -47,6 +47,7 @@ const SimpleHeader = () => {
         auth.getUserInfo().then(result => {
           if (result.success) {
             setUserInfo(result.data);
+            localStorage.setItem('userInfo', JSON.stringify(result.data));
           }
         });
       }
@@ -64,6 +65,8 @@ const SimpleHeader = () => {
 
   const handleLogout = () => {
     auth.logout();
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
@@ -78,56 +81,6 @@ const SimpleHeader = () => {
     };
     fetchLanguages();
   }, []);
-
-  useEffect(() => {
-    // 从CSS变量中提取主题色RGB值
-    const primaryColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--ant-color-primary')
-      .trim();
-    
-    const bgContainerColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--ant-color-bg-container')
-      .trim();
-      
-    const borderColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--ant-color-border')
-      .trim();
-      
-    const errorColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--ant-color-error')
-      .trim();
-    
-    // 将十六进制颜色转换为RGB
-    const hexToRgb = (hex) => {
-      const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-      const formattedHex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(formattedHex);
-      return result
-        ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-        : '255, 255, 255'; // 默认白色
-    };
-    
-    // 设置RGB变量
-    document.documentElement.style.setProperty(
-      '--ant-primary-rgb', 
-      hexToRgb(primaryColor)
-    );
-    
-    document.documentElement.style.setProperty(
-      '--ant-bg-container-rgb', 
-      hexToRgb(bgContainerColor)
-    );
-    
-    document.documentElement.style.setProperty(
-      '--ant-border-rgb', 
-      hexToRgb(borderColor)
-    );
-    
-    document.documentElement.style.setProperty(
-      '--ant-error-rgb', 
-      hexToRgb(errorColor)
-    );
-  }, [isDark]); // 当主题切换时重新计算
 
   return (
     <Header scrolled={scrolled}>
