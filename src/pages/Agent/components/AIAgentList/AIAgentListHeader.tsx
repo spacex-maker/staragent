@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import { PlusOutlined, ImportOutlined } from '@ant-design/icons';
+import { PlusOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.div`
@@ -20,33 +20,33 @@ const StyledButton = styled(Button)`
   }
 `;
 
-interface ProjectListHeaderProps {
-  onCreateProject: () => void;
-  onImportProject?: () => void;
+interface AIAgentListHeaderProps {
+  onCreateAgent: () => void;
+  onRecruitAgent?: () => void;
 }
 
-const ProjectListHeader: React.FC<ProjectListHeaderProps> = ({ 
-  onCreateProject,
-  onImportProject 
+const AIAgentListHeader: React.FC<AIAgentListHeaderProps> = ({ 
+  onCreateAgent,
+  onRecruitAgent 
 }) => {
   return (
     <HeaderContainer>
       <StyledButton
         type="default"
-        icon={<ImportOutlined />}
-        onClick={onImportProject}
+        icon={<UsergroupAddOutlined />}
+        onClick={onRecruitAgent}
       >
-        引进项目
+        招募员工
       </StyledButton>
       <StyledButton
         type="primary"
         icon={<PlusOutlined />}
-        onClick={onCreateProject}
+        onClick={onCreateAgent}
       >
-        新建项目
+        新增员工
       </StyledButton>
     </HeaderContainer>
   );
 };
 
-export default ProjectListHeader; 
+export default AIAgentListHeader; 
