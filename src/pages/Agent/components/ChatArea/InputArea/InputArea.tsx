@@ -1,43 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Spin, message, Input } from 'antd';
+import { Spin, message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
-import axios from '../../../../../api/axios';
-import { ProjectAgent } from '../../../types';
+import axios from 'api/axios';
+import { ProjectAgent } from 'pages/Agent/types';
 import MentionDropdown from './MentionDropdown';
-import styled from 'styled-components';
 import {
   GlobalMentionsStyle,
   StyledFooter,
   InputContainer,
   SendButton,
-  LoadingContainer
+  LoadingContainer,
+  CustomTextArea
 } from './styles';
-
-const { TextArea } = Input;
-
-// 创建一个内联的样式组件，以便可以直接使用ref
-const CustomTextArea = styled(TextArea)`
-  flex: 1;
-  min-width: 0;
-  padding: 7px 12px;
-  resize: none;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--ant-color-border);
-  transition: all 0.3s ease;
-  min-height: 36px;
-  max-height: 120px;
-  overflow-y: auto;
-  
-  &:focus {
-    box-shadow: 0 0 0 2px rgba(var(--ant-color-primary-rgb), 0.2);
-    border-color: var(--ant-color-primary);
-  }
-  
-  &:hover {
-    border-color: var(--ant-color-primary);
-  }
-`;
 
 interface InputAreaProps {
   inputValue: string;

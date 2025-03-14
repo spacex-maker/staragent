@@ -142,6 +142,29 @@ export const MentionOption = styled.div`
   }
 `;
 
+export const CustomTextArea = styled(TextArea)`
+  flex: 1;
+  min-width: 0;
+  padding: 7px 12px;
+  resize: none;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--ant-color-border);
+  transition: all 0.3s ease;
+  min-height: 36px;
+  max-height: 120px;
+  overflow-y: auto;
+  
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(var(--ant-color-primary-rgb), 0.2);
+    border-color: var(--ant-color-primary);
+  }
+  
+  &:hover {
+    border-color: var(--ant-color-primary);
+  }
+`;
+
 export const LoadingContainer = styled.div`
   flex: 1;
   min-width: 0;
