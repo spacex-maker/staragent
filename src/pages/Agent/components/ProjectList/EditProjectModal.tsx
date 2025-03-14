@@ -6,12 +6,11 @@ import axios from '../../../../api/axios';
 import styled from 'styled-components';
 import AddAgentModal from './AddAgentModal';
 
-interface ProjectModalProps {
+interface EditProjectModalProps {
   visible: boolean;
-  editingProject: Project | null;
+  project: Project;
   onSuccess: () => void;
   onCancel: () => void;
-  onProjectCreate: (project: Project) => void;
   onProjectUpdate: (projectId: string, project: Partial<Project>) => void;
 }
 
@@ -37,12 +36,11 @@ const StyledModal = styled(Modal)`
   }
 `;
 
-const ProjectModal: React.FC<ProjectModalProps> = ({
+const EditProjectModal: React.FC<EditProjectModalProps> = ({
   visible,
-  editingProject,
+  project,
   onSuccess,
   onCancel,
-  onProjectCreate,
   onProjectUpdate,
 }) => {
   const [form] = Form.useForm();
@@ -53,18 +51,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   const [addAgentModalVisible, setAddAgentModalVisible] = React.useState(false);
 
   React.useEffect(() => {
-    if (visible) {
-      if (editingProject) {
-        form.setFieldsValue(editingProject);
-        if (activeTab === 'agents') {
-          fetchProjectAgents(editingProject.id);
-        }
-      } else {
-        form.resetFields();
-        form.setFieldsValue({ visibility: 'private' });
+    if (visible && project) {
+      form.setFieldsValue(project);
+      if (activeTab === 'agents') {
+        fetchProjectAgents(project.id);
       }
     }
-  }, [visible, editingProject, form, activeTab]);
+  }, [visible, project, form, activeTab]);
 
   const fetchProjectAgents = async (projectId: string) => {
     if (!projectId) return;
@@ -87,8 +80,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
-    if (key === 'agents' && editingProject) {
-      fetchProjectAgents(editingProject.id);
+    if (key === 'agents' && project) {
+      fetchProjectAgents(project.id);
     }
   };
 
@@ -97,56 +90,32 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       const values = await form.validateFields();
       setLoading(true);
 
-      if (editingProject) {
-        try {
-          const updateData = {
-            id: parseInt(editingProject.id),
-            name: values.name,
-            description: values.description,
-            visibility: values.visibility
+      try {
+        const updateData = {
+          id: parseInt(project.id),
+          name: values.name,
+          description: values.description,
+          visibility: values.visibility
+        };
+        
+        const response = await axios.post('/productx/sa-project/update', updateData);
+        if (response.data.success) {
+          const updatedProject = {
+            ...project,
+            ...values,
+            updatedAt: new Date().toISOString()
           };
-          
-          const response = await axios.post('/productx/sa-project/update', updateData);
-          if (response.data.success) {
-            const updatedProject = {
-              ...editingProject,
-              ...values,
-              updatedAt: new Date().toISOString()
-            };
-            onProjectUpdate(editingProject.id, updatedProject);
-            message.success('项目更新成功');
-            onSuccess();
-          } else {
-            message.error(response.data.message || '项目更新失败');
-          }
-        } catch (error) {
-          message.error('更新项目时发生错误');
-          console.error('更新项目错误:', error);
-          return;
+          onProjectUpdate(project.id, updatedProject);
+          message.success('项目更新成功');
+          onSuccess();
+        } else {
+          message.error(response.data.message || '项目更新失败');
         }
-      } else {
-        try {
-          console.log('开始创建项目:', values);
-          const response = await axios.post('/productx/sa-project/create', values);
-          console.log('项目创建响应:', response.data);
-          
-          if (response.data.success) {
-            // 后端返回成功，但 data 可能只是 true
-            message.success('项目创建成功');
-            
-            // 直接调用成功回调，让父组件刷新项目列表
-            onSuccess();
-            onCancel();
-          } else {
-            console.error('项目创建失败:', response.data);
-            message.error(response.data.message || '项目创建失败');
-          }
-        } catch (error: any) {
-          console.error('创建项目错误:', error);
-          // 错误已经由 axios 拦截器处理，这里只需记录日志
-        } finally {
-          setLoading(false);
-        }
+      } catch (error) {
+        message.error('更新项目时发生错误');
+        console.error('更新项目错误:', error);
+      } finally {
+        setLoading(false);
       }
     } catch (error) {
       console.error('表单验证失败:', error);
@@ -159,20 +128,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const handleAddAgentSuccess = () => {
     setAddAgentModalVisible(false);
-    if (editingProject) {
-      fetchProjectAgents(editingProject.id);
+    if (project) {
+      fetchProjectAgents(project.id);
     }
   };
 
   const handleRemoveAgent = async (recordId: number) => {
-    if (!editingProject) return;
+    if (!project) return;
     
     try {
       const response = await axios.delete(`/productx/sa-ai-agent-project/${recordId}`);
       
       if (response.data.success) {
         message.success('员工已从项目中移除');
-        fetchProjectAgents(editingProject.id);
+        fetchProjectAgents(project.id);
       } else {
         message.error(response.data.message || '移除员工失败');
       }
@@ -183,7 +152,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   };
 
   const handleUpdateAgentSettings = async (record: ProjectAgent, field: string, value: any) => {
-    if (!editingProject) return;
+    if (!project) return;
     
     try {
       // 构建更新数据，只包含需要更新的字段
@@ -361,7 +330,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   return (
     <>
       <StyledModal
-        title={editingProject ? '编辑项目' : '新建项目'}
+        title="编辑项目"
         open={visible}
         onOk={handleOk}
         onCancel={onCancel}
@@ -378,7 +347,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               <Form
                 form={form}
                 layout="vertical"
-                initialValues={{ visibility: 'private' }}
               >
                 <Form.Item
                   name="name"
@@ -424,7 +392,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           {
             key: 'agents',
             label: '员工管理',
-            disabled: !editingProject,
             children: (
               <TabContainer>
                 <AgentListHeader>
@@ -458,16 +425,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         ]} />
       </StyledModal>
 
-      {editingProject && (
-        <AddAgentModal
-          visible={addAgentModalVisible}
-          projectId={editingProject.id}
-          onCancel={() => setAddAgentModalVisible(false)}
-          onSuccess={handleAddAgentSuccess}
-        />
-      )}
+      <AddAgentModal
+        visible={addAgentModalVisible}
+        projectId={project?.id || ''}
+        onCancel={() => setAddAgentModalVisible(false)}
+        onSuccess={handleAddAgentSuccess}
+      />
     </>
   );
 };
 
-export default ProjectModal; 
+export default EditProjectModal; 
