@@ -28,12 +28,15 @@ const ProjectContent = styled.div`
   width: 100%;
   position: relative;
   padding: 0;
+  justify-content: space-between;
 `;
 
 const LeftSection = styled.div`
   display: flex;
   gap: 12px;
   flex: 1;
+  min-width: 0;
+  max-width: calc(100% - 120px);
 `;
 
 const ProjectIcon = styled.div`
@@ -48,21 +51,25 @@ const ProjectIcon = styled.div`
 const ProjectInfo = styled.div`
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 `;
 
 const ProjectName = styled(Text)`
   font-size: 16px;
   display: block;
   margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 `;
 
 const ProjectDetails = styled.div`
   font-size: 12px;
   color: var(--ant-color-text-secondary);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   line-height: 1.4;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const RightSection = styled.div`
@@ -72,6 +79,7 @@ const RightSection = styled.div`
   align-items: flex-end;
   padding: 0 8px;
   min-width: 100px;
+  flex-shrink: 0;
 `;
 
 const ActionButtons = styled.div`
@@ -173,10 +181,12 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             {project.visibility === 'private' ? <LockOutlined /> : <GlobalOutlined />}
           </ProjectIcon>
           <ProjectInfo>
-            <ProjectName strong>{project.name}</ProjectName>
+            <ProjectName strong ellipsis={{ tooltip: true }}>
+              {project.name}
+            </ProjectName>
             {project.description && (
               <ProjectDetails>
-                <Paragraph ellipsis={{ rows: 2 }} style={{ margin: 0 }}>
+                <Paragraph ellipsis={{ rows: 2, tooltip: true }} style={{ margin: 0 }}>
                   {project.description}
                 </Paragraph>
               </ProjectDetails>

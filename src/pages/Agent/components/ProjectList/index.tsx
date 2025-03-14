@@ -5,7 +5,8 @@ import { Project } from '../../types';
 import axios from '../../../../api/axios';
 import ProjectListHeader from './ProjectListHeader';
 import ProjectItem from './ProjectItem';
-import ProjectModal from './ProjectModal';
+import CreateProjectModal from './CreateProjectModal';
+import EditProjectModal from './EditProjectModal';
 import AIAgentList from '../AIAgentList';
 
 const ProjectListContainer = styled.div`
@@ -120,7 +121,8 @@ const ProjectList: React.FC<ProjectListProps> = ({
   onProjectUpdate,
   onProjectDelete,
 }) => {
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isCreateModalVisible, setIsCreateModalVisible] = React.useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = React.useState(false);
   const [editingProject, setEditingProject] = React.useState<Project | null>(null);
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [fetchLoading, setFetchLoading] = React.useState(true);
@@ -156,17 +158,24 @@ const ProjectList: React.FC<ProjectListProps> = ({
   }, []);
 
   const handleCreateProject = () => {
-    setEditingProject(null);
-    setIsModalVisible(true);
+    setIsCreateModalVisible(true);
   };
 
   const handleEditProject = (project: Project) => {
     setEditingProject(project);
-    setIsModalVisible(true);
+    setIsEditModalVisible(true);
   };
 
-  const handleModalSuccess = () => {
-    console.log('模态框操作成功，刷新项目列表');
+  const handleCreateModalSuccess = () => {
+    console.log('创建项目成功，刷新项目列表');
+    // 延迟一点时间再刷新，确保服务器数据已更新
+    setTimeout(() => {
+      fetchProjects();
+    }, 500);
+  };
+
+  const handleEditModalSuccess = () => {
+    console.log('编辑项目成功，刷新项目列表');
     // 延迟一点时间再刷新，确保服务器数据已更新
     setTimeout(() => {
       fetchProjects();
@@ -252,14 +261,24 @@ const ProjectList: React.FC<ProjectListProps> = ({
         />
       </TabContainer>
 
-      <ProjectModal
-        visible={isModalVisible}
-        editingProject={editingProject}
-        onSuccess={handleModalSuccess}
-        onCancel={() => setIsModalVisible(false)}
+      {/* 创建项目模态框 */}
+      <CreateProjectModal
+        visible={isCreateModalVisible}
+        onSuccess={handleCreateModalSuccess}
+        onCancel={() => setIsCreateModalVisible(false)}
         onProjectCreate={onProjectCreate}
-        onProjectUpdate={onProjectUpdate}
       />
+
+      {/* 编辑项目模态框 */}
+      {editingProject && (
+        <EditProjectModal
+          visible={isEditModalVisible}
+          project={editingProject}
+          onSuccess={handleEditModalSuccess}
+          onCancel={() => setIsEditModalVisible(false)}
+          onProjectUpdate={onProjectUpdate}
+        />
+      )}
     </ProjectListContainer>
   );
 };

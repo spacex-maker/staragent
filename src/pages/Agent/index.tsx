@@ -1,14 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Layout, Input, Button, List, Avatar, Typography } from 'antd';
-import { SendOutlined, UserOutlined, RobotOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import SimpleHeader from '../../components/headers/simple';
 import ProjectList from './components/ProjectList';
+import ChatArea from './components/ChatArea';
 import { Message, Project } from './types';
-
-const { Content, Footer } = Layout;
-const { TextArea } = Input;
-const { Text } = Typography;
+import axios from '../../api/axios';
 
 const StyledLayout = styled(Layout)`
   width: 100vw;
@@ -27,63 +24,6 @@ const MainContainer = styled.div`
   margin-top: 64px;
   position: relative;
   overflow: hidden;
-`;
-
-const ChatContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: var(--ant-color-bg-container);
-  min-width: 0;
-  overflow: hidden;
-`;
-
-const StyledContent = styled(Content)`
-  flex: 1;
-  padding: 24px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const StyledFooter = styled(Footer)`
-  background: var(--ant-color-bg-container);
-  border-top: 1px solid var(--ant-color-border);
-  padding: 16px 24px;
-  width: 100%;
-`;
-
-const MessageList = styled(List<Message>)`
-  flex: 1;
-  padding: 0 24px;
-  width: 100%;
-`;
-
-const MessageItem = styled(List.Item)`
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  background: var(--ant-color-bg-container);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  gap: 16px;
-  align-items: flex-end;
-  width: 100%;
-  
-  .ant-input-textarea {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .ant-btn {
-    flex-shrink: 0;
-  }
 `;
 
 const Sidebar = styled.div<{ collapsed: boolean }>`
@@ -166,7 +106,39 @@ const AgentPage: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [projectsLoading, setProjectsLoading] = useState(true);
+
+  // 加载项目列表
+  useEffect(() => {
+    const fetchProjects = async () => {
+      setProjectsLoading(true);
+      try {
+        const response = await axios.get('/productx/sa-project/list');
+        if (response.data.success) {
+          const formattedProjects = response.data.data.map((project: any) => ({
+            id: project.id.toString(),
+            name: project.name,
+            description: project.description,
+            visibility: project.visibility,
+            isActive: project.status === 'active',
+            createdAt: project.createTime,
+            updatedAt: project.updateTime
+          }));
+          setProjects(formattedProjects);
+          console.log('加载的项目列表:', formattedProjects);
+        } else {
+          message.error(response.data.message || '获取项目列表失败');
+        }
+      } catch (error) {
+        console.error('获取项目列表错误:', error);
+        message.error('获取项目列表失败，请稍后重试');
+      } finally {
+        setProjectsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   // 监听窗口大小变化
   useEffect(() => {
@@ -177,14 +149,6 @@ const AgentPage: React.FC = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const handleSend = () => {
     if (!inputValue.trim() || !activeProjectId) return;
@@ -232,6 +196,15 @@ const AgentPage: React.FC = () => {
     }
   };
 
+  const handleProjectSelect = (projectId: string) => {
+    console.log('选择项目:', projectId);
+    setActiveProjectId(projectId);
+    
+    // 查找并记录选中的项目信息
+    const selectedProject = projects.find(p => p.id === projectId);
+    console.log('选中的项目信息:', selectedProject);
+  };
+
   const filteredMessages = messages.filter(msg => msg.projectId === activeProjectId);
 
   const toggleSidebar = () => {
@@ -243,6 +216,10 @@ const AgentPage: React.FC = () => {
     setCollapsed(true);
   };
 
+  // 获取当前选中的项目
+  const activeProject = projects.find(p => p.id === activeProjectId);
+  console.log('当前选中的项目:', activeProject, '项目ID:', activeProjectId);
+
   return (
     <StyledLayout>
       <SimpleHeader />
@@ -253,7 +230,7 @@ const AgentPage: React.FC = () => {
             <ProjectList
               projects={projects}
               activeProjectId={activeProjectId}
-              onProjectSelect={setActiveProjectId}
+              onProjectSelect={handleProjectSelect}
               onProjectCreate={handleProjectCreate}
               onProjectUpdate={handleProjectUpdate}
               onProjectDelete={handleProjectDelete}
@@ -268,55 +245,13 @@ const AgentPage: React.FC = () => {
         
         <Mask visible={!collapsed && window.innerWidth <= 768} onClick={handleMaskClick} />
 
-        <ChatContainer>
-          <StyledContent>
-            <MessageList
-              dataSource={filteredMessages}
-              renderItem={(item: Message) => (
-                <MessageItem>
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar icon={item.type === 'user' ? <UserOutlined /> : <RobotOutlined />} />
-                    }
-                    title={
-                      <Text strong>{item.type === 'user' ? '用户' : 'AI助手'}</Text>
-                    }
-                    description={
-                      <Text>{item.content}</Text>
-                    }
-                  />
-                </MessageItem>
-              )}
-            />
-            <div ref={messagesEndRef} />
-          </StyledContent>
-
-          <StyledFooter>
-            <InputContainer>
-              <TextArea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder={activeProjectId ? "输入您的问题..." : "请先选择一个项目"}
-                autoSize={{ minRows: 1, maxRows: 4 }}
-                onPressEnter={(e) => {
-                  if (!e.shiftKey) {
-                    e.preventDefault();
-                    handleSend();
-                  }
-                }}
-                disabled={!activeProjectId}
-              />
-              <Button
-                type="primary"
-                icon={<SendOutlined />}
-                onClick={handleSend}
-                disabled={!inputValue.trim() || !activeProjectId}
-              >
-                发送
-              </Button>
-            </InputContainer>
-          </StyledFooter>
-        </ChatContainer>
+        <ChatArea 
+          messages={filteredMessages}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          activeProject={activeProject}
+          handleSend={handleSend}
+        />
       </MainContainer>
     </StyledLayout>
   );
