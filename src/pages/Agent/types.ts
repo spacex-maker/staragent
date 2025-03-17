@@ -19,6 +19,34 @@ export interface Message {
   content: string;
   projectId?: string;
   timestamp: string;
+  agentName?: string;
+  agentId?: number;
+}
+
+// 聊天会话接口
+export interface ChatSession {
+  id: string;
+  projectId: string;
+  title: string;
+  lastMessage: string;
+  messageCount: number;
+  createTime?: string;
+  updateTime?: string;
+}
+
+// 分页请求参数
+export interface PaginationParams {
+  pageSize: number;
+  currentPage: number;
+}
+
+// 分页响应数据
+export interface PaginationResponse<T> {
+  records: T[];
+  total: number;
+  size: number;
+  current: number;
+  pages: number;
 }
 
 export interface AIAgent {

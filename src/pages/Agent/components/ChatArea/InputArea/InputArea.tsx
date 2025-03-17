@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Spin, message } from 'antd';
-import { SendOutlined } from '@ant-design/icons';
+import { SendOutlined, LoadingOutlined, StopOutlined } from '@ant-design/icons';
 import axios from 'api/axios';
 import { ProjectAgent } from 'pages/Agent/types';
 import MentionDropdown from './MentionDropdown';
@@ -19,6 +19,8 @@ interface InputAreaProps {
   handleSend: () => void;
   disabled: boolean;
   projectId?: string;
+  loading?: boolean;
+  onCancelRequest?: () => void;
 }
 
 const InputArea: React.FC<InputAreaProps> = ({
@@ -26,10 +28,12 @@ const InputArea: React.FC<InputAreaProps> = ({
   setInputValue,
   handleSend,
   disabled,
-  projectId
+  projectId,
+  loading = false,
+  onCancelRequest
 }) => {
   const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [agentsLoading, setAgentsLoading] = useState(false);
   const [showMentions, setShowMentions] = useState(false);
   const [mentionFilter, setMentionFilter] = useState('');
   const [cursorPosition, setCursorPosition] = useState(0);
@@ -47,7 +51,7 @@ const InputArea: React.FC<InputAreaProps> = ({
   const fetchProjectAgents = async (projectId: string) => {
     if (!projectId) return;
     
-    setLoading(true);
+    setAgentsLoading(true);
     try {
       const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${projectId}`);
       if (response.data.success) {
@@ -59,7 +63,7 @@ const InputArea: React.FC<InputAreaProps> = ({
       console.error('获取项目员工错误:', error);
       message.error('获取项目员工失败，请稍后重试');
     } finally {
-      setLoading(false);
+      setAgentsLoading(false);
     }
   };
 
@@ -67,7 +71,9 @@ const InputArea: React.FC<InputAreaProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSend();
+      if (!loading) {
+        handleSend();
+      }
     }
   };
 
@@ -133,11 +139,18 @@ const InputArea: React.FC<InputAreaProps> = ({
     agent.agentName.toLowerCase().includes(mentionFilter.toLowerCase())
   );
 
+  // 处理取消请求
+  const handleCancelRequest = () => {
+    if (onCancelRequest) {
+      onCancelRequest();
+    }
+  };
+
   return (
     <StyledFooter>
       <GlobalMentionsStyle />
       <InputContainer>
-        {loading ? (
+        {agentsLoading ? (
           <LoadingContainer>
             <Spin size="small" />
           </LoadingContainer>
@@ -149,7 +162,7 @@ const InputArea: React.FC<InputAreaProps> = ({
               onChange={handleInputChange}
               placeholder={disabled ? "请先选择一个项目" : "输入您的问题..."}
               onKeyDown={handleKeyDown}
-              disabled={disabled}
+              disabled={disabled || loading}
               autoSize={{ minRows: 1, maxRows: 5 }}
             />
             
@@ -161,14 +174,25 @@ const InputArea: React.FC<InputAreaProps> = ({
             )}
           </>
         )}
-        <SendButton
-          type="primary"
-          icon={<SendOutlined />}
-          onClick={handleSend}
-          disabled={!inputValue.trim() || disabled}
-        >
-          发送
-        </SendButton>
+        {loading ? (
+          <SendButton
+            type="primary"
+            danger
+            icon={<StopOutlined />}
+            onClick={handleCancelRequest}
+          >
+            取消
+          </SendButton>
+        ) : (
+          <SendButton
+            type="primary"
+            icon={<SendOutlined />}
+            onClick={handleSend}
+            disabled={!inputValue.trim() || disabled}
+          >
+            发送
+          </SendButton>
+        )}
       </InputContainer>
     </StyledFooter>
   );

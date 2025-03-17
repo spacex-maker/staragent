@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import SimpleHeader from '../../components/headers/simple';
@@ -100,6 +100,18 @@ const Mask = styled.div<{ visible: boolean }>`
   }
 `;
 
+interface ChatAreaProps {
+  messages: Message[];
+  inputValue: string;
+  setInputValue: (value: string) => void;
+  activeProject: Project | undefined;
+  handleSend: (sessionId?: string) => void;
+  sendLoading?: boolean;
+  onNewSession?: (sessionId: string) => void;
+  onCancelRequest: () => void;
+  onClearMessages: () => void;
+}
+
 const AgentPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -107,6 +119,9 @@ const AgentPage: React.FC = () => {
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
   const [projectsLoading, setProjectsLoading] = useState(true);
+  const [sendLoading, setSendLoading] = useState(false);
+  // 添加一个AbortController的引用，用于取消请求
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   // 加载项目列表
   useEffect(() => {
@@ -150,9 +165,29 @@ const AgentPage: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleSend = () => {
+  // 取消发送消息的请求
+  const cancelSendRequest = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+      setSendLoading(false);
+      message.info('已取消请求');
+    }
+  };
+
+  const handleSend = async (sessionId?: string) => {
     if (!inputValue.trim() || !activeProjectId) return;
 
+    // 如果有正在进行的请求，先取消
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    // 创建新的AbortController
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+
+    // 添加用户消息到本地状态
     const newMessage: Message = {
       type: 'user',
       content: inputValue,
@@ -160,18 +195,104 @@ const AgentPage: React.FC = () => {
       timestamp: new Date().toISOString(),
     };
     setMessages(prev => [...prev, newMessage]);
+    
+    // 清空输入框
+    const userMessage = inputValue;
     setInputValue('');
-
-    // 模拟AI响应
-    setTimeout(() => {
-      const aiResponse: Message = {
+    
+    // 发送消息到服务器，设置加载状态
+    setSendLoading(true);
+    try {
+      // 使用较长的超时时间，确保有足够时间等待后端处理
+      const response = await axios.post('/chat/send', {
+        projectId: parseInt(activeProjectId),
+        sessionId: sessionId || null,
+        content: userMessage
+      }, {
+        timeout: 120000, // 设置2分钟超时，给模型足够的思考时间
+        signal // 传递AbortController的signal
+      });
+      
+      if (response.data.success) {
+        // 适配实际的API返回数据结构
+        // 返回格式: {"success":true,"message":"发送成功","data":[{"agentName":"自动控制专家","agentId":2,"sessionId":"27","content":"你好，有什么可以帮助您的吗？"}]}
+        const responseData = response.data.data;
+        
+        // 记录会话ID
+        let newSessionId = null;
+        
+        if (Array.isArray(responseData) && responseData.length > 0) {
+          // 添加所有AI员工的响应到本地状态
+          responseData.forEach((reply) => {
+            const aiResponse: Message = {
+              type: 'assistant',
+              content: reply.content || '抱歉，我无法理解您的问题。',
+              projectId: activeProjectId,
+              timestamp: new Date().toISOString(),
+              agentName: reply.agentName,
+              agentId: reply.agentId
+            };
+            setMessages(prev => [...prev, aiResponse]);
+            
+            // 记录会话ID（所有回复的会话ID应该是相同的）
+            if (!sessionId && reply.sessionId) {
+              newSessionId = reply.sessionId;
+            }
+          });
+          
+          // 如果是新会话，记录会话ID
+          if (newSessionId) {
+            console.log('新会话创建成功，会话ID:', newSessionId);
+          }
+        } else {
+          // 处理API返回空数组的情况
+          const systemMessage: Message = {
+            type: 'assistant',
+            content: '抱歉，我无法理解您的问题或者没有合适的回答。请尝试用更清晰的方式提问。',
+            projectId: activeProjectId,
+            timestamp: new Date().toISOString(),
+            agentName: '系统',
+            agentId: 0
+          };
+          setMessages(prev => [...prev, systemMessage]);
+          
+          // 如果有会话ID，记录下来
+          if (sessionId) {
+            newSessionId = sessionId;
+          }
+          
+          console.log('模型未返回回复');
+        }
+      } else {
+        message.error(response.data.message || '发送消息失败');
+      }
+    } catch (error: any) {
+      console.error('发送消息错误:', error);
+      // 区分不同类型的错误
+      if (error.name === 'CanceledError' || error.message?.includes('canceled')) {
+        message.info('用户取消了请求');
+      } else if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        message.error('请求超时，模型可能需要更长时间思考');
+      } else {
+        message.error('发送消息失败，请稍后重试');
+      }
+      
+      // 添加错误提示到本地状态
+      const errorMessage: Message = {
         type: 'assistant',
-        content: '这是一个模拟的AI响应消息。在实际应用中，这里应该调用真实的AI API。',
+        content: '发送消息失败，请稍后重试。',
         projectId: activeProjectId,
         timestamp: new Date().toISOString(),
+        agentName: '系统',
+        agentId: 0
       };
-      setMessages(prev => [...prev, aiResponse]);
-    }, 1000);
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      // 清除AbortController引用
+      abortControllerRef.current = null;
+      // 无论成功失败，都结束加载状态
+      setSendLoading(false);
+    }
   };
 
   const handleProjectCreate = (project: Project) => {
@@ -198,6 +319,13 @@ const AgentPage: React.FC = () => {
 
   const handleProjectSelect = (projectId: string) => {
     console.log('选择项目:', projectId);
+    
+    // 如果选择了不同的项目，清空输入框和消息
+    if (activeProjectId !== projectId) {
+      setInputValue('');
+      // 不清空全局消息列表，因为我们需要保留不同项目的消息
+    }
+    
     setActiveProjectId(projectId);
     
     // 查找并记录选中的项目信息
@@ -219,6 +347,14 @@ const AgentPage: React.FC = () => {
   // 获取当前选中的项目
   const activeProject = projects.find(p => p.id === activeProjectId);
   console.log('当前选中的项目:', activeProject, '项目ID:', activeProjectId);
+
+  // 清空当前项目的消息
+  const clearProjectMessages = () => {
+    if (activeProjectId) {
+      // 只清空当前项目的消息
+      setMessages(prev => prev.filter(msg => msg.projectId !== activeProjectId));
+    }
+  };
 
   return (
     <StyledLayout>
@@ -251,6 +387,9 @@ const AgentPage: React.FC = () => {
           setInputValue={setInputValue}
           activeProject={activeProject}
           handleSend={handleSend}
+          sendLoading={sendLoading}
+          onCancelRequest={cancelSendRequest}
+          onClearMessages={clearProjectMessages}
         />
       </MainContainer>
     </StyledLayout>
