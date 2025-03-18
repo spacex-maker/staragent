@@ -15,12 +15,17 @@ export interface CreateProjectRequest {
 }
 
 export interface Message {
-  type: 'user' | 'assistant';
+  id: number;
+  sessionId: string;
+  role: 'user' | 'assistant' | 'system';
   content: string;
-  projectId?: string;
-  timestamp: string;
-  agentName?: string;
-  agentId?: number;
+  createTime: string;
+  updateTime: string;
+  agentName?: string | null;
+  agentId?: number | null;
+  model?: string | null;
+  sending?: boolean;
+  error?: boolean;
 }
 
 // 聊天会话接口

@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Layout, Input, Button, List, Avatar, Typography, message } from 'antd';
-import { SendOutlined, UserOutlined, RobotOutlined, ProjectOutlined } from '@ant-design/icons';
+import { Layout, Typography, message } from 'antd';
+import { ProjectOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Message, Project, ChatSession } from '../../types';
+import { Message, Project } from '../../types';
 import ProjectHeader from './ProjectHeader';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
-import SessionList, { SessionListRef } from './SessionList/index';
+import SessionList, { SessionListRef } from './SessionList';
 import axios from '../../../../api/axios';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 const { Title, Text } = Typography;
 
 const ChatContainer = styled.div`
@@ -67,11 +67,13 @@ interface ChatAreaProps {
   messages: Message[];
   inputValue: string;
   setInputValue: (value: string) => void;
-  activeProject: Project | undefined;
+  activeProject: Project | null;
   handleSend: (sessionId?: string) => Promise<string | undefined>;
   sendLoading?: boolean;
   onCancelRequest?: () => void;
   onClearMessages?: () => void;
+  activeSessionId: string | null;
+  setActiveSessionId: (sessionId: string | null) => void;
 }
 
 const ChatArea: React.FC<ChatAreaProps> = ({
@@ -82,282 +84,225 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   handleSend,
   sendLoading = false,
   onCancelRequest,
-  onClearMessages
+  onClearMessages,
+  activeSessionId,
+  setActiveSessionId
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sessionListRef = useRef<SessionListRef>(null);
-  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
   const [sessionMessages, setSessionMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
-  // 添加refreshTimerId用于防止重复刷新会话列表
-  const refreshTimerId = useRef<NodeJS.Timeout | null>(null);
-  // 添加状态来追踪是否已经为当前项目刷新过会话列表
-  const hasRefreshedRef = useRef<Set<string>>(new Set());
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [beforeId, setBeforeId] = useState<number | null>(null);
+  const PAGE_SIZE = 20;
 
-  const scrollToBottom = () => {
+  // 滚动到底部
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // 防抖函数，用于延迟刷新会话列表
-  const debouncedRefreshSessions = () => {
-    // 清除之前的定时器
-    if (refreshTimerId.current) {
-      clearTimeout(refreshTimerId.current);
-    }
-    
-    // 设置新的定时器，延迟刷新会话列表
-    refreshTimerId.current = setTimeout(() => {
-      sessionListRef.current?.refreshSessions();
-      refreshTimerId.current = null;
-    }, 1000);
-  };
-
-  // 清除hasRefreshedRef，用于项目切换时重置状态
-  useEffect(() => {
-    if (activeProject) {
-      // 当项目变更时，重置刷新状态
-      hasRefreshedRef.current = new Set();
-    }
-    return () => {
-      // 组件卸载时清除定时器
-      if (refreshTimerId.current) {
-        clearTimeout(refreshTimerId.current);
-      }
-    };
-  }, [activeProject?.id]);
-
-  // 监听messages的变化，检测新会话创建
-  useEffect(() => {
-    // 只在特定条件下处理：存在活动项目、没有活动会话、有消息
-    if (!activeProject || activeSessionId || messages.length === 0) return;
-    
-    // 获取当前项目的消息
-    const projectMessages = messages.filter(msg => msg.projectId === activeProject.id);
-    if (projectMessages.length === 0) return;
-    
-    // 检查是否有用户消息和AI回复
-    const userMessages = projectMessages.filter(msg => msg.type === 'user');
-    const assistantMessages = projectMessages.filter(msg => msg.type === 'assistant');
-    
-    // 只有同时有用户消息和AI回复时才可能是新会话
-    if (userMessages.length === 0 || assistantMessages.length === 0) return;
-    
-    // 获取最后一条消息
-    const latestMessage = projectMessages[projectMessages.length - 1];
-    
-    // 只有最新消息是AI回复，且我们尚未为此项目刷新过会话列表时，才刷新
-    if (latestMessage.type === 'assistant' && !hasRefreshedRef.current.has(activeProject.id)) {
-      console.log('检测到新会话创建，刷新会话列表');
-      
-      // 标记此项目已刷新
-      hasRefreshedRef.current.add(activeProject.id);
-      
-      // 刷新会话列表
-      setTimeout(() => {
-        refreshSessionList();
-      }, 1000);
-    }
-  }, [activeProject, activeSessionId, messages]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [sessionMessages]);
-
-  // 当项目变更时，重置会话状态
-  useEffect(() => {
-    setActiveSessionId(null);
-    setSessionMessages([]);
-  }, [activeProject?.id]);
-
-  // 当选择会话时，加载会话消息
-  useEffect(() => {
-    if (activeSessionId) {
-      // 清空当前会话消息，显示加载状态
-      setSessionMessages([]);
-      // 加载会话消息
-      fetchSessionMessages(activeSessionId);
-    } else {
-      setSessionMessages([]);
-    }
-  }, [activeSessionId]);
-
-  // 当收到新消息时，更新会话消息
-  useEffect(() => {
-    if (activeProject) {
-      if (activeSessionId) {
-        // 如果有活动会话，将新消息添加到会话消息中
-        const newUserMessage = messages.find(msg => 
-          msg.projectId === activeProject.id && 
-          msg.type === 'user' && 
-          !sessionMessages.some(existingMsg => 
-            existingMsg.content === msg.content && 
-            existingMsg.type === 'user'
-          )
-        );
-        
-        if (newUserMessage) {
-          // 如果有新的用户消息，添加到会话消息中
-          setSessionMessages(prev => [...prev, newUserMessage]);
-        }
-        
-        // 检查是否有新的AI回复（包括系统消息）
-        const newAIMessages = messages.filter(msg => 
-          msg.projectId === activeProject.id && 
-          msg.type === 'assistant' && 
-          !sessionMessages.some(existingMsg => 
-            existingMsg.content === msg.content && 
-            existingMsg.type === 'assistant' &&
-            (
-              // 对于系统消息，只检查内容
-              (msg.agentName === '系统' && existingMsg.agentName === '系统' && existingMsg.content === msg.content) ||
-              // 对于普通AI消息，检查内容和agentId
-              (msg.agentName !== '系统' && existingMsg.agentId === msg.agentId && existingMsg.content === msg.content)
-            )
-          )
-        );
-        
-        if (newAIMessages.length > 0) {
-          // 如果有新的AI回复，添加到会话消息中
-          setSessionMessages(prev => [...prev, ...newAIMessages]);
-        }
-      } else {
-        // 如果没有活动会话但有消息，可能是新创建的会话
-        // 检查是否有新的用户消息
-        const userMessages = messages.filter(msg => 
-          msg.projectId === activeProject.id && 
-          msg.type === 'user'
-        );
-        
-        // 检查是否有新的AI回复
-        const aiMessages = messages.filter(msg => 
-          msg.projectId === activeProject.id && 
-          msg.type === 'assistant'
-        );
-        
-        // 如果有用户消息和AI回复，说明是新会话
-        if (userMessages.length > 0 && aiMessages.length > 0) {
-          // 将所有消息添加到会话消息中
-          setSessionMessages(messages.filter(msg => msg.projectId === activeProject.id));
-          
-          // 刷新会话列表，获取新会话ID
-          debouncedRefreshSessions();
-        }
-      }
-    }
-  }, [messages, activeProject, activeSessionId]);
+  }, []);
 
   // 获取会话消息
-  const fetchSessionMessages = async (sessionId: string) => {
+  const fetchSessionMessages = useCallback(async (sessionId: string, loadMore: boolean = false) => {
     if (!activeProject) return;
     
-    setLoading(true);
+    if (loadMore) {
+      setLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
+
     try {
-      // 调用获取会话消息的API
-      const response = await axios.get(`/chat/history/${sessionId}`, {
+      const response = await axios.get('/chat/history', {
         params: {
-          currentPage: 1,
-          pageSize: 100 // 获取足够多的消息
+          sessionId,
+          pageSize: PAGE_SIZE,
+          beforeId: loadMore ? beforeId : null
         }
       });
       
       if (response.data.success) {
-        // 获取数据
-        const messagesData = response.data.data || [];
+        const messages = response.data.data || [];
         
-        // 转换消息格式
-        const formattedMessages = messagesData.map((msg: any) => ({
-          type: msg.role === 'user' ? 'user' : 'assistant',
-          content: msg.content,
-          projectId: activeProject?.id,
-          timestamp: msg.createTime || new Date().toISOString(),
-          // 添加AI员工信息
-          ...(msg.role !== 'user' && msg.agentName ? { agentName: msg.agentName } : {}),
-          ...(msg.role !== 'user' && msg.agentId ? { agentId: msg.agentId } : {})
-        }));
+        // 更新beforeId为最后一条消息的ID
+        if (messages.length > 0) {
+          setBeforeId(messages[messages.length - 1].id);
+        }
         
-        setSessionMessages(formattedMessages);
+        // 设置是否还有更多消息
+        setHasMore(messages.length === PAGE_SIZE);
+        
+        // 如果是加载更多，添加到消息列表顶部
+        // 如果是首次加载，直接设置消息列表
+        setSessionMessages(prev => 
+          loadMore ? [...messages, ...prev] : messages
+        );
       } else {
         message.error(response.data.message || '获取会话消息失败');
-        // 如果获取失败，使用过滤的消息作为备选
-        setSessionMessages(messages.filter(msg => msg.projectId === activeProject?.id));
       }
     } catch (error) {
       console.error('获取会话消息错误:', error);
       message.error('获取会话消息失败，请稍后重试');
-      // 如果获取失败，使用过滤的消息作为备选
-      setSessionMessages(messages.filter(msg => msg.projectId === activeProject?.id));
     } finally {
-      setLoading(false);
+      if (loadMore) {
+        setLoadingMore(false);
+      } else {
+        setLoading(false);
+      }
     }
-  };
+  }, [activeProject, beforeId]);
 
-  // 处理选择会话
-  const handleSessionSelect = (sessionId: string) => {
+  // 加载更多消息
+  const loadMoreMessages = useCallback(() => {
+    if (!activeSessionId || loadingMore || !hasMore) return;
+    fetchSessionMessages(activeSessionId, true);
+  }, [activeSessionId, loadingMore, hasMore, fetchSessionMessages]);
+
+  // 刷新会话列表
+  const refreshSessionList = useCallback(() => {
+    sessionListRef.current?.refreshSessions();
+  }, []);
+
+  // 处理会话选择
+  const handleSessionSelect = useCallback((sessionId: string) => {
     setActiveSessionId(sessionId);
-  };
+    setSessionMessages([]); // 清空当前消息
+    setBeforeId(null); // 重置beforeId
+    setHasMore(true); // 重置加载更多状态
+    fetchSessionMessages(sessionId); // 加载会话消息
+  }, [fetchSessionMessages]);
 
   // 处理新建会话
-  const handleNewSession = () => {
-    // 清空会话ID
-    setActiveSessionId(null);
-    // 清空会话消息
-    setSessionMessages([]);
-    // 清空输入框
-    setInputValue('');
+  const handleNewSession = useCallback(async () => {
+    if (!activeProject?.id) return;
     
-    // 清空全局消息列表
-    if (onClearMessages) {
-      onClearMessages();
+    try {
+      const response = await axios.post('/chat/create-session', {
+        projectId: parseInt(activeProject.id),
+        title: '新会话'  // 默认标题
+      });
+      
+      if (response.data.success) {
+        console.log('创建新会话成功:', response.data);
+        const newSession = response.data.data;
+        
+        // 直接使用返回的会话ID
+        setActiveSessionId(newSession.id.toString());
+        setSessionMessages([]); // 清空消息列表
+        setBeforeId(null); // 重置beforeId
+        setHasMore(true); // 重置加载更多状态
+        setInputValue('');
+        onClearMessages?.();
+        refreshSessionList(); // 刷新会话列表
+      } else {
+        message.error(response.data.message || '创建会话失败');
+      }
+    } catch (error) {
+      console.error('创建会话错误:', error);
+      message.error('创建会话失败，请稍后重试');
     }
-    
-    // 重置刷新状态，允许为新会话刷新
-    if (activeProject) {
-      hasRefreshedRef.current.delete(activeProject.id);
-    }
-    
-    // 滚动到底部，确保视图更新
-    setTimeout(() => {
-      scrollToBottom();
-    }, 100);
-  };
+  }, [activeProject?.id, setInputValue, onClearMessages, refreshSessionList]);
 
   // 处理发送消息
   const handleSendMessage = async () => {
-    // 检查是否是新会话
-    const isNewSession = !activeSessionId;
+    if (!inputValue.trim() || !activeSessionId) return;
+    
+    console.log('发送消息:', inputValue);
+    console.log('当前会话ID:', activeSessionId);
+    
+    // 创建临时消息对象
+    const tempMessage: Message = {
+      id: Date.now(), // 临时ID
+      sessionId: activeSessionId,
+      role: 'user',
+      content: inputValue,
+      createTime: new Date().toISOString(),
+      updateTime: new Date().toISOString(),
+      sending: true // 标记为发送中状态
+    };
+
+    // 立即添加到消息列表
+    setSessionMessages(prev => [...prev, tempMessage]);
+    setInputValue(''); // 清空输入框
+    scrollToBottom(); // 滚动到底部
     
     try {
-      // 发送消息
-      let newSessionId: string | undefined;
-      if (isNewSession) {
-        // 不传递会话ID，让后端创建新会话
-        newSessionId = await handleSend(undefined);
-        
-        // 如果创建了新会话并返回了ID
-        if (newSessionId) {
-          console.log('新会话创建成功，会话ID:', newSessionId);
-          
-          // 更新活动会话ID
-          setActiveSessionId(newSessionId);
-          
-          // 延迟刷新会话列表，确保后端处理完成
-          setTimeout(() => {
-            refreshSessionList();
-          }, 1500);
-        }
-      } else {
-        // 使用现有会话ID，不需要刷新会话列表
-        await handleSend(activeSessionId);
-      }
+      await handleSend(activeSessionId);
     } catch (error) {
       console.error('发送消息失败:', error);
+      message.error('发送消息失败，请稍后重试');
+      
+      // 更新临时消息为发送失败状态
+      setSessionMessages(prev => 
+        prev.map(msg => 
+          msg.id === tempMessage.id 
+            ? { ...msg, sending: false, error: true } 
+            : msg
+        )
+      );
     }
   };
 
-  // 刷新会话列表
-  const refreshSessionList = () => {
-    sessionListRef.current?.refreshSessions();
-  };
+  // 处理新消息更新
+  useEffect(() => {
+    if (!messages || !activeProject?.id) return;
+    
+    console.log('收到新消息更新:', messages);
+    console.log('当前活动会话:', activeSessionId);
+    
+    // 如果有活动会话，则更新该会话的消息
+    if (activeSessionId) {
+      // 过滤出属于当前会话的消息
+      const currentSessionMessages = messages.filter(msg => msg.sessionId === activeSessionId);
+      console.log('当前会话的消息:', currentSessionMessages);
+      
+      if (currentSessionMessages.length > 0) {
+        setSessionMessages(prev => {
+          // 创建一个新的消息数组，移除所有发送中的消息
+          const withoutTemp = prev.filter(msg => !msg.sending);
+          
+          // 将新消息添加到数组中
+          currentSessionMessages.forEach(msg => {
+            if (!withoutTemp.some(m => m.id === msg.id)) {
+              withoutTemp.push(msg);
+            }
+          });
+          
+          // 按照创建时间排序
+          return withoutTemp.sort((a, b) => 
+            new Date(a.createTime).getTime() - new Date(b.createTime).getTime()
+          );
+        });
+      }
+    }
+    // 如果没有活动会话，但有新消息，则设置会话ID
+    else if (messages.length > 0) {
+      const firstMessage = messages[0];
+      console.log('设置新会话:', firstMessage);
+      
+      if (firstMessage.sessionId) {
+        setActiveSessionId(firstMessage.sessionId);
+        setSessionMessages(messages.sort((a, b) => 
+          new Date(a.createTime).getTime() - new Date(b.createTime).getTime()
+        ));
+        refreshSessionList();
+      }
+    }
+  }, [messages, activeProject?.id, activeSessionId, refreshSessionList]);
+
+  // 监听项目变化
+  useEffect(() => {
+    if (activeProject) {
+      setActiveSessionId(null);
+      setSessionMessages([]);
+      refreshSessionList();
+    }
+  }, [activeProject?.id, refreshSessionList]);
+
+  // 监听消息变化，自动滚动
+  useEffect(() => {
+    scrollToBottom();
+  }, [sessionMessages, scrollToBottom]);
 
   return (
     <ChatContainer>
@@ -372,15 +317,17 @@ const ChatArea: React.FC<ChatAreaProps> = ({
       )}
 
       <ChatMainArea>
-        {/* 项目标题栏 - 只在选择了项目时显示 */}
         {activeProject && <ProjectHeader project={activeProject} />}
 
         <StyledContent>
           {activeProject ? (
             <>
               <MessageList 
-                messages={activeSessionId ? sessionMessages : (messages.length > 0 ? messages : [])} 
-                loading={loading} 
+                messages={activeSessionId ? sessionMessages : messages}
+                loading={loading}
+                loadingMore={loadingMore}
+                hasMore={hasMore}
+                onLoadMore={loadMoreMessages}
               />
               <div ref={messagesEndRef} />
             </>
@@ -399,6 +346,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
           handleSend={handleSendMessage}
           disabled={!activeProject}
           projectId={activeProject?.id}
+          activeSessionId={activeSessionId}
           loading={sendLoading}
           onCancelRequest={onCancelRequest}
         />

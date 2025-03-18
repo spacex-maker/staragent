@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Spin, message } from 'antd';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Spin, message, Input } from 'antd';
+import type { TextAreaRef } from 'antd/es/input/TextArea';
 import { SendOutlined, LoadingOutlined, StopOutlined } from '@ant-design/icons';
 import axios from 'api/axios';
 import { ProjectAgent } from 'pages/Agent/types';
@@ -19,6 +20,7 @@ interface InputAreaProps {
   handleSend: () => void;
   disabled: boolean;
   projectId?: string;
+  activeSessionId?: string | null;
   loading?: boolean;
   onCancelRequest?: () => void;
 }
@@ -29,6 +31,7 @@ const InputArea: React.FC<InputAreaProps> = ({
   handleSend,
   disabled,
   projectId,
+  activeSessionId,
   loading = false,
   onCancelRequest
 }) => {
@@ -37,25 +40,18 @@ const InputArea: React.FC<InputAreaProps> = ({
   const [showMentions, setShowMentions] = useState(false);
   const [mentionFilter, setMentionFilter] = useState('');
   const [cursorPosition, setCursorPosition] = useState(0);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaRef = useRef<TextAreaRef>(null);
 
   // 获取项目员工列表
-  useEffect(() => {
-    if (projectId) {
-      fetchProjectAgents(projectId);
-    } else {
-      setProjectAgents([]);
-    }
-  }, [projectId]);
-
-  const fetchProjectAgents = async (projectId: string) => {
+  const fetchProjectAgents = useCallback(async (projectId: string) => {
     if (!projectId) return;
     
     setAgentsLoading(true);
     try {
       const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${projectId}`);
       if (response.data.success) {
-        setProjectAgents(response.data.data);
+        const agents = response.data.data || [];
+        setProjectAgents(agents);
       } else {
         message.error(response.data.message || '获取项目员工失败');
       }
@@ -65,17 +61,30 @@ const InputArea: React.FC<InputAreaProps> = ({
     } finally {
       setAgentsLoading(false);
     }
-  };
+  }, []);
 
-  // 更新键盘事件处理方法
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      if (!loading) {
-        handleSend();
-      }
+  // 只在项目ID变化时获取员工列表
+  useEffect(() => {
+    if (projectId) {
+      fetchProjectAgents(projectId);
+    } else {
+      setProjectAgents([]);
     }
-  };
+  }, [projectId, fetchProjectAgents]);
+
+  // 监听员工列表变化事件
+  useEffect(() => {
+    const handleAgentsChange = () => {
+      if (projectId) {
+        fetchProjectAgents(projectId);
+      }
+    };
+
+    window.addEventListener('projectAgentsChanged', handleAgentsChange);
+    return () => {
+      window.removeEventListener('projectAgentsChanged', handleAgentsChange);
+    };
+  }, [projectId, fetchProjectAgents]);
 
   // 处理输入变化
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -96,6 +105,7 @@ const InputArea: React.FC<InputAreaProps> = ({
       setShowMentions(true);
     } else {
       setShowMentions(false);
+      setMentionFilter('');
     }
   };
 
@@ -112,25 +122,26 @@ const InputArea: React.FC<InputAreaProps> = ({
       
       setInputValue(newValue);
       setShowMentions(false);
+      setMentionFilter('');
       
       // 设置新的光标位置
       setTimeout(() => {
-        // 获取textarea的DOM元素
-        const textareaElement = textAreaRef.current;
-        if (textareaElement) {
+        if (textAreaRef.current) {
           const newCursorPos = atIndex + agentName.length + 2; // @ + name + space
-          
-          // 获取焦点
-          textareaElement.focus();
-          
-          // 使用DOM API设置光标位置
-          try {
-            textareaElement.setSelectionRange(newCursorPos, newCursorPos);
-          } catch (error) {
-            console.error('设置光标位置失败:', error);
-          }
+          textAreaRef.current.focus();
+          textAreaRef.current.resizableTextArea?.textArea.setSelectionRange(newCursorPos, newCursorPos);
         }
-      }, 10); // 增加延迟时间，确保DOM已更新
+      }, 0);
+    }
+  };
+
+  // 更新键盘事件处理方法
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (!loading) {
+        handleSend();
+      }
     }
   };
 
@@ -138,13 +149,6 @@ const InputArea: React.FC<InputAreaProps> = ({
   const filteredAgents = projectAgents.filter(agent => 
     agent.agentName.toLowerCase().includes(mentionFilter.toLowerCase())
   );
-
-  // 处理取消请求
-  const handleCancelRequest = () => {
-    if (onCancelRequest) {
-      onCancelRequest();
-    }
-  };
 
   return (
     <StyledFooter>
@@ -166,7 +170,7 @@ const InputArea: React.FC<InputAreaProps> = ({
               autoSize={{ minRows: 1, maxRows: 5 }}
             />
             
-            {showMentions && (
+            {showMentions && filteredAgents.length > 0 && (
               <MentionDropdown 
                 filteredAgents={filteredAgents} 
                 onSelect={selectMention} 
@@ -179,7 +183,7 @@ const InputArea: React.FC<InputAreaProps> = ({
             type="primary"
             danger
             icon={<StopOutlined />}
-            onClick={handleCancelRequest}
+            onClick={onCancelRequest}
           >
             取消
           </SendButton>
