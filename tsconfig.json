@@ -15,7 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -23,7 +23,8 @@
     "baseUrl": "src",
     "paths": {
       "api/*": ["api/*"],
-      "pages/*": ["pages/*"]
+      "pages/*": ["pages/*"],
+      "*": ["*", "node_modules/*"]
     }
   },
   "include": [

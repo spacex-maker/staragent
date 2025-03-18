@@ -52,15 +52,17 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
   // 暴露刷新方法给父组件
   useImperativeHandle(ref, () => ({
     refreshSessions: () => {
-      // 重置分页，重新加载第一页
+      // 重置分页状态
       setPagination({
         currentPage: 1,
         pageSize: 10
       });
       setHasMore(true);
       setSessions([]); // 清空当前会话列表
+      setLoadingMore(false); // 重置加载更多状态
+      
+      // 使用setTimeout确保状态更新后再调用fetchSessions
       setTimeout(() => {
-        // 延迟执行fetchSessions，确保pagination更新后再调用
         fetchSessions(true);
       }, 0);
     }
@@ -163,7 +165,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
       const response = await axios.get('/chat/sessions', {
         params: {
           projectId: currentProjectId,
-          currentPage: currentPagination.currentPage,
+          currentPage: isRefresh ? 1 : currentPagination.currentPage, // 如果是刷新，强制使用第一页
           pageSize: currentPagination.pageSize
         }
       });
@@ -178,6 +180,11 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         // 如果是加载更多，追加到现有会话列表
         if (isRefresh) {
           setSessions(newSessions);
+          // 重置分页状态
+          setPagination({
+            currentPage: 1,
+            pageSize: 10
+          });
         } else {
           setSessions(prev => [...prev, ...newSessions]);
         }
@@ -204,7 +211,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         setLoadingMore(false);
       }
     }
-  }, []);
+  }, [sessions.length]);
 
   // 处理会话选择
   const handleSessionSelect = (sessionId: string) => {

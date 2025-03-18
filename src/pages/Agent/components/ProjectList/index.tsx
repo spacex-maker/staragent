@@ -190,6 +190,12 @@ const ProjectList: React.FC<ProjectListProps> = ({
     fetchProjects();
   };
 
+  // 处理员工列表变化
+  const handleAgentsChange = () => {
+    // 触发一个自定义事件，通知 InputArea 组件刷新员工列表
+    window.dispatchEvent(new CustomEvent('projectAgentsChanged'));
+  };
+
   if (fetchLoading) {
     return (
       <ProjectListContainer>
@@ -277,6 +283,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
           onSuccess={handleEditModalSuccess}
           onCancel={() => setIsEditModalVisible(false)}
           onProjectUpdate={onProjectUpdate}
+          onAgentsChange={handleAgentsChange}
         />
       )}
     </ProjectListContainer>
