@@ -3,14 +3,14 @@ import { Modal, Form, Input, InputNumber, Select, message } from 'antd';
 import { AIAgent } from '../../types';
 import axios from '../../../../api/axios';
 
-interface AIAgentModalProps {
+interface EditAIAgentModalProps {
   visible: boolean;
-  editingAgent: AIAgent | null;
+  editingAgent: AIAgent;
   onSuccess: () => void;
   onCancel: () => void;
 }
 
-const AIAgentModal: React.FC<AIAgentModalProps> = ({
+const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
   visible,
   editingAgent,
   onSuccess,
@@ -22,8 +22,6 @@ const AIAgentModal: React.FC<AIAgentModalProps> = ({
   React.useEffect(() => {
     if (visible && editingAgent) {
       form.setFieldsValue(editingAgent);
-    } else {
-      form.resetFields();
     }
   }, [visible, editingAgent, form]);
 
@@ -33,7 +31,7 @@ const AIAgentModal: React.FC<AIAgentModalProps> = ({
       setLoading(true);
 
       const updateData = {
-        id: editingAgent?.id,
+        id: editingAgent.id,
         ...values,
       };
 
@@ -64,7 +62,6 @@ const AIAgentModal: React.FC<AIAgentModalProps> = ({
       <Form
         form={form}
         layout="vertical"
-        initialValues={{ status: 'active' }}
       >
         <Form.Item
           name="name"
@@ -80,9 +77,20 @@ const AIAgentModal: React.FC<AIAgentModalProps> = ({
           rules={[{ required: true, message: '请选择使用模型' }]}
         >
           <Select>
-            <Select.Option value="GPT-4">GPT-4</Select.Option>
-            <Select.Option value="GPT-3.5">GPT-3.5</Select.Option>
-            <Select.Option value="Claude-3">Claude-3</Select.Option>
+            <Select.OptGroup label="文本聊天">
+              <Select.Option value="gpt-4o">GPT-4 Optimized</Select.Option>
+              <Select.Option value="gpt-3.5-turbo">GPT-3.5 Turbo</Select.Option>
+            </Select.OptGroup>
+            <Select.OptGroup label="图像生成">
+              <Select.Option value="dall-e-3">DALL-E 3</Select.Option>
+            </Select.OptGroup>
+            <Select.OptGroup label="语音识别">
+              <Select.Option value="whisper-1">Whisper-1</Select.Option>
+            </Select.OptGroup>
+            <Select.OptGroup label="嵌入搜索">
+              <Select.Option value="text-embedding-3-large">Text Embedding 3 Large</Select.Option>
+              <Select.Option value="text-embedding-3-small">Text Embedding 3 Small</Select.Option>
+            </Select.OptGroup>
           </Select>
         </Form.Item>
 
@@ -154,4 +162,4 @@ const AIAgentModal: React.FC<AIAgentModalProps> = ({
   );
 };
 
-export default AIAgentModal; 
+export default EditAIAgentModal; 
