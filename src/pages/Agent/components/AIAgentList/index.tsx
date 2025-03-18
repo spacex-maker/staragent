@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import axios from '../../../../api/axios';
 import { AIAgent } from '../../types';
 import AIAgentItem from './AIAgentItem';
-import AIAgentModal from './AIAgentModal';
+import CreateAIAgentModal from './CreateAIAgentModal';
+import EditAIAgentModal from './EditAIAgentModal';
 import AIAgentListHeader from './AIAgentListHeader';
 
 const { Text } = Typography;
@@ -20,7 +21,8 @@ const ListContainer = styled.div`
 const AIAgentList: React.FC = () => {
   const [agents, setAgents] = useState<AIAgent[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editingAgent, setEditingAgent] = useState<AIAgent | null>(null);
 
   const fetchAgents = async () => {
@@ -45,21 +47,26 @@ const AIAgentList: React.FC = () => {
 
   const handleEdit = (agent: AIAgent) => {
     setEditingAgent(agent);
-    setIsModalVisible(true);
+    setIsEditModalVisible(true);
   };
 
   const handleDelete = (agentId: string) => {
     setAgents(prev => prev.filter(agent => agent.id.toString() !== agentId));
   };
 
-  const handleModalSuccess = () => {
-    setIsModalVisible(false);
+  const handleCreateSuccess = () => {
+    setIsCreateModalVisible(false);
+    fetchAgents();
+  };
+
+  const handleEditSuccess = () => {
+    setIsEditModalVisible(false);
+    setEditingAgent(null);
     fetchAgents();
   };
 
   const handleCreate = () => {
-    setEditingAgent(null);
-    setIsModalVisible(true);
+    setIsCreateModalVisible(true);
   };
 
   const handleRecruit = () => {
@@ -94,12 +101,23 @@ const AIAgentList: React.FC = () => {
         locale={{ emptyText: '暂无AI员工' }}
       />
 
-      <AIAgentModal
-        visible={isModalVisible}
-        editingAgent={editingAgent}
-        onSuccess={handleModalSuccess}
-        onCancel={() => setIsModalVisible(false)}
+      <CreateAIAgentModal
+        visible={isCreateModalVisible}
+        onSuccess={handleCreateSuccess}
+        onCancel={() => setIsCreateModalVisible(false)}
       />
+
+      {editingAgent && (
+        <EditAIAgentModal
+          visible={isEditModalVisible}
+          editingAgent={editingAgent}
+          onSuccess={handleEditSuccess}
+          onCancel={() => {
+            setIsEditModalVisible(false);
+            setEditingAgent(null);
+          }}
+        />
+      )}
     </ListContainer>
   );
 };

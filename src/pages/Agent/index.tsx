@@ -36,6 +36,7 @@ const Sidebar = styled.div<{ collapsed: boolean }>`
   position: relative;
   flex-shrink: 0;
   overflow: visible;
+  z-index: 2;
   
   @media (max-width: 768px) {
     position: fixed;
@@ -67,9 +68,10 @@ const SidebarResizer = styled.div<{ $collapsed: boolean }>`
   background-color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#000000'};
   border-radius: 4px;
   cursor: pointer;
-  z-index: 10000;
+  z-index: 1000;
   transition: all 0.2s ease-in-out;
   opacity: 0.8;
+  pointer-events: auto;
   
   &:hover {
     opacity: 1;
@@ -175,8 +177,8 @@ const AgentPage: React.FC = () => {
     }
   };
 
-  const handleSend = async (sessionId?: string) => {
-    if (!inputValue.trim() || !activeProjectId) return;
+  const handleSend = async (sessionId?: string): Promise<string | undefined> => {
+    if (!inputValue.trim() || !activeProjectId) return undefined;
 
     // 如果有正在进行的请求，先取消
     if (abortControllerRef.current) {
@@ -219,7 +221,7 @@ const AgentPage: React.FC = () => {
         const responseData = response.data.data;
         
         // 记录会话ID
-        let newSessionId = null;
+        let newSessionId: string | null = null;
         
         if (Array.isArray(responseData) && responseData.length > 0) {
           // 添加所有AI员工的响应到本地状态
@@ -243,6 +245,9 @@ const AgentPage: React.FC = () => {
           // 如果是新会话，记录会话ID
           if (newSessionId) {
             console.log('新会话创建成功，会话ID:', newSessionId);
+            
+            // 返回新的会话ID
+            return newSessionId;
           }
         } else {
           // 处理API返回空数组的情况
@@ -266,33 +271,32 @@ const AgentPage: React.FC = () => {
       } else {
         message.error(response.data.message || '发送消息失败');
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('发送消息错误:', error);
-      // 区分不同类型的错误
-      if (error.name === 'CanceledError' || error.message?.includes('canceled')) {
-        message.info('用户取消了请求');
-      } else if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-        message.error('请求超时，模型可能需要更长时间思考');
-      } else {
-        message.error('发送消息失败，请稍后重试');
-      }
       
-      // 添加错误提示到本地状态
-      const errorMessage: Message = {
-        type: 'assistant',
-        content: '发送消息失败，请稍后重试。',
-        projectId: activeProjectId,
-        timestamp: new Date().toISOString(),
-        agentName: '系统',
-        agentId: 0
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      // 如果不是用户取消的错误，显示错误消息
+      if (!(error instanceof Error && error.name === 'CanceledError')) {
+        message.error('发送消息失败，请稍后重试');
+        
+        // 添加系统消息
+        const errorMessage: Message = {
+          type: 'assistant',
+          content: '抱歉，发送消息时出现错误，请稍后重试。',
+          projectId: activeProjectId,
+          timestamp: new Date().toISOString(),
+          agentName: '系统',
+          agentId: 0
+        };
+        setMessages(prev => [...prev, errorMessage]);
+      }
     } finally {
-      // 清除AbortController引用
-      abortControllerRef.current = null;
-      // 无论成功失败，都结束加载状态
+      // 重置加载状态和AbortController
       setSendLoading(false);
+      abortControllerRef.current = null;
     }
+    
+    // 如果没有创建新会话或出现错误，返回undefined
+    return undefined;
   };
 
   const handleProjectCreate = (project: Project) => {
@@ -374,7 +378,10 @@ const AgentPage: React.FC = () => {
           </SidebarContent>
           <SidebarResizer 
             $collapsed={collapsed} 
-            onClick={toggleSidebar}
+            onClick={(e) => {
+              e.stopPropagation(); // 阻止事件冒泡
+              toggleSidebar();
+            }}
             title={collapsed ? "展开侧边栏" : "收起侧边栏"}
           />
         </Sidebar>

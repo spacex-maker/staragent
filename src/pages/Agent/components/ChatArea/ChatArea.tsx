@@ -6,7 +6,7 @@ import { Message, Project, ChatSession } from '../../types';
 import ProjectHeader from './ProjectHeader';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
-import SessionList, { SessionListRef } from './SessionList';
+import SessionList, { SessionListRef } from './SessionList/index';
 import axios from '../../../../api/axios';
 
 const { Content, Footer } = Layout;
@@ -68,7 +68,7 @@ interface ChatAreaProps {
   inputValue: string;
   setInputValue: (value: string) => void;
   activeProject: Project | undefined;
-  handleSend: (sessionId?: string) => void;
+  handleSend: (sessionId?: string) => Promise<string | undefined>;
   sendLoading?: boolean;
   onCancelRequest?: () => void;
   onClearMessages?: () => void;
@@ -91,6 +91,8 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const [loading, setLoading] = useState(false);
   // 添加refreshTimerId用于防止重复刷新会话列表
   const refreshTimerId = useRef<NodeJS.Timeout | null>(null);
+  // 添加状态来追踪是否已经为当前项目刷新过会话列表
+  const hasRefreshedRef = useRef<Set<string>>(new Set());
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -109,6 +111,53 @@ const ChatArea: React.FC<ChatAreaProps> = ({
       refreshTimerId.current = null;
     }, 1000);
   };
+
+  // 清除hasRefreshedRef，用于项目切换时重置状态
+  useEffect(() => {
+    if (activeProject) {
+      // 当项目变更时，重置刷新状态
+      hasRefreshedRef.current = new Set();
+    }
+    return () => {
+      // 组件卸载时清除定时器
+      if (refreshTimerId.current) {
+        clearTimeout(refreshTimerId.current);
+      }
+    };
+  }, [activeProject?.id]);
+
+  // 监听messages的变化，检测新会话创建
+  useEffect(() => {
+    // 只在特定条件下处理：存在活动项目、没有活动会话、有消息
+    if (!activeProject || activeSessionId || messages.length === 0) return;
+    
+    // 获取当前项目的消息
+    const projectMessages = messages.filter(msg => msg.projectId === activeProject.id);
+    if (projectMessages.length === 0) return;
+    
+    // 检查是否有用户消息和AI回复
+    const userMessages = projectMessages.filter(msg => msg.type === 'user');
+    const assistantMessages = projectMessages.filter(msg => msg.type === 'assistant');
+    
+    // 只有同时有用户消息和AI回复时才可能是新会话
+    if (userMessages.length === 0 || assistantMessages.length === 0) return;
+    
+    // 获取最后一条消息
+    const latestMessage = projectMessages[projectMessages.length - 1];
+    
+    // 只有最新消息是AI回复，且我们尚未为此项目刷新过会话列表时，才刷新
+    if (latestMessage.type === 'assistant' && !hasRefreshedRef.current.has(activeProject.id)) {
+      console.log('检测到新会话创建，刷新会话列表');
+      
+      // 标记此项目已刷新
+      hasRefreshedRef.current.add(activeProject.id);
+      
+      // 刷新会话列表
+      setTimeout(() => {
+        refreshSessionList();
+      }, 1000);
+    }
+  }, [activeProject, activeSessionId, messages]);
 
   useEffect(() => {
     scrollToBottom();
@@ -261,6 +310,11 @@ const ChatArea: React.FC<ChatAreaProps> = ({
       onClearMessages();
     }
     
+    // 重置刷新状态，允许为新会话刷新
+    if (activeProject) {
+      hasRefreshedRef.current.delete(activeProject.id);
+    }
+    
     // 滚动到底部，确保视图更新
     setTimeout(() => {
       scrollToBottom();
@@ -268,14 +322,35 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   };
 
   // 处理发送消息
-  const handleSendMessage = () => {
-    // 如果是新会话，不传递会话ID
-    if (!activeSessionId) {
-      // 发送消息，不带会话ID，后端会自动创建新会话
-      handleSend(undefined);
-    } else {
-      // 发送消息，带上现有会话ID
-      handleSend(activeSessionId);
+  const handleSendMessage = async () => {
+    // 检查是否是新会话
+    const isNewSession = !activeSessionId;
+    
+    try {
+      // 发送消息
+      let newSessionId: string | undefined;
+      if (isNewSession) {
+        // 不传递会话ID，让后端创建新会话
+        newSessionId = await handleSend(undefined);
+        
+        // 如果创建了新会话并返回了ID
+        if (newSessionId) {
+          console.log('新会话创建成功，会话ID:', newSessionId);
+          
+          // 更新活动会话ID
+          setActiveSessionId(newSessionId);
+          
+          // 延迟刷新会话列表，确保后端处理完成
+          setTimeout(() => {
+            refreshSessionList();
+          }, 1500);
+        }
+      } else {
+        // 使用现有会话ID，不需要刷新会话列表
+        await handleSend(activeSessionId);
+      }
+    } catch (error) {
+      console.error('发送消息失败:', error);
     }
   };
 
