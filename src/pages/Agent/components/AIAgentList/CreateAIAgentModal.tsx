@@ -55,7 +55,6 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
         form={form}
         layout="vertical"
         initialValues={{
-          status: 'active',
           temperature: 0.7,
           maxTokens: 2000
         }}
@@ -145,17 +144,6 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
             min={1}
             style={{ width: '100%' }}
           />
-        </Form.Item>
-
-        <Form.Item
-          name="status"
-          label="状态"
-          rules={[{ required: true, message: '请选择状态' }]}
-        >
-          <Select>
-            <Select.Option value="active">启用</Select.Option>
-            <Select.Option value="inactive">禁用</Select.Option>
-          </Select>
         </Form.Item>
       </Form>
     </Modal>

@@ -90,11 +90,13 @@ const ChatArea: React.FC<ChatAreaProps> = ({
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sessionListRef = useRef<SessionListRef>(null);
+  const previousProjectIdRef = useRef<string | null>(null);
   const [sessionMessages, setSessionMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [beforeId, setBeforeId] = useState<number | null>(null);
+  const [noSessionsMessage, setNoSessionsMessage] = useState<string>('');
   const PAGE_SIZE = 20;
 
   // 滚动到底部
@@ -172,77 +174,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     fetchSessionMessages(sessionId); // 加载会话消息
   }, [fetchSessionMessages]);
 
-  // 处理新建会话
-  const handleNewSession = useCallback(async () => {
-    if (!activeProject?.id) return;
-    
-    try {
-      const response = await axios.post('/chat/create-session', {
-        projectId: parseInt(activeProject.id),
-        title: '新会话'  // 默认标题
-      });
-      
-      if (response.data.success) {
-        console.log('创建新会话成功:', response.data);
-        const newSession = response.data.data;
-        
-        // 直接使用返回的会话ID
-        setActiveSessionId(newSession.id.toString());
-        setSessionMessages([]); // 清空消息列表
-        setBeforeId(null); // 重置beforeId
-        setHasMore(true); // 重置加载更多状态
-        setInputValue('');
-        onClearMessages?.();
-        refreshSessionList(); // 刷新会话列表
-      } else {
-        message.error(response.data.message || '创建会话失败');
-      }
-    } catch (error) {
-      console.error('创建会话错误:', error);
-      message.error('创建会话失败，请稍后重试');
-    }
-  }, [activeProject?.id, setInputValue, onClearMessages, refreshSessionList]);
-
-  // 处理发送消息
-  const handleSendMessage = async () => {
-    if (!inputValue.trim() || !activeSessionId) return;
-    
-    console.log('发送消息:', inputValue);
-    console.log('当前会话ID:', activeSessionId);
-    
-    // 创建临时消息对象
-    const tempMessage: Message = {
-      id: Date.now(), // 临时ID
-      sessionId: activeSessionId,
-      role: 'user',
-      content: inputValue,
-      createTime: new Date().toISOString(),
-      updateTime: new Date().toISOString(),
-      sending: true // 标记为发送中状态
-    };
-
-    // 立即添加到消息列表
-    setSessionMessages(prev => [...prev, tempMessage]);
-    setInputValue(''); // 清空输入框
-    scrollToBottom(); // 滚动到底部
-    
-    try {
-      await handleSend(activeSessionId);
-    } catch (error) {
-      console.error('发送消息失败:', error);
-      message.error('发送消息失败，请稍后重试');
-      
-      // 更新临时消息为发送失败状态
-      setSessionMessages(prev => 
-        prev.map(msg => 
-          msg.id === tempMessage.id 
-            ? { ...msg, sending: false, error: true } 
-            : msg
-        )
-      );
-    }
-  };
-
   // 处理新消息更新
   useEffect(() => {
     if (!messages || !activeProject?.id) return;
@@ -285,24 +216,142 @@ const ChatArea: React.FC<ChatAreaProps> = ({
         setSessionMessages(messages.sort((a, b) => 
           new Date(a.createTime).getTime() - new Date(b.createTime).getTime()
         ));
-        refreshSessionList();
       }
     }
-  }, [messages, activeProject?.id, activeSessionId, refreshSessionList]);
+  }, [messages, activeProject?.id, activeSessionId]);
+
+  // 获取会话列表并自动选择最新会话
+  const fetchAndSelectFirstSession = useCallback(async () => {
+    if (!activeProject?.id) return;
+    
+    try {
+      const response = await axios.get('/chat/sessions', {
+        params: {
+          projectId: activeProject.id,
+          pageSize: 1,
+          currentPage: 1
+        }
+      });
+      
+      if (response.data.success) {
+        const sessions = response.data.data.records || [];
+        if (sessions.length > 0) {
+          // 直接使用第一个会话（已经是最新的）
+          const latestSession = sessions[0];
+          console.log('选择会话:', latestSession);
+          handleSessionSelect(latestSession.id.toString());
+          setNoSessionsMessage('');
+        } else {
+          setNoSessionsMessage('请先创建一个新的会话');
+        }
+      }
+    } catch (error) {
+      console.error('获取会话列表错误:', error);
+      message.error('获取会话列表失败，请稍后重试');
+    }
+  }, [activeProject?.id, handleSessionSelect]);
 
   // 监听项目变化
   useEffect(() => {
-    if (activeProject) {
-      setActiveSessionId(null);
-      setSessionMessages([]);
-      refreshSessionList();
+    const currentProjectId = activeProject?.id || null;
+    
+    // 只在项目ID真正变化时执行
+    if (currentProjectId !== previousProjectIdRef.current) {
+      previousProjectIdRef.current = currentProjectId;
+      
+      if (currentProjectId) {
+        // 使用批量更新，避免多次渲染
+        setActiveSessionId(null);
+        setSessionMessages([]);
+        setBeforeId(null);
+        setHasMore(true);
+        // 不再主动获取会话列表，由 SessionList 组件处理
+      }
     }
-  }, [activeProject?.id, refreshSessionList]);
+  }, [activeProject?.id]);
 
   // 监听消息变化，自动滚动
   useEffect(() => {
     scrollToBottom();
   }, [sessionMessages, scrollToBottom]);
+
+  // 处理新建会话
+  const handleNewSession = useCallback(async () => {
+    if (!activeProject?.id) return;
+    
+    try {
+      const response = await axios.post('/chat/create-session', {
+        projectId: parseInt(activeProject.id),
+        title: '新会话'  // 默认标题
+      });
+      
+      if (response.data.success) {
+        console.log('创建新会话成功:', response.data);
+        const newSession = response.data.data;
+        
+        // 批量更新状态
+        const updateState = () => {
+          setActiveSessionId(newSession.id.toString());
+          setSessionMessages([]);
+          setBeforeId(null);
+          setHasMore(true);
+          setInputValue('');
+          onClearMessages?.();
+        };
+        
+        updateState();
+      } else {
+        message.error(response.data.message || '创建会话失败');
+      }
+    } catch (error) {
+      console.error('创建会话错误:', error);
+      message.error('创建会话失败，请稍后重试');
+    }
+  }, [activeProject?.id, setInputValue, onClearMessages]);
+
+  // 处理发送消息
+  const handleSendMessage = async () => {
+    if (!inputValue.trim()) return;
+    
+    // 如果没有活动会话，提示用户创建会话
+    if (!activeSessionId) {
+      message.warning('请先创建一个新的会话');
+      return;
+    }
+    
+    console.log('发送消息:', inputValue);
+    console.log('当前会话ID:', activeSessionId);
+    
+    // 创建临时消息对象
+    const tempMessage: Message = {
+      id: Date.now(),
+      sessionId: activeSessionId,
+      role: 'user',
+      content: inputValue,
+      createTime: new Date().toISOString(),
+      updateTime: new Date().toISOString(),
+      sending: true
+    };
+
+    setSessionMessages(prev => [...prev, tempMessage]);
+    setInputValue('');
+    scrollToBottom();
+    
+    try {
+      await handleSend(activeSessionId);
+    } catch (error) {
+      console.error('发送消息失败:', error);
+      message.error('发送消息失败，请稍后重试');
+      
+      setSessionMessages(prev => 
+        prev.map(msg => 
+          msg.id === tempMessage.id 
+            ? { ...msg, sending: false, error: true } 
+            : msg
+        )
+      );
+    }
+  };
 
   return (
     <ChatContainer>
@@ -344,11 +393,18 @@ const ChatArea: React.FC<ChatAreaProps> = ({
           inputValue={inputValue}
           setInputValue={setInputValue}
           handleSend={handleSendMessage}
-          disabled={!activeProject}
+          disabled={!activeProject || !activeSessionId}
           projectId={activeProject?.id}
           activeSessionId={activeSessionId}
           loading={sendLoading}
           onCancelRequest={onCancelRequest}
+          placeholder={
+            !activeProject 
+              ? "请先选择一个项目" 
+              : !activeSessionId 
+                ? noSessionsMessage || "请先创建一个新的会话"
+                : "输入您的问题..."
+          }
         />
       </ChatMainArea>
     </ChatContainer>

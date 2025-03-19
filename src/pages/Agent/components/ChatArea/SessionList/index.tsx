@@ -71,6 +71,11 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         if (isFirstPage) {
           setSessions(newSessions);
           sessionsLengthRef.current = newSessions.length;
+          // 如果有会话且没有激活的会话，自动选中第一个
+          if (newSessions.length > 0 && !activeSessionId) {
+            console.log('自动选中第一个会话:', newSessions[0]);
+            onSessionSelect(newSessions[0].id.toString());
+          }
         } else {
           setSessions(prev => {
             const updatedSessions = [...prev, ...newSessions];
@@ -95,7 +100,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         setLoadingMore(false);
       }
     }
-  }, []);
+  }, [pagination.pageSize]); // 只依赖 pageSize
 
   // 重置状态并刷新
   const resetAndRefresh = useCallback(async () => {
@@ -123,14 +128,13 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
     fetchSessions(nextPage);
   }, [loadingMore, hasMore, pagination.currentPage, fetchSessions]);
 
-  // 当projectId变化时，更新ref值
+  // 当projectId变化时，更新ref值并重置会话列表
   useEffect(() => {
+    console.log('SessionList - projectId changed:', projectId);
     projectIdRef.current = projectId;
-  }, [projectId]);
-
-  // 只在组件挂载时和projectId变化时获取会话列表
-  useEffect(() => {
+    
     if (projectId) {
+      console.log('SessionList - fetching sessions for project:', projectId);
       resetAndRefresh().catch(error => {
         console.error('初始化会话列表失败:', error);
       });

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { List, Avatar, Typography, Spin, Tag, Image, message } from 'antd';
-import { UserOutlined, RobotOutlined } from '@ant-design/icons';
+import { UserOutlined, RobotOutlined, CopyOutlined } from '@ant-design/icons';
 import styled, { ThemeContext } from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -255,6 +255,7 @@ const MessageContent = styled.div<{ $isUser?: boolean; $sending?: boolean; $erro
   box-shadow: none;
   transition: all 0.3s ease;
   opacity: ${props => props.$sending ? 0.8 : 1};
+  position: relative;
 
   &:hover {
     box-shadow: none;
@@ -295,12 +296,55 @@ const MessageStatus = styled.div<{ $error?: boolean }>`
   text-align: right;
 `;
 
+const MessageActions = styled.div<{ $isUser?: boolean }>`
+  position: absolute;
+  bottom: -24px;
+  ${props => props.$isUser ? 'left: 0;' : 'right: 0;'}
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+`;
+
+const ActionButton = styled.button`
+  background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+  border: 1px solid ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)'};
+  color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.65)'};
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
+    border-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
+    transform: translateY(-1px);
+  }
+
+  .anticon {
+    font-size: 14px;
+  }
+`;
+
 const MessageContentWrapper = styled.div<{ $isUser?: boolean }>`
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
   max-width: calc(100% - 46px); // 40px avatar + 6px gap
+  
+  &:hover {
+    ${MessageActions} {
+      opacity: 1;
+    }
+  }
 `;
 
 const MarkdownContent = styled.div`
@@ -528,6 +572,14 @@ interface MarkdownComponents {
 }
 
 const parseMessageContent = (content: string, isUser?: boolean) => {
+  const handleCopyMessage = () => {
+    navigator.clipboard.writeText(content).then(() => {
+      message.success('消息已复制到剪贴板');
+    }).catch(() => {
+      message.error('复制失败，请手动复制');
+    });
+  };
+
   const components: MarkdownComponents = {
     img: ({ src, alt }: { src?: string; alt?: string }) => (
       <ImageWrapper>
@@ -593,15 +645,22 @@ const parseMessageContent = (content: string, isUser?: boolean) => {
   };
 
   return (
-    <MarkdownContent>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeRaw, rehypeKatex, rehypePrism]}
-        components={components}
-      >
-        {content}
-      </ReactMarkdown>
-    </MarkdownContent>
+    <div style={{ position: 'relative' }}>
+      <MarkdownContent>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeRaw, rehypeKatex, rehypePrism]}
+          components={components}
+        >
+          {content}
+        </ReactMarkdown>
+      </MarkdownContent>
+      <MessageActions $isUser={isUser}>
+        <ActionButton onClick={handleCopyMessage} title="复制消息">
+          <CopyOutlined />
+        </ActionButton>
+      </MessageActions>
+    </div>
   );
 };
 
