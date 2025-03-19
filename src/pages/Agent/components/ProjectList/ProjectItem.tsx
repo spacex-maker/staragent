@@ -134,7 +134,7 @@ const IndustryTag = styled(Tag)`
 interface ProjectItemProps {
   project: Project;
   isActive: boolean;
-  onSelect: (projectId: string) => void;
+  onSelect: (project: Project) => void;
   onEdit: (project: Project) => void;
   onDelete: (projectId: string) => void;
 }
@@ -146,35 +146,21 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [deleteLoading, setDeleteLoading] = React.useState(false);
+  const handleSelect = () => {
+    onSelect(project);
+  };
+
+  const handleEdit = () => {
+    onEdit(project);
+  };
 
   const handleDelete = () => {
     Modal.confirm({
       title: '确认删除',
-      content: `确定要删除项目 "${project.name}" 吗？此操作不可恢复。`,
-      okText: '删除',
-      okType: 'danger',
+      content: `确定要删除项目 "${project.name}" 吗？`,
+      okText: '确认',
       cancelText: '取消',
-      onOk: async () => {
-        setDeleteLoading(true);
-        try {
-          console.log('删除项目:', project.id);
-          const response = await axios.delete(`/productx/sa-project/${project.id}`);
-          console.log('删除项目响应:', response.data);
-          
-          if (response.data.success) {
-            message.success('项目删除成功');
-            onDelete(project.id);
-          } else {
-            message.error(response.data.message || '删除项目失败');
-          }
-        } catch (error) {
-          console.error('删除项目错误:', error);
-          message.error('删除项目失败，请稍后重试');
-        } finally {
-          setDeleteLoading(false);
-        }
-      },
+      onOk: () => onDelete(project.id),
     });
   };
 
@@ -197,7 +183,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   return (
     <ProjectItemWrapper
       className={isActive ? 'active' : ''}
-      onClick={() => onSelect(project.id)}
+      onClick={handleSelect}
       style={isActive ? {
         background: 'var(--ant-color-primary-bg)',
         borderColor: 'var(--ant-color-primary)'
@@ -215,7 +201,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
               icon={<EditOutlined />}
               onClick={(e) => {
                 e.stopPropagation();
-                onEdit(project);
+                handleEdit();
               }}
             />
             <ActionButton
@@ -225,8 +211,6 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                 e.stopPropagation();
                 handleDelete();
               }}
-              danger
-              loading={deleteLoading}
             />
           </ActionButtons>
         </HeaderRow>

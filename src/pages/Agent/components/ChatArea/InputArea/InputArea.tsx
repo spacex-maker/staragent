@@ -23,6 +23,7 @@ interface InputAreaProps {
   activeSessionId?: string | null;
   loading?: boolean;
   onCancelRequest?: () => void;
+  placeholder?: string;
 }
 
 const InputArea: React.FC<InputAreaProps> = ({
@@ -33,7 +34,8 @@ const InputArea: React.FC<InputAreaProps> = ({
   projectId,
   activeSessionId,
   loading = false,
-  onCancelRequest
+  onCancelRequest,
+  placeholder = "输入您的问题..."
 }) => {
   const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
   const [agentsLoading, setAgentsLoading] = useState(false);
@@ -164,7 +166,7 @@ const InputArea: React.FC<InputAreaProps> = ({
               ref={textAreaRef}
               value={inputValue}
               onChange={handleInputChange}
-              placeholder={disabled ? "请先选择一个项目" : "输入您的问题..."}
+              placeholder={placeholder}
               onKeyDown={handleKeyDown}
               disabled={disabled || loading}
               autoSize={{ minRows: 1, maxRows: 5 }}

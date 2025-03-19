@@ -107,10 +107,10 @@ const ListContent = styled.div`
 interface ProjectListProps {
   projects: Project[];
   activeProjectId: string | null;
-  onProjectSelect: (projectId: string) => void;
-  onProjectCreate: (project: Project) => void;
-  onProjectUpdate: (projectId: string, project: Partial<Project>) => void;
-  onProjectDelete: (projectId: string) => void;
+  onProjectSelect: (project: Project) => void;
+  onProjectCreate: (values: any) => Promise<void>;
+  onProjectUpdate: (projectId: string, values: any) => Promise<void>;
+  onProjectDelete: (projectId: string) => Promise<void>;
 }
 
 const ProjectList: React.FC<ProjectListProps> = ({
@@ -124,39 +124,6 @@ const ProjectList: React.FC<ProjectListProps> = ({
   const [isCreateModalVisible, setIsCreateModalVisible] = React.useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = React.useState(false);
   const [editingProject, setEditingProject] = React.useState<Project | null>(null);
-  const [projects, setProjects] = React.useState<Project[]>([]);
-  const [fetchLoading, setFetchLoading] = React.useState(true);
-
-  // 获取项目列表
-  const fetchProjects = async () => {
-    try {
-      const response = await axios.get('/productx/sa-project/list');
-      if (response.data.success) {
-        const formattedProjects = response.data.data.map((project: any) => ({
-          id: project.id.toString(),
-          name: project.name,
-          description: project.description,
-          visibility: project.visibility,
-          isActive: project.status === 'active',
-          createdAt: project.createTime,
-          updatedAt: project.updateTime,
-          industries: project.industries || []
-        }));
-        setProjects(formattedProjects);
-      } else {
-        message.error(response.data.message || '获取项目列表失败');
-      }
-    } catch (error) {
-      console.error('获取项目列表错误:', error);
-      message.error('获取项目列表失败，请稍后重试');
-    } finally {
-      setFetchLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
 
   const handleCreateProject = () => {
     setIsCreateModalVisible(true);
@@ -168,62 +135,17 @@ const ProjectList: React.FC<ProjectListProps> = ({
   };
 
   const handleCreateModalSuccess = () => {
-    console.log('创建项目成功，刷新项目列表');
-    // 延迟一点时间再刷新，确保服务器数据已更新
-    setTimeout(() => {
-      fetchProjects();
-    }, 500);
+    setIsCreateModalVisible(false);
   };
 
   const handleEditModalSuccess = () => {
-    console.log('编辑项目成功，刷新项目列表');
-    // 延迟一点时间再刷新，确保服务器数据已更新
-    setTimeout(() => {
-      fetchProjects();
-    }, 500);
-  };
-
-  // 处理删除项目
-  const handleProjectDelete = (projectId: string) => {
-    // 先调用父组件的删除回调
-    onProjectDelete(projectId);
-    // 然后刷新项目列表
-    fetchProjects();
+    setIsEditModalVisible(false);
   };
 
   // 处理员工列表变化
   const handleAgentsChange = () => {
-    // 触发一个自定义事件，通知 InputArea 组件刷新员工列表
     window.dispatchEvent(new CustomEvent('projectAgentsChanged'));
   };
-
-  if (fetchLoading) {
-    return (
-      <ProjectListContainer>
-        <TabContainer>
-          <Tabs
-            items={[
-              {
-                key: 'projects',
-                label: '项目列表',
-                children: (
-                  <ListContainer>
-                    <Spin tip="加载中..." />
-                  </ListContainer>
-                ),
-              },
-              {
-                key: 'agents',
-                label: 'AI员工',
-                children: <AIAgentList />,
-              },
-            ]}
-            defaultActiveKey="projects"
-          />
-        </TabContainer>
-      </ProjectListContainer>
-    );
-  }
 
   const items = [
     {
@@ -235,14 +157,14 @@ const ProjectList: React.FC<ProjectListProps> = ({
           <ListContent>
             <List
               itemLayout="horizontal"
-              dataSource={projects}
+              dataSource={externalProjects}
               renderItem={(project: Project) => (
                 <ProjectItem
                   project={project}
                   isActive={project.id === activeProjectId}
                   onSelect={onProjectSelect}
                   onEdit={handleEditProject}
-                  onDelete={handleProjectDelete}
+                  onDelete={onProjectDelete}
                 />
               )}
               locale={{ emptyText: '暂无项目，点击上方按钮创建' }}

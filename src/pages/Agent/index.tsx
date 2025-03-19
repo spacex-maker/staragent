@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import SimpleHeader from '../../components/headers/simple';
@@ -117,48 +117,52 @@ interface ChatAreaProps {
 }
 
 const AgentPage: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState('');
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
-  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const [projects, setProjects] = React.useState<Project[]>([]);
+  const [projectsLoading, setProjectsLoading] = React.useState(true);
+  const [activeProjectId, setActiveProjectId] = React.useState<string | null>(null);
+  const [activeProject, setActiveProject] = React.useState<Project | null>(null);
+  const [inputValue, setInputValue] = React.useState('');
+  const [activeSessionId, setActiveSessionId] = React.useState<string | null>(null);
+  const [messages, setMessages] = React.useState<Message[]>([]);
+  const abortControllerRef = React.useRef<AbortController | null>(null);
+  const projectsRef = React.useRef<Project[]>([]);
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
-  const [projectsLoading, setProjectsLoading] = useState(true);
   const [sendLoading, setSendLoading] = useState(false);
-  // 添加一个AbortController的引用，用于取消请求
-  const abortControllerRef = useRef<AbortController | null>(null);
 
-  // 加载项目列表
-  useEffect(() => {
-    const fetchProjects = async () => {
+  // 获取项目列表
+  const fetchProjects = React.useCallback(async () => {
+    try {
       setProjectsLoading(true);
-      try {
-        const response = await axios.get('/productx/sa-project/list');
-        if (response.data.success) {
-          const formattedProjects = response.data.data.map((project: any) => ({
-            id: project.id.toString(),
-            name: project.name,
-            description: project.description,
-            visibility: project.visibility,
-            isActive: project.status === 'active',
-            createdAt: project.createTime,
-            updatedAt: project.updateTime
-          }));
-          setProjects(formattedProjects);
-          console.log('加载的项目列表:', formattedProjects);
-        } else {
-          message.error(response.data.message || '获取项目列表失败');
-        }
-      } catch (error) {
-        console.error('获取项目列表错误:', error);
-        message.error('获取项目列表失败，请稍后重试');
-      } finally {
-        setProjectsLoading(false);
+      const response = await axios.get('/productx/sa-project/list');
+      if (response.data.success) {
+        const formattedProjects = response.data.data.map((project: any) => ({
+          id: project.id.toString(),
+          name: project.name,
+          description: project.description,
+          visibility: project.visibility,
+          isActive: project.status === 'active',
+          createdAt: project.createTime,
+          updatedAt: project.updateTime,
+          industries: project.industries || []
+        }));
+        setProjects(formattedProjects);
+        projectsRef.current = formattedProjects;
+        console.log('加载的项目列表:', formattedProjects);
+      } else {
+        message.error(response.data.message || '获取项目列表失败');
       }
-    };
-
-    fetchProjects();
+    } catch (error) {
+      console.error('获取项目列表错误:', error);
+      message.error('获取项目列表失败，请稍后重试');
+    } finally {
+      setProjectsLoading(false);
+    }
   }, []);
+
+  // 只在组件挂载时获取一次项目列表
+  React.useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   // 监听窗口大小变化
   useEffect(() => {
@@ -177,6 +181,83 @@ const AgentPage: React.FC = () => {
       abortControllerRef.current = null;
       setSendLoading(false);
       message.info('已取消请求');
+    }
+  };
+
+  // 处理项目选择
+  const handleProjectSelect = (project: Project) => {
+    // 如果点击的是当前已选中的项目，不做任何操作
+    if (activeProjectId === project.id) {
+      return;
+    }
+    
+    console.log('选择项目:', project.id);
+    // 使用批量更新，避免多次渲染
+    const updateState = () => {
+      setActiveProjectId(project.id);
+      setActiveProject(project);
+      setInputValue('');
+      setActiveSessionId(null);
+      setMessages([]);
+    };
+    
+    updateState();
+  };
+
+  // 处理项目创建
+  const handleProjectCreate = async (values: any) => {
+    try {
+      const response = await axios.post('/productx/sa-project/create', values);
+      if (response.data.success) {
+        message.success('创建项目成功');
+        fetchProjects();
+      } else {
+        message.error(response.data.message || '创建项目失败');
+      }
+    } catch (error) {
+      console.error('创建项目错误:', error);
+      message.error('创建项目失败，请稍后重试');
+    }
+  };
+
+  // 处理项目更新
+  const handleProjectUpdate = async (projectId: string, values: any) => {
+    try {
+      const response = await axios.post('/productx/sa-project/update', {
+        id: projectId,
+        ...values
+      });
+      if (response.data.success) {
+        message.success('更新项目成功');
+        fetchProjects();
+      } else {
+        message.error(response.data.message || '更新项目失败');
+      }
+    } catch (error) {
+      console.error('更新项目错误:', error);
+      message.error('更新项目失败，请稍后重试');
+    }
+  };
+
+  // 处理项目删除
+  const handleProjectDelete = async (projectId: string) => {
+    try {
+      const response = await axios.post('/productx/sa-project/delete', {
+        id: projectId
+      });
+      if (response.data.success) {
+        message.success('删除项目成功');
+        if (activeProject?.id === projectId) {
+          setActiveProject(null);
+          setActiveProjectId(null);
+        }
+        fetchProjects();
+      } else {
+        message.error(response.data.message || '删除项目失败');
+      }
+    } catch (error) {
+      console.error('删除项目错误:', error);
+      message.error('删除项目失败，请稍后重试');
     }
   };
 
@@ -264,44 +345,6 @@ const AgentPage: React.FC = () => {
     return undefined;
   };
 
-  const handleProjectCreate = (project: Project) => {
-    setProjects(prev => [...prev, project]);
-    setActiveProjectId(project.id);
-  };
-
-  const handleProjectUpdate = (projectId: string, project: Partial<Project>) => {
-    setProjects(prev =>
-      prev.map(p =>
-        p.id === projectId
-          ? { ...p, ...project, updatedAt: new Date().toISOString() }
-          : p
-      )
-    );
-  };
-
-  const handleProjectDelete = (projectId: string) => {
-    setProjects(prev => prev.filter(p => p.id !== projectId));
-    if (activeProjectId === projectId) {
-      setActiveProjectId(null);
-    }
-  };
-
-  const handleProjectSelect = (projectId: string) => {
-    console.log('选择项目:', projectId);
-    
-    // 如果选择了不同的项目，清空输入框、消息和会话ID
-    if (activeProjectId !== projectId) {
-      setInputValue('');
-      setActiveSessionId(null);
-    }
-    
-    setActiveProjectId(projectId);
-    
-    // 查找并记录选中的项目信息
-    const selectedProject = projects.find(p => p.id === projectId);
-    console.log('选中的项目信息:', selectedProject);
-  };
-
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
   };
@@ -310,10 +353,6 @@ const AgentPage: React.FC = () => {
   const handleMaskClick = () => {
     setCollapsed(true);
   };
-
-  // 获取当前选中的项目
-  const activeProject = projects.find(p => p.id === activeProjectId);
-  console.log('当前选中的项目:', activeProject, '项目ID:', activeProjectId);
 
   // 清空当前项目的消息
   const clearProjectMessages = () => {
