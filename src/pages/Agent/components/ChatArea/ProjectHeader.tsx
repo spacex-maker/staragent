@@ -7,16 +7,16 @@ import { Project } from '../../types';
 const { Title, Text } = Typography;
 
 const ProjectTitleBar = styled.div`
-  padding: 16px 24px;
+  padding: 8px 16px;
   background: var(--ant-color-bg-container);
   border-bottom: 1px solid var(--ant-color-border);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 `;
 
 const ProjectIcon = styled.div`
-  font-size: 20px;
+  font-size: 16px;
   color: var(--ant-color-primary);
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@ const ProjectIcon = styled.div`
 
 const ProjectTitle = styled(Title)`
   margin: 0 !important;
-  font-size: 18px !important;
+  font-size: 16px !important;
   line-height: 1.5 !important;
   white-space: nowrap;
   overflow: hidden;
@@ -34,9 +34,9 @@ const ProjectTitle = styled(Title)`
 
 const ProjectDescription = styled(Text)`
   color: var(--ant-color-text-secondary);
-  font-size: 14px;
+  font-size: 12px;
   display: block;
-  margin-top: 4px;
+  margin-top: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

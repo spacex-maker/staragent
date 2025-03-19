@@ -30,19 +30,20 @@ export interface Message {
 
 // 聊天会话接口
 export interface ChatSession {
-  id: string;
-  projectId: string;
+  id: number;
+  userId: number;
+  projectId: number;
   title: string;
-  lastMessage: string;
+  lastMessage: string | null;
   messageCount: number;
-  createTime?: string;
-  updateTime?: string;
+  createTime: string;
+  updateTime: string;
 }
 
 // 分页请求参数
 export interface PaginationParams {
-  pageSize: number;
   currentPage: number;
+  pageSize: number;
 }
 
 // 分页响应数据

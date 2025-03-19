@@ -51,7 +51,7 @@ export const GlobalMentionsStyle = createGlobalStyle`
 export const StyledFooter = styled(Footer)`
   background: var(--ant-color-bg-container);
   border-top: 1px solid var(--ant-color-border);
-  padding: 12px 24px;
+  padding: 8px;
   width: 100%;
 `;
 

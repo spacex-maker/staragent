@@ -33,7 +33,7 @@ const ChatMainArea = styled.div`
 
 const StyledContent = styled(Content)`
   flex: 1;
-  padding: 24px;
+  padding: 8px;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
