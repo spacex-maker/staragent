@@ -1,8 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { List, Avatar, Typography, Spin, Tag, Image } from 'antd';
+import { List, Avatar, Typography, Spin, Tag, Image, message } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
 import styled, { ThemeContext } from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeRaw from 'rehype-raw';
+import 'katex/dist/katex.min.css';
+import 'prismjs/themes/prism-okaidia.css';
 import { Message } from '../../types';
+import type { Root } from 'mdast';
 
 const { Text } = Typography;
 
@@ -294,6 +303,202 @@ const MessageContentWrapper = styled.div<{ $isUser?: boolean }>`
   max-width: calc(100% - 46px); // 40px avatar + 6px gap
 `;
 
+const MarkdownContent = styled.div`
+  font-size: 14px;
+  line-height: 1.6;
+
+  p {
+    margin-bottom: 1em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  ul, ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  code {
+    font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+    border-radius: 3px;
+  }
+
+  pre {
+    margin: 1em 0;
+    padding: 1em;
+    overflow: auto;
+    background-color: ${props => props.theme.mode === 'dark' ? '#1a1a1a' : '#f6f8fa'};
+    border-radius: 6px;
+    border: 1px solid ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+    position: relative;
+
+    &:hover {
+      .copy-button {
+        opacity: 1;
+      }
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      padding: 0.3em 0.6em;
+      background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+      border: 1px solid ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
+      border-radius: 4px;
+      color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.6)'};
+      font-size: 12px;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
+      }
+    }
+
+    code {
+      background: none;
+      padding: 0;
+      font-size: 14px;
+      color: ${props => props.theme.mode === 'dark' ? '#e6e6e6' : '#24292e'};
+      text-shadow: none;
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: ${props => props.theme.mode === 'dark' ? '#6a9955' : '#5c6370'};
+      font-style: italic;
+    }
+
+    .token.punctuation {
+      color: ${props => props.theme.mode === 'dark' ? '#d4d4d4' : '#24292e'};
+    }
+
+    .token.property,
+    .token.tag,
+    .token.constant,
+    .token.symbol {
+      color: ${props => props.theme.mode === 'dark' ? '#569cd6' : '#0550ae'};
+    }
+
+    .token.boolean,
+    .token.number {
+      color: ${props => props.theme.mode === 'dark' ? '#b5cea8' : '#098658'};
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: ${props => props.theme.mode === 'dark' ? '#ce9178' : '#0a7b07'};
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: ${props => props.theme.mode === 'dark' ? '#d4d4d4' : '#24292e'};
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: ${props => props.theme.mode === 'dark' ? '#c586c0' : '#cf222e'};
+    }
+
+    .token.function {
+      color: ${props => props.theme.mode === 'dark' ? '#dcdcaa' : '#8250df'};
+    }
+
+    .token.class-name {
+      color: ${props => props.theme.mode === 'dark' ? '#4ec9b0' : '#116329'};
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: ${props => props.theme.mode === 'dark' ? '#d16969' : '#953800'};
+    }
+
+    .token.deleted {
+      color: ${props => props.theme.mode === 'dark' ? '#f14c4c' : '#82071e'};
+    }
+
+    .token.important,
+    .token.bold {
+      font-weight: bold;
+    }
+
+    .token.italic {
+      font-style: italic;
+    }
+  }
+
+  blockquote {
+    margin: 1em 0;
+    padding: 0 1em;
+    color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)'};
+    border-left: 0.25em solid ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)'};
+  }
+
+  table {
+    width: 100%;
+    margin: 1em 0;
+    border-collapse: collapse;
+    
+    th, td {
+      padding: 0.5em;
+      border: 1px solid ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+    }
+
+    th {
+      background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'};
+      font-weight: 600;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 1em 0;
+  }
+
+  hr {
+    height: 1px;
+    margin: 1em 0;
+    border: none;
+    background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+  }
+
+  .math {
+    overflow-x: auto;
+    padding: 0.5em 0;
+  }
+`;
+
 interface UserInfo {
   username: string;
   avatar?: string;
@@ -308,29 +513,27 @@ interface MessageListProps {
   onLoadMore?: () => void;
 }
 
-// 解析Markdown格式的图片
+interface MarkdownImageProps {
+  src?: string;
+  alt?: string;
+}
+
+interface MarkdownLinkProps {
+  href?: string;
+  children?: React.ReactNode;
+}
+
+interface MarkdownComponents {
+  [key: string]: React.ComponentType<any>;
+}
+
 const parseMessageContent = (content: string, isUser?: boolean) => {
-  const imgRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
-
-  while ((match = imgRegex.exec(content)) !== null) {
-    // 添加图片前的文本
-    if (match.index > lastIndex) {
-      parts.push(
-        <Text key={`text-${lastIndex}`}>
-          {content.slice(lastIndex, match.index)}
-        </Text>
-      );
-    }
-
-    // 添加图片
-    parts.push(
-      <ImageWrapper key={`img-${match.index}`}>
+  const components: MarkdownComponents = {
+    img: ({ src, alt }: { src?: string; alt?: string }) => (
+      <ImageWrapper>
         <Image
-          src={match[2]}
-          alt={match[1]}
+          src={src || ''}
+          alt={alt}
           style={{ 
             width: '100%',
             height: 'auto',
@@ -342,21 +545,64 @@ const parseMessageContent = (content: string, isUser?: boolean) => {
           }}
         />
       </ImageWrapper>
-    );
+    ),
+    a: ({ href, children }: { href?: string; children?: React.ReactNode }) => (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    ),
+    code: ({ node, inline, className, children, ...props }: { 
+      node?: any; 
+      inline?: boolean; 
+      className?: string; 
+      children: React.ReactNode;
+    }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const language = match ? match[1] : '';
+      
+      if (!inline) {
+        const handleCopy = () => {
+          const code = String(children).replace(/\n$/, '');
+          navigator.clipboard.writeText(code).then(() => {
+            message.success('代码已复制到剪贴板');
+          }).catch(() => {
+            message.error('复制失败，请手动复制');
+          });
+        };
 
-    lastIndex = match.index + match[0].length;
-  }
+        return (
+          <div style={{ position: 'relative' }}>
+            <pre className={className} {...props}>
+              <code className={className} {...props}>
+                {children}
+              </code>
+              <button className="copy-button" onClick={handleCopy}>
+                复制代码
+              </button>
+            </pre>
+          </div>
+        );
+      }
 
-  // 添加剩余的文本
-  if (lastIndex < content.length) {
-    parts.push(
-      <Text key={`text-${lastIndex}`}>
-        {content.slice(lastIndex)}
-      </Text>
-    );
-  }
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
+    }
+  };
 
-  return parts.length > 0 ? parts : <Text>{content}</Text>;
+  return (
+    <MarkdownContent>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeRaw, rehypeKatex, rehypePrism]}
+        components={components}
+      >
+        {content}
+      </ReactMarkdown>
+    </MarkdownContent>
+  );
 };
 
 const MessageList: React.FC<MessageListProps> = ({ 

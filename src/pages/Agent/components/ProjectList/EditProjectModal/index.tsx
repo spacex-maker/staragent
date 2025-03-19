@@ -26,7 +26,11 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
 
   React.useEffect(() => {
     if (visible && project) {
-      form.setFieldsValue(project);
+      form.setFieldsValue({
+        name: project.name,
+        description: project.description,
+        visibility: project.visibility
+      });
     }
   }, [visible, project, form]);
 
@@ -40,11 +44,18 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
       setLoading(true);
 
       try {
+        // 将级联选择器的值转换为ID数组
+        const industryIds = values.industryIds.map((path: number[]) => {
+          // 获取每个选择路径的最后一个ID
+          return path[path.length - 1];
+        });
+
         const updateData = {
           id: parseInt(project.id),
           name: values.name,
           description: values.description,
-          visibility: values.visibility
+          visibility: values.visibility,
+          industryIds: industryIds
         };
         
         const response = await axios.post('/productx/sa-project/update', updateData);
@@ -52,6 +63,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           const updatedProject = {
             ...project,
             ...values,
+            industryIds: industryIds,
             updatedAt: new Date().toISOString()
           };
           onProjectUpdate(project.id, updatedProject);

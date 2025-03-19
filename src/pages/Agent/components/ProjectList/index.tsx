@@ -139,7 +139,8 @@ const ProjectList: React.FC<ProjectListProps> = ({
           visibility: project.visibility,
           isActive: project.status === 'active',
           createdAt: project.createTime,
-          updatedAt: project.updateTime
+          updatedAt: project.updateTime,
+          industries: project.industries || []
         }));
         setProjects(formattedProjects);
       } else {

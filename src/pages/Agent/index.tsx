@@ -6,6 +6,7 @@ import ProjectList from './components/ProjectList';
 import ChatArea from './components/ChatArea';
 import { Message, Project } from './types';
 import axios from '../../api/axios';
+import { IndustryProvider } from './contexts/IndustryContext';
 
 const StyledLayout = styled(Layout)`
   width: 100vw;
@@ -322,47 +323,49 @@ const AgentPage: React.FC = () => {
   };
 
   return (
-    <StyledLayout>
-      <SimpleHeader />
-      
-      <MainContainer>
-        <Sidebar collapsed={collapsed}>
-          <SidebarContent collapsed={collapsed}>
-            <ProjectList
-              projects={projects}
-              activeProjectId={activeProjectId}
-              onProjectSelect={handleProjectSelect}
-              onProjectCreate={handleProjectCreate}
-              onProjectUpdate={handleProjectUpdate}
-              onProjectDelete={handleProjectDelete}
-            />
-          </SidebarContent>
-          <SidebarResizer 
-            $collapsed={collapsed} 
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleSidebar();
-            }}
-            title={collapsed ? "展开侧边栏" : "收起侧边栏"}
-          />
-        </Sidebar>
+    <IndustryProvider>
+      <StyledLayout>
+        <SimpleHeader />
         
-        <Mask visible={!collapsed && window.innerWidth <= 768} onClick={handleMaskClick} />
+        <MainContainer>
+          <Sidebar collapsed={collapsed}>
+            <SidebarContent collapsed={collapsed}>
+              <ProjectList
+                projects={projects}
+                activeProjectId={activeProjectId}
+                onProjectSelect={handleProjectSelect}
+                onProjectCreate={handleProjectCreate}
+                onProjectUpdate={handleProjectUpdate}
+                onProjectDelete={handleProjectDelete}
+              />
+            </SidebarContent>
+            <SidebarResizer 
+              $collapsed={collapsed} 
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleSidebar();
+              }}
+              title={collapsed ? "展开侧边栏" : "收起侧边栏"}
+            />
+          </Sidebar>
+          
+          <Mask visible={!collapsed && window.innerWidth <= 768} onClick={handleMaskClick} />
 
-        <ChatArea 
-          messages={messages}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          activeProject={activeProject || null}
-          handleSend={handleSend}
-          sendLoading={sendLoading}
-          onCancelRequest={cancelSendRequest}
-          onClearMessages={clearProjectMessages}
-          activeSessionId={activeSessionId}
-          setActiveSessionId={setActiveSessionId}
-        />
-      </MainContainer>
-    </StyledLayout>
+          <ChatArea 
+            messages={messages}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            activeProject={activeProject || null}
+            handleSend={handleSend}
+            sendLoading={sendLoading}
+            onCancelRequest={cancelSendRequest}
+            onClearMessages={clearProjectMessages}
+            activeSessionId={activeSessionId}
+            setActiveSessionId={setActiveSessionId}
+          />
+        </MainContainer>
+      </StyledLayout>
+    </IndustryProvider>
   );
 };
 

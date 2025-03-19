@@ -1,11 +1,21 @@
+export interface Industry {
+  id: number;
+  code: string;
+  name: string;
+  description: string;
+  icon: string;
+  sortOrder: number;
+}
+
 export interface Project {
   id: string;
   name: string;
   description?: string;
-  visibility: 'private' | 'public';
+  visibility: 'public' | 'private';
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
-  isActive: boolean;
+  industries?: Industry[];
 }
 
 export interface CreateProjectRequest {
