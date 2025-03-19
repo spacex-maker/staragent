@@ -8,16 +8,19 @@ const { Text } = Typography;
 
 const StyledMessageList = styled(List<Message>)`
   flex: 1;
-  padding: 24px;
+  padding: 8px;
   width: 100%;
+  
+  .ant-list-items {
+    border: none;
+  }
 `;
 
 const MessageItem = styled(List.Item)<{ $isUser?: boolean }>`
   padding: 0;
-  border-radius: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   background: transparent;
-  border: none;
+  border: none !important;
   box-shadow: none;
 
   &:hover {
@@ -28,13 +31,17 @@ const MessageItem = styled(List.Item)<{ $isUser?: boolean }>`
     align-items: flex-start;
     margin-bottom: 0;
   }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const MessageContainer = styled.div<{ $isUser?: boolean }>`
   display: flex;
   align-items: flex-start;
   flex-direction: ${props => props.$isUser ? 'row-reverse' : 'row'};
-  gap: 16px;
+  gap: 6px;
   justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
   width: 100%;
 `;
@@ -44,48 +51,26 @@ const AvatarContainer = styled.div<{ $isUser?: boolean }>`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  padding: 2px;
-  background: linear-gradient(to right, 
-    ${props => props.$isUser 
-      ? 'var(--ant-color-primary), var(--ant-color-primary-active)' 
-      : 'var(--ant-color-primary-bg), var(--ant-color-primary-3)'
-    });
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 50%;
-    background: linear-gradient(
-      90deg, 
-      transparent 0%, 
-      var(--ant-color-primary) 25%, 
-      var(--ant-color-primary-active) 50%, 
-      var(--ant-color-primary) 75%, 
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    z-index: -1;
-    opacity: 0.5;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
 `;
 
 const StyledAvatar = styled(Avatar)<{ $isUser?: boolean }>`
-  width: 100%;
-  height: 100%;
+  width: ${props => props.$isUser ? '36px' : '40px'};
+  height: ${props => props.$isUser ? '36px' : '40px'};
   background: ${props => props.$isUser ? '#fff' : 'var(--ant-color-bg-container)'};
-  color: ${props => props.$isUser ? 'var(--ant-color-primary)' : 'var(--ant-color-primary)'};
+  color: var(--ant-color-primary);
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid ${props => props.$isUser ? '#fff' : 'var(--ant-color-bg-container)'};
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  border: ${props => props.$isUser 
+    ? '2px solid var(--ant-color-primary)' 
+    : '3px solid var(--ant-color-primary)'};
 
   .anticon {
     font-size: 18px;
@@ -112,7 +97,7 @@ const StatusIndicator = styled.div<{ $isUser?: boolean }>`
 `;
 
 const MessageInfo = styled.div<{ $isUser?: boolean }>`
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
   justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
@@ -154,17 +139,23 @@ const LoadMoreContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 12px;
-  margin: 0 24px 24px 24px;
+  padding: 6px;
+  margin: 0 8px 8px 8px;
   cursor: pointer;
   color: var(--ant-color-primary);
-  background: var(--ant-color-bg-container);
-  border-radius: 8px;
-  border: 1px solid var(--ant-color-border);
+  background: ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.04)'
+    : 'var(--ant-color-bg-container)'};
+  border-radius: 6px;
+  border: 0.5px solid ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'var(--ant-color-border)'};
   transition: all 0.3s ease;
   
   &:hover {
-    background: var(--ant-color-primary-bg);
+    background: ${props => props.theme.mode === 'dark'
+      ? 'rgba(59, 130, 246, 0.15)'
+      : 'var(--ant-color-primary-bg)'};
     border-color: var(--ant-color-primary-border);
   }
 `;
@@ -173,7 +164,7 @@ const AgentTag = styled(Tag)`
   margin-left: 8px;
   font-size: 12px;
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: 20px;
   font-weight: 500;
 `;
 
@@ -190,8 +181,12 @@ const SystemTag = styled(AgentTag)`
 `;
 
 const SystemMessageContent = styled(Text)`
-  color: var(--ant-color-warning-text);
-  background-color: var(--ant-color-warning-bg);
+  color: ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.85)'
+    : 'var(--ant-color-warning-text)'};
+  background-color: ${props => props.theme.mode === 'dark'
+    ? 'rgba(245, 158, 11, 0.15)'
+    : 'var(--ant-color-warning-bg)'};
   padding: 8px 12px;
   border-radius: 8px;
   display: inline-block;
@@ -215,45 +210,65 @@ const EmptyContainer = styled.div`
   align-items: center;
   height: 100%;
   color: var(--ant-color-text-secondary);
-  padding: 40px 20px;
+  padding: 24px 16px;
   text-align: center;
-  background: var(--ant-color-bg-container);
-  border-radius: 12px;
-  border: 1px dashed var(--ant-color-border);
-  margin: 24px;
+  background: ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.04)'
+    : 'var(--ant-color-bg-container)'};
+  border-radius: 20px;
+  border: 0.5px dashed ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'var(--ant-color-border)'};
 `;
 
 const MessageContent = styled.div<{ $isUser?: boolean; $sending?: boolean; $error?: boolean }>`
   max-width: 80%;
-  padding: 16px 24px;
-  background: ${props => props.$isUser ? 'var(--ant-color-primary-bg)' : 'var(--ant-color-bg-container)'};
-  border: 1px solid ${props => {
-    if (props.$error) return 'var(--ant-color-error)';
-    if (props.$sending) return 'var(--ant-color-warning)';
-    return props.$isUser ? 'var(--ant-color-primary-border)' : 'var(--ant-color-border)';
+  padding: 8px 12px;
+  background: ${props => props.$isUser 
+    ? props.theme.mode === 'dark'
+      ? 'rgba(59, 130, 246, 0.15)'
+      : 'rgba(59, 130, 246, 0.08)'
+    : props.theme.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.04)'
+      : 'var(--ant-color-bg-container)'};
+  border: ${props => {
+    if (props.$error) return '0.5px solid var(--ant-color-error)';
+    if (props.$sending) return '0.5px solid var(--ant-color-warning)';
+    return props.$isUser 
+      ? props.theme.mode === 'dark'
+        ? '0.5px solid rgba(59, 130, 246, 0.2)'
+        : '0.5px solid rgba(59, 130, 246, 0.15)'
+      : props.theme.mode === 'dark'
+        ? '0.5px solid rgba(255, 255, 255, 0.1)'
+        : '0.5px solid rgba(0, 0, 0, 0.06)';
   }};
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  box-shadow: none;
   transition: all 0.3s ease;
   opacity: ${props => props.$sending ? 0.8 : 1};
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
   }
 
-  color: ${props => props.$isUser ? 'var(--ant-color-text-secondary)' : 'var(--ant-color-text)'};
+  color: ${props => props.$isUser 
+    ? props.theme.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.85)'
+      : 'var(--ant-color-text-secondary)'
+    : 'var(--ant-color-text)'};
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
 
   img {
     max-width: 300px;
     max-height: 200px;
-    border-radius: 8px;
+    border-radius: 6px;
     margin: 8px 0;
     object-fit: contain;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    border: 0.5px solid rgba(0, 0, 0, 0.06);
   }
 
   @media (max-width: 768px) {
@@ -276,7 +291,7 @@ const MessageContentWrapper = styled.div<{ $isUser?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
-  max-width: calc(100% - 56px); // 40px avatar + 16px gap
+  max-width: calc(100% - 46px); // 40px avatar + 6px gap
 `;
 
 interface UserInfo {
