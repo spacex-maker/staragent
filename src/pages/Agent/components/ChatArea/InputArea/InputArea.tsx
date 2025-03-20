@@ -139,7 +139,8 @@ const InputArea: React.FC<InputAreaProps> = ({
 
   // 更新键盘事件处理方法
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    // 检查是否正在使用输入法
+    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       if (!loading) {
         handleSend();
