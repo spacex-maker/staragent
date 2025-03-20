@@ -5,6 +5,7 @@ import styled, { ThemeContext } from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import remarkBreaks from 'remark-breaks';
 import rehypeKatex from 'rehype-katex';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeRaw from 'rehype-raw';
@@ -352,7 +353,7 @@ const MarkdownContent = styled.div`
   line-height: 1.6;
 
   p {
-    margin-bottom: 1em;
+    margin: 0.5em 0;
     &:last-child {
       margin-bottom: 0;
     }
@@ -509,17 +510,38 @@ const MarkdownContent = styled.div`
 
   table {
     width: 100%;
-    margin: 1em 0;
+    margin: 0.5em 0;
     border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    overflow-x: auto;
+    white-space: normal;
     
     th, td {
-      padding: 0.5em;
+      padding: 0.5em 1em;
       border: 1px solid ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.5;
+      min-width: 100px;
     }
 
     th {
       background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'};
       font-weight: 600;
+      white-space: nowrap;
+    }
+
+    tr:nth-child(even) {
+      background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)'};
+    }
+
+    tr:hover {
+      background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'};
+    }
+
+    & + p {
+      margin-top: 0.5em;
     }
   }
 
@@ -579,6 +601,15 @@ const parseMessageContent = (content: string, isUser?: boolean) => {
       message.error('复制失败，请手动复制');
     });
   };
+
+  // 预处理内容，处理 Java 转义的字符串
+  const processedContent = content
+    .replace(/\\n/g, '\n')  // 将 Java 转义的 \n 转换为实际的换行符
+    .replace(/\r\n/g, '\n')  // 统一换行符
+    .replace(/\n{3,}/g, '\n\n')  // 将连续的3个或更多换行符替换为2个
+    .replace(/(?:\n\n)(\|)/g, '\n$1')  // 移除表格前的多余换行，保留一个
+    .replace(/\|(?:\n\n)/g, '|\n')  // 移除表格后的多余换行，保留一个
+    .replace(/^\s+|\s+$/g, '');  // 去除首尾空白
 
   const components: MarkdownComponents = {
     img: ({ src, alt }: { src?: string; alt?: string }) => (
@@ -652,7 +683,7 @@ const parseMessageContent = (content: string, isUser?: boolean) => {
           rehypePlugins={[rehypeRaw, rehypeKatex, rehypePrism]}
           components={components}
         >
-          {content}
+          {processedContent}
         </ReactMarkdown>
       </MarkdownContent>
       <MessageActions $isUser={isUser}>
