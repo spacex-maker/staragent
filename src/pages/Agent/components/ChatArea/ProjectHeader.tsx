@@ -1,8 +1,9 @@
-import React from 'react';
-import { Typography } from 'antd';
-import { ProjectOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import { Typography, Dropdown, Button, Space, Table, message } from 'antd';
+import { ProjectOutlined, EllipsisOutlined, RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Project } from '../../types';
+import { Project, ProjectAgent } from '../../types';
+import axios from '../../../../api/axios';
 
 const { Title, Text } = Typography;
 
@@ -43,11 +44,97 @@ const ProjectDescription = styled(Text)`
   max-width: 100%;
 `;
 
+const MoreButton = styled(Button)`
+  padding: 4px 8px;
+  height: 32px;
+  margin-left: auto;
+`;
+
+const AgentListContainer = styled.div`
+  padding: 12px;
+  min-width: 400px;
+  max-width: 600px;
+  max-height: 500px;
+  overflow: auto;
+`;
+
+const AgentTag = styled(Text)`
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  background: var(--ant-color-primary-bg);
+  color: var(--ant-color-primary);
+  margin-left: 8px;
+`;
+
 interface ProjectHeaderProps {
   project: Project;
 }
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
+  const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchProjectAgents = async () => {
+    if (!project?.id) return;
+    
+    setLoading(true);
+    try {
+      const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${project.id}`);
+      if (response.data.success) {
+        setProjectAgents(response.data.data);
+      } else {
+        message.error(response.data.message || '获取项目员工失败');
+      }
+    } catch (error) {
+      console.error('获取项目员工错误:', error);
+      message.error('获取项目员工失败，请稍后重试');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const columns = [
+    {
+      title: '员工信息',
+      dataIndex: 'agentName',
+      key: 'agentName',
+      render: (text: string, record: ProjectAgent) => (
+        <Space direction="vertical" size={2}>
+          <Space>
+            <RobotOutlined style={{ color: 'var(--ant-color-primary)' }} />
+            <span>{text}</span>
+          </Space>
+          <Space size={4} style={{ marginLeft: 22 }}>
+            <AgentTag>{record.role}</AgentTag>
+            <AgentTag>{record.modelType}</AgentTag>
+          </Space>
+        </Space>
+      ),
+    },
+    {
+      title: '优先级',
+      dataIndex: 'priority',
+      key: 'priority',
+      width: 80,
+      align: 'center' as const,
+    }
+  ];
+
+  const dropdownContent = (
+    <AgentListContainer>
+      <Table
+        dataSource={projectAgents}
+        columns={columns}
+        rowKey="id"
+        loading={loading}
+        pagination={false}
+        size="small"
+        locale={{ emptyText: '暂无员工' }}
+      />
+    </AgentListContainer>
+  );
+
   return (
     <ProjectTitleBar>
       <ProjectIcon>
@@ -61,6 +148,17 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
           </ProjectDescription>
         )}
       </div>
+      <Dropdown 
+        trigger={['click']} 
+        dropdownRender={() => dropdownContent}
+        onOpenChange={(visible) => {
+          if (visible) {
+            fetchProjectAgents();
+          }
+        }}
+      >
+        <MoreButton type="text" icon={<EllipsisOutlined />} />
+      </Dropdown>
     </ProjectTitleBar>
   );
 };

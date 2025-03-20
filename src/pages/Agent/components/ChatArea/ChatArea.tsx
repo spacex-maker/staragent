@@ -99,10 +99,18 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const [noSessionsMessage, setNoSessionsMessage] = useState<string>('');
   const PAGE_SIZE = 20;
 
-  // 滚动到底部
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
+
+  // 监听消息变化，只在发送新消息时自动滚动
+  useEffect(() => {
+    // 检查是否是新消息（而不是加载历史消息）
+    const isNewMessage = messages.some(msg => msg.sending);
+    if (isNewMessage) {
+      scrollToBottom();
+    }
+  }, [messages, scrollToBottom]);
 
   // 获取会话消息
   const fetchSessionMessages = useCallback(async (sessionId: string, loadMore: boolean = false) => {
@@ -270,11 +278,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     }
   }, [activeProject?.id]);
 
-  // 监听消息变化，自动滚动
-  useEffect(() => {
-    scrollToBottom();
-  }, [sessionMessages, scrollToBottom]);
-
   // 处理新建会话
   const handleNewSession = useCallback(async () => {
     if (!activeProject?.id) return;
@@ -313,7 +316,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
     
-    // 如果没有活动会话，提示用户创建会话
     if (!activeSessionId) {
       message.warning('请先创建一个新的会话');
       return;
@@ -322,7 +324,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     console.log('发送消息:', inputValue);
     console.log('当前会话ID:', activeSessionId);
     
-    // 创建临时消息对象
     const tempMessage: Message = {
       id: Date.now(),
       sessionId: activeSessionId,
@@ -335,7 +336,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
 
     setSessionMessages(prev => [...prev, tempMessage]);
     setInputValue('');
-    scrollToBottom();
+    scrollToBottom(); // 发送新消息时滚动到底部
     
     try {
       await handleSend(activeSessionId);
