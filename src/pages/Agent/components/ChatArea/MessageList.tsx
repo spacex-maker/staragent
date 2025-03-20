@@ -353,7 +353,7 @@ const MarkdownContent = styled.div`
   line-height: 1.6;
 
   p {
-    margin: 0.5em 0;
+    margin: 0 0 0.5em;
     &:last-child {
       margin-bottom: 0;
     }
