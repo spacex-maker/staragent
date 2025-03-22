@@ -254,9 +254,7 @@ const AgentPage: React.FC = () => {
   // 处理项目删除
   const handleProjectDelete = async (projectId: string) => {
     try {
-      const response = await axios.post('/productx/sa-project/delete', {
-        id: projectId
-      });
+      const response = await axios.delete(`/productx/sa-project/${projectId}`);
       if (response.data.success) {
         message.success('删除项目成功');
         if (activeProject?.id === projectId) {

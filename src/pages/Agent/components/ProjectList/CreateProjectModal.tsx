@@ -31,7 +31,7 @@ interface CreateProjectModalProps {
   visible: boolean;
   onSuccess: () => void;
   onCancel: () => void;
-  onProjectCreate: (project: Project) => void;
+  onProjectCreate: (values: any) => Promise<void>;
 }
 
 const StyledModal = styled(Modal)`
@@ -109,18 +109,10 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           industryIds: industryIds
         };
 
-        console.log('开始创建项目:', submitData);
-        const response = await axios.post('/productx/sa-project/create', submitData);
-        console.log('项目创建响应:', response.data);
-        
-        if (response.data.success) {
-          message.success('项目创建成功');
-          onSuccess();  // 刷新列表
-          onCancel();  // 关闭弹窗
-        } else {
-          console.error('项目创建失败:', response.data);
-          message.error(response.data.message || '项目创建失败');
-        }
+        await onProjectCreate(submitData);
+        message.success('项目创建成功');
+        onSuccess();
+        onCancel();
       } catch (error: any) {
         console.error('创建项目错误:', error);
         message.error('创建项目失败，请稍后重试');

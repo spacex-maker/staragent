@@ -70,6 +70,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           onProjectUpdate(project.id, updatedProject);
           message.success('项目更新成功');
           onSuccess();
+          onCancel();
         } else {
           message.error(response.data.message || '项目更新失败');
         }
