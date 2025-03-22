@@ -5,9 +5,15 @@ import styled from 'styled-components';
 import { AIAgent } from '../../types';
 import axios from '../../../../api/axios';
 
+interface ThemeProps {
+  theme: {
+    mode: 'light' | 'dark';
+  };
+}
+
 const { Text } = Typography;
 
-const AgentItem = styled(List.Item)`
+const AgentItem = styled(List.Item)<ThemeProps>`
   padding: 8px !important;
   margin: 8px 0;
   border-radius: 8px !important;
@@ -80,13 +86,15 @@ const ActionButtons = styled.div`
   }
 `;
 
-const ActionButton = styled(Button)`
-  padding: 4px 8px;
-  height: 28px;
-  
-  &:hover {
-    background: var(--ant-color-primary-bg);
-    color: var(--ant-color-primary);
+const ButtonWrapper = styled.div`
+  .ant-btn {
+    padding: 4px 8px;
+    height: 28px;
+    
+    &:hover {
+      background: var(--ant-color-primary-bg);
+      color: var(--ant-color-primary);
+    }
   }
 `;
 
@@ -97,7 +105,7 @@ const TagsWrapper = styled.div`
   gap: 8px;
 `;
 
-const RoleTag = styled(Tag)`
+const RoleTag = styled(Tag)<ThemeProps>`
   margin: 0;
   background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.1)' : '#eff6ff'};
   color: #3b82f6;
@@ -157,22 +165,26 @@ const AIAgentItem: React.FC<AIAgentItemProps> = ({ agent, onEdit, onDelete }) =>
 
         <RightSection>
           <ActionButtons>
-            <ActionButton
-              type="text"
-              icon={<EditOutlined />}
-              onClick={(e) => {
-                e.stopPropagation();
-                onEdit(agent);
-              }}
-            />
-            <ActionButton
-              type="text"
-              icon={<DeleteOutlined />}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDelete();
-              }}
-            />
+            <ButtonWrapper>
+              <Button
+                type="text"
+                icon={<EditOutlined />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEdit(agent);
+                }}
+              />
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <Button
+                type="text"
+                icon={<DeleteOutlined />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete();
+                }}
+              />
+            </ButtonWrapper>
           </ActionButtons>
           <TagsWrapper>
             <RoleTag>{agent.role}</RoleTag>
