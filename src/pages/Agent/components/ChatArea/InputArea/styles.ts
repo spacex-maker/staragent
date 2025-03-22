@@ -1,5 +1,6 @@
 import { Button, Layout, Input } from 'antd';
 import styled from 'styled-components';
+import { PropsWithChildren } from 'react';
 
 const { Footer } = Layout;
 const { TextArea } = Input;
@@ -24,11 +25,11 @@ export const GlobalMentionsStyle = styled.div`
       margin: 0;
       
       &:hover, &-active {
-        background-color: rgba(var(--ant-color-primary-rgb), 0.1);
+        background-color: var(--ant-color-primary-bg);
       }
       
       &-selected {
-        background-color: rgba(var(--ant-color-primary-rgb), 0.2);
+        background-color: var(--ant-color-primary-bg-hover);
         font-weight: 500;
       }
     }
@@ -82,10 +83,10 @@ export const MentionDropdown = styled.div`
   left: 12px;
   bottom: 100%;
   margin-bottom: 4px;
-  background: ${props => props.theme.mode === 'dark' ? '#1f1f1f' : '#ffffff'};
+  background: var(--ant-color-bg-container);
   border-radius: 20px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid ${props => props.theme.mode === 'dark' ? '#303030' : '#d9d9d9'};
+  border: 1px solid var(--ant-color-border);
   padding: 2px;
   max-height: 250px;
   overflow-y: auto;
@@ -94,7 +95,11 @@ export const MentionDropdown = styled.div`
   max-width: 80%;
 `;
 
-export const MentionItem = styled.div<{ onClick?: () => void }>`
+interface MentionItemProps {
+  onClick?: () => void;
+}
+
+export const MentionItem = styled.div<PropsWithChildren<MentionItemProps>>`
   padding: 0;
   border-radius: 16px;
   cursor: pointer;
@@ -103,9 +108,9 @@ export const MentionItem = styled.div<{ onClick?: () => void }>`
   margin: 0;
   
   &:hover {
-    background-color: ${props => props.theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)'};
+    background-color: var(--ant-color-primary-bg);
   }
-` as any;
+`;
 
 export const MentionOption = styled.div`
   display: flex;
@@ -117,8 +122,8 @@ export const MentionOption = styled.div`
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-color: ${props => props.theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)'};
-    color: ${props => props.theme.mode === 'dark' ? '#3b82f6' : '#3b82f6'};
+    background-color: var(--ant-color-primary-bg);
+    color: var(--ant-color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,13 +134,14 @@ export const MentionOption = styled.div`
   .agent-name {
     font-weight: 500;
     font-size: 14px;
+    color: var(--ant-color-text);
   }
   
   .agent-role {
-    color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.45)' : 'rgba(0, 0, 0, 0.45)'};
+    color: var(--ant-color-text-secondary);
     margin-left: 6px;
     font-size: 12px;
-    background-color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : '#f5f5f5'};
+    background-color: var(--ant-color-bg-layout);
     padding: 1px 6px;
     border-radius: 10px;
     flex-shrink: 0;
@@ -156,7 +162,7 @@ export const CustomTextArea = styled(TextArea)`
   overflow-y: auto;
   
   &:focus {
-    box-shadow: 0 0 0 2px rgba(var(--ant-color-primary-rgb), 0.2);
+    box-shadow: 0 0 0 2px var(--ant-color-primary-bg);
     border-color: var(--ant-color-primary);
   }
   
