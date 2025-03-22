@@ -141,6 +141,9 @@ const AgentPage: React.FC = () => {
   const projectsRef = React.useRef<Project[]>([]);
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
   const [sendLoading, setSendLoading] = useState(false);
+  const [controller, setController] = useState<AbortController | null>(null);
+  const [projectListKey, setProjectListKey] = useState<string>('projects');
+  const [shouldTriggerAddAgent, setShouldTriggerAddAgent] = useState(false);
 
   // 获取项目列表
   const fetchProjects = React.useCallback(async () => {
@@ -185,6 +188,19 @@ const AgentPage: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // 监听导航到AI员工标签的事件
+  useEffect(() => {
+    const handleNavigateToAgents = () => {
+      setProjectListKey('agents');
+      setShouldTriggerAddAgent(true);
+    };
+
+    window.addEventListener('navigateToAgents', handleNavigateToAgents);
+    return () => {
+      window.removeEventListener('navigateToAgents', handleNavigateToAgents);
+    };
   }, []);
 
   // 取消发送消息的请求
@@ -381,6 +397,15 @@ const AgentPage: React.FC = () => {
     }
   };
 
+  // 处理标签页切换
+  const handleTabChange = (key: string) => {
+    setProjectListKey(key);
+    // 如果不是从导航事件触发的切换，不要自动打开新增员工弹窗
+    if (key !== 'agents') {
+      setShouldTriggerAddAgent(false);
+    }
+  };
+
   return (
     <IndustryProvider>
       <StyledLayout>
@@ -396,6 +421,9 @@ const AgentPage: React.FC = () => {
                 onProjectCreate={handleProjectCreate}
                 onProjectUpdate={handleProjectUpdate}
                 onProjectDelete={handleProjectDelete}
+                activeKey={projectListKey}
+                onTabChange={handleTabChange}
+                autoTriggerAddAgent={shouldTriggerAddAgent}
               />
             </SidebarContent>
             <SidebarResizer 

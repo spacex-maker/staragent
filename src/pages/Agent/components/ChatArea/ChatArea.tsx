@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Layout, Typography, message } from 'antd';
 import { ProjectOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Message, Project, FrontendMessage } from '../../types';
+import { Message, Project, FrontendMessage, ProjectAgent } from '../../types';
 import ProjectHeader from './ProjectHeader';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
@@ -99,6 +99,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const [loadingMore, setLoadingMore] = useState(false);
   const [beforeId, setBeforeId] = useState<number | null>(null);
   const [noSessionsMessage, setNoSessionsMessage] = useState<string>('');
+  const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
   const PAGE_SIZE = 20;
 
   const scrollToBottom = useCallback(() => {
@@ -337,6 +338,43 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     handleSend(activeSessionId);  // 让父组件处理session的创建
   };
 
+  // 获取项目员工列表
+  const fetchProjectAgents = async () => {
+    if (!activeProject?.id) return;
+    
+    try {
+      const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${activeProject.id}`);
+      if (response.data.success) {
+        setProjectAgents(response.data.data);
+      }
+    } catch (error) {
+      console.error('获取项目员工错误:', error);
+    }
+  };
+
+  // 监听项目变化时获取员工列表
+  useEffect(() => {
+    if (activeProject?.id) {
+      fetchProjectAgents();
+    } else {
+      setProjectAgents([]);
+    }
+  }, [activeProject?.id]);
+
+  // 监听员工列表变化事件
+  useEffect(() => {
+    const handleAgentsChange = () => {
+      if (activeProject?.id) {
+        fetchProjectAgents();
+      }
+    };
+
+    window.addEventListener('projectAgentsChanged', handleAgentsChange);
+    return () => {
+      window.removeEventListener('projectAgentsChanged', handleAgentsChange);
+    };
+  }, [activeProject?.id]);
+
   return (
     <ChatContainer>
       {activeProject && (
@@ -361,6 +399,11 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                 loadingMore={loadingMore}
                 hasMore={hasMore}
                 onLoadMore={loadMoreMessages}
+                projectAgents={projectAgents}
+                onNavigateToAgents={() => {
+                  // 触发一个自定义事件，让父组件切换到AI员工标签
+                  window.dispatchEvent(new CustomEvent('navigateToAgents'));
+                }}
               />
               <div ref={messagesEndRef} />
             </>
@@ -387,7 +430,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({
               ? "请先选择一个项目" 
               : !activeSessionId 
                 ? noSessionsMessage || "请先创建一个新的会话"
-                : "输入您的问题..."
+                : projectAgents.length === 0
+                  ? "请先添加AI员工到项目中"
+                  : "输入您的问题..."
           }
         />
       </ChatMainArea>

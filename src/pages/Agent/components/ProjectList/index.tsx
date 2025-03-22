@@ -7,7 +7,7 @@ import ProjectListHeader from './ProjectListHeader';
 import ProjectItem from './ProjectItem';
 import CreateProjectModal from './CreateProjectModal';
 import EditProjectModal from './EditProjectModal';
-import AIAgentList from '../AIAgentList';
+import AIAgentList, { AIAgentListRef } from '../AIAgentList';
 
 const ProjectListContainer = styled.div`
   display: flex;
@@ -111,6 +111,10 @@ interface ProjectListProps {
   onProjectCreate: (values: any) => Promise<void>;
   onProjectUpdate: (projectId: string, values: any) => Promise<void>;
   onProjectDelete: (projectId: string) => Promise<void>;
+  defaultActiveKey?: string;
+  activeKey?: string;
+  onTabChange?: (key: string) => void;
+  autoTriggerAddAgent?: boolean;
 }
 
 const ProjectList: React.FC<ProjectListProps> = ({
@@ -120,10 +124,40 @@ const ProjectList: React.FC<ProjectListProps> = ({
   onProjectCreate,
   onProjectUpdate,
   onProjectDelete,
+  defaultActiveKey = 'projects',
+  activeKey,
+  onTabChange,
+  autoTriggerAddAgent = false
 }) => {
   const [isCreateModalVisible, setIsCreateModalVisible] = React.useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = React.useState(false);
   const [editingProject, setEditingProject] = React.useState<Project | null>(null);
+  const aiAgentListRef = React.useRef<AIAgentListRef>(null);
+  const [shouldTriggerAddAgent, setShouldTriggerAddAgent] = React.useState(false);
+
+  // 监听是否需要自动触发添加员工
+  React.useEffect(() => {
+    if (autoTriggerAddAgent && activeKey === 'agents') {
+      // 使用setTimeout确保在tab切换完成后再触发模态框
+      setTimeout(() => {
+        if (aiAgentListRef.current?.triggerAddAgent) {
+          aiAgentListRef.current.triggerAddAgent();
+        }
+      }, 100);
+    }
+  }, [autoTriggerAddAgent, activeKey]);
+
+  // 监听shouldTriggerAddAgent变化
+  React.useEffect(() => {
+    if (shouldTriggerAddAgent && activeKey === 'agents') {
+      setTimeout(() => {
+        if (aiAgentListRef.current?.triggerAddAgent) {
+          aiAgentListRef.current.triggerAddAgent();
+        }
+      }, 100);
+      setShouldTriggerAddAgent(false);
+    }
+  }, [shouldTriggerAddAgent, activeKey]);
 
   const handleCreateProject = () => {
     setIsCreateModalVisible(true);
@@ -176,7 +210,13 @@ const ProjectList: React.FC<ProjectListProps> = ({
     {
       key: 'agents',
       label: 'AI员工',
-      children: <AIAgentList />,
+      children: <AIAgentList 
+        ref={aiAgentListRef} 
+        onNavigateToAgents={() => {
+          setShouldTriggerAddAgent(true);
+          onTabChange?.('agents');
+        }} 
+      />,
     },
   ];
 
@@ -185,7 +225,8 @@ const ProjectList: React.FC<ProjectListProps> = ({
       <TabContainer>
         <Tabs
           items={items}
-          defaultActiveKey="projects"
+          activeKey={activeKey || defaultActiveKey}
+          onChange={onTabChange}
           animated={{ tabPane: true }}
         />
       </TabContainer>

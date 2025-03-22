@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { List, Typography, Tag, Spin, message } from 'antd';
 import styled from 'styled-components';
 import axios from '../../../../api/axios';
@@ -18,12 +18,28 @@ const ListContainer = styled.div`
   gap: 16px;
 `;
 
-const AIAgentList: React.FC = () => {
+export interface AIAgentListRef {
+  triggerAddAgent: () => void;
+}
+
+interface AIAgentListProps {
+  onNavigateToAgents?: () => void;
+}
+
+const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) => {
+  const { onNavigateToAgents } = props;
   const [agents, setAgents] = useState<AIAgent[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editingAgent, setEditingAgent] = useState<AIAgent | null>(null);
+
+  // 暴露方法给父组件
+  useImperativeHandle(ref, () => ({
+    triggerAddAgent: () => {
+      setIsCreateModalVisible(true);
+    }
+  }));
 
   const fetchAgents = async () => {
     try {
@@ -120,6 +136,6 @@ const AIAgentList: React.FC = () => {
       )}
     </ListContainer>
   );
-};
+});
 
 export default AIAgentList; 

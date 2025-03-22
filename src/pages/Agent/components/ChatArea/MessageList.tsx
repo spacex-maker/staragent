@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, PropsWithChildren } from 'react
 import { List, Avatar, Typography, Spin, Tag, Button } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
 import styled, { ThemeContext } from 'styled-components';
-import { Message, FrontendMessage } from '../../types';
+import { Message, FrontendMessage, ProjectAgent } from '../../types';
 import MessageContent from './MessageContent';
 
 const { Text } = Typography;
@@ -198,12 +198,31 @@ const EmptyContainer = styled.div`
   border: 1px dashed var(--ant-color-border);
 `;
 
+const EmptyTitle = styled(Text)`
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--ant-color-text);
+  font-weight: 500;
+`;
+
+const EmptyDescription = styled(Text)`
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 16px;
+`;
+
+const EmptyAction = styled(Button)`
+  margin-top: 8px;
+`;
+
 interface MessageListProps {
   messages: (Message | FrontendMessage)[];
   loading?: boolean;
   loadingMore?: boolean;
   hasMore?: boolean;
   onLoadMore?: () => void;
+  projectAgents?: ProjectAgent[];
+  onNavigateToAgents?: () => void;
 }
 
 const MessageList: React.FC<MessageListProps> = ({ 
@@ -211,7 +230,9 @@ const MessageList: React.FC<MessageListProps> = ({
   loading = false,
   loadingMore = false,
   hasMore = false,
-  onLoadMore
+  onLoadMore,
+  projectAgents = [],
+  onNavigateToAgents
 }) => {
   const theme = useContext(ThemeContext);
   const [userInfo, setUserInfo] = useState<{ username: string; avatar?: string } | null>(null);
@@ -234,12 +255,25 @@ const MessageList: React.FC<MessageListProps> = ({
   if (!messages || messages.length === 0) {
     return (
       <EmptyContainer>
-        <Text style={{ fontSize: '16px', marginBottom: '8px' }}>
-          开始一个新的对话
-        </Text>
-        <Text style={{ fontSize: '14px', opacity: 0.8 }}>
-          在下方输入框中输入您的问题
-        </Text>
+        <EmptyTitle>
+          {projectAgents && projectAgents.length > 0 ? (
+            '开始一个新的对话'
+          ) : (
+            '项目尚未添加AI员工'
+          )}
+        </EmptyTitle>
+        <EmptyDescription>
+          {projectAgents && projectAgents.length > 0 ? (
+            '在下方输入框中输入您的问题，AI员工将为您提供专业解答'
+          ) : (
+            '请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择'
+          )}
+        </EmptyDescription>
+        {(!projectAgents || projectAgents.length === 0) && onNavigateToAgents && (
+          <EmptyAction type="primary" onClick={onNavigateToAgents}>
+            前往添加AI员工
+          </EmptyAction>
+        )}
       </EmptyContainer>
     );
   }
