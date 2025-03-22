@@ -76,8 +76,8 @@ const ScrollContainer = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background-color: ${props => props.theme.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.2)'
-      : 'rgba(0, 0, 0, 0.2)'};
+    ? 'rgba(255, 255, 255, 0.2)'
+    : 'rgba(0, 0, 0, 0.2)'};
     border-radius: 3px;
   }
 `;
@@ -117,8 +117,8 @@ const ActionButton = styled.button`
 
   &:hover {
     background: ${props => props.theme.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.1)'};
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'rgba(0, 0, 0, 0.1)'};
     transform: scale(1.05);
   }
 
@@ -152,8 +152,8 @@ const Title = styled.h1`
 const StyledTimeline = styled(Timeline)`
   .ant-timeline-item-tail {
     border-inline-start: 2px solid ${props => props.theme.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.1)'};
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'rgba(0, 0, 0, 0.1)'};
   }
 
   .ant-timeline-item-content {
@@ -227,13 +227,13 @@ const ProductLogModal: React.FC<ProductLogModalProps> = ({ open, onClose }) => {
       if (response.data.success) {
         const { data, totalNum }: PaginationResponse = response.data.data;
         setTotal(totalNum);
-        
+
         if (page === 1) {
           setLogs(data);
         } else {
           setLogs(prevLogs => [...prevLogs, ...data]);
         }
-        
+
         setHasMore((page * pageSize) < totalNum);
       }
     } catch (error) {
@@ -289,63 +289,63 @@ const ProductLogModal: React.FC<ProductLogModalProps> = ({ open, onClose }) => {
   };
 
   return (
-    <FullScreenOverlay visible={open}>
-      <Header>
-        <Title>
-          <FormattedMessage id="productLog.title" defaultMessage="产品更新日志" />
-        </Title>
-        <FeedbackButton onClick={() => setIsFeedbackVisible(true)}>
-          <BulbOutlined />
-          <FormattedMessage id="productLog.feedback" defaultMessage="提需求" />
-        </FeedbackButton>
-        <CloseButton onClick={onClose}>
-          <CloseOutlined />
-        </CloseButton>
-      </Header>
-      <ScrollContainer ref={containerRef}>
-        <ContentContainer>
-          {loading ? (
-            <div style={{ textAlign: 'center', padding: '40px' }}>
-              <Spin size="large" />
-            </div>
-          ) : (
-            <>
-              <StyledTimeline>
-                {logs.map((log, index) => (
-                  <Timeline.Item key={index}>
-                    <div>
-                      <VersionTag color="blue">v{log.version}</VersionTag>
-                      <DateText>{log.releaseDate}</DateText>
-                      <UpdateTypeTag color={getUpdateTypeColor(log.updateType)}>
-                        {log.updateType}
-                      </UpdateTypeTag>
-                    </div>
-                    <ContentWrapper>
-                      <Text style={{ color: 'inherit' }}>{log.updateContent}</Text>
-                      {log.remarks && (
-                        <div style={{ marginTop: 12 }}>
-                          <Text type="secondary" style={{ opacity: 0.8 }}>{log.remarks}</Text>
-                        </div>
-                      )}
-                    </ContentWrapper>
-                  </Timeline.Item>
-                ))}
-              </StyledTimeline>
-              {loadingMore && (
-                <LoadingWrapper>
-                  <Spin />
-                </LoadingWrapper>
-              )}
-            </>
-          )}
-        </ContentContainer>
-      </ScrollContainer>
-      <FeedbackModalEntry
-        open={isFeedbackVisible}
-        onClose={() => setIsFeedbackVisible(false)}
-      />
-    </FullScreenOverlay>
+      <FullScreenOverlay visible={open}>
+        <Header>
+          <Title>
+            <FormattedMessage id="productLog.title" defaultMessage="产品更新日志" />
+          </Title>
+          <FeedbackButton onClick={() => setIsFeedbackVisible(true)}>
+            <BulbOutlined />
+            <FormattedMessage id="productLog.feedback" defaultMessage="提需求" />
+          </FeedbackButton>
+          <CloseButton onClick={onClose}>
+            <CloseOutlined />
+          </CloseButton>
+        </Header>
+        <ScrollContainer ref={containerRef}>
+          <ContentContainer>
+            {loading ? (
+                <div style={{ textAlign: 'center', padding: '40px' }}>
+                  <Spin size="large" />
+                </div>
+            ) : (
+                <>
+                  <StyledTimeline>
+                    {logs.map((log, index) => (
+                        <Timeline.Item key={index}>
+                          <div>
+                            <VersionTag color="blue">v{log.version}</VersionTag>
+                            <DateText>{log.releaseDate}</DateText>
+                            <UpdateTypeTag color={getUpdateTypeColor(log.updateType)}>
+                              {log.updateType}
+                            </UpdateTypeTag>
+                          </div>
+                          <ContentWrapper>
+                            <Text style={{ color: 'inherit' }}>{log.updateContent}</Text>
+                            {log.remarks && (
+                                <div style={{ marginTop: 12 }}>
+                                  <Text type="secondary" style={{ opacity: 0.8 }}>{log.remarks}</Text>
+                                </div>
+                            )}
+                          </ContentWrapper>
+                        </Timeline.Item>
+                    ))}
+                  </StyledTimeline>
+                  {loadingMore && (
+                      <LoadingWrapper>
+                        <Spin />
+                      </LoadingWrapper>
+                  )}
+                </>
+            )}
+          </ContentContainer>
+        </ScrollContainer>
+        <FeedbackModalEntry
+            open={isFeedbackVisible}
+            onClose={() => setIsFeedbackVisible(false)}
+        />
+      </FullScreenOverlay>
   );
 };
 
-export default ProductLogModal; 
+export default ProductLogModal;
