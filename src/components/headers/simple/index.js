@@ -35,22 +35,28 @@ const SimpleHeader = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const fetchUserInfo = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const result = await auth.getUserInfo();
+        if (result.success) {
+          setUserInfo(result.data);
+          localStorage.setItem('userInfo', JSON.stringify(result.data));
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch user info:', error);
+    }
+  };
+
   useEffect(() => {
     // 从本地存储获取用户信息
     const storedUserInfo = localStorage.getItem('userInfo');
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
     } else {
-      // 如果本地没有用户信息但有token，尝试重新获取
-      const token = localStorage.getItem('token');
-      if (token) {
-        auth.getUserInfo().then(result => {
-          if (result.success) {
-            setUserInfo(result.data);
-            localStorage.setItem('userInfo', JSON.stringify(result.data));
-          }
-        });
-      }
+      fetchUserInfo();
     }
   }, []);
 
@@ -67,6 +73,7 @@ const SimpleHeader = () => {
     auth.logout();
     localStorage.removeItem('userInfo');
     localStorage.removeItem('token');
+    setUserInfo(null);
     navigate('/login');
   };
 
@@ -81,6 +88,10 @@ const SimpleHeader = () => {
     };
     fetchLanguages();
   }, []);
+
+  const handleUserInfoUpdate = () => {
+    fetchUserInfo();
+  };
 
   return (
     <Header scrolled={scrolled}>
@@ -106,6 +117,7 @@ const SimpleHeader = () => {
               userInfo={userInfo}
               isDark={isDark}
               onLogout={handleLogout}
+              onUserInfoUpdate={handleUserInfoUpdate}
             />
           ) : (
             <>
