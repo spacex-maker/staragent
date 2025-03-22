@@ -32,7 +32,12 @@ interface StyledProps {
   };
 }
 
-const FullScreenOverlay = styled.div<StyledProps & { visible: boolean }>`
+interface FullScreenOverlayProps {
+  visible: boolean;
+  children: React.ReactNode;
+}
+
+const FullScreenOverlay = styled.div<StyledProps & FullScreenOverlayProps>`
   position: fixed;
   top: 0;
   left: 0;
