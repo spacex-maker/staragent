@@ -55,7 +55,8 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           name: values.name,
           description: values.description,
           visibility: values.visibility,
-          industryIds: industryIds
+          industryIds: industryIds,
+          status: project.isActive
         };
         
         const response = await axios.post('/productx/sa-project/update', updateData);

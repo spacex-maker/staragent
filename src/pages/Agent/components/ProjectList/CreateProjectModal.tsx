@@ -115,8 +115,8 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         
         if (response.data.success) {
           message.success('项目创建成功');
-          onSuccess();
-          onCancel();
+          onSuccess();  // 刷新列表
+          onCancel();  // 关闭弹窗
         } else {
           console.error('项目创建失败:', response.data);
           message.error(response.data.message || '项目创建失败');
