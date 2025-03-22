@@ -26,14 +26,25 @@ export interface CreateProjectRequest {
 
 export interface Message {
   id: number;
+  userId: number;
+  sessionId: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  agentName: string | null;
+  agentId: number | null;
+  model: string | null;
+  createTime: string;
+  updateTime: string;
+}
+
+// 前端消息类型，扩展基础消息接口
+export interface FrontendMessage extends Partial<Message> {
+  id: number;
   sessionId: string;
   role: 'user' | 'assistant' | 'system';
   content: string;
   createTime: string;
   updateTime: string;
-  agentName?: string | null;
-  agentId?: number | null;
-  model?: string | null;
   sending?: boolean;
   error?: boolean;
 }

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Layout, Typography, message } from 'antd';
 import { ProjectOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Message, Project } from '../../types';
+import { Message, Project, FrontendMessage } from '../../types';
 import ProjectHeader from './ProjectHeader';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
@@ -74,6 +74,7 @@ interface ChatAreaProps {
   onClearMessages?: () => void;
   activeSessionId: string | null;
   setActiveSessionId: (sessionId: string | null) => void;
+  onSendMessage: (message: string) => void;
 }
 
 const ChatArea: React.FC<ChatAreaProps> = ({
@@ -86,12 +87,13 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   onCancelRequest,
   onClearMessages,
   activeSessionId,
-  setActiveSessionId
+  setActiveSessionId,
+  onSendMessage
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sessionListRef = useRef<SessionListRef>(null);
   const previousProjectIdRef = useRef<string | null>(null);
-  const [sessionMessages, setSessionMessages] = useState<Message[]>([]);
+  const [sessionMessages, setSessionMessages] = useState<(Message | FrontendMessage)[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -106,7 +108,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   // 监听消息变化，只在发送新消息时自动滚动
   useEffect(() => {
     // 检查是否是新消息（而不是加载历史消息）
-    const isNewMessage = messages.some(msg => msg.sending);
+    const isNewMessage = messages.some(msg => 'sending' in msg && msg.sending);
     if (isNewMessage) {
       scrollToBottom();
     }
@@ -123,21 +125,21 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     }
 
     try {
+      // 如果是加载更多，获取当前消息列表中最小的ID
+      const minId = loadMore && sessionMessages.length > 0
+        ? Math.min(...sessionMessages.map(msg => msg.id))
+        : null;
+
       const response = await axios.get('/chat/history', {
         params: {
           sessionId,
           pageSize: PAGE_SIZE,
-          beforeId: loadMore ? beforeId : null
+          beforeId: minId // 使用最小ID作为beforeId
         }
       });
       
       if (response.data.success) {
         const messages = response.data.data || [];
-        
-        // 更新beforeId为最后一条消息的ID
-        if (messages.length > 0) {
-          setBeforeId(messages[messages.length - 1].id);
-        }
         
         // 设置是否还有更多消息
         setHasMore(messages.length === PAGE_SIZE);
@@ -160,7 +162,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
         setLoading(false);
       }
     }
-  }, [activeProject, beforeId]);
+  }, [activeProject, sessionMessages]);
 
   // 加载更多消息
   const loadMoreMessages = useCallback(() => {
@@ -198,7 +200,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
       if (currentSessionMessages.length > 0) {
         setSessionMessages(prev => {
           // 创建一个新的消息数组，移除所有发送中的消息
-          const withoutTemp = prev.filter(msg => !msg.sending);
+          const withoutTemp = prev.filter(msg => !('sending' in msg && msg.sending));
           
           // 将新消息添加到数组中
           currentSessionMessages.forEach(msg => {
@@ -313,45 +315,26 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   }, [activeProject?.id, setInputValue, onClearMessages]);
 
   // 处理发送消息
-  const handleSendMessage = async () => {
+  const handleSendMessage = () => {
     if (!inputValue.trim()) return;
-    
-    if (!activeSessionId) {
-      message.warning('请先创建一个新的会话');
-      return;
-    }
-    
-    console.log('发送消息:', inputValue);
-    console.log('当前会话ID:', activeSessionId);
-    
-    const tempMessage: Message = {
+
+    const tempMessage: FrontendMessage = {
       id: Date.now(),
-      sessionId: activeSessionId,
+      sessionId: activeSessionId || '',  // 允许空的sessionId
       role: 'user',
       content: inputValue,
       createTime: new Date().toISOString(),
       updateTime: new Date().toISOString(),
-      sending: true
+      sending: true,
+      userId: 0,
+      agentName: null,
+      agentId: null,
+      model: null
     };
 
     setSessionMessages(prev => [...prev, tempMessage]);
     setInputValue('');
-    scrollToBottom(); // 发送新消息时滚动到底部
-    
-    try {
-      await handleSend(activeSessionId);
-    } catch (error) {
-      console.error('发送消息失败:', error);
-      message.error('发送消息失败，请稍后重试');
-      
-      setSessionMessages(prev => 
-        prev.map(msg => 
-          msg.id === tempMessage.id 
-            ? { ...msg, sending: false, error: true } 
-            : msg
-        )
-      );
-    }
+    handleSend(activeSessionId);  // 让父组件处理session的创建
   };
 
   return (

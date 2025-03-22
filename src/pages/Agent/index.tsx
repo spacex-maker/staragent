@@ -126,6 +126,7 @@ interface ChatAreaProps {
   onClearMessages?: () => void;
   activeSessionId: string | null;
   setActiveSessionId: (sessionId: string | null) => void;
+  onSendMessage: (sessionId?: string) => Promise<string | undefined>;
 }
 
 const AgentPage: React.FC = () => {
@@ -290,10 +291,26 @@ const AgentPage: React.FC = () => {
     // 发送消息到服务器
     setSendLoading(true);
     try {
+      // 如果没有sessionId，先创建一个新的session
+      let currentSessionId = sessionId;
+      if (!currentSessionId) {
+        const createSessionResponse = await axios.post('/chat/createSession', {
+          projectId: parseInt(activeProjectId),
+          name: userMessage.substring(0, 50) // 使用消息的前50个字符作为session名称
+        });
+        
+        if (createSessionResponse.data.success) {
+          currentSessionId = createSessionResponse.data.data.id;
+          setActiveSessionId(currentSessionId);
+        } else {
+          throw new Error('创建会话失败');
+        }
+      }
+
       // 发送到服务器
       const response = await axios.post('/chat/send', {
         projectId: parseInt(activeProjectId),
-        sessionId: sessionId || null,
+        sessionId: currentSessionId,
         content: userMessage
       }, {
         timeout: 120000,
@@ -305,28 +322,19 @@ const AgentPage: React.FC = () => {
         console.log('服务器返回的消息:', responseData);
         
         if (Array.isArray(responseData) && responseData.length > 0) {
-          // 如果是新会话
-          if (!sessionId) {
-            const newSessionId = responseData[0].sessionId;
-            setMessages(responseData);
-            return newSessionId;
-          } 
-          // 如果是现有会话
-          else {
-            setMessages(prev => {
-              // 保留所有消息，并添加新消息
-              const newMessages = [...prev];
-              responseData.forEach(msg => {
-                // 检查消息是否已存在
-                const existingIndex = newMessages.findIndex(m => m.id === msg.id);
-                if (existingIndex === -1) {
-                  newMessages.push(msg);
-                }
-              });
-              console.log('更新后的消息列表:', newMessages);
-              return newMessages;
+          setMessages(prev => {
+            // 保留所有消息，并添加新消息
+            const newMessages = [...prev];
+            responseData.forEach(msg => {
+              // 检查消息是否已存在
+              const existingIndex = newMessages.findIndex(m => m.id === msg.id);
+              if (existingIndex === -1) {
+                newMessages.push(msg);
+              }
             });
-          }
+            console.log('更新后的消息列表:', newMessages);
+            return newMessages;
+          });
         }
       } else {
         message.error(response.data.message || '发送消息失败');
@@ -337,13 +345,15 @@ const AgentPage: React.FC = () => {
         message.error('发送消息失败，请稍后重试');
         const errorMessage: Message = {
           id: Date.now(),
+          userId: 0,
           sessionId: sessionId || '',
           role: 'assistant',
           content: '抱歉，发送消息时出现错误，请稍后重试。',
           createTime: new Date().toISOString(),
           updateTime: new Date().toISOString(),
           agentName: '系统',
-          agentId: 0
+          agentId: 0,
+          model: null
         };
         setMessages(prev => [...prev, errorMessage]);
       }
@@ -404,13 +414,14 @@ const AgentPage: React.FC = () => {
             messages={messages}
             inputValue={inputValue}
             setInputValue={setInputValue}
-            activeProject={activeProject || null}
+            activeProject={activeProject}
             handleSend={handleSend}
             sendLoading={sendLoading}
             onCancelRequest={cancelSendRequest}
             onClearMessages={clearProjectMessages}
             activeSessionId={activeSessionId}
             setActiveSessionId={setActiveSessionId}
+            onSendMessage={handleSend}
           />
         </MainContainer>
       </StyledLayout>

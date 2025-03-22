@@ -103,8 +103,8 @@ const Logo = () => {
           </svg>
         </StarIcon>
         <BrandText>
-          <span className="full-name">StarAgent</span>
-          <span className="short-name">SA</span>
+          <span className="full-name">AI MateX</span>
+          <span className="short-name">AM</span>
         </BrandText>
       </BrandContainer>
     </LogoLink>
