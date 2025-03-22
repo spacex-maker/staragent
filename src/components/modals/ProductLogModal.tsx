@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Timeline, Spin, Typography, Tag } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 import instance from 'api/axios';
 import { CloseOutlined, BulbOutlined } from '@ant-design/icons';
 import FeedbackModalEntry from 'components/modals/FeedbackModalEntry';
@@ -26,7 +26,13 @@ interface PaginationResponse {
   totalNum: number;
 }
 
-const FullScreenOverlay = styled.div<{ visible: boolean }>`
+interface StyledProps {
+  theme: DefaultTheme & {
+    mode: 'dark' | 'light';
+  };
+}
+
+const FullScreenOverlay = styled.div<StyledProps & { visible: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -42,7 +48,7 @@ const FullScreenOverlay = styled.div<{ visible: boolean }>`
   align-items: center;
 `;
 
-const Header = styled.div`
+const Header = styled.div<StyledProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +69,7 @@ const Header = styled.div`
     : 'rgba(255, 255, 255, 0.15)'};
 `;
 
-const ScrollContainer = styled.div`
+const ScrollContainer = styled.div<StyledProps>`
   width: 100%;
   height: calc(100% - 64px);
   overflow-y: auto;
@@ -89,7 +95,7 @@ const ContentContainer = styled.div`
   position: relative;
 `;
 
-const ActionButton = styled.button`
+const ActionButton = styled.button<StyledProps>`
   position: fixed;
   background: ${props => props.theme.mode === 'dark'
     ? 'rgba(0, 0, 0, 0.6)'
@@ -141,7 +147,7 @@ const CloseButton = styled(ActionButton)`
   border-radius: 50%;
 `;
 
-const Title = styled.h1`
+const Title = styled.h1<StyledProps>`
   text-align: center;
   color: ${props => props.theme.mode === 'dark' ? '#fff' : '#000'};
   margin: 0;
@@ -149,7 +155,7 @@ const Title = styled.h1`
   font-weight: 600;
 `;
 
-const StyledTimeline = styled(Timeline)`
+const StyledTimeline = styled(Timeline)<StyledProps>`
   .ant-timeline-item-tail {
     border-inline-start: 2px solid ${props => props.theme.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.1)'
@@ -168,7 +174,7 @@ const VersionTag = styled(Tag)`
   margin-right: 8px;
 `;
 
-const DateText = styled(Text)`
+const DateText = styled(Text)<StyledProps>`
   color: ${props => props.theme.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.65)'
     : 'rgba(0, 0, 0, 0.65)'};
@@ -179,7 +185,7 @@ const UpdateTypeTag = styled(Tag)`
   margin: 0 8px;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<StyledProps>`
   margin-top: 8px;
   padding: 16px;
   background: ${props => props.theme.mode === 'dark'
