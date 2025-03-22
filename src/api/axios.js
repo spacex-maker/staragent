@@ -3,7 +3,7 @@ import { message } from 'antd';
 
 // 创建 axios 实例
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:8080',
+  baseURL: process.env.REACT_APP_API_URL || 'https://api.aimatex.com',
 
   timeout: 10000,
   withCredentials: true,
