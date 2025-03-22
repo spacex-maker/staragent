@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { marqueeGlow, pulseEffect } from './styles';
+import UserSettingsModal from '../../modals/UserSettingsModal';
+import instance from '../../../api/axios';
 
 const UserMenuContainer = styled.div`
   position: relative;
@@ -239,6 +241,12 @@ const LogoutMenuItem = styled(UserMenuItem)`
 const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [localUserInfo, setLocalUserInfo] = useState(userInfo);
+
+  useEffect(() => {
+    setLocalUserInfo(userInfo);
+  }, [userInfo]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -256,16 +264,34 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
     return username.charAt(0).toUpperCase();
   };
 
+  const handleSettingsClick = () => {
+    setShowUserMenu(false);
+    setShowSettingsModal(true);
+  };
+
+  const handleSettingsSuccess = async () => {
+    try {
+      const response = await instance.get('/productx/user/user-detail');
+      if (response.data.success) {
+        setLocalUserInfo(response.data.data);
+        // 更新localStorage中的用户信息
+        localStorage.setItem('userInfo', JSON.stringify(response.data.data));
+      }
+    } catch (error) {
+      console.error('Failed to fetch updated user info:', error);
+    }
+  };
+
   return (
     <UserMenuContainer className="user-menu">
       <UserButton onClick={() => setShowUserMenu(!showUserMenu)}>
         <ButtonGlow isDark={isDark} />
         <GlowOverlay />
         <AvatarContainer>
-          {userInfo.avatar ? (
+          {localUserInfo.avatar ? (
             <UserAvatar 
-              src={userInfo.avatar} 
-              alt={userInfo.username} 
+              src={localUserInfo.avatar} 
+              alt={localUserInfo.username} 
               isDark={isDark}
               onError={(e) => {
                 e.target.style.display = 'none';
@@ -273,13 +299,13 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
               }}
             />
           ) : (
-            <AvatarFallback isDark={isDark}>{getInitial(userInfo.username)}</AvatarFallback>
+            <AvatarFallback isDark={isDark}>{getInitial(localUserInfo.username)}</AvatarFallback>
           )}
           <StatusIndicator isDark={isDark} />
         </AvatarContainer>
         <UserInfo>
-          <UserName>{userInfo.username}</UserName>
-          <UserEmail>{userInfo.email}</UserEmail>
+          <UserName>{localUserInfo.username}</UserName>
+          <UserEmail>{localUserInfo.email}</UserEmail>
         </UserInfo>
       </UserButton>
       
@@ -300,10 +326,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
         </UserMenuItem>
         <UserMenuItem 
           isDark={isDark}
-          onClick={() => {
-            setShowUserMenu(false);
-            navigate('/settings');
-          }}
+          onClick={handleSettingsClick}
         >
           <i className="bi bi-gear icon" />
           账号设置
@@ -319,6 +342,12 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           退出登录
         </LogoutMenuItem>
       </UserDropdown>
+
+      <UserSettingsModal
+        open={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+        onSuccess={handleSettingsSuccess}
+      />
     </UserMenuContainer>
   );
 };

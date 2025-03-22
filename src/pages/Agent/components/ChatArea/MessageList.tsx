@@ -98,20 +98,6 @@ const StyledAvatar = styled(Avatar)<PropsWithChildren<StyledProps>>`
   }
 `;
 
-const StatusIndicator = styled.div<PropsWithChildren<StyledProps>>`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${props => props.$isUser ? 'var(--ant-color-success)' : 'var(--ant-color-primary)'};
-  border: 2px solid var(--ant-color-bg-container);
-  z-index: 3;
-  box-shadow: 0 0 8px 2px ${props => props.$isUser ? 'rgba(82, 196, 26, 0.3)' : 'rgba(59, 130, 246, 0.3)'};
-  opacity: 0.9;
-`;
-
 const MessageInfo = styled.div<PropsWithChildren<StyledProps>>`
   margin-bottom: 4px;
   display: flex;
@@ -549,7 +535,7 @@ const MessageList: React.FC<MessageListProps> = ({
                       />
                     ) : (
                       <StyledAvatar $isUser={true}>
-                        {userInfo?.username?.[0]?.toUpperCase() || '用户'}
+                        <UserOutlined />
                       </StyledAvatar>
                     )
                   ) : (
@@ -557,14 +543,18 @@ const MessageList: React.FC<MessageListProps> = ({
                       <RobotOutlined />
                     </StyledAvatar>
                   )}
-                  <StatusIndicator $isUser={isUser} />
                 </AvatarContainer>
                 <MessageContentWrapper $isUser={isUser}>
                   <MessageInfo $isUser={isUser}>
                     <UserName $isUser={isUser}>
-                      {isUser ? userInfo?.username || '用户' : 'AI 助手'}
+                      {isUser ? userInfo?.username || '用户' : msg.agentName || 'AI 助手'}
                     </UserName>
-                    {!isUser && <AgentTag color="blue">AI</AgentTag>}
+                    {!isUser && (
+                      <>
+                        <AgentTag color="blue">{msg.role || 'AI'}</AgentTag>
+                        {msg.model && <AgentTag color="purple">{msg.model}</AgentTag>}
+                      </>
+                    )}
                   </MessageInfo>
                   <MessageContent $isUser={isUser}>
                     <MarkdownContent>
