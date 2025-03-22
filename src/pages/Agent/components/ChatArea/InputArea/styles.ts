@@ -1,11 +1,11 @@
 import { Button, Layout, Input } from 'antd';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 const { Footer } = Layout;
 const { TextArea } = Input;
 
-// 全局样式覆盖，用于自定义下拉菜单样式
-export const GlobalMentionsStyle = createGlobalStyle`
+// 使用普通样式组件替代全局样式
+export const GlobalMentionsStyle = styled.div`
   .ant-mentions-dropdown {
     border-radius: 20px !important;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;

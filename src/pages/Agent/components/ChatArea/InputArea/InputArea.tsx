@@ -154,8 +154,7 @@ const InputArea: React.FC<InputAreaProps> = ({
   );
 
   return (
-    <>
-      <GlobalMentionsStyle />
+    <GlobalMentionsStyle>
       <StyledFooter>
         <InputContainer>
           {agentsLoading ? (
@@ -203,7 +202,7 @@ const InputArea: React.FC<InputAreaProps> = ({
           )}
         </InputContainer>
       </StyledFooter>
-    </>
+    </GlobalMentionsStyle>
   );
 };
 
