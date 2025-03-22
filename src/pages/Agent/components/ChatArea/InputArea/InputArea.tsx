@@ -14,6 +14,9 @@ import {
   CustomTextArea
 } from './styles';
 
+// 在组件外部渲染全局样式
+GlobalMentionsStyle.createGlobalStyle();
+
 interface InputAreaProps {
   inputValue: string;
   setInputValue: (value: string) => void;
@@ -155,7 +158,6 @@ const InputArea: React.FC<InputAreaProps> = ({
 
   return (
     <StyledFooter>
-      <GlobalMentionsStyle />
       <InputContainer>
         {agentsLoading ? (
           <LoadingContainer>
