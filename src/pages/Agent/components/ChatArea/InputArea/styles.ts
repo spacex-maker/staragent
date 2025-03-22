@@ -105,7 +105,7 @@ export const MentionItem = styled.div<{ onClick?: () => void }>`
   &:hover {
     background-color: ${props => props.theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)'};
   }
-`;
+` as any;
 
 export const MentionOption = styled.div`
   display: flex;
