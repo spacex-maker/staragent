@@ -1,6 +1,6 @@
 {
-  "short_name": "Treact",
-  "name": "Treact - Modern React Templates and Components for building Landing Pages",
+  "short_name": "AIMateX",
+  "name": "AIMateX - 智能AI助手平台",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +8,13 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "logo192.ico",
+      "type": "image/x-icon",
       "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#3b82f6",
   "background_color": "#ffffff"
 }

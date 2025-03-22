@@ -86,8 +86,8 @@ const LoginPage = () => {
   return (
     <>
       <Helmet>
-        <title>登录 - MyStorageX</title>
-        <meta name="description" content="登录 MyStorageX，开启您的云存储之旅" />
+        <title>登录 - AIMateX</title>
+        <meta name="description" content="登录 AIMateX，开启您的智能助手之旅" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Helmet>
       <PageContainer>
