@@ -7,7 +7,6 @@ const baseURL = isDevelopment ? 'http://127.0.0.1:8080' : 'https://api.aimatex.c
 
 const instance = axios.create({
   baseURL,
-  timeout: 10000,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
