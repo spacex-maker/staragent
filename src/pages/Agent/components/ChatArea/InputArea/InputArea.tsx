@@ -14,9 +14,6 @@ import {
   CustomTextArea
 } from './styles';
 
-// 在组件外部渲染全局样式
-GlobalMentionsStyle.createGlobalStyle();
-
 interface InputAreaProps {
   inputValue: string;
   setInputValue: (value: string) => void;
@@ -157,53 +154,56 @@ const InputArea: React.FC<InputAreaProps> = ({
   );
 
   return (
-    <StyledFooter>
-      <InputContainer>
-        {agentsLoading ? (
-          <LoadingContainer>
-            <Spin size="small" />
-          </LoadingContainer>
-        ) : (
-          <>
-            <CustomTextArea
-              ref={textAreaRef}
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder={placeholder}
-              onKeyDown={handleKeyDown}
-              disabled={disabled || loading}
-              autoSize={{ minRows: 1, maxRows: 5 }}
-            />
-            
-            {showMentions && filteredAgents.length > 0 && (
-              <MentionDropdown 
-                filteredAgents={filteredAgents} 
-                onSelect={selectMention} 
+    <>
+      <GlobalMentionsStyle />
+      <StyledFooter>
+        <InputContainer>
+          {agentsLoading ? (
+            <LoadingContainer>
+              <Spin size="small" />
+            </LoadingContainer>
+          ) : (
+            <>
+              <CustomTextArea
+                ref={textAreaRef}
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder={placeholder}
+                onKeyDown={handleKeyDown}
+                disabled={disabled || loading}
+                autoSize={{ minRows: 1, maxRows: 5 }}
               />
-            )}
-          </>
-        )}
-        {loading ? (
-          <SendButton
-            type="primary"
-            danger
-            icon={<StopOutlined />}
-            onClick={onCancelRequest}
-          >
-            取消
-          </SendButton>
-        ) : (
-          <SendButton
-            type="primary"
-            icon={<SendOutlined />}
-            onClick={handleSend}
-            disabled={!inputValue.trim() || disabled}
-          >
-            发送
-          </SendButton>
-        )}
-      </InputContainer>
-    </StyledFooter>
+              
+              {showMentions && filteredAgents.length > 0 && (
+                <MentionDropdown 
+                  filteredAgents={filteredAgents} 
+                  onSelect={selectMention} 
+                />
+              )}
+            </>
+          )}
+          {loading ? (
+            <SendButton
+              type="primary"
+              danger
+              icon={<StopOutlined />}
+              onClick={onCancelRequest}
+            >
+              取消
+            </SendButton>
+          ) : (
+            <SendButton
+              type="primary"
+              icon={<SendOutlined />}
+              onClick={handleSend}
+              disabled={!inputValue.trim() || disabled}
+            >
+              发送
+            </SendButton>
+          )}
+        </InputContainer>
+      </StyledFooter>
+    </>
   );
 };
 
