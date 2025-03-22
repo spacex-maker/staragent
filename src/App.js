@@ -209,45 +209,16 @@ export default function App() {
   // Manually set CSS variables
   React.useEffect(() => {
     const root = document.documentElement;
-    
-    // 基础颜色
+    const textColor = isDark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.85)';
+    root.style.setProperty('--ant-color-text', textColor);
     root.style.setProperty('--ant-color-primary', '#3b82f6');
-    root.style.setProperty('--ant-color-success', '#10b981');
-    root.style.setProperty('--ant-color-warning', '#f59e0b');
-    root.style.setProperty('--ant-color-error', '#ef4444');
-    root.style.setProperty('--ant-color-info', '#3b82f6');
-
-    // 背景色
-    root.style.setProperty('--ant-color-bg-container', isDark ? '#1f1f1f' : '#ffffff');
-    root.style.setProperty('--ant-color-bg-elevated', isDark ? '#1f1f1f' : '#ffffff');
-    root.style.setProperty('--ant-color-bg-layout', isDark ? '#141414' : '#f0f2f5');
-    root.style.setProperty('--ant-color-bg-spotlight', isDark ? '#1f1f1f' : '#ffffff');
-    root.style.setProperty('--ant-color-bg-mask', 'rgba(0, 0, 0, 0.45)');
-
-    // 主色调相关
     root.style.setProperty('--ant-color-primary-bg', isDark ? '#1d2b53' : '#eff6ff');
-    root.style.setProperty('--ant-color-primary-bg-hover', isDark ? '#1e3a8a' : '#dbeafe');
     root.style.setProperty('--ant-color-primary-border', isDark ? '#2563eb' : '#93c5fd');
     root.style.setProperty('--ant-color-primary-hover', isDark ? '#60a5fa' : '#2563eb');
     root.style.setProperty('--ant-color-primary-active', isDark ? '#3b82f6' : '#1d4ed8');
     root.style.setProperty('--ant-color-primary-text-hover', isDark ? '#60a5fa' : '#2563eb');
     root.style.setProperty('--ant-color-primary-text', isDark ? '#3b82f6' : '#1d4ed8');
     root.style.setProperty('--ant-color-primary-text-active', isDark ? '#2563eb' : '#1e40af');
-
-    // 文字颜色
-    root.style.setProperty('--ant-color-text', isDark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.85)');
-    root.style.setProperty('--ant-color-text-secondary', isDark ? 'rgba(255, 255, 255, 0.65)' : 'rgba(0, 0, 0, 0.65)');
-    root.style.setProperty('--ant-color-text-tertiary', isDark ? 'rgba(255, 255, 255, 0.45)' : 'rgba(0, 0, 0, 0.45)');
-    root.style.setProperty('--ant-color-text-quaternary', isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.25)');
-
-    // 边框颜色
-    root.style.setProperty('--ant-color-border', isDark ? '#303030' : '#d9d9d9');
-    root.style.setProperty('--ant-color-border-secondary', isDark ? '#303030' : '#f0f0f0');
-    root.style.setProperty('--ant-color-split', isDark ? '#303030' : '#f0f0f0');
-
-    // 其他颜色
-    root.style.setProperty('--ant-color-white', '#ffffff');
-    root.style.setProperty('--ant-color-black', '#000000');
     
     // Convert primary color to RGB for opacity operations
     const primaryRGB = '59, 130, 246'; // This is #3b82f6 in RGB
