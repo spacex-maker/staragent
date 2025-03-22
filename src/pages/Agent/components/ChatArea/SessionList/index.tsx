@@ -173,15 +173,15 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
   // 监听滚动事件，实现无限滚动
   useEffect(() => {
     const handleScroll = () => {
-      if (!sessionListRef.current || loading || loadingMore || !hasMore) return;
-      
-      const { scrollTop, scrollHeight, clientHeight } = sessionListRef.current;
-      if (scrollHeight - scrollTop - clientHeight < 100) {
-        loadMoreSessions();
+      if (sessionListRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = sessionListRef.current;
+        if (scrollHeight - scrollTop - clientHeight < 100) {
+          loadMoreSessions();
+        }
       }
     };
     
-    let timeoutId: NodeJS.Timeout | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     const debouncedHandleScroll = () => {
       if (timeoutId) {
         clearTimeout(timeoutId);
