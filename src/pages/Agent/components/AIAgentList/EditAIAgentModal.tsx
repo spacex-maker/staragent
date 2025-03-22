@@ -232,6 +232,8 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
             <Select.OptGroup label="文本聊天">
               <Select.Option value="gpt-4o">GPT-4 Optimized</Select.Option>
               <Select.Option value="gpt-3.5-turbo">GPT-3.5 Turbo</Select.Option>
+              <Select.Option value="deepseek-chat">DeepSeek Chat</Select.Option>
+              <Select.Option value="deepseek-coder">DeepSeek Coder</Select.Option>
             </Select.OptGroup>
             <Select.OptGroup label="图像生成">
               <Select.Option value="dall-e-3">DALL-E 3</Select.Option>
