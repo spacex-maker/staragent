@@ -10,13 +10,18 @@ const HeaderContainer = styled.div`
   padding: 0 8px;
 `;
 
-const StyledButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  
-  .anticon {
-    font-size: 16px;
+const ButtonWrapper = styled.div`
+  .ant-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 20px;
+    height: 36px;
+    padding: 0 20px;
+    
+    .anticon {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -31,20 +36,24 @@ const AIAgentListHeader: React.FC<AIAgentListHeaderProps> = ({
 }) => {
   return (
     <HeaderContainer>
-      <StyledButton
-        type="default"
-        icon={<UsergroupAddOutlined />}
-        onClick={onRecruitAgent}
-      >
-        招募员工
-      </StyledButton>
-      <StyledButton
-        type="primary"
-        icon={<PlusOutlined />}
-        onClick={onCreateAgent}
-      >
-        新增员工
-      </StyledButton>
+      <ButtonWrapper>
+        <Button
+          type="default"
+          icon={<UsergroupAddOutlined />}
+          onClick={onRecruitAgent}
+        >
+          招募员工
+        </Button>
+      </ButtonWrapper>
+      <ButtonWrapper>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={onCreateAgent}
+        >
+          新增员工
+        </Button>
+      </ButtonWrapper>
     </HeaderContainer>
   );
 };

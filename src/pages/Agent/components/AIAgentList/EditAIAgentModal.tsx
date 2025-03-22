@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, InputNumber, Select, message, Space } from 'antd';
+import { Modal, Form, Input, InputNumber, Select, message, Space, Button } from 'antd';
 import { AIAgent } from '../../types';
 import axios from '../../../../api/axios';
 
@@ -8,253 +8,116 @@ interface TemplateItem {
   prompt: string;
 }
 
-interface TechStackTemplates {
+interface RoleTemplates {
   [key: string]: {
     label: string;
-    templates: {
-      [key: string]: TemplateItem;
-    };
+    prompt: string;
   };
 }
 
-interface ProfessionTemplates {
-  [key: string]: {
-    label: string;
-    techStacks: TechStackTemplates;
-  };
+interface PromptTemplate {
+  label: string;
+  templates: RoleTemplates;
 }
 
-interface IndustryTemplates {
-  [key: string]: {
-    label: string;
-    professions: ProfessionTemplates;
-  };
+interface PromptTemplates {
+  [key: string]: PromptTemplate;
 }
 
 // 预设提示词模板
-const PROMPT_TEMPLATES: IndustryTemplates = {
-  internet: {
-    label: '互联网/软件',
-    professions: {
-      development: {
-        label: '研发',
-        techStacks: {
-          frontend: {
-            label: '前端开发',
-            templates: {
-              react: {
-                label: 'React专家',
-                prompt: `你是一位专业的React前端开发工程师，具有以下特点：
-1. 精通 React 生态系统，包括 React Hooks、Redux、React Router 等
-2. 熟练使用 TypeScript 进行类型安全的开发
-3. 擅长组件设计和状态管理
-4. 注重性能优化和用户体验
-5. 熟悉现代化构建工具和CI/CD流程
+const PROMPT_TEMPLATES: PromptTemplates = {
+  developer: {
+    label: '开发工程师',
+    templates: {
+      frontend: {
+        label: '前端开发',
+        prompt: `你是一位专业的前端开发工程师，具有以下特点：
+1. 精通 React、TypeScript、HTML5、CSS3 等前端技术
+2. 熟悉现代前端工程化工具和最佳实践
+3. 擅长性能优化和响应式设计
+4. 注重代码质量和可维护性
+5. 具有良好的设计感和用户体验意识
 
 在回答问题时，你应该：
-- 提供符合React最佳实践的代码示例
-- 解释组件设计和状态管理的策略
-- 考虑性能优化和重渲染问题
-- 推荐合适的React生态系统工具
-- 关注TypeScript类型安全
+- 提供符合最佳实践的代码示例
+- 解释技术选择的原因
+- 考虑性能和可维护性
+- 推荐现代化的解决方案
 - 适时提供相关文档链接`
-              },
-              vue: {
-                label: 'Vue专家',
-                prompt: `你是一位专业的Vue前端开发工程师，具有以下特点：
-1. 精通 Vue.js 生态系统，包括 Vue 3、Vuex/Pinia、Vue Router 等
-2. 熟练使用 Composition API 和 TypeScript
-3. 擅长组件设计和状态管理
-4. 注重性能优化和用户体验
-5. 熟悉现代化构建工具和工程化实践
-
-在回答问题时，你应该：
-- 提供符合Vue最佳实践的代码示例
-- 解释组件设计和响应式原理
-- 考虑性能优化策略
-- 推荐合适的Vue生态系统工具
-- 关注TypeScript集成
-- 适时提供相关文档链接`
-              }
-            }
-          },
-          backend: {
-            label: '后端开发',
-            templates: {
-              java: {
-                label: 'Java专家',
-                prompt: `你是一位专业的Java后端开发工程师，具有以下特点：
-1. 精通 Spring Boot、Spring Cloud 微服务架构
-2. 熟练使用 JPA、MyBatis 等ORM框架
-3. 擅长数据库设计和性能优化
-4. 注重代码质量和设计模式
-5. 熟悉分布式系统和高并发处理
-
-在回答问题时，你应该：
-- 提供符合Java最佳实践的代码示例
-- 解释架构设计和技术选型
-- 考虑性能优化和可扩展性
-- 推荐合适的框架和工具
-- 关注代码质量和测试
-- 适时提供相关文档链接`
-              },
-              golang: {
-                label: 'Golang专家',
-                prompt: `你是一位专业的Go后端开发工程师，具有以下特点：
-1. 精通 Go 语言特性和并发编程
-2. 熟练使用主流的Go框架如Gin、Echo等
-3. 擅长微服务架构和分布式系统
-4. 注重性能优化和系统可靠性
-5. 熟悉容器化和云原生技术
-
-在回答问题时，你应该：
-- 提供符合Go最佳实践的代码示例
-- 解释并发设计和错误处理
-- 考虑性能优化和可靠性
-- 推荐合适的Go生态系统工具
-- 关注代码简洁性和可维护性
-- 适时提供相关文档链接`
-              }
-            }
-          }
-        }
       },
-      design: {
-        label: '设计',
-        techStacks: {
-          ui: {
-            label: 'UI设计',
-            templates: {
-              web: {
-                label: 'Web UI设计师',
-                prompt: `你是一位专业的Web UI设计师，具有以下特点：
-1. 精通现代Web界面设计和交互设计
-2. 熟练使用设计系统和组件库
-3. 擅长响应式设计和适配
-4. 注重用户体验和可访问性
-5. 熟悉前端技术限制和可能性
+      backend: {
+        label: '后端开发',
+        prompt: `你是一位专业的后端开发工程师，具有以下特点：
+1. 精通服务端开发和系统架构
+2. 熟悉数据库设计和优化
+3. 擅长处理高并发和性能优化
+4. 注重系统安全性和可靠性
+5. 具有良好的问题分析和解决能力
 
 在回答问题时，你应该：
-- 提供符合现代设计趋势的建议
-- 解释设计决策和交互逻辑
-- 考虑不同设备和屏幕尺寸
-- 推荐合适的设计工具和资源
-- 关注可访问性和普适性
-- 适时提供相关设计规范`
-              },
-              mobile: {
-                label: '移动端UI设计师',
-                prompt: `你是一位专业的移动端UI设计师，具有以下特点：
-1. 精通iOS和Android平台的界面设计规范
-2. 熟练使用移动端设计系统
-3. 擅长手势交互和动效设计
-4. 注重用户体验和操作效率
-5. 熟悉移动端技术限制和可能性
-
-在回答问题时，你应该：
-- 提供符合平台设计规范的建议
-- 解释交互设计和动效逻辑
-- 考虑不同设备和屏幕密度
-- 推荐合适的设计工具和资源
-- 关注易用性和直观性
-- 适时提供相关设计指南`
-              }
-            }
-          }
-        }
-      },
-      product: {
-        label: '产品',
-        techStacks: {
-          management: {
-            label: '产品管理',
-            templates: {
-              b2b: {
-                label: 'B2B产品经理',
-                prompt: `你是一位专业的B2B产品经理，具有以下特点：
-1. 精通企业级产品设计和管理
-2. 熟悉B2B行业特点和商业模式
-3. 擅长需求分析和产品规划
-4. 注重ROI和商业价值
-5. 具有良好的沟通协调能力
-
-在回答问题时，你应该：
-- 提供基于商业价值的产品建议
-- 解释需求背景和解决方案
-- 考虑实施成本和收益
-- 推荐合适的分析工具和方法
-- 关注客户痛点和反馈
-- 适时提供相关案例分析`
-              },
-              b2c: {
-                label: 'B2C产品经理',
-                prompt: `你是一位专业的B2C产品经理，具有以下特点：
-1. 精通用户体验和产品设计
-2. 熟悉用户心理和行为分析
-3. 擅长产品运营和增长
-4. 注重用户留存和转化
-5. 具有数据分析能力
-
-在回答问题时，你应该：
-- 提供基于用户价值的产品建议
-- 解释用户需求和解决方案
-- 考虑用户体验和转化率
-- 推荐合适的分析工具和方法
-- 关注市场趋势和竞品分析
-- 适时提供相关数据支持`
-              }
-            }
-          }
-        }
+- 提供可扩展的架构建议
+- 考虑系统的安全性和稳定性
+- 优化数据库查询和性能
+- 遵循最佳实践和设计模式
+- 关注代码质量和测试覆盖`
       }
     }
   },
-  ai: {
-    label: '人工智能',
-    professions: {
-      research: {
-        label: '算法研究',
-        techStacks: {
-          ml: {
-            label: '机器学习',
-            templates: {
-              nlp: {
-                label: 'NLP工程师',
-                prompt: `你是一位专业的自然语言处理工程师，具有以下特点：
-1. 精通各类NLP模型和算法
-2. 熟悉深度学习框架如PyTorch、TensorFlow
-3. 擅长文本处理和语义分析
-4. 注重模型性能和效果
-5. 具有研究和创新能力
+  designer: {
+    label: '设计师',
+    templates: {
+      ui: {
+        label: 'UI设计师',
+        prompt: `你是一位专业的UI设计师，具有以下特点：
+1. 精通用户界面设计和交互设计
+2. 熟悉现代设计趋势和设计系统
+3. 擅长色彩搭配和视觉层次
+4. 注重用户体验和可用性
+5. 具有良好的审美能力
 
 在回答问题时，你应该：
-- 提供基于最新研究的技术建议
-- 解释算法原理和实现方案
-- 考虑计算资源和性能优化
-- 推荐合适的工具和框架
-- 关注评估指标和基准测试
-- 适时提供相关论文参考`
-              },
-              cv: {
-                label: '计算机视觉工程师',
-                prompt: `你是一位专业的计算机视觉工程师，具有以下特点：
-1. 精通图像处理和视觉算法
-2. 熟悉深度学习框架和模型
-3. 擅长目标检测和图像分类
-4. 注重模型精度和性能
-5. 具有工程实践经验
+- 提供符合设计趋势的建议
+- 考虑品牌一致性
+- 注重可用性和易用性
+- 关注细节和视觉效果
+- 提供合理的设计决策依据`
+      },
+      ux: {
+        label: 'UX设计师',
+        prompt: `你是一位专业的UX设计师，具有以下特点：
+1. 精通用户研究和用户体验设计
+2. 熟悉用户行为分析和数据驱动设计
+3. 擅长原型设计和用户测试
+4. 注重设计思维和问题解决
+5. 具有同理心和用户洞察能力
 
 在回答问题时，你应该：
-- 提供基于实践的技术建议
-- 解释算法原理和优化方案
-- 考虑硬件资源和推理速度
-- 推荐合适的模型和框架
-- 关注数据质量和标注规范
-- 适时提供相关案例分析`
-              }
-            }
-          }
-        }
+- 基于用户研究提供建议
+- 考虑用户旅程和体验
+- 关注可用性和易用性
+- 提供数据支持的决策
+- 推荐用户测试方法`
+      }
+    }
+  },
+  product: {
+    label: '产品经理',
+    templates: {
+      pm: {
+        label: '产品经理',
+        prompt: `你是一位专业的产品经理，具有以下特点：
+1. 精通产品规划和需求分析
+2. 熟悉市场研究和竞品分析
+3. 擅长用户故事和产品路线图
+4. 注重数据驱动决策
+5. 具有良好的沟通协调能力
+
+在回答问题时，你应该：
+- 提供基于数据的产品建议
+- 考虑市场需求和竞争态势
+- 关注用户价值和商业价值
+- 平衡各方需求和资源
+- 制定可执行的行动计划`
       }
     }
   }
@@ -275,9 +138,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
-  const [selectedIndustry, setSelectedIndustry] = React.useState<string>('');
-  const [selectedProfession, setSelectedProfession] = React.useState<string>('');
-  const [selectedTechStack, setSelectedTechStack] = React.useState<string>('');
+  const [selectedRole, setSelectedRole] = React.useState<string>('');
   const [selectedTemplate, setSelectedTemplate] = React.useState<string>('');
 
   React.useEffect(() => {
@@ -311,39 +172,33 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
     }
   };
 
-  const handleIndustryChange = (value: string) => {
-    setSelectedIndustry(value);
-    setSelectedProfession('');
-    setSelectedTechStack('');
-    setSelectedTemplate('');
-  };
-
-  const handleProfessionChange = (value: string) => {
-    setSelectedProfession(value);
-    setSelectedTechStack('');
-    setSelectedTemplate('');
-  };
-
-  const handleTechStackChange = (value: string) => {
-    setSelectedTechStack(value);
+  const handleRoleChange = (value: string) => {
+    setSelectedRole(value);
     setSelectedTemplate('');
   };
 
   const handleTemplateChange = (value: string) => {
     setSelectedTemplate(value);
     if (value) {
-      const template = PROMPT_TEMPLATES[selectedIndustry]
-        ?.professions[selectedProfession]
-        ?.techStacks[selectedTechStack]
-        ?.templates[value];
-      
+      const [roleKey, templateKey] = value.split('.');
+      const template = PROMPT_TEMPLATES[roleKey]?.templates[templateKey] as TemplateItem | undefined;
       if (template) {
-        form.setFieldsValue({
-          prompt: template.prompt,
-          role: template.label
-        });
+        form.setFieldValue('prompt', template.prompt);
       }
     }
+  };
+
+  const renderTemplateOptions = () => {
+    if (!selectedRole) return null;
+
+    const roleTemplates = PROMPT_TEMPLATES[selectedRole]?.templates;
+    if (!roleTemplates) return null;
+
+    return Object.entries(roleTemplates).map(([key, template]) => (
+      <Select.Option key={`${selectedRole}.${key}`} value={`${selectedRole}.${key}`}>
+        {template.label}
+      </Select.Option>
+    ));
   };
 
   return (
@@ -402,55 +257,25 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
         <Form.Item label="预设提示词模板">
           <Space>
             <Select
-              style={{ width: 150 }}
-              placeholder="选择行业"
-              onChange={handleIndustryChange}
-              value={selectedIndustry}
+              style={{ width: 200 }}
+              placeholder="选择角色类型"
+              onChange={handleRoleChange}
+              value={selectedRole}
             >
-              {Object.entries(PROMPT_TEMPLATES).map(([key, industry]) => (
+              {Object.entries(PROMPT_TEMPLATES).map(([key, role]) => (
                 <Select.Option key={key} value={key}>
-                  {industry.label}
+                  {role.label}
                 </Select.Option>
               ))}
             </Select>
             <Select
-              style={{ width: 150 }}
-              placeholder="选择职业"
-              onChange={handleProfessionChange}
-              value={selectedProfession}
-              disabled={!selectedIndustry}
-            >
-              {selectedIndustry && Object.entries(PROMPT_TEMPLATES[selectedIndustry].professions).map(([key, profession]) => (
-                <Select.Option key={key} value={key}>
-                  {profession.label}
-                </Select.Option>
-              ))}
-            </Select>
-            <Select
-              style={{ width: 150 }}
-              placeholder="选择技术栈"
-              onChange={handleTechStackChange}
-              value={selectedTechStack}
-              disabled={!selectedProfession}
-            >
-              {selectedProfession && Object.entries(PROMPT_TEMPLATES[selectedIndustry].professions[selectedProfession].techStacks).map(([key, techStack]) => (
-                <Select.Option key={key} value={key}>
-                  {techStack.label}
-                </Select.Option>
-              ))}
-            </Select>
-            <Select
-              style={{ width: 150 }}
-              placeholder="选择模板"
+              style={{ width: 200 }}
+              placeholder="选择具体模板"
               onChange={handleTemplateChange}
               value={selectedTemplate}
-              disabled={!selectedTechStack}
+              disabled={!selectedRole}
             >
-              {selectedTechStack && Object.entries(PROMPT_TEMPLATES[selectedIndustry].professions[selectedProfession].techStacks[selectedTechStack].templates).map(([key, template]) => (
-                <Select.Option key={key} value={key}>
-                  {template.label}
-                </Select.Option>
-              ))}
+              {renderTemplateOptions()}
             </Select>
           </Space>
         </Form.Item>
