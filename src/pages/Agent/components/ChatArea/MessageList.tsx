@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, PropsWithChildren } from 'react';
-import { List, Avatar, Typography, Spin, Tag, Image, message } from 'antd';
+import { List, Avatar, Typography, Spin, Tag, Image, message, Button } from 'antd';
 import { UserOutlined, RobotOutlined, CopyOutlined } from '@ant-design/icons';
 import styled, { ThemeContext } from 'styled-components';
 import ReactMarkdown from 'react-markdown';
@@ -213,9 +213,27 @@ const EmptyContainer = styled.div`
   border: 0.5px dashed var(--ant-color-border);
 `;
 
+const MessageStatus = styled.div<PropsWithChildren<StyledProps>>`
+  font-size: 12px;
+  color: ${props => props.$error ? 'var(--ant-color-error)' : 'var(--ant-color-text-secondary)'};
+  margin-top: 4px;
+  text-align: right;
+`;
+
+const MessageActions = styled.div<PropsWithChildren<StyledProps>>`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+`;
+
 const MessageContent = styled.div<PropsWithChildren<StyledProps>>`
   max-width: 80%;
-  padding: 8px 12px;
+  padding: 8px 32px 8px 12px;
   background: ${props => props.$isUser 
     ? 'var(--ant-color-primary-bg)'
     : 'var(--ant-color-bg-container)'};
@@ -234,6 +252,9 @@ const MessageContent = styled.div<PropsWithChildren<StyledProps>>`
 
   &:hover {
     box-shadow: none;
+    ${MessageActions} {
+      opacity: 1;
+    }
   }
 
   color: ${props => props.$isUser 
@@ -262,56 +283,13 @@ const MessageContent = styled.div<PropsWithChildren<StyledProps>>`
   }
 `;
 
-const MessageStatus = styled.div<PropsWithChildren<StyledProps>>`
-  font-size: 12px;
-  color: ${props => props.$error ? 'var(--ant-color-error)' : 'var(--ant-color-text-secondary)'};
-  margin-top: 4px;
-  text-align: right;
-`;
-
-const MessageActions = styled.div<PropsWithChildren<StyledProps>>`
-  position: absolute;
-  bottom: -24px;
-  ${props => props.$isUser ? 'left: 0;' : 'right: 0;'}
-  display: flex;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1;
-`;
-
-const ActionButton = styled.button`
-  background: var(--ant-color-bg-container);
-  border: 1px solid var(--ant-color-border);
-  color: var(--ant-color-text);
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  font-size: 14px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: var(--ant-color-primary-bg);
-    border-color: var(--ant-color-primary);
-    transform: translateY(-1px);
-  }
-
-  .anticon {
-    font-size: 14px;
-  }
-`;
-
 const MessageContentWrapper = styled.div<PropsWithChildren<StyledProps>>`
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
   max-width: calc(100% - 46px); // 40px avatar + 6px gap
+  position: relative;
   
   &:hover {
     ${MessageActions} {
@@ -478,6 +456,16 @@ const MessageList: React.FC<MessageListProps> = ({
   const theme = useContext(ThemeContext);
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   
+  const handleCopy = async (content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      message.success('复制成功');
+    } catch (err) {
+      message.error('复制失败');
+      console.error('复制失败:', err);
+    }
+  };
+
   useEffect(() => {
     // 从 localStorage 获取用户信息
     const storedUserInfo = localStorage.getItem('userInfo');
@@ -560,12 +548,27 @@ const MessageList: React.FC<MessageListProps> = ({
                     <MarkdownContent>
                       {msg.content}
                     </MarkdownContent>
+                    <MessageActions $isUser={isUser}>
+                      <Button
+                        type="text"
+                        icon={<CopyOutlined />}
+                        onClick={() => handleCopy(msg.content)}
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          minWidth: '24px',
+                          padding: 0,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderRadius: '4px',
+                          background: 'var(--ant-color-bg-container)',
+                          border: '1px solid var(--ant-color-border)',
+                          color: 'var(--ant-color-text)',
+                        }}
+                      />
+                    </MessageActions>
                   </MessageContent>
-                  <MessageActions $isUser={isUser}>
-                    <ActionButton>
-                      <CopyOutlined />
-                    </ActionButton>
-                  </MessageActions>
                 </MessageContentWrapper>
               </MessageContainer>
             </MessageItem>
