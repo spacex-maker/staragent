@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, PropsWithChildren } from 'react';
 import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import SimpleHeader from '../../components/headers/simple';
@@ -27,7 +27,19 @@ const MainContainer = styled.div`
   overflow: hidden;
 `;
 
-const Sidebar = styled.div<{ collapsed: boolean }>`
+interface SidebarProps extends PropsWithChildren<{ collapsed: boolean }> {}
+interface SidebarContentProps extends PropsWithChildren<{ collapsed: boolean }> {}
+interface SidebarResizerProps extends PropsWithChildren<{ 
+  $collapsed: boolean;
+  onClick?: (e: React.MouseEvent) => void;
+  title?: string;
+}> {}
+interface MaskProps extends PropsWithChildren<{ 
+  visible: boolean;
+  onClick?: () => void;
+}> {}
+
+const Sidebar = styled.div<SidebarProps>`
   width: ${props => props.collapsed ? '0' : '300px'};
   height: 100%;
   background: ${props => props.theme.token?.colorBgContainer};
@@ -50,7 +62,7 @@ const Sidebar = styled.div<{ collapsed: boolean }>`
   }
 `;
 
-const SidebarContent = styled.div<{ collapsed: boolean }>`
+const SidebarContent = styled.div<SidebarContentProps>`
   width: 300px;
   height: 100%;
   overflow-y: auto;
@@ -59,7 +71,7 @@ const SidebarContent = styled.div<{ collapsed: boolean }>`
   transition: transform 0.2s ease-in-out;
 `;
 
-const SidebarResizer = styled.div<{ $collapsed: boolean }>`
+const SidebarResizer = styled.div<SidebarResizerProps>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -88,7 +100,7 @@ const SidebarResizer = styled.div<{ $collapsed: boolean }>`
   }
 `;
 
-const Mask = styled.div<{ visible: boolean }>`
+const Mask = styled.div<MaskProps>`
   position: fixed;
   top: 0;
   left: 0;
