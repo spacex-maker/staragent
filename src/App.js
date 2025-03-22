@@ -211,6 +211,7 @@ export default function App() {
     const root = document.documentElement;
     const textColor = isDark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.85)';
     root.style.setProperty('--ant-color-text', textColor);
+    root.style.setProperty('--ant-color-text-secondary', isDark ? 'rgba(255, 255, 255, 0.65)' : 'rgba(0, 0, 0, 0.65)');
     root.style.setProperty('--ant-color-primary', '#3b82f6');
     root.style.setProperty('--ant-color-primary-bg', isDark ? '#1d2b53' : '#eff6ff');
     root.style.setProperty('--ant-color-primary-border', isDark ? '#2563eb' : '#93c5fd');
@@ -219,6 +220,9 @@ export default function App() {
     root.style.setProperty('--ant-color-primary-text-hover', isDark ? '#60a5fa' : '#2563eb');
     root.style.setProperty('--ant-color-primary-text', isDark ? '#3b82f6' : '#1d4ed8');
     root.style.setProperty('--ant-color-primary-text-active', isDark ? '#2563eb' : '#1e40af');
+    root.style.setProperty('--ant-color-bg-container', isDark ? '#1f1f1f' : '#ffffff');
+    root.style.setProperty('--ant-color-bg-layout', isDark ? '#141414' : '#f0f2f5');
+    root.style.setProperty('--ant-color-border', isDark ? '#303030' : '#d9d9d9');
     
     // Convert primary color to RGB for opacity operations
     const primaryRGB = '59, 130, 246'; // This is #3b82f6 in RGB
