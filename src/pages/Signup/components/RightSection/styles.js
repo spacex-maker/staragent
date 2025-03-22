@@ -304,7 +304,7 @@ export const PasswordToggle = styled.button`
 export const SubmitButton = styled.button`
   width: 100%;
   padding: 0.875rem;
-  border-radius: 0.5rem;
+  border-radius: 9999px;
   border: none;
   background: var(--ant-color-primary);
   color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#000000'};
@@ -316,6 +316,11 @@ export const SubmitButton = styled.button`
 
   &:hover {
     background: var(--ant-color-primary-hover);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:disabled {

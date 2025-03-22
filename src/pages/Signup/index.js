@@ -186,7 +186,7 @@ const SignupPage = () => {
     <>
       <Helmet>
         <title>{intl.formatMessage({ id: 'signup.page.title' })}</title>
-        <meta name="description" content="注册 MyStorageX，获取专属云存储空间" />
+        <meta name="description" content="注册 AIMateX，开启您的智能助手之旅" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Helmet>
       <PageContainer>
