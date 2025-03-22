@@ -94,7 +94,7 @@ export const MentionDropdown = styled.div`
   max-width: 80%;
 `;
 
-export const MentionItem = styled.div`
+export const MentionItem = styled.div<{ onClick?: () => void }>`
   padding: 0;
   border-radius: 16px;
   cursor: pointer;
