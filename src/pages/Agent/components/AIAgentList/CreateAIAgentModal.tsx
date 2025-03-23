@@ -1,6 +1,7 @@
 import React from 'react';
-import { Modal, Form, Input, InputNumber, Select, message } from 'antd';
+import { Modal, Form, Input, InputNumber, message } from 'antd';
 import axios from '../../../../api/axios';
+import ModelSelector from '../ModelSelector';
 
 interface CreateAIAgentModalProps {
   visible: boolean;
@@ -50,6 +51,7 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
       onCancel={onCancel}
       confirmLoading={loading}
       destroyOnClose
+      width={800}
     >
       <Form
         form={form}
@@ -72,24 +74,7 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
           label="使用模型"
           rules={[{ required: true, message: '请选择使用模型' }]}
         >
-          <Select>
-            <Select.OptGroup label="文本聊天">
-              <Select.Option value="gpt-4o">GPT-4 Optimized</Select.Option>
-              <Select.Option value="gpt-3.5-turbo">GPT-3.5 Turbo</Select.Option>
-              <Select.Option value="deepseek-chat">DeepSeek Chat</Select.Option>
-              <Select.Option value="deepseek-coder">DeepSeek Coder</Select.Option>
-            </Select.OptGroup>
-            <Select.OptGroup label="图像生成">
-              <Select.Option value="dall-e-3">DALL-E 3</Select.Option>
-            </Select.OptGroup>
-            <Select.OptGroup label="语音识别">
-              <Select.Option value="whisper-1">Whisper-1</Select.Option>
-            </Select.OptGroup>
-            <Select.OptGroup label="嵌入搜索">
-              <Select.Option value="text-embedding-3-large">Text Embedding 3 Large</Select.Option>
-              <Select.Option value="text-embedding-3-small">Text Embedding 3 Small</Select.Option>
-            </Select.OptGroup>
-          </Select>
+          <ModelSelector />
         </Form.Item>
 
         <Form.Item

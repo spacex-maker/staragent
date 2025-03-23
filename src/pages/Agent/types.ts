@@ -105,4 +105,36 @@ export interface ProjectAgent {
   modelType: string;
   role: string;
   status: string;
+}
+
+export interface AIModel {
+  id: number;
+  companyId: number;
+  modelName: string;
+  modelCode: string;
+  releaseYear: string;
+  description: string;
+  status: boolean;
+  contextLength: number | null;
+  thoughtChainLength: number | null;
+  outputLength: number | null;
+  createTime: string;
+  updateTime: string | null;
+}
+
+export interface AICompany {
+  id: number;
+  companyName: string;
+  apiUrl: string;
+  websiteUrl: string;
+  description: string;
+  logoPath: string;
+  defaultModel: string;
+  models: AIModel[];
+}
+
+export interface CompanyModelTree {
+  success: boolean;
+  message: string;
+  data: AICompany[];
 } 

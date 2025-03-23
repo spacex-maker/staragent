@@ -6,8 +6,8 @@ import mockupImageSrc from "images/app-mockup.png"
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-9.svg";
 import { ContentWithPaddingXl, Container as ContainerBase } from "components/misc/Layouts";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
-import appleIconImageSrc from "images/apple-icon.png";
-import googlePlayIconImageSrc from "images/google-play-icon.png"
+import appleIconImageSrc from "../../images/company-icon/apple-icon.png";
+import googlePlayIconImageSrc from "../../images/company-icon/google-play-icon.png"
 
 const Container = tw(ContainerBase)`bg-gray-900 -mx-8`
 const Content = tw(ContentWithPaddingXl)``

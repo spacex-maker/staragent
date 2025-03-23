@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Form, Input, InputNumber, Select, message, Space, Button } from 'antd';
+import { Modal, Form, Input, InputNumber, Select, message, Space } from 'antd';
 import { AIAgent } from '../../types';
 import axios from '../../../../api/axios';
+import ModelSelector from '../ModelSelector';
 
 interface TemplateItem {
   label: string;
@@ -138,8 +139,6 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
-  const [selectedRole, setSelectedRole] = React.useState<string>('');
-  const [selectedTemplate, setSelectedTemplate] = React.useState<string>('');
 
   React.useEffect(() => {
     if (visible && editingAgent) {
@@ -172,35 +171,6 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
     }
   };
 
-  const handleRoleChange = (value: string) => {
-    setSelectedRole(value);
-    setSelectedTemplate('');
-  };
-
-  const handleTemplateChange = (value: string) => {
-    setSelectedTemplate(value);
-    if (value) {
-      const [roleKey, templateKey] = value.split('.');
-      const template = PROMPT_TEMPLATES[roleKey]?.templates[templateKey] as TemplateItem | undefined;
-      if (template) {
-        form.setFieldValue('prompt', template.prompt);
-      }
-    }
-  };
-
-  const renderTemplateOptions = () => {
-    if (!selectedRole) return null;
-
-    const roleTemplates = PROMPT_TEMPLATES[selectedRole]?.templates;
-    if (!roleTemplates) return null;
-
-    return Object.entries(roleTemplates).map(([key, template]) => (
-      <Select.Option key={`${selectedRole}.${key}`} value={`${selectedRole}.${key}`}>
-        {template.label}
-      </Select.Option>
-    ));
-  };
-
   return (
     <Modal
       title="编辑AI员工"
@@ -228,24 +198,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
           label="使用模型"
           rules={[{ required: true, message: '请选择使用模型' }]}
         >
-          <Select>
-            <Select.OptGroup label="文本聊天">
-              <Select.Option value="gpt-4o">GPT-4 Optimized</Select.Option>
-              <Select.Option value="gpt-3.5-turbo">GPT-3.5 Turbo</Select.Option>
-              <Select.Option value="deepseek-chat">DeepSeek Chat</Select.Option>
-              <Select.Option value="deepseek-coder">DeepSeek Coder</Select.Option>
-            </Select.OptGroup>
-            <Select.OptGroup label="图像生成">
-              <Select.Option value="dall-e-3">DALL-E 3</Select.Option>
-            </Select.OptGroup>
-            <Select.OptGroup label="语音识别">
-              <Select.Option value="whisper-1">Whisper-1</Select.Option>
-            </Select.OptGroup>
-            <Select.OptGroup label="嵌入搜索">
-              <Select.Option value="text-embedding-3-large">Text Embedding 3 Large</Select.Option>
-              <Select.Option value="text-embedding-3-small">Text Embedding 3 Small</Select.Option>
-            </Select.OptGroup>
-          </Select>
+          <ModelSelector />
         </Form.Item>
 
         <Form.Item
@@ -254,32 +207,6 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
           rules={[{ required: true, message: '请输入AI员工角色' }]}
         >
           <Input placeholder="请输入AI员工角色" maxLength={50} showCount />
-        </Form.Item>
-
-        <Form.Item label="预设提示词模板">
-          <Space>
-            <Select
-              style={{ width: 200 }}
-              placeholder="选择角色类型"
-              onChange={handleRoleChange}
-              value={selectedRole}
-            >
-              {Object.entries(PROMPT_TEMPLATES).map(([key, role]) => (
-                <Select.Option key={key} value={key}>
-                  {role.label}
-                </Select.Option>
-              ))}
-            </Select>
-            <Select
-              style={{ width: 200 }}
-              placeholder="选择具体模板"
-              onChange={handleTemplateChange}
-              value={selectedTemplate}
-              disabled={!selectedRole}
-            >
-              {renderTemplateOptions()}
-            </Select>
-          </Space>
         </Form.Item>
 
         <Form.Item

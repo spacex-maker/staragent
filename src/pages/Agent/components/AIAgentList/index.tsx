@@ -16,6 +16,24 @@ const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow: hidden;
+`;
+
+const ListContent = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  
+  .ant-list {
+    .ant-list-item {
+      padding: 0;
+      border: none;
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 `;
 
 export interface AIAgentListRef {
@@ -105,17 +123,19 @@ const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) =>
         onRecruitAgent={handleRecruit}
       />
 
-      <List
-        dataSource={agents}
-        renderItem={(agent) => (
-          <AIAgentItem
-            agent={agent}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-        )}
-        locale={{ emptyText: '暂无AI员工' }}
-      />
+      <ListContent>
+        <List
+          dataSource={agents}
+          renderItem={(agent) => (
+            <AIAgentItem
+              agent={agent}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          )}
+          locale={{ emptyText: '暂无AI员工' }}
+        />
+      </ListContent>
 
       <CreateAIAgentModal
         visible={isCreateModalVisible}

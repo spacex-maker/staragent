@@ -1,31 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Input, Radio, Space, Cascader, message, Tooltip } from 'antd';
 import { LockOutlined, GlobalOutlined } from '@ant-design/icons';
-import { Project, Industry } from '../../types';
 import axios from '../../../../api/axios';
 import styled from 'styled-components';
+import { useIndustries } from '../../contexts/IndustryContext';
 import type { DefaultOptionType } from 'antd/es/cascader';
-
-interface IndustryTreeNode extends Industry {
-  children?: IndustryTreeNode[];
-}
-
-interface CascaderOption extends DefaultOptionType {
-  value: number;
-  label: React.ReactNode;
-  children?: CascaderOption[];
-  isLeaf?: boolean;
-  name?: string;
-  icon?: string;
-}
-
-interface SpaceProps {
-  children: [React.ReactElement, React.ReactElement];
-}
-
-interface SpanProps {
-  children: string;
-}
 
 interface CreateProjectModalProps {
   visible: boolean;
@@ -48,47 +27,14 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
-  const [industries, setIndustries] = useState<CascaderOption[]>([]);
-  const [fetchingIndustries, setFetchingIndustries] = useState(false);
+  const { industries, loading: industriesLoading } = useIndustries();
 
   useEffect(() => {
     if (visible) {
       form.resetFields();
       form.setFieldsValue({ visibility: 'private' });
-      fetchIndustries();
     }
   }, [visible, form]);
-
-  const fetchIndustries = async () => {
-    setFetchingIndustries(true);
-    try {
-      const response = await axios.get('/base/industry/tree');
-      if (response.data.success) {
-        const formattedData = formatIndustryData(response.data.data);
-        setIndustries(formattedData);
-      }
-    } catch (error) {
-      console.error('获取行业列表失败:', error);
-    } finally {
-      setFetchingIndustries(false);
-    }
-  };
-
-  const formatIndustryData = (data: IndustryTreeNode[]): CascaderOption[] => {
-    return data.map(item => ({
-      value: item.id,
-      label: (
-        <Space>
-          <i className={item.icon} style={{ width: 16, textAlign: 'center' }} />
-          <span>{item.name}</span>
-        </Space>
-      ),
-      children: item.children ? formatIndustryData(item.children) : undefined,
-      isLeaf: !item.children || item.children.length === 0,
-      name: item.name,
-      icon: item.icon,
-    }));
-  };
 
   const handleOk = async () => {
     try {
@@ -165,14 +111,14 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
           <Cascader
             options={industries}
             placeholder="请选择所属行业"
-            loading={fetchingIndustries}
+            loading={industriesLoading}
             multiple
             showSearch={{
               filter: (inputValue, path) => {
                 const option = path[path.length - 1];
                 if (React.isValidElement(option.label)) {
-                  const label = option.label as React.ReactElement<SpaceProps>;
-                  const spanElement = label.props.children[1] as React.ReactElement<SpanProps>;
+                  const labelElement = option.label as React.ReactElement;
+                  const spanElement = labelElement.props.children[1] as React.ReactElement;
                   return spanElement.props.children.toLowerCase().indexOf(inputValue.toLowerCase()) > -1;
                 }
                 return false;

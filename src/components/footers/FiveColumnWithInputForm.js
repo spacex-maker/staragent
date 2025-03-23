@@ -5,9 +5,9 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 
 import LogoImage from "../../images/logo.svg";
-import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
+import { ReactComponent as FacebookIcon } from "../../images/company-icon/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../images/twitter-icon.svg";
-import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
+import { ReactComponent as YoutubeIcon } from "../../images/company-icon/youtube-icon.svg";
 
 const Container = styled.div`
   ${tw`relative px-8 py-20 lg:py-24 bg-gray-100 dark:bg-gray-900`}
