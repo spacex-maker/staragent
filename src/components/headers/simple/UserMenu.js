@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { marqueeGlow, pulseEffect } from './styles';
 import UserSettingsModal from '../../modals/UserSettingsModal';
 import instance from '../../../api/axios';
+import { message } from 'antd';
 
 const UserMenuContainer = styled.div`
   position: relative;
@@ -238,6 +239,53 @@ const LogoutMenuItem = styled(UserMenuItem)`
   }
 `;
 
+const DevelopmentBadge = styled.span`
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: ${props => props.isDark ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.1)'};
+  color: #10b981;
+  margin-left: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+    margin-right: 4px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0.6;
+      transform: scale(0.8);
+    }
+  }
+`;
+
+const MenuItemContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -282,6 +330,18 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
     }
   };
 
+  const handleProfileClick = (e) => {
+    e.preventDefault();
+    setShowUserMenu(false);
+    message.info({
+      content: '个人中心功能正在开发中，敬请期待！',
+      duration: 3,
+      style: {
+        marginTop: '64px'
+      }
+    });
+  };
+
   return (
     <UserMenuContainer className="user-menu">
       <UserButton onClick={() => setShowUserMenu(!showUserMenu)}>
@@ -316,13 +376,15 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
         <DropdownHeader isDark={isDark}>账号</DropdownHeader>
         <UserMenuItem 
           isDark={isDark}
-          onClick={() => {
-            setShowUserMenu(false);
-            navigate('/profile');
-          }}
+          onClick={handleProfileClick}
         >
-          <i className="bi bi-person icon" />
-          个人中心
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-person icon" />
+              个人中心
+            </div>
+            <DevelopmentBadge isDark={isDark}>开发中</DevelopmentBadge>
+          </MenuItemContent>
         </UserMenuItem>
         <UserMenuItem 
           isDark={isDark}
