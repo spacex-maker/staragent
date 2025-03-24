@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Typography, Dropdown, Button, Space, Table, message } from 'antd';
+import React from 'react';
+import { Typography, Dropdown, Button, Space, Table } from 'antd';
 import { ProjectOutlined, EllipsisOutlined, RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Project, ProjectAgent } from '../../types';
-import axios from '../../../../api/axios';
+import { useProjectAgents } from 'hooks/useProjectAgents';
 
 const { Title, Text } = Typography;
 
@@ -72,27 +72,7 @@ interface ProjectHeaderProps {
 }
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
-  const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetchProjectAgents = async () => {
-    if (!project?.id) return;
-    
-    setLoading(true);
-    try {
-      const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${project.id}`);
-      if (response.data.success) {
-        setProjectAgents(response.data.data);
-      } else {
-        message.error(response.data.message || '获取项目员工失败');
-      }
-    } catch (error) {
-      console.error('获取项目员工错误:', error);
-      message.error('获取项目员工失败，请稍后重试');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { projectAgents, loading, fetchAgents } = useProjectAgents(project.id);
 
   const columns = [
     {
@@ -153,7 +133,7 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
         dropdownRender={() => dropdownContent}
         onOpenChange={(visible) => {
           if (visible) {
-            fetchProjectAgents();
+            fetchAgents();
           }
         }}
       >

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Spin, message, Input } from 'antd';
+import React, { useState, useRef, useCallback } from 'react';
+import { message, Input } from 'antd';
 import type { TextAreaRef } from 'antd/es/input/TextArea';
 import { SendOutlined, LoadingOutlined, StopOutlined } from '@ant-design/icons';
-import axios from 'api/axios';
-import { ProjectAgent } from 'pages/Agent/types';
+import { useProjectAgents } from 'hooks/useProjectAgents';
 import MentionDropdown from './MentionDropdown';
 import {
   GlobalMentionsStyle,
@@ -14,18 +13,20 @@ import {
   CustomTextArea
 } from './styles';
 
+// 定义InputArea组件的属性接口
 interface InputAreaProps {
-  inputValue: string;
-  setInputValue: (value: string) => void;
-  handleSend: () => void;
-  disabled: boolean;
-  projectId?: string;
-  activeSessionId?: string | null;
-  loading?: boolean;
-  onCancelRequest?: () => void;
-  placeholder?: string;
+  inputValue: string;           // 输入框的当前值
+  setInputValue: (value: string) => void;  // 更新输入框值的函数
+  handleSend: () => void;      // 发送消息的回调函数
+  disabled: boolean;           // 输入框是否禁用
+  projectId?: string;          // 当前项目的ID
+  activeSessionId?: string | null;  // 当前活动会话的ID
+  loading?: boolean;           // 是否处于加载状态
+  onCancelRequest?: () => void;  // 取消请求的回调函数
+  placeholder?: string;        // 输入框的占位文本
 }
 
+// InputArea组件：聊天输入区域的主要组件
 const InputArea: React.FC<InputAreaProps> = ({
   inputValue,
   setInputValue,
@@ -37,63 +38,21 @@ const InputArea: React.FC<InputAreaProps> = ({
   onCancelRequest,
   placeholder = "输入您的问题..."
 }) => {
-  const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
-  const [agentsLoading, setAgentsLoading] = useState(false);
-  const [showMentions, setShowMentions] = useState(false);
-  const [mentionFilter, setMentionFilter] = useState('');
-  const [cursorPosition, setCursorPosition] = useState(0);
-  const textAreaRef = useRef<TextAreaRef>(null);
+  // 状态管理
+  const [showMentions, setShowMentions] = useState(false);    // 是否显示@提及下拉框
+  const [mentionFilter, setMentionFilter] = useState('');     // @提及的过滤文本
+  const [cursorPosition, setCursorPosition] = useState(0);    // 当前光标位置
+  const textAreaRef = useRef<TextAreaRef>(null);             // 文本输入区域的引用
 
-  // 获取项目员工列表
-  const fetchProjectAgents = useCallback(async (projectId: string) => {
-    if (!projectId) return;
-    
-    setAgentsLoading(true);
-    try {
-      const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${projectId}`);
-      if (response.data.success) {
-        const agents = response.data.data || [];
-        setProjectAgents(agents);
-      } else {
-        message.error(response.data.message || '获取项目员工失败');
-      }
-    } catch (error) {
-      console.error('获取项目员工错误:', error);
-      message.error('获取项目员工失败，请稍后重试');
-    } finally {
-      setAgentsLoading(false);
-    }
-  }, []);
+  // 使用全局 hook 获取项目成员列表
+  const { projectAgents, loading: agentsLoading } = useProjectAgents(projectId);
 
-  // 只在项目ID变化时获取员工列表
-  useEffect(() => {
-    if (projectId) {
-      fetchProjectAgents(projectId);
-    } else {
-      setProjectAgents([]);
-    }
-  }, [projectId, fetchProjectAgents]);
-
-  // 监听员工列表变化事件
-  useEffect(() => {
-    const handleAgentsChange = () => {
-      if (projectId) {
-        fetchProjectAgents(projectId);
-      }
-    };
-
-    window.addEventListener('projectAgentsChanged', handleAgentsChange);
-    return () => {
-      window.removeEventListener('projectAgentsChanged', handleAgentsChange);
-    };
-  }, [projectId, fetchProjectAgents]);
-
-  // 处理输入变化
+  // 处理输入框内容变化
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setInputValue(value);
     
-    // 获取光标位置
+    // 更新光标位置
     const cursorPos = e.target.selectionStart || 0;
     setCursorPosition(cursorPos);
     
@@ -101,6 +60,7 @@ const InputArea: React.FC<InputAreaProps> = ({
     const textBeforeCursor = value.substring(0, cursorPos);
     const atIndex = textBeforeCursor.lastIndexOf('@');
     
+    // 如果@符号在单词开始处，显示提及下拉框
     if (atIndex !== -1 && (atIndex === 0 || /\s/.test(textBeforeCursor[atIndex - 1]))) {
       const filterText = textBeforeCursor.substring(atIndex + 1);
       setMentionFilter(filterText);
@@ -111,12 +71,13 @@ const InputArea: React.FC<InputAreaProps> = ({
     }
   };
 
-  // 选择@提及的员工
+  // 处理选择@提及的成员
   const selectMention = (agentName: string) => {
     const textBeforeCursor = inputValue.substring(0, cursorPosition);
     const atIndex = textBeforeCursor.lastIndexOf('@');
     
     if (atIndex !== -1) {
+      // 构建新的输入值，包含选中的成员名
       const newValue = 
         inputValue.substring(0, atIndex) + 
         '@' + agentName + ' ' + 
@@ -126,7 +87,7 @@ const InputArea: React.FC<InputAreaProps> = ({
       setShowMentions(false);
       setMentionFilter('');
       
-      // 设置新的光标位置
+      // 更新光标位置到成员名后
       setTimeout(() => {
         if (textAreaRef.current) {
           const newCursorPos = atIndex + agentName.length + 2; // @ + name + space
@@ -137,9 +98,9 @@ const InputArea: React.FC<InputAreaProps> = ({
     }
   };
 
-  // 更新键盘事件处理方法
+  // 处理键盘事件，支持回车发送
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // 检查是否正在使用输入法
+    // 当按下回车键（非Shift+Enter）且不在输入法编辑状态时发送消息
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       if (!loading) {
@@ -148,21 +109,24 @@ const InputArea: React.FC<InputAreaProps> = ({
     }
   };
 
-  // 过滤员工列表
+  // 过滤并匹配成员列表
   const filteredAgents = projectAgents.filter(agent => 
     agent.agentName.toLowerCase().includes(mentionFilter.toLowerCase())
   );
 
+  // 渲染组件UI
   return (
     <GlobalMentionsStyle>
       <StyledFooter>
         <InputContainer>
+          {/* 显示加载状态或输入区域 */}
           {agentsLoading ? (
             <LoadingContainer>
-              <Spin size="small" />
+              <LoadingOutlined spin />
             </LoadingContainer>
           ) : (
             <>
+              {/* 文本输入区域 */}
               <CustomTextArea
                 ref={textAreaRef}
                 value={inputValue}
@@ -173,6 +137,7 @@ const InputArea: React.FC<InputAreaProps> = ({
                 autoSize={{ minRows: 1, maxRows: 5 }}
               />
               
+              {/* @提及下拉菜单 */}
               {showMentions && filteredAgents.length > 0 && (
                 <MentionDropdown 
                   filteredAgents={filteredAgents} 
@@ -181,6 +146,7 @@ const InputArea: React.FC<InputAreaProps> = ({
               )}
             </>
           )}
+          {/* 发送/取消按钮 */}
           {loading ? (
             <SendButton
               type="primary"

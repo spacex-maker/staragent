@@ -1,67 +1,116 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Layout, Typography, message } from 'antd';
-import { ProjectOutlined } from '@ant-design/icons';
+import React, { useRef, useEffect, useCallback, useMemo, useState } from 'react';
+import { Layout} from 'antd';
 import styled from 'styled-components';
-import { Message, Project, FrontendMessage, ProjectAgent } from '../../types';
+import { Message, Project, FrontendMessage } from '../../types';
 import ProjectHeader from './ProjectHeader';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
 import SessionList, { SessionListRef } from './SessionList';
-import axios from '../../../../api/axios';
+import { useSessionManager } from './hooks/useSessionManager';
+import { useMessageManager } from './hooks/useMessageManager';
+import { useProjectAgents } from './hooks/useProjectAgents';
+import EmptyChat from './EmptyChat';
 
 const { Content } = Layout;
-const { Title, Text } = Typography;
 
-const ChatContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  background: var(--ant-color-bg-container);
-  min-width: 0;
-  overflow: hidden;
-`;
+// 样式组件
+const StyledComponents = {
+  ChatContainer: styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background: var(--ant-color-bg-container);
+    min-width: 0;
+    overflow: hidden;
+  `,
 
-const ChatMainArea = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-width: 0;
-  overflow: hidden;
-`;
+  ChatMainArea: styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+  `,
 
-const StyledContent = styled(Content)`
-  flex: 1;
-  padding: 8px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
+  StyledContent: styled(Content)`
+    flex: 1;
+    padding: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    height: calc(100% - 80px);
+    max-height: calc(100vh - 140px);
+    
+    /* 添加以下样式以确保滚动事件正确触发 */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--ant-color-border);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--ant-color-border-hover);
+    }
+    
+    /* 修改滚动容器的样式 */
+    > * {
+      flex-shrink: 0;
+      width: 100%;
+    }
+    
+    /* 确保消息列表可以正确滚动 */
+    .ant-list {
+      flex: 1;
+      overflow: visible;
+      min-height: 0;
+    }
+    
+    .ant-list-items {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+  `,
 
-const EmptyProjectPrompt = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 24px;
-  text-align: center;
-  color: var(--ant-color-text-secondary);
+  EmptyProjectPrompt: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 24px;
+    text-align: center;
+    color: var(--ant-color-text-secondary);
+    
+    .anticon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+    
+    h3 {
+      margin-bottom: 8px;
+      font-weight: normal;
+    }
+  `,
   
-  .anticon {
-    font-size: 48px;
-    margin-bottom: 16px;
-    opacity: 0.5;
-  }
-  
-  h3 {
-    margin-bottom: 8px;
-    font-weight: normal;
-  }
-`;
+  MessagesEndMarker: styled.div`
+    height: 1px;
+    width: 100%;
+  `
+};
 
 interface ChatAreaProps {
   messages: Message[];
@@ -91,237 +140,82 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   onSendMessage
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const sessionListRef = useRef<SessionListRef>(null);
-  const previousProjectIdRef = useRef<string | null>(null);
-  const [sessionMessages, setSessionMessages] = useState<(Message | FrontendMessage)[]>([]);
-  const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [beforeId, setBeforeId] = useState<number | null>(null);
-  const [noSessionsMessage, setNoSessionsMessage] = useState<string>('');
-  const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
-  const PAGE_SIZE = 20;
 
+  // 使用自定义 hooks 管理状态和逻辑
+  const {
+    sessionMessages,
+    loading,
+    loadingMore,
+    hasMore: hookHasMore,
+    messagesLoaded,
+    handleLoadMore: originalHandleLoadMore,
+    updateSessionMessages,
+    clearSessionMessages,
+  } = useMessageManager(messages, activeSessionId);
+
+  // 确保hasMore状态与hook返回的同步
+  useEffect(() => {
+    setHasMore(hookHasMore);
+  }, [hookHasMore]);
+
+  // 滚动到底部的函数
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (contentRef.current) {
+      contentRef.current.scrollTop = contentRef.current.scrollHeight;
+    }
   }, []);
 
-  // 监听消息变化，只在发送新消息时自动滚动
+  // 监听消息加载完成状态，自动滚动到底部
   useEffect(() => {
-    // 检查是否是新消息（而不是加载历史消息）
-    const isNewMessage = messages.some(msg => 'sending' in msg && msg.sending);
-    if (isNewMessage) {
-      scrollToBottom();
+    if (messagesLoaded && !loading) {
+      // 使用 setTimeout 确保在 DOM 更新后再滚动
+      setTimeout(scrollToBottom, 100);
     }
-  }, [messages, scrollToBottom]);
+  }, [messagesLoaded, loading, scrollToBottom]);
 
-  // 获取会话消息
-  const fetchSessionMessages = useCallback(async (sessionId: string, loadMore: boolean = false) => {
-    if (!activeProject) return;
-    
-    if (loadMore) {
-      setLoadingMore(true);
-    } else {
-      setLoading(true);
-    }
+  // 创建一个包装的handleLoadMore函数，确保触发正确的事件
+  const handleLoadMore = useCallback(() => {
+    console.log('ChatArea: 调用handleLoadMore');
+    // 设置本地状态
+    setHasMore(hookHasMore);
+    // 调用原始的加载函数
+    originalHandleLoadMore();
+  }, [originalHandleLoadMore, hookHasMore]);
 
-    try {
-      // 如果是加载更多，获取当前消息列表中最小的ID
-      const minId = loadMore && sessionMessages.length > 0
-        ? Math.min(...sessionMessages.map(msg => msg.id))
-        : null;
+  const {
+    handleSessionSelect,
+    handleNewSession,
+    noSessionsMessage,
+  } = useSessionManager({
+    activeProject,
+    activeSessionId,
+    setActiveSessionId,
+    clearSessionMessages,
+    onClearMessages
+  });
 
-      const response = await axios.get('/chat/history', {
-        params: {
-          sessionId,
-          pageSize: PAGE_SIZE,
-          beforeId: minId // 使用最小ID作为beforeId
-        }
-      });
-      
-      if (response.data.success) {
-        const messages = response.data.data || [];
-        
-        // 设置是否还有更多消息
-        setHasMore(messages.length === PAGE_SIZE);
-        
-        // 如果是加载更多，添加到消息列表顶部
-        // 如果是首次加载，直接设置消息列表
-        setSessionMessages(prev => 
-          loadMore ? [...messages, ...prev] : messages
-        );
-      } else {
-        message.error(response.data.message || '获取会话消息失败');
-      }
-    } catch (error) {
-      console.error('获取会话消息错误:', error);
-      message.error('获取会话消息失败，请稍后重试');
-    } finally {
-      if (loadMore) {
-        setLoadingMore(false);
-      } else {
-        setLoading(false);
-      }
-    }
-  }, [activeProject, sessionMessages]);
+  const {
+    projectAgents,
+    fetchAgents
+  } = useProjectAgents(activeProject?.id);
 
-  // 加载更多消息
-  const loadMoreMessages = useCallback(() => {
-    if (!activeSessionId || loadingMore || !hasMore) return;
-    fetchSessionMessages(activeSessionId, true);
-  }, [activeSessionId, loadingMore, hasMore, fetchSessionMessages]);
-
-  // 刷新会话列表
-  const refreshSessionList = useCallback(() => {
-    sessionListRef.current?.refreshSessions();
-  }, []);
-
-  // 处理会话选择
-  const handleSessionSelect = useCallback((sessionId: string) => {
-    setActiveSessionId(sessionId);
-    setSessionMessages([]); // 清空当前消息
-    setBeforeId(null); // 重置beforeId
-    setHasMore(true); // 重置加载更多状态
-    fetchSessionMessages(sessionId); // 加载会话消息
-  }, [fetchSessionMessages]);
-
-  // 处理新消息更新
+  // 监听项目变化时获取员工列表
   useEffect(() => {
-    if (!messages || !activeProject?.id) return;
-    
-    console.log('收到新消息更新:', messages);
-    console.log('当前活动会话:', activeSessionId);
-    
-    // 如果有活动会话，则更新该会话的消息
-    if (activeSessionId) {
-      // 过滤出属于当前会话的消息
-      const currentSessionMessages = messages.filter(msg => msg.sessionId === activeSessionId);
-      console.log('当前会话的消息:', currentSessionMessages);
-      
-      if (currentSessionMessages.length > 0) {
-        setSessionMessages(prev => {
-          // 创建一个新的消息数组，移除所有发送中的消息
-          const withoutTemp = prev.filter(msg => !('sending' in msg && msg.sending));
-          
-          // 将新消息添加到数组中
-          currentSessionMessages.forEach(msg => {
-            if (!withoutTemp.some(m => m.id === msg.id)) {
-              withoutTemp.push(msg);
-            }
-          });
-          
-          // 按照创建时间排序
-          return withoutTemp.sort((a, b) => 
-            new Date(a.createTime).getTime() - new Date(b.createTime).getTime()
-          );
-        });
-      }
+    if (activeProject?.id) {
+      fetchAgents();
     }
-    // 如果没有活动会话，但有新消息，则设置会话ID
-    else if (messages.length > 0) {
-      const firstMessage = messages[0];
-      console.log('设置新会话:', firstMessage);
-      
-      if (firstMessage.sessionId) {
-        setActiveSessionId(firstMessage.sessionId);
-        setSessionMessages(messages.sort((a, b) => 
-          new Date(a.createTime).getTime() - new Date(b.createTime).getTime()
-        ));
-      }
-    }
-  }, [messages, activeProject?.id, activeSessionId]);
-
-  // 获取会话列表并自动选择最新会话
-  const fetchAndSelectFirstSession = useCallback(async () => {
-    if (!activeProject?.id) return;
-    
-    try {
-      const response = await axios.get('/chat/sessions', {
-        params: {
-          projectId: activeProject.id,
-          pageSize: 1,
-          currentPage: 1
-        }
-      });
-      
-      if (response.data.success) {
-        const sessions = response.data.data.records || [];
-        if (sessions.length > 0) {
-          // 直接使用第一个会话（已经是最新的）
-          const latestSession = sessions[0];
-          console.log('选择会话:', latestSession);
-          handleSessionSelect(latestSession.id.toString());
-          setNoSessionsMessage('');
-        } else {
-          setNoSessionsMessage('请先创建一个新的会话');
-        }
-      }
-    } catch (error) {
-      console.error('获取会话列表错误:', error);
-      message.error('获取会话列表失败，请稍后重试');
-    }
-  }, [activeProject?.id, handleSessionSelect]);
-
-  // 监听项目变化
-  useEffect(() => {
-    const currentProjectId = activeProject?.id || null;
-    
-    // 只在项目ID真正变化时执行
-    if (currentProjectId !== previousProjectIdRef.current) {
-      previousProjectIdRef.current = currentProjectId;
-      
-      if (currentProjectId) {
-        // 使用批量更新，避免多次渲染
-        setActiveSessionId(null);
-        setSessionMessages([]);
-        setBeforeId(null);
-        setHasMore(true);
-        // 不再主动获取会话列表，由 SessionList 组件处理
-      }
-    }
-  }, [activeProject?.id]);
-
-  // 处理新建会话
-  const handleNewSession = useCallback(async () => {
-    if (!activeProject?.id) return;
-    
-    try {
-      const response = await axios.post('/chat/create-session', {
-        projectId: parseInt(activeProject.id),
-        title: '新会话'  // 默认标题
-      });
-      
-      if (response.data.success) {
-        console.log('创建新会话成功:', response.data);
-        const newSession = response.data.data;
-        
-        // 批量更新状态
-        const updateState = () => {
-          setActiveSessionId(newSession.id.toString());
-          setSessionMessages([]);
-          setBeforeId(null);
-          setHasMore(true);
-          setInputValue('');
-          onClearMessages?.();
-        };
-        
-        updateState();
-      } else {
-        message.error(response.data.message || '创建会话失败');
-      }
-    } catch (error) {
-      console.error('创建会话错误:', error);
-      message.error('创建会话失败，请稍后重试');
-    }
-  }, [activeProject?.id, setInputValue, onClearMessages]);
+  }, [activeProject?.id, fetchAgents]);
 
   // 处理发送消息
-  const handleSendMessage = () => {
+  const handleSendMessage = useCallback(() => {
     if (!inputValue.trim()) return;
 
     const tempMessage: FrontendMessage = {
       id: Date.now(),
-      sessionId: activeSessionId || '',  // 允许空的sessionId
+      sessionId: activeSessionId || '',
       role: 'user',
       content: inputValue,
       createTime: new Date().toISOString(),
@@ -333,50 +227,21 @@ const ChatArea: React.FC<ChatAreaProps> = ({
       model: null
     };
 
-    setSessionMessages(prev => [...prev, tempMessage]);
+    updateSessionMessages(prev => [...prev, tempMessage]);
     setInputValue('');
-    handleSend(activeSessionId);  // 让父组件处理session的创建
-  };
+    handleSend(activeSessionId);
+  }, [inputValue, activeSessionId, handleSend, setInputValue, updateSessionMessages]);
 
-  // 获取项目员工列表
-  const fetchProjectAgents = async () => {
-    if (!activeProject?.id) return;
-    
-    try {
-      const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${activeProject.id}`);
-      if (response.data.success) {
-        setProjectAgents(response.data.data);
-      }
-    } catch (error) {
-      console.error('获取项目员工错误:', error);
-    }
-  };
-
-  // 监听项目变化时获取员工列表
-  useEffect(() => {
-    if (activeProject?.id) {
-      fetchProjectAgents();
-    } else {
-      setProjectAgents([]);
-    }
-  }, [activeProject?.id]);
-
-  // 监听员工列表变化事件
-  useEffect(() => {
-    const handleAgentsChange = () => {
-      if (activeProject?.id) {
-        fetchProjectAgents();
-      }
-    };
-
-    window.addEventListener('projectAgentsChanged', handleAgentsChange);
-    return () => {
-      window.removeEventListener('projectAgentsChanged', handleAgentsChange);
-    };
-  }, [activeProject?.id]);
+  // 获取输入框占位符
+  const inputPlaceholder = useMemo(() => {
+    if (!activeProject) return "请先选择一个项目";
+    if (!activeSessionId) return noSessionsMessage || "请先创建一个新的会话";
+    if (projectAgents.length === 0) return "请先添加AI员工到项目中";
+    return "输入您的问题...";
+  }, [activeProject, activeSessionId, noSessionsMessage, projectAgents.length]);
 
   return (
-    <ChatContainer>
+    <StyledComponents.ChatContainer>
       {activeProject && (
         <SessionList
           ref={sessionListRef}
@@ -387,10 +252,10 @@ const ChatArea: React.FC<ChatAreaProps> = ({
         />
       )}
 
-      <ChatMainArea>
+      <StyledComponents.ChatMainArea>
         {activeProject && <ProjectHeader project={activeProject} />}
 
-        <StyledContent>
+        <StyledComponents.StyledContent ref={contentRef}>
           {activeProject ? (
             <>
               <MessageList 
@@ -398,23 +263,24 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                 loading={loading}
                 loadingMore={loadingMore}
                 hasMore={hasMore}
-                onLoadMore={loadMoreMessages}
+                onLoadMore={handleLoadMore}
                 projectAgents={projectAgents}
                 onNavigateToAgents={() => {
-                  // 触发一个自定义事件，让父组件切换到AI员工标签
                   window.dispatchEvent(new CustomEvent('navigateToAgents'));
                 }}
+                messageListRef={contentRef}
+                activeSessionId={activeSessionId}
               />
-              <div ref={messagesEndRef} />
+              <StyledComponents.MessagesEndMarker ref={messagesEndRef} />
             </>
           ) : (
-            <EmptyProjectPrompt>
-              <ProjectOutlined />
-              <Title level={3}>请选择一个项目开始对话</Title>
-              <Text>从左侧选择一个已有项目，或创建一个新项目</Text>
-            </EmptyProjectPrompt>
+            <EmptyChat
+              onNavigateToAgents={() => {
+                window.dispatchEvent(new CustomEvent('navigateToProjects'));
+              }}
+            />
           )}
-        </StyledContent>
+        </StyledComponents.StyledContent>
 
         <InputArea 
           inputValue={inputValue}
@@ -425,18 +291,10 @@ const ChatArea: React.FC<ChatAreaProps> = ({
           activeSessionId={activeSessionId}
           loading={sendLoading}
           onCancelRequest={onCancelRequest}
-          placeholder={
-            !activeProject 
-              ? "请先选择一个项目" 
-              : !activeSessionId 
-                ? noSessionsMessage || "请先创建一个新的会话"
-                : projectAgents.length === 0
-                  ? "请先添加AI员工到项目中"
-                  : "输入您的问题..."
-          }
+          placeholder={inputPlaceholder}
         />
-      </ChatMainArea>
-    </ChatContainer>
+      </StyledComponents.ChatMainArea>
+    </StyledComponents.ChatContainer>
   );
 };
 

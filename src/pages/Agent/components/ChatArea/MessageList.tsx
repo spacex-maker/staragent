@@ -1,75 +1,73 @@
-import React, { useContext, useEffect, useState, PropsWithChildren } from 'react';
-import { List, Avatar, Typography, Spin, Tag, Button } from 'antd';
+import React, { useEffect, useState,  useRef } from 'react';
+import { Avatar, Spin, Tag } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 import { Message, FrontendMessage, ProjectAgent } from '../../types';
 import MessageContent from './MessageContent';
+import EmptyChat from './EmptyChat';
 
-const { Text } = Typography;
-
+// 定义样式组件的属性接口
 interface StyledProps {
-  $isUser?: boolean;
-  $sending?: boolean;
-  $error?: boolean;
+  $isUser?: boolean;  // 是否为用户消息
+  $sending?: boolean; // 是否正在发送
+  $error?: boolean;   // 是否发送失败
   children?: React.ReactNode;
 }
 
-const StyledMessageList = styled(List<Message | FrontendMessage>)`
+// 消息列表的主容器样式
+const StyledMessageList = styled.div`
   flex: 1;
   padding: 8px;
   width: 100%;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  
+  /* 确保消息列表可以正确滚动 */
+  .ant-list {
+    flex: 1;
+    overflow: visible;
+    min-height: 0;
+  }
   
   .ant-list-items {
-    border: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 `;
 
-const MessageItem = styled(List.Item)<StyledProps>`
-  padding: 0;
+// 单条消息项的样式
+const MessageItem = styled.div<{ $isUser: boolean }>`
+  display: flex;
+  flex-direction: ${props => props.$isUser ? 'row-reverse' : 'row'};
   margin-bottom: 16px;
-  background: transparent;
-  border: none !important;
-  box-shadow: none;
-
-  &:hover {
-    background: transparent;
-  }
-
-  .ant-list-item-meta {
-    align-items: flex-start;
-    margin-bottom: 0;
-  }
-
+  width: 100%;
+  
   &:last-child {
     margin-bottom: 0;
   }
 `;
 
-const MessageContainer = styled.div<StyledProps>`
+// 消息容器样式，控制消息的布局方向
+const MessageContainer = styled.div<{ $isUser: boolean }>`
   display: flex;
-  align-items: flex-start;
   flex-direction: ${props => props.$isUser ? 'row-reverse' : 'row'};
-  gap: 12px;
-  justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 8px;
+  max-width: 80%;
+  margin: ${props => props.$isUser ? '0 0 0 auto' : '0 auto 0 0'};
 `;
 
-const AvatarContainer = styled.div<StyledProps>`
+// 头像容器样式
+const AvatarContainer = styled.div<{ $isUser: boolean }>`
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background: transparent;
-  margin-top: 4px;
+  margin: ${props => props.$isUser ? '0 0 0 8px' : '0 8px 0 0'};
 `;
 
+// 头像样式
 const StyledAvatar = styled(Avatar)<StyledProps>`
   width: ${props => props.$isUser ? '36px' : '40px'};
   height: ${props => props.$isUser ? '36px' : '40px'};
@@ -96,146 +94,134 @@ const StyledAvatar = styled(Avatar)<StyledProps>`
   }
 `;
 
-const MessageInfo = styled.div<StyledProps>`
-  margin-bottom: 4px;
+// 消息信息区域样式（用户名、时间等）
+const MessageInfo = styled.div<{ $isUser: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
   gap: 8px;
-  position: relative;
+  margin-bottom: 4px;
+  justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
 `;
 
-const UserName = styled(Text)<StyledProps>`
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: ${props => props.$isUser ? 'var(--ant-color-primary)' : 'var(--ant-color-text)'};
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  position: relative;
-  z-index: 1;
+// 用户名样式
+const UserName = styled.span<{ $isUser: boolean }>`
+  font-size: 12px;
+  color: var(--ant-color-text-secondary);
+  font-weight: 500;
 `;
 
+// 加载状态容器样式
 const LoadingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 32px 0;
+  padding: 24px;
 `;
 
-const LoadMoreButton = styled(Button)`
-  width: 100%;
-  margin: 16px 0;
-  border-radius: 8px;
-  height: 40px;
-  
-  &:hover {
-    background: var(--ant-color-primary-bg);
-    border-color: var(--ant-color-primary);
-  }
-`;
-
+// AI助手标签样式
 const AgentTag = styled(Tag)`
-  margin-left: 8px;
+  margin: 0;
   font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-weight: 500;
+  padding: 0 8px;
+  height: 20px;
+  line-height: 18px;
 `;
 
-const MessageContentWrapper = styled.div<StyledProps>`
-  flex: 1;
+// 消息内容包装器样式
+const MessageContentWrapper = styled.div<{ $isUser: boolean }>`
   display: flex;
   flex-direction: column;
-  align-items: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
-  max-width: calc(100% - 52px);
-`;
-
-const MessageBubble = styled.div<StyledProps>`
-  background: ${props => props.$isUser 
-    ? 'var(--ant-color-primary-bg)'
-    : 'var(--ant-color-bg-container)'};
-  border: ${props => {
-    if (props.$error) return '1px solid var(--ant-color-error)';
-    if (props.$sending) return '1px solid var(--ant-color-warning)';
-    return props.$isUser 
-      ? '1px solid var(--ant-color-primary-border)'
-      : '1px solid var(--ant-color-border)';
-  }};
-  border-radius: 20px;
-  padding: 12px 16px;
+  gap: 4px;
   max-width: 100%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  opacity: ${props => props.$sending ? 0.8 : 1};
-  transition: all 0.3s ease;
-
-  &:hover {
-    border-color: ${props => props.$isUser 
-      ? 'var(--ant-color-primary)'
-      : 'var(--ant-color-primary-border)'};
-  }
 `;
 
-const MessageStatus = styled.div<StyledProps>`
+// 消息气泡样式
+const MessageBubble = styled.div<{ $isUser: boolean; $sending?: boolean; $error?: boolean }>`
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: ${props => props.$isUser ? 'var(--ant-color-primary)' : 'var(--ant-color-bg-container)'};
+  color: ${props => props.$isUser ? 'white' : 'var(--ant-color-text)'};
+  border: 1px solid ${props => props.$isUser ? 'var(--ant-color-primary)' : 'var(--ant-color-border)'};
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  opacity: ${props => props.$sending ? 0.7 : 1};
+  border-color: ${props => props.$error ? 'var(--ant-color-error)' : undefined};
+  max-width: 100%;
+  word-break: break-word;
+`;
+
+// 消息状态样式（发送中、发送失败等）
+const MessageStatus = styled.div<{ $error?: boolean }>`
   font-size: 12px;
   color: ${props => props.$error ? 'var(--ant-color-error)' : 'var(--ant-color-text-secondary)'};
   margin-top: 4px;
   text-align: right;
 `;
 
-const EmptyContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: var(--ant-color-text-secondary);
-  padding: 24px 16px;
-  text-align: center;
-  background: var(--ant-color-bg-container);
-  border-radius: 20px;
-  border: 1px dashed var(--ant-color-border);
-`;
-
-const EmptyTitle = styled(Text)`
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: var(--ant-color-text);
-  font-weight: 500;
-`;
-
-const EmptyDescription = styled(Text)`
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 16px;
-`;
-
-const EmptyAction = styled(Button)`
-  margin-top: 8px;
-`;
-
+// 组件属性接口定义
 interface MessageListProps {
-  messages: (Message | FrontendMessage)[];
-  loading?: boolean;
-  loadingMore?: boolean;
-  hasMore?: boolean;
-  onLoadMore?: () => void;
-  projectAgents?: ProjectAgent[];
-  onNavigateToAgents?: () => void;
+  messages: (Message | FrontendMessage)[];  // 消息列表
+  loading?: boolean;                        // 是否正在加载
+  loadingMore?: boolean;                    // 是否正在加载更多
+  hasMore?: boolean;                        // 是否还有更多消息
+  onLoadMore?: () => void;                  // 加载更多回调
+  projectAgents?: ProjectAgent[];           // 项目中的AI助手列表
+  onNavigateToAgents?: () => void;         // 导航到AI助手页面的回调
+  messageListRef?: React.RefObject<HTMLDivElement>; // 消息列表的引用，实际上是父容器的引用
+  activeSessionId?: string | null;         // 当前活动会话ID
 }
 
+// 消息列表组件
 const MessageList: React.FC<MessageListProps> = ({ 
-  messages, 
+  messages,
   loading = false,
   loadingMore = false,
   hasMore = false,
   onLoadMore,
   projectAgents = [],
-  onNavigateToAgents
+  onNavigateToAgents,
+  messageListRef,
+  activeSessionId
 }) => {
-  const theme = useContext(ThemeContext);
   const [userInfo, setUserInfo] = useState<{ username: string; avatar?: string } | null>(null);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // 从父容器获取滚动事件
+  useEffect(() => {
+    if (!messageListRef?.current || !onLoadMore) return;
+    
+    const handleScroll = () => {
+      const container = messageListRef.current;
+      if (!container || loadingMore) return;
+      
+      const scrollPosition = Math.round(container.scrollTop);
+      
+      // 当滚动到顶部附近时加载更多消息
+      if (scrollPosition < 50 && hasMore) {
+        // 防抖处理，避免频繁触发
+        if (debounceTimerRef.current) {
+          clearTimeout(debounceTimerRef.current);
+        }
+        
+        debounceTimerRef.current = setTimeout(() => {
+          onLoadMore();
+        }, 300);
+      }
+    };
+    
+    const currentRef = messageListRef.current;
+    currentRef.addEventListener('scroll', handleScroll);
+    currentRef.addEventListener('touchmove', handleScroll);
+    
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+      if (currentRef) {
+        currentRef.removeEventListener('scroll', handleScroll);
+        currentRef.removeEventListener('touchmove', handleScroll);
+      }
+    };
+  }, [messageListRef, hasMore, loadingMore, onLoadMore]);
 
   useEffect(() => {
     const storedUserInfo = localStorage.getItem('userInfo');
@@ -244,6 +230,7 @@ const MessageList: React.FC<MessageListProps> = ({
     }
   }, []);
 
+  // 如果正在加载，显示加载状态
   if (loading) {
     return (
       <LoadingContainer>
@@ -252,54 +239,38 @@ const MessageList: React.FC<MessageListProps> = ({
     );
   }
 
+  // 如果没有消息，显示空状态
   if (!messages || messages.length === 0) {
     return (
-      <EmptyContainer>
-        <EmptyTitle>
-          {projectAgents && projectAgents.length > 0 ? (
-            '开始一个新的对话'
-          ) : (
-            '项目尚未添加AI员工'
-          )}
-        </EmptyTitle>
-        <EmptyDescription>
-          {projectAgents && projectAgents.length > 0 ? (
-            '在下方输入框中输入您的问题，AI员工将为您提供专业解答'
-          ) : (
-            '请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择'
-          )}
-        </EmptyDescription>
-        {(!projectAgents || projectAgents.length === 0) && onNavigateToAgents && (
-          <EmptyAction type="primary" onClick={onNavigateToAgents}>
-            前往添加AI员工
-          </EmptyAction>
-        )}
-      </EmptyContainer>
+      <EmptyChat 
+        projectAgents={projectAgents} 
+        onNavigateToAgents={onNavigateToAgents} 
+      />
     );
   }
 
+  // 渲染消息列表
   return (
     <>
-      {hasMore && (
-        <LoadMoreButton 
-          onClick={onLoadMore}
-          loading={loadingMore}
-          type="dashed"
-        >
-          {loadingMore ? '加载更多消息...' : '加载更多消息'}
-        </LoadMoreButton>
+      {/* 加载更多时显示的顶部加载提示 */}
+      {loadingMore && (
+        <LoadingContainer style={{ padding: '8px 0' }}>
+          <Spin size="small" tip="加载历史消息中..." />
+        </LoadingContainer>
       )}
+    
       
-      <StyledMessageList
-        dataSource={messages}
-        renderItem={(msg) => {
+      <StyledMessageList>
+        {messages.map((msg) => {
+          // 判断消息类型
           const isUser = msg.role === 'user';
           const isSending = 'sending' in msg && msg.sending === true;
           const hasError = 'error' in msg && msg.error === true;
           
           return (
-            <MessageItem $isUser={isUser}>
+            <MessageItem key={msg.id} $isUser={isUser}>
               <MessageContainer $isUser={isUser}>
+                {/* 头像区域 */}
                 <AvatarContainer $isUser={isUser}>
                   {isUser ? (
                     userInfo?.avatar ? (
@@ -318,7 +289,10 @@ const MessageList: React.FC<MessageListProps> = ({
                     </StyledAvatar>
                   )}
                 </AvatarContainer>
+
+                {/* 消息内容区域 */}
                 <MessageContentWrapper $isUser={isUser}>
+                  {/* 消息信息（用户名、标签等） */}
                   <MessageInfo $isUser={isUser}>
                     <UserName $isUser={isUser}>
                       {isUser ? userInfo?.username || '用户' : msg.agentName || 'AI 助手'}
@@ -330,6 +304,8 @@ const MessageList: React.FC<MessageListProps> = ({
                       </>
                     )}
                   </MessageInfo>
+
+                  {/* 消息气泡 */}
                   <MessageBubble 
                     $isUser={isUser}
                     $sending={isSending}
@@ -337,6 +313,8 @@ const MessageList: React.FC<MessageListProps> = ({
                   >
                     <MessageContent content={msg.content} />
                   </MessageBubble>
+
+                  {/* 消息状态 */}
                   {(isSending || hasError) && (
                     <MessageStatus $error={hasError}>
                       {isSending ? '发送中...' : '发送失败'}
@@ -346,8 +324,8 @@ const MessageList: React.FC<MessageListProps> = ({
               </MessageContainer>
             </MessageItem>
           );
-        }}
-      />
+        })}
+      </StyledMessageList>
     </>
   );
 };

@@ -23,6 +23,16 @@ const ContentWrapper = styled.div`
     line-height: 1.6;
     padding: 0 32px 0 0; // 只保留右侧padding，为复制按钮留出空间
     
+    // 修改删除线样式，只在特定情况下生效
+    del {
+      text-decoration: none;
+      
+      // 只有当文本被两个~包围时才显示删除线
+      &:has(+ del) {
+        text-decoration: line-through;
+      }
+    }
+    
     pre {
       position: relative;
       background: ${props => props.theme.mode === 'dark' 
@@ -252,10 +262,20 @@ interface MessageContentProps {
 const MessageContent: React.FC<MessageContentProps> = ({ content }) => {
   const [copied, setCopied] = useState(false);
 
+  // 预处理markdown内容，将单个~替换为特殊字符
+  const processedContent = React.useMemo(() => {
+    // 先处理双~的情况，将它们替换为临时标记
+    let temp = content.replace(/~~/g, '§§');
+    // 处理单个~的情况
+    temp = temp.replace(/~/g, '\\~');
+    // 恢复双~的情况
+    return temp.replace(/§§/g, '~~');
+  }, [content]);
+
   // 复制整个消息内容
   const handleCopyMessage = async () => {
     try {
-      await navigator.clipboard.writeText(content);
+      await navigator.clipboard.writeText(content); // 复制原始内容
       setCopied(true);
       message.success('消息已复制到剪贴板');
       setTimeout(() => setCopied(false), 2000);
@@ -351,7 +371,7 @@ const MessageContent: React.FC<MessageContentProps> = ({ content }) => {
         />
       </Tooltip>
       <Viewer 
-        value={content}
+        value={processedContent}
         plugins={plugins}
       />
     </ContentWrapper>

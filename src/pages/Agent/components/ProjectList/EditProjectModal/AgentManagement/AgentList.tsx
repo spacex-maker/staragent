@@ -3,7 +3,7 @@ import { Button, Space, Tooltip, message } from 'antd';
 import { PlusOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { ProjectAgent } from '../../../../types';
-import axios from '../../../../../../api/axios';
+import { fetchProjectAgents, updateProjectAgentSettings, removeProjectAgent } from 'services/projectAgentService';
 import AgentTable from './AgentTable';
 import AddAgentModal from '../../AddAgentModal';
 import { AgentListProps } from '../types';
@@ -25,28 +25,23 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
   const [loading, setLoading] = useState(false);
   const [addAgentModalVisible, setAddAgentModalVisible] = useState(false);
 
-  const fetchProjectAgents = async () => {
+  const fetchAgents = async () => {
     if (!projectId) return;
     
     setLoading(true);
     try {
-      const response = await axios.get(`/productx/sa-ai-agent-project/list-by-project/${projectId}`);
-      if (response.data.success) {
-        setProjectAgents(response.data.data);
-        onAgentsChange?.();
-      } else {
-        message.error(response.data.message || '获取项目员工失败');
-      }
+      const agents = await fetchProjectAgents(projectId);
+      setProjectAgents(agents);
+      onAgentsChange?.();
     } catch (error) {
       console.error('获取项目员工错误:', error);
-      message.error('获取项目员工失败，请稍后重试');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProjectAgents();
+    fetchAgents();
   }, [projectId]);
 
   const handleAddAgent = () => {
@@ -55,88 +50,53 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
 
   const handleAddAgentSuccess = () => {
     setAddAgentModalVisible(false);
-    fetchProjectAgents();
+    fetchAgents();
     onAddAgent();
   };
 
   const handleRemoveAgent = async (recordId: number) => {
-    try {
-      const response = await axios.delete(`/productx/sa-ai-agent-project/${recordId}`);
-      
-      if (response.data.success) {
-        message.success('员工已从项目中移除');
-        fetchProjectAgents();
-      } else {
-        message.error(response.data.message || '移除员工失败');
-      }
-    } catch (error) {
-      console.error('移除员工错误:', error);
-      message.error('移除员工失败，请稍后重试');
+    const success = await removeProjectAgent(recordId);
+    if (success) {
+      fetchAgents();
     }
   };
 
   const handleUpdateAgentSettings = async (record: ProjectAgent, field: string, value: any) => {
-    try {
-      const updateData: any = {
-        id: record.id
-      };
-      
-      if (field === 'priority') {
-        updateData.priority = value;
-      } else if (field === 'enableMemory') {
-        updateData.enableMemory = value;
-      } else if (field === 'enableRag') {
-        updateData.enableRag = value;
-      } else if (field === 'enableExternal') {
-        updateData.enableExternal = value;
-      } else if (field === 'temperature') {
-        updateData.temperature = value;
-      } else if (field === 'maxTokens') {
-        updateData.maxTokens = value;
-      }
-      
-      const response = await axios.post('/productx/sa-ai-agent-project/update', updateData);
-      
-      if (response.data.success) {
-        message.success(`员工${field}设置已更新`);
-        setProjectAgents(prev => 
-          prev.map(item => 
-            item.id === record.id ? { ...item, [field]: value } : item
-          )
-        );
-        onAgentsChange?.();
-      } else {
-        message.error(response.data.message || `更新员工${field}设置失败`);
-      }
-    } catch (error) {
-      console.error('更新员工设置错误:', error);
-      message.error('更新员工设置失败，请稍后重试');
+    const success = await updateProjectAgentSettings(record, field, value);
+    if (success) {
+      setProjectAgents(prev => 
+        prev.map(item => 
+          item.id === record.id ? { ...item, [field]: value } : item
+        )
+      );
+      onAgentsChange?.();
     }
   };
 
   return (
     <TabContainer>
       <AgentListHeader>
-        <div>
-          <Tooltip title="员工将按照优先级顺序参与项目，优先级越高越先响应">
-            <InfoCircleOutlined style={{ marginRight: 8 }} />
+        <Space>
+          <Button 
+            type="primary" 
+            icon={<PlusOutlined />}
+            onClick={handleAddAgent}
+          >
+            添加员工
+          </Button>
+          <Tooltip title="添加员工到项目中，并设置其优先级和能力">
+            <InfoCircleOutlined style={{ color: 'var(--ant-color-primary)' }} />
           </Tooltip>
-          <span>项目员工列表</span>
-        </div>
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={handleAddAgent}
-        >
-          添加员工
-        </Button>
+        </Space>
       </AgentListHeader>
+
       <AgentTable
         projectAgents={projectAgents}
         loading={loading}
         onUpdateAgentSettings={handleUpdateAgentSettings}
         onRemoveAgent={handleRemoveAgent}
       />
+
       <AddAgentModal
         visible={addAgentModalVisible}
         projectId={projectId}
