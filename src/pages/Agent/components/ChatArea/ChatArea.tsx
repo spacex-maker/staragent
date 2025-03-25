@@ -32,6 +32,12 @@ const StyledComponents = {
     height: 100%;
     min-width: 0;
     overflow: hidden;
+    
+    ${props => !props.children?.[1] && `
+      > :last-child {
+        display: none;
+      }
+    `}
   `,
 
   StyledContent: styled(Content)`
@@ -43,10 +49,9 @@ const StyledComponents = {
     flex-direction: column;
     width: 100%;
     position: relative;
-    height: calc(100% - 80px);
-    max-height: calc(100vh - 140px);
+    height: 100%;
     
-    /* 添加以下样式以确保滚动事件正确触发 */
+    /* 滚动条样式 */
     &::-webkit-scrollbar {
       width: 6px;
     }

@@ -1,10 +1,10 @@
 export interface Industry {
   id: number;
-  code: string;
   name: string;
-  description: string;
+  code: string;
   icon: string;
-  sortOrder: number;
+  description?: string;
+  children?: Industry[];
 }
 
 export interface Project {
@@ -13,9 +13,9 @@ export interface Project {
   description?: string;
   visibility: 'public' | 'private';
   isActive: boolean;
+  industries: Industry[];
   createdAt: string;
   updatedAt: string;
-  industries?: Industry[];
 }
 
 export interface CreateProjectRequest {
@@ -79,32 +79,32 @@ export interface PaginationResponse<T> {
 export interface AIAgent {
   id: number;
   name: string;
-  modelType: string;
   role: string;
-  prompt: string;
+  modelType: string;
+  status: string;
   temperature: number;
   maxTokens: number;
-  status: string;
-  createTime: string;
-  updateTime: string | null;
+  prompt: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ProjectAgent {
   id: number;
   agentId: number;
-  projectId: number;
+  name: string;
+  agentName: string;
+  role: string;
+  modelType: string;
+  status: string;
   priority: number;
+  temperature: number | null;
+  maxTokens: number | null;
   enableMemory: boolean;
   enableRag: boolean;
   enableExternal: boolean;
-  temperature: number | null;
-  maxTokens: number | null;
-  createTime: string;
-  updateTime: string | null;
-  agentName: string;
-  modelType: string;
-  role: string;
-  status: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface AIModel {

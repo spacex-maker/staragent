@@ -15,7 +15,7 @@ const MentionDropdown: React.FC<MentionDropdownProps> = ({ filteredAgents, onSel
     <StyledMentionDropdown>
       {filteredAgents.map(agent => (
         <MentionItem 
-          key={agent.agentId.toString()} 
+          key={agent.id.toString()} 
           onClick={() => onSelect(agent.agentName)}
         >
           <MentionOption>

@@ -35,6 +35,7 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
       onAgentsChange?.();
     } catch (error) {
       console.error('获取项目员工错误:', error);
+      message.error('获取项目员工失败');
     } finally {
       setLoading(false);
     }
@@ -55,21 +56,29 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
   };
 
   const handleRemoveAgent = async (recordId: number) => {
-    const success = await removeProjectAgent(recordId);
-    if (success) {
+    try {
+      await removeProjectAgent(recordId);
+      message.success('移除成功');
       fetchAgents();
+    } catch (error) {
+      console.error('移除项目员工错误:', error);
+      message.error('移除失败');
     }
   };
 
   const handleUpdateAgentSettings = async (record: ProjectAgent, field: string, value: any) => {
-    const success = await updateProjectAgentSettings(record, field, value);
-    if (success) {
-      setProjectAgents(prev => 
-        prev.map(item => 
-          item.id === record.id ? { ...item, [field]: value } : item
-        )
-      );
-      onAgentsChange?.();
+    try {
+      const success = await updateProjectAgentSettings(record, field, value);
+      if (success) {
+        setProjectAgents(prev => 
+          prev.map(item => 
+            item.id === record.id ? { ...item, [field]: value } : item
+          )
+        );
+        onAgentsChange?.();
+      }
+    } catch (error) {
+      console.error('更新项目员工设置错误:', error);
     }
   };
 

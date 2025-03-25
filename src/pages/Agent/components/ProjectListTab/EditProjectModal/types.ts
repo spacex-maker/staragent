@@ -9,11 +9,6 @@ export interface EditProjectModalProps {
   onAgentsChange?: () => void;
 }
 
-export interface BasicInfoFormProps {
-  form: any;
-  initialValues?: Partial<Project>;
-}
-
 export interface AgentListProps {
   projectId: string;
   onAddAgent: () => void;

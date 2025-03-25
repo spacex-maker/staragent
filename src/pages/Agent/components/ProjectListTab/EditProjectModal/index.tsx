@@ -1,16 +1,17 @@
 import React from 'react';
 import { Modal, Form, Tabs, message } from 'antd';
-import styled from 'styled-components';
-import axios from '../../../../../api/axios';
+import { Project } from '../../../types';
 import BasicInfoForm from './BasicInfo/BasicInfoForm';
 import AgentList from './AgentManagement/AgentList';
-import { EditProjectModalProps } from './types';
 
-const StyledModal = styled(Modal)`
-  .ant-modal-body {
-    transition: height 0.3s ease;
-  }
-`;
+interface EditProjectModalProps {
+  visible: boolean;
+  project: Project;
+  onSuccess: () => void;
+  onCancel: () => void;
+  onProjectUpdate: (projectId: string, project: Partial<Project>) => Promise<void>;
+  onAgentsChange?: () => void;
+}
 
 const EditProjectModal: React.FC<EditProjectModalProps> = ({
   visible,
@@ -29,7 +30,8 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
       form.setFieldsValue({
         name: project.name,
         description: project.description,
-        visibility: project.visibility
+        visibility: project.visibility,
+        industries: project.industries
       });
     }
   }, [visible, project, form]);
@@ -51,7 +53,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         });
 
         const updateData = {
-          id: parseInt(project.id),
+          id: project.id,
           name: values.name,
           description: values.description,
           visibility: values.visibility,
@@ -59,34 +61,22 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           status: project.isActive
         };
         
-        const response = await axios.post('/productx/sa-project/update', updateData);
-        if (response.data.success) {
-          const updatedProject = {
-            ...project,
-            ...values,
-            industryIds: industryIds,
-            updatedAt: new Date().toISOString()
-          };
-          onProjectUpdate(project.id, updatedProject);
-          message.success('项目更新成功');
-          onSuccess();
-          onCancel();
-        } else {
-          message.error(response.data.message || '项目更新失败');
-        }
+        await onProjectUpdate(project.id, updateData);
+        message.success('更新项目成功');
+        onSuccess();
       } catch (error) {
-        message.error('更新项目时发生错误');
         console.error('更新项目错误:', error);
-      } finally {
-        setLoading(false);
+        message.error('更新项目失败');
       }
     } catch (error) {
       console.error('表单验证失败:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <StyledModal
+    <Modal
       title="编辑项目"
       open={visible}
       onOk={handleOk}
@@ -119,7 +109,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           )
         }
       ]} />
-    </StyledModal>
+    </Modal>
   );
 };
 

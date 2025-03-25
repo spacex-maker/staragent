@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, PropsWithChildren } fr
 import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import SimpleHeader from '../../components/headers/simple';
-import ProjectList from './components/ProjectList';
+import Sidebar from './components/Sidebar';
 import ChatArea from './components/ChatArea';
 import { Message, Project } from './types';
 import axios from '../../api/axios';
@@ -38,29 +38,6 @@ interface MaskProps extends PropsWithChildren<{
   visible: boolean;
   onClick?: () => void;
 }> {}
-
-const Sidebar = styled.div<SidebarProps>`
-  width: ${props => props.collapsed ? '0' : '300px'};
-  height: 100%;
-  background: ${props => props.theme.token?.colorBgContainer};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: all 0.2s ease-in-out;
-  position: relative;
-  flex-shrink: 0;
-  overflow: visible;
-  z-index: 2;
-  
-  @media (max-width: 768px) {
-    position: fixed;
-    left: 0;
-    top: 64px;
-    bottom: 0;
-    z-index: 1000;
-    width: 300px;
-    transform: translateX(${props => props.collapsed ? '-100%' : '0'});
-  }
-`;
 
 const SidebarContent = styled.div<SidebarContentProps>`
   width: 300px;
@@ -412,31 +389,17 @@ const AgentPage: React.FC = () => {
         <SimpleHeader />
         
         <MainContainer>
-          <Sidebar collapsed={collapsed}>
-            <SidebarContent collapsed={collapsed}>
-              <ProjectList
-                projects={projects}
-                activeProjectId={activeProjectId}
-                onProjectSelect={handleProjectSelect}
-                onProjectCreate={handleProjectCreate}
-                onProjectUpdate={handleProjectUpdate}
-                onProjectDelete={handleProjectDelete}
-                activeKey={projectListKey}
-                onTabChange={handleTabChange}
-                autoTriggerAddAgent={shouldTriggerAddAgent}
-              />
-            </SidebarContent>
-            <SidebarResizer 
-              $collapsed={collapsed} 
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleSidebar();
-              }}
-              title={collapsed ? "展开侧边栏" : "收起侧边栏"}
-            />
-          </Sidebar>
-          
-          <Mask visible={!collapsed && window.innerWidth <= 768} onClick={handleMaskClick} />
+          <Sidebar
+            projects={projects}
+            activeProjectId={activeProjectId}
+            onProjectSelect={handleProjectSelect}
+            onProjectCreate={handleProjectCreate}
+            onProjectUpdate={handleProjectUpdate}
+            onProjectDelete={handleProjectDelete}
+            activeKey={projectListKey}
+            onTabChange={handleTabChange}
+            autoTriggerAddAgent={shouldTriggerAddAgent}
+          />
 
           <ChatArea 
             messages={messages}

@@ -1,5 +1,6 @@
-import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
-import { List, Typography, Tag, Spin, message } from 'antd';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import { Button, List, message } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import axios from '../../../../api/axios';
 import { AIAgent } from '../../types';
@@ -8,32 +9,23 @@ import CreateAIAgentModal from './CreateAIAgentModal';
 import EditAIAgentModal from './EditAIAgentModal';
 import AIAgentListHeader from './AIAgentListHeader';
 
-const { Text } = Typography;
-
-const ListContainer = styled.div`
+const Container = styled.div`
   padding: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: hidden;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ListContent = styled.div`
   flex: 1;
   overflow-y: auto;
-  
-  .ant-list {
-    .ant-list-item {
-      padding: 0;
-      border: none;
-      margin-bottom: 8px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
 `;
 
 export interface AIAgentListRef {
@@ -42,15 +34,22 @@ export interface AIAgentListRef {
 
 interface AIAgentListProps {
   onNavigateToAgents?: () => void;
+  autoTriggerAddAgent?: boolean;
 }
 
-const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) => {
-  const { onNavigateToAgents } = props;
+const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigateToAgents, autoTriggerAddAgent = false }, ref) => {
+  const [loading, setLoading] = useState(false);
   const [agents, setAgents] = useState<AIAgent[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editingAgent, setEditingAgent] = useState<AIAgent | null>(null);
+
+  // 监听 autoTriggerAddAgent 属性变化
+  React.useEffect(() => {
+    if (autoTriggerAddAgent) {
+      setIsCreateModalVisible(true);
+    }
+  }, [autoTriggerAddAgent]);
 
   // 暴露方法给父组件
   useImperativeHandle(ref, () => ({
@@ -59,8 +58,10 @@ const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) =>
     }
   }));
 
+  // 获取AI员工列表
   const fetchAgents = async () => {
     try {
+      setLoading(true);
       const response = await axios.get('/productx/sa-ai-agent/list');
       if (response.data.success) {
         setAgents(response.data.data);
@@ -69,15 +70,20 @@ const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) =>
       }
     } catch (error) {
       console.error('获取AI员工列表错误:', error);
-      message.error('获取AI员工列表失败，请稍后重试');
+      message.error('获取AI员工列表失败');
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
+  // 组件挂载时获取列表
+  React.useEffect(() => {
     fetchAgents();
   }, []);
+
+  const handleAddAgent = () => {
+    setIsCreateModalVisible(true);
+  };
 
   const handleEdit = (agent: AIAgent) => {
     setEditingAgent(agent);
@@ -99,32 +105,26 @@ const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) =>
     fetchAgents();
   };
 
-  const handleCreate = () => {
-    setIsCreateModalVisible(true);
-  };
-
   const handleRecruit = () => {
     // TODO: 实现招募员工功能
     message.info('招募员工功能开发中...');
   };
 
-  if (loading) {
-    return (
-      <ListContainer>
-        <Spin tip="加载中..." />
-      </ListContainer>
-    );
-  }
-
   return (
-    <ListContainer>
-      <AIAgentListHeader 
-        onCreateAgent={handleCreate}
-        onRecruitAgent={handleRecruit}
-      />
+    <Container>
+      <Header>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={handleAddAgent}
+        >
+          新增AI员工
+        </Button>
+      </Header>
 
       <ListContent>
         <List
+          loading={loading}
           dataSource={agents}
           renderItem={(agent) => (
             <AIAgentItem
@@ -133,7 +133,7 @@ const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) =>
               onDelete={handleDelete}
             />
           )}
-          locale={{ emptyText: '暂无AI员工' }}
+          locale={{ emptyText: '暂无AI员工，点击上方按钮添加' }}
         />
       </ListContent>
 
@@ -154,8 +154,10 @@ const AIAgentList = forwardRef<AIAgentListRef, AIAgentListProps>((props, ref) =>
           }}
         />
       )}
-    </ListContainer>
+    </Container>
   );
 });
 
-export default AIAgentList; 
+AIAgentListTab.displayName = 'AIAgentListTab';
+
+export default AIAgentListTab; 

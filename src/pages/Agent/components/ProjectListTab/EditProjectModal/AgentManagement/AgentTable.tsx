@@ -2,7 +2,14 @@ import React from 'react';
 import { Table, Input, Switch, Button, Popconfirm, Space, Tag } from 'antd';
 import { RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { AgentTableProps } from '../types';
+import { ProjectAgent } from '../../../../types';
+
+interface AgentTableProps {
+  projectAgents: ProjectAgent[];
+  loading: boolean;
+  onUpdateAgentSettings: (agent: ProjectAgent, field: string, value: any) => void;
+  onRemoveAgent: (agentId: number) => void;
+}
 
 const AgentTag = styled(Tag)`
   margin-right: 0;

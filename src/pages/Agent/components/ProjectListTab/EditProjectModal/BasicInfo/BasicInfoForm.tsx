@@ -4,14 +4,6 @@ import { LockOutlined, GlobalOutlined } from '@ant-design/icons';
 import { BasicInfoFormProps } from './types';
 import { useIndustries } from '../../../../contexts/IndustryContext';
 
-interface SpaceProps {
-  children: [React.ReactElement, React.ReactElement];
-}
-
-interface SpanProps {
-  children: string;
-}
-
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) => {
   const { industries, loading } = useIndustries();
 
@@ -81,8 +73,8 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
             filter: (inputValue, path) => {
               const option = path[path.length - 1];
               if (React.isValidElement(option.label)) {
-                const label = option.label as React.ReactElement<SpaceProps>;
-                const spanElement = label.props.children[1] as React.ReactElement<SpanProps>;
+                const labelElement = option.label as React.ReactElement;
+                const spanElement = labelElement.props.children[1] as React.ReactElement;
                 return spanElement.props.children.toLowerCase().indexOf(inputValue.toLowerCase()) > -1;
               }
               return false;

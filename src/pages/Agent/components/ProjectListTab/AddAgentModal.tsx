@@ -3,7 +3,7 @@ import { Modal, Table, Button, Input, Space, message, Tag, Tooltip } from 'antd'
 import { SearchOutlined, RobotOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { AIAgent } from '../../types';
-import axios from '../../../../api/axios';
+import instance from '../../../../api/axios';
 
 const { Search } = Input;
 
@@ -46,7 +46,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
   const fetchAgents = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/productx/sa-ai-agent/list');
+      const response = await instance.get('/productx/sa-ai-agent/list');
       if (response.data.success) {
         setAgents(response.data.data);
       } else {
@@ -84,7 +84,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
     // 逐个添加员工
     for (const agentId of selectedAgentIds) {
       try {
-        const response = await axios.post('/productx/sa-ai-agent-project/create', {
+        const response = await instance.post('/productx/sa-ai-agent-project/create', {
           projectId: parseInt(projectId),
           agentId,
           priority: 1, // 默认优先级
@@ -99,12 +99,10 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
           successCount++;
         } else {
           failCount++;
-          // 显示服务器返回的具体错误消息
           message.error(response.data.message || '添加员工失败');
         }
       } catch (error: any) {
         failCount++;
-        // 尝试从错误响应中获取详细信息
         if (error.response && error.response.data) {
           message.error(error.response.data.message || '添加员工失败，请稍后重试');
         } else {
