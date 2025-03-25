@@ -3,6 +3,9 @@ import { Modal, Form, Input, InputNumber, Select, message, Space } from 'antd';
 import { AIAgent } from '../../types';
 import axios from '../../../../api/axios';
 import ModelSelector from '../ModelSelector';
+import MBTISelector from '../MBTISelector';
+import RoleSelector from '../RoleSelector';
+import { useIntl } from 'react-intl';
 
 interface TemplateItem {
   label: string;
@@ -139,6 +142,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
+  const intl = useIntl();
 
   React.useEffect(() => {
     if (visible && editingAgent) {
@@ -179,7 +183,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
       onCancel={onCancel}
       confirmLoading={loading}
       destroyOnClose
-      width={800}
+      width={1000}
     >
       <Form
         form={form}
@@ -202,11 +206,20 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
         </Form.Item>
 
         <Form.Item
-          name="role"
-          label="角色"
-          rules={[{ required: true, message: '请输入AI员工角色' }]}
+          name="mbtiCode"
+          label="MBTI性格"
+          tooltip="选择AI员工的MBTI性格类型，这将影响其行为方式和沟通风格"
         >
-          <Input placeholder="请输入AI员工角色" maxLength={50} showCount />
+          <MBTISelector />
+        </Form.Item>
+
+        <Form.Item
+          name="roleIds"
+          label="角色"
+          rules={[{ required: true, message: '请选择AI员工角色' }]}
+          tooltip="选择AI员工可以扮演的角色，支持多选"
+        >
+          <RoleSelector />
         </Form.Item>
 
         <Form.Item

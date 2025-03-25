@@ -2,6 +2,8 @@ import React from 'react';
 import { Modal, Form, Input, InputNumber, message } from 'antd';
 import axios from '../../../../api/axios';
 import ModelSelector from '../ModelSelector';
+import MBTISelector from '../MBTISelector';
+import RoleSelector from '../RoleSelector';
 
 interface CreateAIAgentModalProps {
   visible: boolean;
@@ -51,7 +53,7 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
       onCancel={onCancel}
       confirmLoading={loading}
       destroyOnClose
-      width={800}
+      width={1000}
     >
       <Form
         form={form}
@@ -78,11 +80,20 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
         </Form.Item>
 
         <Form.Item
-          name="role"
-          label="角色"
-          rules={[{ required: true, message: '请输入AI员工角色' }]}
+          name="mbtiCode"
+          label="MBTI性格"
+          tooltip="选择AI员工的MBTI性格类型，这将影响其行为方式和沟通风格"
         >
-          <Input placeholder="请输入AI员工角色，例如：前端开发专家" maxLength={50} showCount />
+          <MBTISelector />
+        </Form.Item>
+
+        <Form.Item
+          name="roleIds"
+          label="角色"
+          rules={[{ required: true, message: '请选择AI员工角色' }]}
+          tooltip="选择AI员工可以扮演的角色，支持多选"
+        >
+          <RoleSelector />
         </Form.Item>
 
         <Form.Item
