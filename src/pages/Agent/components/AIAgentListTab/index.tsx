@@ -10,22 +10,50 @@ import EditAIAgentModal from './EditAIAgentModal';
 import AIAgentListHeader from './AIAgentListHeader';
 
 const Container = styled.div`
-  padding: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  overflow: hidden;
+  position: relative;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 16px;
+  height: 64px;
+  border-bottom: 1px solid var(--ant-color-border);
+  flex-shrink: 0;
 `;
 
 const ListContent = styled.div`
   flex: 1;
   overflow-y: auto;
+  padding: 16px;
+  min-height: 0;
+
+  /* 滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--ant-color-border);
+    border-radius: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--ant-color-border-hover);
+  }
+
+  /* 确保滚动条不占用内容区域宽度 */
+  padding-right: 20px;
+  margin-right: -20px;
 `;
 
 export interface AIAgentListRef {

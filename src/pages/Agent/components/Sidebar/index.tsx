@@ -9,43 +9,9 @@ interface StyledSidebarProps {
   $collapsed: boolean;
 }
 
-const SidebarWrapper = styled.div<StyledSidebarProps>`
-  width: ${props => props.$collapsed ? '0' : '300px'};
-  height: 100%;
-  background: var(--ant-color-bg-container);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: all 0.2s ease-in-out;
-  position: relative;
-  flex-shrink: 0;
-  overflow: visible;
-  z-index: 2;
-  
-  @media (max-width: 768px) {
-    position: fixed;
-    left: 0;
-    top: 64px;
-    bottom: 0;
-    z-index: 1000;
-    width: 300px;
-    transform: translateX(${props => props.$collapsed ? '-100%' : '0'});
-  }
-`;
-
 interface StyledContentProps {
   $collapsed: boolean;
 }
-
-const SidebarContent = styled.div<StyledContentProps>`
-  height: 100%;
-  width: 300px;
-  position: relative;
-  overflow: hidden;
-  
-  ${props => props.$collapsed && `
-    transform: translateX(-100%);
-  `}
-`;
 
 const SidebarContainer = styled.div`
   height: 100%;
@@ -54,19 +20,26 @@ const SidebarContainer = styled.div`
   flex-direction: column;
   background: var(--ant-color-bg-container);
   overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
 
 const StyledTabs = styled(Tabs)`
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  width: 300px;
   
   .ant-tabs-nav {
     margin: 0;
     padding: 0 16px;
     background: var(--ant-color-bg-container);
     border-bottom: 1px solid var(--ant-color-border);
+    flex-shrink: 0;
+    width: 300px;
     
     &::before {
       display: none;
@@ -77,9 +50,12 @@ const StyledTabs = styled(Tabs)`
     }
 
     .ant-tabs-tab {
-      padding: 12px 0;
+      padding: 16px 0;
       margin: 0;
       font-size: 14px;
+      height: 64px;
+      display: flex;
+      align-items: center;
       
       &:hover {
         color: var(--ant-color-primary);
@@ -98,15 +74,68 @@ const StyledTabs = styled(Tabs)`
   .ant-tabs-content-holder {
     flex: 1;
     overflow: hidden;
+    height: calc(100% - 64px);
+    width: 300px;
   }
 
   .ant-tabs-content {
     height: 100%;
+    width: 300px;
   }
 
   .ant-tabs-tabpane {
     height: 100%;
     padding: 0;
+    width: 300px;
+  }
+`;
+
+const SidebarContent = styled.div<StyledContentProps>`
+  height: 100%;
+  width: ${props => props.$collapsed ? '0' : '300px'};
+  position: relative;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+`;
+
+const SidebarWrapper = styled.div<StyledSidebarProps>`
+  width: ${props => props.$collapsed ? '0' : '300px'};
+  height: 100%;
+  background: var(--ant-color-bg-container);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: width 0.3s ease-in-out;
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+  z-index: 2;
+  
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    bottom: 0;
+    z-index: 1000;
+    width: 300px;
+    transform: translateX(${props => props.$collapsed ? '-100%' : '0'});
+  }
+
+  /* 当宽度小于完全展开时隐藏内容 */
+  &[style*="width:"] {
+    ${SidebarContent} {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0s, visibility 0s;
+    }
+  }
+
+  /* 当完全展开时显示内容 */
+  &[style*="width: 300px"] {
+    ${SidebarContent} {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s ease-in-out 0.3s, visibility 0.2s ease-in-out 0.3s;
+    }
   }
 `;
 
@@ -124,6 +153,7 @@ const SidebarResizer = styled.div<{ $collapsed: boolean }>`
   transition: all 0.2s ease-in-out;
   opacity: 0.8;
   pointer-events: auto;
+  display: block !important;
   
   &:hover {
     opacity: 1;
@@ -165,6 +195,7 @@ interface SidebarProps {
   activeKey?: string;
   onTabChange?: (key: string) => void;
   autoTriggerAddAgent?: boolean;
+  loading?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -177,7 +208,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   defaultActiveKey = 'projects',
   activeKey,
   onTabChange,
-  autoTriggerAddAgent = false
+  autoTriggerAddAgent = false,
+  loading = false,
 }) => {
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
 
@@ -211,6 +243,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           onProjectCreate={onProjectCreate}
           onProjectUpdate={onProjectUpdate}
           onProjectDelete={onProjectDelete}
+          loading={loading}
         />
       ),
     },

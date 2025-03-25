@@ -14,6 +14,7 @@ interface CascaderOption extends DefaultOptionType {
   isLeaf?: boolean;
   name?: string;
   icon?: string;
+  iconColor?: string;
 }
 
 interface IndustryContextType {
@@ -33,7 +34,7 @@ const formatIndustryData = (data: IndustryTreeNode[]): CascaderOption[] => {
     value: item.id,
     label: (
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <i className={item.icon} style={{ width: 16, textAlign: 'center' }} />
+        <i className={item.icon} style={{ width: 16, textAlign: 'center', color: item.iconColor || '#8c8c8c' }} />
         <span>{item.name}</span>
       </div>
     ),
@@ -41,6 +42,7 @@ const formatIndustryData = (data: IndustryTreeNode[]): CascaderOption[] => {
     isLeaf: !item.children || item.children.length === 0,
     name: item.name,
     icon: item.icon,
+    iconColor: item.iconColor || '#8c8c8c',
   }));
 };
 

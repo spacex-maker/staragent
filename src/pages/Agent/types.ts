@@ -3,6 +3,7 @@ export interface Industry {
   name: string;
   code: string;
   icon: string;
+  iconColor?: string;
   description?: string;
   children?: Industry[];
 }
@@ -12,6 +13,7 @@ export interface Project {
   name: string;
   description?: string;
   visibility: 'public' | 'private';
+  status: 'active' | 'inactive' | 'archived';
   isActive: boolean;
   industries: Industry[];
   createdAt: string;
@@ -22,6 +24,7 @@ export interface CreateProjectRequest {
   name: string;
   description?: string;
   visibility: 'private' | 'public';
+  status: 'active' | 'inactive' | 'archived';
 }
 
 export interface Message {

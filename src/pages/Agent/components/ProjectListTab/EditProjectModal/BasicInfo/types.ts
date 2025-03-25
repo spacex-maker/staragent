@@ -7,6 +7,7 @@ export interface BasicInfoFormProps {
     name?: string;
     description?: string;
     visibility?: 'public' | 'private';
+    status?: 'active' | 'inactive' | 'archived';
     industryIds?: number[];
     industries?: Industry[];
   };

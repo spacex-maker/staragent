@@ -2,7 +2,7 @@ import React, { useState, useEffect, useImperativeHandle, forwardRef, useRef, us
 import { message } from 'antd';
 import { ChatSession, PaginationParams } from '../../../types';
 import axios from '../../../../../api/axios';
-import { SessionListContainer } from './styles';
+import { SessionListContainer, SessionListResizer } from './styles';
 import SessionListHeader from './components/SessionListHeader';
 import SessionListContent from './components/SessionListContent';
 
@@ -34,6 +34,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
   });
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const sessionListRef = useRef<HTMLDivElement>(null);
 
   // 使用useRef保存projectId和sessions长度，避免频繁触发useEffect
@@ -204,8 +205,12 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
     };
   }, [loading, loadingMore, hasMore, loadMoreSessions]);
 
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
+
   return (
-    <SessionListContainer>
+    <SessionListContainer style={{ width: collapsed ? '0px' : '280px' }}>
       <SessionListHeader
         projectId={projectId}
         loading={loading}
@@ -223,6 +228,14 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         activeSessionId={activeSessionId}
         onSessionSelect={onSessionSelect}
         onLoadMore={loadMoreSessions}
+      />
+      <SessionListResizer 
+        $collapsed={collapsed}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleCollapse();
+        }}
+        title={collapsed ? "展开会话列表" : "收起会话列表"}
       />
     </SessionListContainer>
   );

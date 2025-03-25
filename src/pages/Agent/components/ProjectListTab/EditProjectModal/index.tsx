@@ -58,7 +58,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           description: values.description,
           visibility: values.visibility,
           industryIds: industryIds,
-          status: project.isActive
+          status: values.status
         };
         
         await onProjectUpdate(project.id, updateData);

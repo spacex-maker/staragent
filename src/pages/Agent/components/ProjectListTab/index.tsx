@@ -8,18 +8,23 @@ import CreateProjectModal from './CreateProjectModal';
 import EditProjectModal from './EditProjectModal';
 
 const ListContainer = styled.div`
-  padding: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  overflow: hidden;
+  position: relative;
 `;
 
 const ListContent = styled.div`
   flex: 1;
   overflow-y: auto;
+  padding: 16px;
+  min-height: 0;
   
   .ant-list {
+    height: 100%;
+    min-height: 0;
+    
     .ant-list-items {
       display: flex;
       flex-direction: column;
@@ -32,6 +37,28 @@ const ListContent = styled.div`
       margin: 8px 0;
     }
   }
+
+  /* 滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--ant-color-border);
+    border-radius: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--ant-color-border-hover);
+  }
+
+  /* 确保滚动条不占用内容区域宽度 */
+  padding-right: 20px;
+  margin-right: -20px;
 `;
 
 interface ProjectListTabProps {
@@ -41,6 +68,7 @@ interface ProjectListTabProps {
   onProjectCreate: (values: any) => Promise<void>;
   onProjectUpdate: (projectId: string, values: any) => Promise<void>;
   onProjectDelete: (projectId: string) => Promise<void>;
+  loading?: boolean;
 }
 
 const ProjectListTab: React.FC<ProjectListTabProps> = ({
@@ -50,6 +78,7 @@ const ProjectListTab: React.FC<ProjectListTabProps> = ({
   onProjectCreate,
   onProjectUpdate,
   onProjectDelete,
+  loading = false,
 }) => {
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
@@ -83,6 +112,7 @@ const ProjectListTab: React.FC<ProjectListTabProps> = ({
         <List
           itemLayout="horizontal"
           dataSource={projects}
+          loading={loading}
           renderItem={(project: Project) => (
             <ProjectItem
               project={project}
@@ -92,7 +122,9 @@ const ProjectListTab: React.FC<ProjectListTabProps> = ({
               onDelete={onProjectDelete}
             />
           )}
-          locale={{ emptyText: '暂无项目，点击上方按钮创建' }}
+          locale={{ 
+            emptyText: loading ? '加载中...' : '暂无项目，点击上方按钮创建',
+          }}
         />
       </ListContent>
 

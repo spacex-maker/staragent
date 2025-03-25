@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Radio, Space, Cascader, Tooltip } from 'antd';
+import { Form, Input, Radio, Space, Tooltip, Tag, Select } from 'antd';
 import { LockOutlined, GlobalOutlined } from '@ant-design/icons';
 import { BasicInfoFormProps } from './types';
 import { useIndustries } from '../../../../contexts/IndustryContext';
+import { StyledCascader } from './styles';
+
+const { Option } = Select;
 
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) => {
   const { industries, loading } = useIndustries();
@@ -64,43 +67,72 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
         label="所属行业"
         rules={[{ required: true, message: '请选择所属行业' }]}
       >
-        <Cascader
+        <StyledCascader
           options={industries}
           placeholder="请选择所属行业"
           loading={loading}
           multiple
+          maxTagCount="responsive"
+          tagRender={({ label, value, closable, onClose }) => {
+            const option = industries.find(item => item.value === value);
+            return (
+              <Tag
+                closable={closable}
+                onClose={onClose}
+                style={{
+                  borderRadius: '9999px',
+                  padding: '0 2px 0 8px',
+                  height: '24px',
+                  lineHeight: '22px',
+                  margin: '2px 2px',
+                  backgroundColor: 'var(--ant-color-primary-bg)',
+                  border: '1px solid var(--ant-color-primary-border)',
+                  color: 'var(--ant-color-primary)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+              >
+                {option?.icon && (
+                  <i className={option.icon} style={{ width: 16, textAlign: 'center', color: option.iconColor || 'var(--ant-color-text-secondary)', marginRight: 4 }} />
+                )}
+                {label}
+              </Tag>
+            );
+          }}
           showSearch={{
             filter: (inputValue, path) => {
-              const option = path[path.length - 1];
-              if (React.isValidElement(option.label)) {
-                const labelElement = option.label as React.ReactElement;
-                const spanElement = labelElement.props.children[1] as React.ReactElement;
-                return spanElement.props.children.toLowerCase().indexOf(inputValue.toLowerCase()) > -1;
-              }
-              return false;
+              return path.some(option => 
+                option.name?.toLowerCase().includes(inputValue.toLowerCase())
+              );
             }
           }}
           displayRender={(labels, selectedOptions) => {
             if (!selectedOptions) return '';
             const lastOption = selectedOptions[selectedOptions.length - 1];
-            const fullPath = selectedOptions
-              .map(option => option?.name || '')
-              .filter(Boolean)
-              .join(' / ');
             
             return (
-              <Tooltip title={fullPath}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                  {lastOption?.icon && (
-                    <i className={lastOption.icon} style={{ width: 16, textAlign: 'center' }} />
-                  )}
-                  <span>{lastOption?.name || ''}</span>
-                </div>
-              </Tooltip>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                {lastOption?.icon && (
+                  <i className={lastOption.icon} style={{ width: 16, textAlign: 'center', color: lastOption.iconColor || 'var(--ant-color-text-secondary)' }} />
+                )}
+                <span>{lastOption?.name || ''}</span>
+              </div>
             );
           }}
           style={{ width: '100%' }}
         />
+      </Form.Item>
+      <Form.Item
+        name="status"
+        label="项目状态"
+        rules={[{ required: true, message: '请选择项目状态' }]}
+        initialValue="active"
+      >
+        <Select>
+          <Option value="active">启用</Option>
+          <Option value="inactive">禁用</Option>
+          <Option value="archived">归档</Option>
+        </Select>
       </Form.Item>
       <Form.Item
         name="visibility"

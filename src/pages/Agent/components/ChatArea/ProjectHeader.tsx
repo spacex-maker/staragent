@@ -8,12 +8,13 @@ import { useProjectAgents } from 'hooks/useProjectAgents';
 const { Title, Text } = Typography;
 
 const ProjectTitleBar = styled.div`
-  padding: 8px 16px;
+  padding: 16px;
   background: var(--ant-color-bg-container);
   border-bottom: 1px solid var(--ant-color-border);
   display: flex;
   align-items: center;
   gap: 8px;
+  height: 64px;
 `;
 
 const ProjectIcon = styled.div`

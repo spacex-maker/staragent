@@ -59,6 +59,7 @@ ts的配置：
 全局样式：
 - 全局样式在 `src/styles/GlobalStyles.js` 文件中。
 - 请确保在添加新全局样式时，遵循上述规则并更新 `src/styles/GlobalStyles.js` 文件。
+- 任何组件的边角都尽量是20px的圆弧
 
 主题色：
 - 主题色必须在 App.js 中通过 ConfigProvider 的 theme.token.colorPrimary 配置

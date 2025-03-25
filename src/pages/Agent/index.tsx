@@ -399,6 +399,7 @@ const AgentPage: React.FC = () => {
             activeKey={projectListKey}
             onTabChange={handleTabChange}
             autoTriggerAddAgent={shouldTriggerAddAgent}
+            loading={projectsLoading}
           />
 
           <ChatArea 

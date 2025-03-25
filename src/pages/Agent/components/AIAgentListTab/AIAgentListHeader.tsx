@@ -7,7 +7,10 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  padding: 0 8px;
+  padding: 16px;
+  height: 64px;
+  align-items: center;
+  border-bottom: 1px solid var(--ant-color-border);
 `;
 
 const ButtonWrapper = styled.div`
