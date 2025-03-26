@@ -56,14 +56,8 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
   };
 
   const handleRemoveAgent = async (recordId: number) => {
-    try {
       await removeProjectAgent(recordId);
-      message.success('移除成功');
-      fetchAgents();
-    } catch (error) {
-      console.error('移除项目员工错误:', error);
-      message.error('移除失败');
-    }
+      await fetchAgents();
   };
 
   const handleUpdateAgentSettings = async (record: ProjectAgent, field: string, value: any) => {

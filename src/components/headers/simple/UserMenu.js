@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { marqueeGlow, pulseEffect } from './styles';
 import UserSettingsModal from '../../modals/UserSettingsModal';
+import UserProfileModalEntry from '../../modals/UserProfileModalEntry';
 import instance from '../../../api/axios';
 import { message } from 'antd';
 
@@ -291,6 +292,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [localUserInfo, setLocalUserInfo] = useState(userInfo);
+  const { showUserProfileModal, UserProfileModalComponent } = UserProfileModalEntry();
 
   useEffect(() => {
     setLocalUserInfo(userInfo);
@@ -333,13 +335,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const handleProfileClick = (e) => {
     e.preventDefault();
     setShowUserMenu(false);
-    message.info({
-      content: '个人中心功能正在开发中，敬请期待！',
-      duration: 3,
-      style: {
-        marginTop: '64px'
-      }
-    });
+    showUserProfileModal();
   };
 
   return (
@@ -383,7 +379,6 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
               <i className="bi bi-person icon" />
               个人中心
             </div>
-            <DevelopmentBadge isDark={isDark}>开发中</DevelopmentBadge>
           </MenuItemContent>
         </UserMenuItem>
         <UserMenuItem 
@@ -410,6 +405,8 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
         onClose={() => setShowSettingsModal(false)}
         onSuccess={handleSettingsSuccess}
       />
+      
+      {UserProfileModalComponent}
     </UserMenuContainer>
   );
 };
