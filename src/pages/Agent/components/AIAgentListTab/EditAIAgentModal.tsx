@@ -146,7 +146,11 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
   React.useEffect(() => {
     if (visible && editingAgent) {
-      form.setFieldsValue(editingAgent);
+      // 直接使用 roles 数组
+      form.setFieldsValue({
+        ...editingAgent,
+        roles: editingAgent.roles || []
+      });
     }
   }, [visible, editingAgent, form]);
 
@@ -157,7 +161,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
       const updateData = {
         id: editingAgent.id,
-        ...values,
+        ...values
       };
 
       const response = await axios.post('/productx/sa-ai-agent/update', updateData);
@@ -214,7 +218,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
         </Form.Item>
 
         <Form.Item
-          name="roleIds"
+          name="roles"
           label="角色"
           rules={[{ required: true, message: '请选择AI员工角色' }]}
           tooltip="选择AI员工可以扮演的角色，支持多选"

@@ -119,8 +119,8 @@ const RoleDescription = styled.span`
 `;
 
 interface RoleSelectorProps {
-  value?: number[];
-  onChange?: (value: number[]) => void;
+  value?: string[];
+  onChange?: (value: string[]) => void;
 }
 
 const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
@@ -159,12 +159,12 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
     fetchRoles();
   }, [locale]);
 
-  const handleChange = (selectedValues: number[]) => {
+  const handleChange = (selectedValues: string[]) => {
     onChange?.(selectedValues);
   };
 
-  const renderSelectedRole = (roleId: number) => {
-    const role = roles.find(r => r.id === roleId);
+  const renderSelectedRole = (roleName: string) => {
+    const role = roles.find(r => r.name === roleName);
     if (!role) return null;
 
     return (
@@ -217,7 +217,7 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
         }
-        tagRender={({ label, value: roleId, closable, onClose }) => (
+        tagRender={({ label, value: roleName, closable, onClose }) => (
           <div
             style={{
               background: 'var(--ant-color-primary-bg)',
@@ -235,7 +235,7 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
               whiteSpace: 'nowrap'
             }}
           >
-            {renderSelectedRole(roleId)}
+            {renderSelectedRole(roleName)}
             {closable && (
               <span
                 onClick={onClose}
@@ -275,7 +275,7 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
             }
           >
             {categoryRoles.map(role => (
-              <Select.Option key={role.id} value={role.id}>
+              <Select.Option key={role.id} value={role.name}>
                 <RoleOption>
                   <img src={role.icon} alt={role.name} />
                   <RoleInfo>

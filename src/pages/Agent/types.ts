@@ -82,7 +82,7 @@ export interface PaginationResponse<T> {
 export interface AIAgent {
   id: number;
   name: string;
-  role: string;
+  roles: string[];
   modelType: string;
   status: string;
   temperature: number;

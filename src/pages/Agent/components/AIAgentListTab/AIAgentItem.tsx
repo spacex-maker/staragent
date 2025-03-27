@@ -187,7 +187,9 @@ const AIAgentItem: React.FC<AIAgentItemProps> = ({ agent, onEdit, onDelete }) =>
             </ButtonWrapper>
           </ActionButtons>
           <TagsWrapper>
-            <RoleTag>{agent.role}</RoleTag>
+            {agent.roles.map((role, index) => (
+              <RoleTag key={index}>{role}</RoleTag>
+            ))}
             <ModelTag color="blue">{agent.modelType}</ModelTag>
           </TagsWrapper>
         </RightSection>

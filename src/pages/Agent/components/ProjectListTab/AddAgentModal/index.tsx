@@ -66,7 +66,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
 
   const filteredAgents = agents.filter(agent => 
     agent.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-    agent.role.toLowerCase().includes(searchValue.toLowerCase()) ||
+    agent.roles.some(role => role.toLowerCase().includes(searchValue.toLowerCase())) ||
     agent.modelType.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -135,7 +135,9 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
             <span style={{ fontWeight: 'bold' }}>{text}</span>
           </Space>
           <Space size={4} style={{ marginLeft: 22 }}>
-            <AgentTag color="blue">{record.role}</AgentTag>
+            {record.roles.map((role, index) => (
+              <AgentTag key={index} color="blue">{role}</AgentTag>
+            ))}
             <AgentTag>{record.modelType}</AgentTag>
           </Space>
         </Space>
