@@ -230,6 +230,13 @@ const MessageList: React.FC<MessageListProps> = ({
     }
   }, []);
 
+  // 获取AI助手的头像
+  const getAgentAvatar = (agentId: number | null) => {
+    if (!agentId) return null;
+    const agent = projectAgents.find(a => a.agentId === agentId);
+    return agent?.avatarUrl || null;
+  };
+
   // 如果正在加载，显示加载状态
   if (loading) {
     return (
@@ -266,6 +273,7 @@ const MessageList: React.FC<MessageListProps> = ({
           const isUser = msg.role === 'user';
           const isSending = 'sending' in msg && msg.sending === true;
           const hasError = 'error' in msg && msg.error === true;
+          const avatarUrl = isUser ? userInfo?.avatar : getAgentAvatar(msg.agentId);
           
           return (
             <MessageItem key={msg.id} $isUser={isUser}>
@@ -284,9 +292,11 @@ const MessageList: React.FC<MessageListProps> = ({
                       </StyledAvatar>
                     )
                   ) : (
-                    <StyledAvatar $isUser={false}>
-                      <RobotOutlined />
-                    </StyledAvatar>
+                    <StyledAvatar 
+                      $isUser={false}
+                      src={avatarUrl}
+                      icon={!avatarUrl && <RobotOutlined />}
+                    />
                   )}
                 </AvatarContainer>
 

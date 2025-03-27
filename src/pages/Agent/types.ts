@@ -36,6 +36,7 @@ export interface Message {
   agentName: string | null;
   agentId: number | null;
   model: string | null;
+  avatarUrl?: string | null;
   createTime: string;
   updateTime: string;
 }
@@ -106,6 +107,7 @@ export interface ProjectAgent {
   enableMemory: boolean;
   enableRag: boolean;
   enableExternal: boolean;
+  avatarUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 }
