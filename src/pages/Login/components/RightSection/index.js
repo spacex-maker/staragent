@@ -34,7 +34,8 @@ import {
   SocialButton,
   Footer,
   ErrorText,
-  ForgotPasswordLink
+  ForgotPasswordLink,
+  TermsPrivacyLinks
 } from './styles';
 
 const emailSuffixes = [
@@ -274,6 +275,16 @@ export const RightSection = ({
               <FormattedMessage id="login.signup.link" />
             </Link>
           </Footer>
+
+          <TermsPrivacyLinks>
+            <Link to="/privacy">
+              <FormattedMessage id="signup.privacy.link" defaultMessage="隐私政策" />
+            </Link>
+            <span>·</span>
+            <Link to="/terms">
+              <FormattedMessage id="signup.terms.link" defaultMessage="服务条款" />
+            </Link>
+          </TermsPrivacyLinks>
         </Form>
       </LoginBox>
     </RightSectionWrapper>

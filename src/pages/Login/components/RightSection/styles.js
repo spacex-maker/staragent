@@ -370,6 +370,28 @@ export const Footer = styled.div`
   }
 `;
 
+export const TermsPrivacyLinks = styled.div`
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--ant-color-text-quaternary);
+
+  a {
+    color: var(--ant-color-text-secondary);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--ant-color-primary);
+    }
+  }
+
+  span {
+    color: var(--ant-color-text-quaternary);
+  }
+`;
+
 export const ErrorText = styled.div`
   color: var(--ant-color-error);
   font-size: 0.875rem;
