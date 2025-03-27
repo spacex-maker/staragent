@@ -104,5 +104,104 @@ export default {
   'avatar.upload.error': 'Failed to upload avatar',
   'avatar.upload.success': 'Avatar updated successfully',
   'avatar.upload.sizeError': 'Image must be smaller than 2MB',
-  'avatar.upload.typeError': 'Only JPG/PNG files are allowed'
+  'avatar.upload.typeError': 'Only JPG/PNG files are allowed',
+  // Privacy Policy Page
+  'privacy.page.title': 'Privacy Policy - AIMateX',
+  'privacy.title': 'Privacy Policy',
+  'privacy.introduction.title': 'Introduction',
+  'privacy.introduction.content': 'Welcome to AIMateX ("we," "our," or "the Platform"). As a professional AI agent service platform, we understand the importance of your personal information and are committed to protecting it. We strictly comply with relevant laws and regulations and take all reasonable measures to ensure the security of your personal information. This Privacy Policy details how we collect, use, store, transmit, and protect your information.',
+  
+  'privacy.collection.title': 'Information Collection',
+  'privacy.collection.description': 'Based on service requirements, we may collect the following types of information:',
+  'privacy.collection.item1': 'Basic account information (e.g., name, email address, phone number)',
+  'privacy.collection.item2': 'Profile information (e.g., avatar, bio, preferences)',
+  'privacy.collection.item3': 'Interaction data (e.g., AI agent conversations, usage records, operation logs)',
+  'privacy.collection.item4': 'Device information (e.g., IP address, device model, operating system, browser type)',
+  'privacy.collection.item5': 'Payment-related information (e.g., transaction records, account balance, payment methods)',
+  'privacy.collection.item6': 'AI agent-related data (e.g., custom configurations, training data, usage preferences)',
+  'privacy.collection.item7': 'System-generated data (e.g., user profiles, behavioral analysis, recommendation records)',
+  
+  'privacy.usage.title': 'Information Usage',
+  'privacy.usage.description': 'We use the collected information for:',
+  'privacy.usage.item1': 'Providing, maintaining, and improving our AI agent services',
+  'privacy.usage.item2': 'Personalizing your AI assistant and user experience',
+  'privacy.usage.item3': 'Processing your payment and transaction requests',
+  'privacy.usage.item4': 'Conducting AI model training and optimization',
+  'privacy.usage.item5': 'Providing customer support and problem resolution',
+  'privacy.usage.item6': 'Sending service notifications and updates',
+  'privacy.usage.item7': 'Preventing fraud and ensuring platform security',
+  
+  'privacy.protection.title': 'Information Protection',
+  'privacy.protection.content': 'We employ industry-leading security technologies and procedures to protect your personal information:\n1. Using encryption technology for data transmission and storage\n2. Implementing strict access control and authentication mechanisms\n3. Conducting regular security audits and risk assessments\n4. Providing privacy protection training to employees\n5. Establishing data classification protection mechanisms\n6. Developing comprehensive data security contingency plans',
+  
+  'privacy.data.title': 'AI Conversation Data Processing',
+  'privacy.data.content': 'Regarding your conversations with AI agents, we commit to:\n1. Using conversation content only for service provision and AI model improvement\n2. Anonymizing data during model training\n3. Not using conversation content for other commercial purposes\n4. Allowing you to delete conversation history at any time\n5. Supporting the export of your conversation data',
+  
+  'privacy.cookies.title': 'Cookies and Similar Technologies',
+  'privacy.cookies.content': 'We use cookies and similar technologies to provide better service experiences, including:\n1. Remembering your login status and preferences\n2. Analyzing service usage and optimizing performance\n3. Providing personalized AI agent recommendations\n4. Ensuring account and transaction security',
+  
+  'privacy.thirdParty.title': 'Third-Party Services',
+  'privacy.thirdParty.content': 'Our services may require integration with third-party services (such as payment services, cloud services, etc.). We will:\n1. Only select partners that meet privacy protection standards\n2. Require third parties to comply with our privacy protection requirements\n3. Share only necessary user information\n4. Regularly assess third-party security\n5. Disclose third-party data usage in our privacy policy',
+  
+  'privacy.rights.title': 'Your Rights',
+  'privacy.rights.item1': 'Access and export your personal information',
+  'privacy.rights.item2': 'Correct or update your personal information',
+  'privacy.rights.item3': 'Delete your account and related data',
+  'privacy.rights.item4': 'Manage your AI agent settings and permissions',
+  'privacy.rights.item5': 'Choose whether to accept personalized recommendations',
+  'privacy.rights.item6': 'Withdraw consent at any time',
+  
+  'privacy.security.title': 'Transaction Security',
+  'privacy.security.content': 'For AI agent transactions on the platform, we take the following measures to protect your interests:\n1. Using secure payment channels and encrypted transmission\n2. Implementing transaction monitoring and risk control\n3. Providing transaction guarantees and dispute resolution mechanisms\n4. Protecting transaction parties\' privacy information\n5. Maintaining complete transaction logs',
+  
+  'privacy.contact.title': 'Contact Us',
+  'privacy.contact.content': 'If you have any questions, comments, or suggestions regarding this Privacy Policy or personal information protection, please contact us at:\n\nEmail: aimatex2024@gmail.com\n\nWe commit to responding within 15 business days of receiving your request. For significant issues, we will take appropriate measures within a reasonable and necessary timeframe.',
+  
+  'privacy.lastUpdated': 'Last Updated: {date}',
+  // Registration page privacy policy
+  'signup.privacy.agreement': 'I have read and agree to the',
+  'signup.privacy.link': 'Privacy Policy',
+  'signup.privacy.and': 'and',
+  'signup.terms.link': 'Terms of Service',
+  'signup.privacy.error': 'Please read and agree to the Privacy Policy and Terms of Service',
+  'terms.page.title': 'Terms of Service - AIMateX',
+  'terms.title': 'Terms of Service',
+  'terms.introduction.title': 'Introduction',
+  'terms.introduction.content': 'Welcome to AIMateX ("we," "our," or "the Platform"). These Terms of Service ("Terms") constitute a legally binding agreement between you and AIMateX. By accessing or using our services, you agree to be bound by these Terms. If you do not agree to any part of these Terms, please do not use our services. Please read these Terms carefully as they affect your legal rights and obligations.',
+  
+  'terms.service.title': 'Service Description',
+  'terms.service.description': 'Our services include but are not limited to:',
+  'terms.service.item1': 'AI Agent Services: Providing personalized AI assistants to help users complete various tasks and requirements',
+  'terms.service.item2': 'Team Collaboration: Supporting multiple AI agents working together to improve efficiency',
+  'terms.service.item3': 'Customized Training: Personalizing and optimizing AI agents based on user needs',
+  'terms.service.item4': 'Data Analysis and Reporting: Providing analysis and performance reports on AI agent usage',
+  'terms.service.item5': 'Knowledge Base Management: Supporting users in building and managing dedicated knowledge bases',
+  'terms.service.item6': 'Multi-scenario Applications: Supporting flexible use of AI agents in different business scenarios',
+  'terms.service.item7': 'Security Assurance: Providing data encryption and privacy protection mechanisms',
+  
+  'terms.account.title': 'Account Management',
+  'terms.account.content': 'You need to register an account to use our services. You agree to:\n\n1. Provide accurate, complete, and up-to-date registration information\n2. Maintain the security of your account and password, regularly update your password\n3. Be responsible for all activities under your account\n4. Notify us immediately of any unauthorized use\n5. Comply with all applicable laws and regulations\n6. Not transfer or sell your account to others\n7. Not use others\' accounts or impersonate others\n8. Comply with account level and permission regulations\n9. Accept our measures for handling violations\n10. Understand and agree to account cancellation rules',
+  
+  'terms.usage.title': 'Usage Rules',
+  'terms.usage.content': 'When using our services, you agree to:\n\n1. Legal Use\n- Not engage in any illegal or abusive behavior\n- Comply with all applicable laws and regulations\n- Not circumvent our security measures\n\n2. Content Standards\n- Not upload or share illegal or harmful content\n- Not infringe on others\' intellectual property rights\n- Be responsible for content you publish\n\n3. Code of Conduct\n- Not interfere with or disrupt normal service operation\n- Not conduct unauthorized commercial activities\n- Not engage in any fraudulent behavior\n\n4. System Protection\n- Not use automated tools for bulk access\n- Not attempt to hack or reverse engineer\n- Not spread malware or viruses\n\n5. Community Standards\n- Respect other users\' rights\n- Follow community discussion rules\n- Cooperate with complaint handling',
+  
+  'terms.intellectual.title': 'Intellectual Property',
+  'terms.intellectual.content': '1. Platform Content\n- Our services, website content, and related intellectual property belong to us\n- No copying or distribution of platform content without permission\n- Platform identifiers and trademarks are legally protected\n\n2. User Content\n- You retain ownership of your created content\n- Grant us rights to use, copy, and distribute\n- Ensure you have rights to share the content\n\n3. AI-Generated Content\n- AI agent-generated content is subject to specific terms\n- Clear restrictions on commercial use\n- Specify usage scope of AI-generated content\n\n4. License Scope\n- Clear platform usage license scope\n- Sublicense conditions\n- Third-party intellectual property protection\n\n5. Infringement Handling\n- Timely handling of infringement complaints\n- Protecting rights holders\' legal interests\n- Cooperating with investigations',
+  
+  'terms.liability.title': 'Limitation of Liability',
+  'terms.liability.content': '1. Service Warranty\n- Services provided "as is" without any express or implied warranties\n- No guarantee of uninterrupted or error-free service\n- No warranties for third-party services\n\n2. Scope of Liability\n- We are not liable for direct, indirect, incidental, or punitive damages from service use\n- No guarantee of accuracy or suitability for AI agent outputs\n- You agree to assume the risks of using the services\n\n3. Compensation Limits\n- Limiting our liability to the maximum extent permitted by law\n- Clear maximum compensation amounts\n- Specified exemption circumstances\n\n4. Force Majeure\n- Service interruptions due to force majeure\n- Temporary inaccessibility due to system maintenance or upgrades\n- Service issues caused by third parties',
+  
+  'terms.termination.title': 'Termination',
+  'terms.termination.content': '1. Termination Circumstances\n- You may terminate use of our services at any time\n- We reserve the right to terminate or suspend access for violations\n- Long-unused accounts may be terminated\n\n2. Termination Consequences\n- Certain terms remain effective after termination\n- Your data will be handled according to our data retention policy\n- Paid fees may not be refunded\n\n3. Data Processing\n- Data retention period after termination\n- Data deletion procedures and methods\n- Data export options\n\n4. Service Restoration\n- Conditions for resuming service after termination\n- Account reactivation process\n- Historical data recovery possibilities',
+  
+  'terms.changes.title': 'Changes to Terms',
+  'terms.changes.content': '1. Change Rules\n- We reserve the right to modify these terms at any time\n- Major changes will be notified via email or website\n- Methods and timeframes for change notifications\n\n2. User Options\n- Continued use indicates acceptance of modified terms\n- Stop using services if you disagree with changes\n- Selection period before changes take effect\n\n3. Notification Methods\n- Platform announcements\n- Email notifications\n- In-app notifications\n\n4. Dispute Handling\n- Accepting user feedback on changes\n- Handling change-related disputes\n- Providing necessary transition periods',
+  
+  'terms.contact.title': 'Contact Us',
+  'terms.contact.content': 'If you have any questions or suggestions about these Terms of Service, please contact us through:\n\n1. Contact Methods\n- Email: aimatex2024@gmail.com\n- Online Support: Weekdays 9:00-18:00\n- Emergency Contact: support@aimatex.com\n\n2. Response Commitment\n- General Issues: Reply within 1-2 business days\n- Urgent Issues: Response within 24 hours\n- Major Issues: Dedicated follow-up\n\n3. Feedback\n- Welcome improvement suggestions\n- Value user feedback\n- Continuous service optimization\n\nWe commit to responding within 15 business days of receiving your request. For major issues, we will take appropriate measures within a reasonable and necessary timeframe.',
+  
+  'terms.lastUpdated': 'Last Updated: {date}',
+  
+  'terms.related.title': 'Related Links',
+  'terms.related.privacy': 'Privacy Policy'
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DownOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -27,6 +27,8 @@ import {
   VerifyCodeButton,
   RuleHint
 } from './styles';
+import { Checkbox, message } from 'antd';
+import styled from 'styled-components';
 
 // 邮箱后缀列表
 const emailSuffixes = [
@@ -39,6 +41,20 @@ const emailSuffixes = [
   "@yahoo.com",
   "@foxmail.com"
 ];
+
+const PrivacyCheckbox = styled(Checkbox)`
+  margin-bottom: 1rem;
+  color: var(--ant-color-text-secondary);
+  
+  a {
+    color: var(--ant-color-primary);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 export const RightSection = ({
   username,
@@ -93,6 +109,7 @@ export const RightSection = ({
   const emailInputRef = React.useRef(null);
   const emailDropdownRef = React.useRef(null);
   const [isChangingCountry, setIsChangingCountry] = React.useState(false);
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
 
   const validateUsername = (value) => {
     setUsernameRules({
@@ -152,6 +169,15 @@ export const RightSection = ({
     setShowCountryDropdown(false);
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!agreedToPrivacy) {
+      message.error(intl.formatMessage({ id: 'signup.privacy.error' }));
+      return;
+    }
+    handleSubmit(e);
+  };
+
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       // 处理国家选择器下拉框
@@ -187,7 +213,7 @@ export const RightSection = ({
         <Logo>
           <FormattedMessage id="signup.title" />
         </Logo>
-        <Form onSubmit={handleSubmit} autoComplete="off">
+        <Form onSubmit={handleFormSubmit} autoComplete="off">
           <FormItem index={0}>
             <InputWrapper isCountrySelector={true}>
               <CountrySelector
@@ -415,14 +441,35 @@ export const RightSection = ({
             </InputWrapper>
           </FormItem>
 
+          <PrivacyCheckbox 
+            checked={agreedToPrivacy}
+            onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+          >
+            <FormattedMessage 
+              id="signup.privacy.agreement" 
+              defaultMessage="我已阅读并同意"
+            />{' '}
+            <Link to="/privacy" target="_blank">
+              <FormattedMessage 
+                id="signup.privacy.link" 
+                defaultMessage="隐私政策"
+              />
+            </Link>
+            {' '}<FormattedMessage id="signup.privacy.and" defaultMessage="和" />{' '}
+            <Link to="/terms" target="_blank">
+              <FormattedMessage 
+                id="signup.terms.link" 
+                defaultMessage="服务条款"
+              />
+            </Link>
+          </PrivacyCheckbox>
+
           {error && <ErrorText>{error}</ErrorText>}
 
-          <SubmitButton type="submit" disabled={loading}>
-            {loading ? (
-              <FormattedMessage id="signup.loading" />
-            ) : (
-              <FormattedMessage id="signup.button" />
-            )}
+          <SubmitButton type="submit" disabled={loading || !agreedToPrivacy}>
+            <FormattedMessage 
+              id={loading ? 'signup.loading' : 'signup.button'} 
+            />
           </SubmitButton>
         </Form>
         <Footer>

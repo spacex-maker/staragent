@@ -83,6 +83,15 @@ const LoginPage = () => {
     };
   }, []);
 
+  const handleGoogleLoginSuccess = (token) => {
+    if (token) {
+      // 存储token
+      localStorage.setItem('token', token);
+      message.success("Google登录成功");
+      navigate("/");
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -112,6 +121,7 @@ const LoginPage = () => {
           loading={loading}
           handleSubmit={handleSubmit}
           intl={intl}
+          onGoogleLoginSuccess={handleGoogleLoginSuccess}
         />
 
         <PhilosophyQuote>

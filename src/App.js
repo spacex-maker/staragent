@@ -8,12 +8,15 @@ import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import ResetPasswordPage from "./pages/ResetPassword";
 import AgentPage from "./pages/Agent";
+import OAuthCallback from './pages/OAuth/Callback';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
 import koKR from 'antd/locale/ko_KR';
 import { LocaleProvider } from './contexts/LocaleContext';
 import { Helmet } from 'react-helmet';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 // 语言配置映射
 const localeMap = {
@@ -34,6 +37,9 @@ const RootRoute = () => {
   const isAuthenticated = localStorage.getItem('token'); // 检查用户是否已登录
   return isAuthenticated ? <Navigate to="/agent" /> : <Navigate to="/login" />;
 };
+
+// 添加默认头像配置
+export const DEFAULT_AVATAR = 'https://lh3.googleusercontent.com/a/ACg8ocLYFFmYDc6kkcuQ2LYwYkJBzwx9LCLvXhWhaFVrMoS6GsXyvwwlXHwqBcfb_AwxfxC2-i50h_Qlnmbli719Xb8wNZbhZ0c=s576-c-no';
 
 export default function App() {
   const [isDark, setIsDark] = React.useState(() => {
@@ -255,6 +261,9 @@ export default function App() {
                   <AgentPage />
                 </PrivateRoute>
               } />
+              <Route path="/oauth/callback" element={<OAuthCallback />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
             </Routes>
           </Router>
         </ConfigProvider>

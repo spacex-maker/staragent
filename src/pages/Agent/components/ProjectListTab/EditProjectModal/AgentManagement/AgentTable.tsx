@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Input, Switch, Button, Popconfirm, Space, Tag } from 'antd';
+import { Table, Input, Switch, Button, Popconfirm, Space, Tag, Avatar } from 'antd';
 import { RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { ProjectAgent } from '../../../../types';
@@ -12,7 +12,49 @@ interface AgentTableProps {
 }
 
 const AgentTag = styled(Tag)`
-  margin-right: 0;
+  margin: 0;
+`;
+
+const AgentAvatar = styled(Avatar)`
+  border: 2px solid var(--ant-color-primary);
+  background: var(--ant-color-bg-container);
+  color: var(--ant-color-primary);
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  
+  .anticon {
+    font-size: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+`;
+
+const AgentInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+`;
+
+const AgentDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const AgentName = styled.span`
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ant-color-text);
+`;
+
+const TagsContainer = styled.div`
+  display: flex;
+  gap: 6px;
 `;
 
 const AgentTable: React.FC<AgentTableProps> = ({
@@ -26,19 +68,22 @@ const AgentTable: React.FC<AgentTableProps> = ({
       title: '员工信息',
       dataIndex: 'agentName',
       key: 'agentName',
-      render: (text: string, record: any) => (
-        <Space direction="vertical" size={2} style={{ width: '100%' }}>
-          <Space>
-            <RobotOutlined style={{ color: 'var(--ant-color-primary)' }} />
-            <span style={{ fontWeight: 'bold' }}>{text}</span>
-          </Space>
-          <Space size={4} style={{ marginLeft: 22 }}>
-            <AgentTag color="blue">{record.role}</AgentTag>
-            <AgentTag>{record.modelType}</AgentTag>
-          </Space>
-        </Space>
+      render: (text: string, record: ProjectAgent) => (
+        <AgentInfoContainer>
+          <AgentAvatar
+            src={record.avatarUrl}
+            icon={!record.avatarUrl && <RobotOutlined />}
+          />
+          <AgentDetails>
+            <AgentName>{text}</AgentName>
+            <TagsContainer>
+              <AgentTag color="blue">{record.role}</AgentTag>
+              <AgentTag>{record.modelType}</AgentTag>
+            </TagsContainer>
+          </AgentDetails>
+        </AgentInfoContainer>
       ),
-      width: 220,
+      width: 280,
     },
     {
       title: '优先级',

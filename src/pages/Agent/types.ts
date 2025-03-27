@@ -89,6 +89,7 @@ export interface AIAgent {
   temperature: number;
   maxTokens: number;
   prompt: string;
+  avatarUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 }

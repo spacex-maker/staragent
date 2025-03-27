@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { 
   GoogleOutlined, 
@@ -12,6 +12,8 @@ import {
   EyeInvisibleOutlined,
   DownOutlined,
 } from '@ant-design/icons';
+import instance from '../../../../api/axios';
+import { message } from 'antd';
 
 import {
   RightSectionWrapper,
@@ -56,12 +58,14 @@ export const RightSection = ({
   error,
   loading,
   handleSubmit,
-  intl
+  intl,
+  onGoogleLoginSuccess
 }) => {
   const [showSuffixDropdown, setShowSuffixDropdown] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [searchParams] = useSearchParams();
   const dropdownRef = useRef(null);
   const emailSuffixButtonRef = useRef(null);
   const inputWrapperRef = useRef(null);
@@ -82,6 +86,15 @@ export const RightSection = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const code = searchParams.get('code');
+    const state = searchParams.get('state');
+    
+    if (code) {
+      handleGoogleCallback(code, state);
+    }
+  }, [searchParams]);
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -105,6 +118,35 @@ export const RightSection = ({
     e.preventDefault();
     e.stopPropagation();
     setShowSuffixDropdown(!showSuffixDropdown);
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await instance.get('/base/productx/auth/google/auth-url');
+      if (response.data.success) {
+        window.location.href = response.data.data;
+      } else {
+        throw new Error(response.data.message || '获取Google登录URL失败');
+      }
+    } catch (error) {
+      console.error('获取Google登录URL失败:', error);
+      message.error('获取Google登录URL失败，请稍后重试');
+    }
+  };
+
+  const handleGoogleCallback = async (code, state) => {
+    try {
+      const response = await instance.post('/base/productx/auth/google/handle-auth', {
+        code,
+        state
+      });
+      
+      if (response.data.success) {
+        onGoogleLoginSuccess(response.data.data);
+      }
+    } catch (error) {
+      console.error('Google登录失败:', error);
+    }
   };
 
   return (
@@ -201,7 +243,12 @@ export const RightSection = ({
           </Divider>
 
           <SocialLogin>
-            <SocialButton type="button" socialType="google" index={0}>
+            <SocialButton 
+              type="button" 
+              socialType="google" 
+              index={0}
+              onClick={handleGoogleLogin}
+            >
               <GoogleOutlined />
             </SocialButton>
             <SocialButton type="button" socialType="github" index={1}>

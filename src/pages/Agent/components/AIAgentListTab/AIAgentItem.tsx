@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Typography, Tag, Button, message, Modal } from 'antd';
+import { List, Typography, Tag, Button, message, Modal, Avatar } from 'antd';
 import { RobotOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { AIAgent } from '../../types';
@@ -45,6 +45,31 @@ const AgentIcon = styled.div`
   font-size: 24px;
   color: var(--ant-color-primary);
   flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const AgentAvatar = styled(Avatar)`
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--ant-color-primary);
+  background: var(--ant-color-bg-container);
+  color: var(--ant-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .anticon {
+    font-size: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
 `;
 
 const AgentInfo = styled.div`
@@ -152,7 +177,10 @@ const AIAgentItem: React.FC<AIAgentItemProps> = ({ agent, onEdit, onDelete }) =>
       <AgentContent>
         <LeftSection>
           <AgentIcon>
-            <RobotOutlined />
+            <AgentAvatar 
+              src={agent.avatarUrl}
+              icon={!agent.avatarUrl && <RobotOutlined />}
+            />
           </AgentIcon>
           <AgentInfo>
             <AgentName strong>{agent.name}</AgentName>

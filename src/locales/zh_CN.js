@@ -104,5 +104,105 @@ export default {
   'avatar.upload.error': '头像上传失败',
   'avatar.upload.success': '头像更新成功',
   'avatar.upload.sizeError': '图片大小不能超过2MB',
-  'avatar.upload.typeError': '只支持 JPG/PNG 格式的图片'
+  'avatar.upload.typeError': '只支持 JPG/PNG 格式的图片',
+  // 隐私政策页面
+  'privacy.page.title': '隐私政策 - AIMateX',
+  'privacy.title': '隐私政策',
+  'privacy.introduction.title': '引言',
+  'privacy.introduction.content': '欢迎使用AIMateX（"我们"、"我们的"或"本平台"）。作为一个专业的AI代理服务平台，我们深知个人信息对您的重要性，并会严格遵守相关法律法规，采取一切合理必要的措施，保护您的个人信息安全。本隐私政策详细说明了我们如何收集、使用、存储、传输与保护您的信息。',
+  
+  'privacy.collection.title': '信息收集',
+  'privacy.collection.description': '根据服务需要，我们可能收集以下类型的信息：',
+  'privacy.collection.item1': '基本账户信息（如姓名、电子邮件地址、手机号码）',
+  'privacy.collection.item2': '个人资料信息（如头像、简介、偏好设置）',
+  'privacy.collection.item3': '交互数据（如与AI代理的对话内容、使用记录、操作日志）',
+  'privacy.collection.item4': '设备信息（如IP地址、设备型号、操作系统、浏览器类型）',
+  'privacy.collection.item5': '支付相关信息（如交易记录、账户余额、支付方式）',
+  'privacy.collection.item6': 'AI代理相关数据（如自定义配置、训练数据、使用偏好）',
+  'privacy.collection.item7': '系统生成数据（如用户画像、行为分析、推荐记录）',
+  
+  'privacy.usage.title': '信息使用',
+  'privacy.usage.description': '我们使用收集的信息用于：',
+  'privacy.usage.item1': '提供、维护和改进我们的AI代理服务',
+  'privacy.usage.item2': '个性化您的AI助手和使用体验',
+  'privacy.usage.item3': '处理您的支付和交易请求',
+  'privacy.usage.item4': '进行AI模型训练和优化',
+  'privacy.usage.item5': '提供客户支持和问题解决',
+  'privacy.usage.item6': '发送服务通知和更新信息',
+  'privacy.usage.item7': '预防欺诈和确保平台安全',
+  
+  'privacy.protection.title': '信息保护',
+  'privacy.protection.content': '我们采用业界领先的安全技术和程序来保护您的个人信息：\n1. 使用加密技术保护数据传输和存储\n2. 实施严格的访问控制和认证机制\n3. 定期进行安全审计和风险评估\n4. 对员工进行隐私保护培训\n5. 建立数据分级保护机制\n6. 制定完善的数据安全应急预案',
+  
+  'privacy.data.title': 'AI对话数据处理',
+  'privacy.data.content': '关于您与AI代理的对话数据，我们承诺：\n1. 对话内容仅用于提供服务和改进AI模型\n2. 在进行模型训练时会进行匿名化处理\n3. 不会将对话内容用于其他商业用途\n4. 您可以随时删除历史对话记录\n5. 支持导出您的对话数据',
+  
+  'privacy.cookies.title': 'Cookie和类似技术',
+  'privacy.cookies.content': '我们使用Cookie和类似技术来提供更好的服务体验，包括：\n1. 记住您的登录状态和偏好设置\n2. 分析服务使用情况和性能优化\n3. 提供个性化的AI代理推荐\n4. 保障账户和交易安全',
+  
+  'privacy.thirdParty.title': '第三方服务',
+  'privacy.thirdParty.content': '我们的服务可能需要接入第三方服务（如支付服务、云服务等）。我们会：\n1. 仅选择符合隐私保护标准的合作伙伴\n2. 要求第三方遵守我们的隐私保护要求\n3. 仅共享必要的用户信息\n4. 定期评估第三方的安全性\n5. 在隐私政策中说明第三方数据使用情况',
+  
+  'privacy.rights.title': '您的权利',
+  'privacy.rights.item1': '访问和导出您的个人信息',
+  'privacy.rights.item2': '更正或更新您的个人信息',
+  'privacy.rights.item3': '删除您的账户和相关数据',
+  'privacy.rights.item4': '管理您的AI代理设置和权限',
+  'privacy.rights.item5': '选择是否接受个性化推荐',
+  'privacy.rights.item6': '随时撤回授权同意',
+  
+  'privacy.security.title': '交易安全',
+  'privacy.security.content': '对于平台上的AI代理交易，我们采取以下措施保护您的权益：\n1. 使用安全的支付渠道和加密传输\n2. 实施交易监控和风险控制\n3. 提供交易担保和争议解决机制\n4. 保护交易双方的隐私信息\n5. 记录完整的交易日志',
+  
+  'privacy.contact.title': '联系我们',
+  'privacy.contact.content': '如果您对本隐私政策或个人信息保护有任何疑问、意见或建议，请通过以下方式联系我们：\n\n电子邮件：aimatex2024@gmail.com\n\n我们承诺在收到您的请求后的15个工作日内回复。如涉及重大问题，我们会在合理必要的时间内采取适当措施。',
+  
+  'privacy.lastUpdated': '最后更新时间：{date}',
+  // 注册页面隐私政策
+  'signup.privacy.agreement': '我已阅读并同意',
+  'signup.privacy.link': '隐私政策',
+  'signup.privacy.and': '和',
+  'signup.terms.link': '服务条款',
+  'signup.privacy.error': '请阅读并同意隐私政策和服务条款',
+  // 服务条款页面
+  'terms.page.title': '服务条款 - AIMateX',
+  'terms.title': '服务条款',
+  'terms.introduction.title': '引言',
+  'terms.introduction.content': '欢迎使用AIMateX（"我们"、"我们的"或"本平台"）。本服务条款（"条款"）是您与AIMateX之间具有法律约束力的协议。通过访问或使用我们的服务，您同意受这些条款的约束。如果您不同意这些条款的任何部分，请勿使用我们的服务。请仔细阅读这些条款，因为它们影响您的法律权利和义务。',
+  
+  'terms.service.title': '服务说明',
+  'terms.service.description': '我们提供的服务包括但不限于：',
+  'terms.service.item1': 'AI代理服务：提供个性化的AI助手，帮助用户完成各种任务和需求',
+  'terms.service.item2': '团队协作功能：支持多个AI代理协同工作，提升工作效率',
+  'terms.service.item3': '定制化训练：根据用户需求对AI代理进行个性化训练和优化',
+  'terms.service.item4': '数据分析和报告：提供AI代理使用情况的分析和性能报告',
+  'terms.service.item5': '知识库管理：支持用户构建和管理专属知识库',
+  'terms.service.item6': '多场景应用：支持在不同业务场景中灵活使用AI代理',
+  'terms.service.item7': '安全保障：提供数据加密和隐私保护机制',
+  
+  'terms.account.title': '账户管理',
+  'terms.account.content': '您需要注册账户才能使用我们的服务。您同意：\n\n1. 提供准确、完整和最新的注册信息\n2. 妥善保管您的账户和密码，定期更新密码\n3. 对您账户下的所有活动负责\n4. 发现未经授权的使用时立即通知我们\n5. 遵守所有适用的法律和法规\n6. 不得将账户转让或出售给他人\n7. 不得使用他人的账户或冒充他人\n8. 遵守账户等级和权限的相关规定\n9. 接受我们对违规账户的处理措施\n10. 了解并同意账户注销的相关规则',
+  
+  'terms.usage.title': '使用规则',
+  'terms.usage.content': '在使用我们的服务时，您同意：\n\n1. 合法使用\n- 不进行任何违法或滥用行为\n- 遵守所有适用的法律法规\n- 不规避我们的安全措施\n\n2. 内容规范\n- 不上传或分享违法或有害内容\n- 不侵犯他人的知识产权\n- 对自己发布的内容负责\n\n3. 行为准则\n- 不干扰或破坏服务的正常运行\n- 不进行未经授权的商业活动\n- 不从事任何欺诈行为\n\n4. 系统保护\n- 不使用自动化工具批量访问\n- 不尝试破解或反向工程\n- 不传播恶意软件或病毒\n\n5. 社区规范\n- 尊重其他用户的权利\n- 遵守社区讨论规则\n- 配合处理投诉和举报',
+  
+  'terms.intellectual.title': '知识产权',
+  'terms.intellectual.content': '1. 平台内容\n- 我们的服务、网站内容和相关知识产权归我们所有\n- 未经许可不得复制或分发平台内容\n- 平台标识和商标受法律保护\n\n2. 用户内容\n- 您保留您创建内容的所有权\n- 授予我们使用、复制和分发的权利\n- 确保您有权分享该内容\n\n3. AI生成内容\n- AI代理生成的内容受特定条款约束\n- 明确规定商业使用的限制\n- 注明AI生成内容的使用范围\n\n4. 授权范围\n- 明确平台使用授权的范围\n- 规定转授权的条件\n- 保护第三方知识产权\n\n5. 侵权处理\n- 及时处理侵权投诉\n- 保护权利人的合法权益\n- 配合调查和取证工作',
+  
+  'terms.liability.title': '责任限制',
+  'terms.liability.content': '1. 服务保证\n- 服务"按现状"提供，不提供任何明示或暗示的保证\n- 不保证服务不会中断或无错误\n- 不对第三方服务做出保证\n\n2. 责任范围\n- 我们不对因使用服务而产生的直接、间接、附带或惩罚性损害负责\n- 对于AI代理的输出结果，我们不承担准确性和适用性的保证\n- 您同意自行承担使用服务的风险\n\n3. 赔偿限额\n- 在法律允许的最大范围内限制我们的责任\n- 明确赔偿的最高限额\n- 规定免责情形\n\n4. 不可抗力\n- 因不可抗力导致的服务中断\n- 系统维护或升级造成的暂时无法访问\n- 第三方原因导致的服务问题',
+  
+  'terms.termination.title': '终止条款',
+  'terms.termination.content': '1. 终止情形\n- 您可以随时终止使用我们的服务\n- 我们保留因违反这些条款而终止或暂停您访问的权利\n- 账户长期未使用可能被终止\n\n2. 终止后果\n- 终止后，部分条款仍继续有效\n- 终止后，您的数据将按照我们的数据保留政策处理\n- 已支付的费用可能不予退还\n\n3. 数据处理\n- 终止后的数据保留期限\n- 数据删除的程序和方式\n- 数据导出的选项\n\n4. 恢复服务\n- 终止后恢复使用的条件\n- 账户重新激活的流程\n- 历史数据找回的可能性',
+  
+  'terms.changes.title': '条款变更',
+  'terms.changes.content': '1. 变更规则\n- 我们保留随时修改这些条款的权利\n- 重大变更将通过电子邮件或网站通知\n- 变更通知的方式和时限\n\n2. 用户选择\n- 继续使用服务表示您接受修改后的条款\n- 如果不同意变更，您应停止使用服务\n- 变更生效前的选择期限\n\n3. 通知方式\n- 通过平台公告发布\n- 向注册邮箱发送通知\n- 在App内推送提醒\n\n4. 异议处理\n- 接受用户对变更的反馈\n- 处理变更引起的争议\n- 提供必要的过渡期',
+  
+  'terms.contact.title': '联系我们',
+  'terms.contact.content': '如果您对这些服务条款有任何疑问或建议，请通过以下方式联系我们：\n\n1. 联系方式\n- 电子邮件：aimatex2024@gmail.com\n- 在线客服：工作日 9:00-18:00\n- 紧急联系：support@aimatex.com\n\n2. 响应承诺\n- 一般问题：1-2个工作日内回复\n- 紧急问题：24小时内响应\n- 重大问题：专人跟进处理\n\n3. 意见反馈\n- 欢迎提供改进建议\n- 重视用户反馈\n- 持续优化服务\n\n我们承诺在收到您的请求后的15个工作日内回复。如涉及重大问题，我们会在合理必要的时间内采取适当措施。',
+  
+  'terms.lastUpdated': '最后更新时间：{date}',
+  
+  'terms.related.title': '相关链接',
+  'terms.related.privacy': '隐私政策'
 }; 

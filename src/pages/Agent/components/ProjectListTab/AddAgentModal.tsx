@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Table, Button, Input, Space, message, Tag, Tooltip } from 'antd';
+import { Modal, Table, Button, Input, Space, message, Tag, Tooltip, Avatar } from 'antd';
 import { SearchOutlined, RobotOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { AIAgent } from '../../types';
@@ -12,7 +12,49 @@ const SearchContainer = styled.div`
 `;
 
 const AgentTag = styled(Tag)`
-  margin-right: 0;
+  margin: 0;
+`;
+
+const AgentAvatar = styled(Avatar)`
+  border: 2px solid var(--ant-color-primary);
+  background: var(--ant-color-bg-container);
+  color: var(--ant-color-primary);
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  
+  .anticon {
+    font-size: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+`;
+
+const AgentInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+`;
+
+const AgentDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const AgentName = styled.span`
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ant-color-text);
+`;
+
+const TagsContainer = styled.div`
+  display: flex;
+  gap: 6px;
 `;
 
 interface AddAgentModalProps {
@@ -129,18 +171,21 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
       dataIndex: 'name',
       key: 'name',
       render: (text: string, record: AIAgent) => (
-        <Space direction="vertical" size={2} style={{ width: '100%' }}>
-          <Space>
-            <RobotOutlined style={{ color: 'var(--ant-color-primary)' }} />
-            <span style={{ fontWeight: 'bold' }}>{text}</span>
-          </Space>
-          <Space size={4} style={{ marginLeft: 22 }}>
-            {record.roles.map((role, index) => (
-              <AgentTag key={index} color="blue">{role}</AgentTag>
-            ))}
-            <AgentTag>{record.modelType}</AgentTag>
-          </Space>
-        </Space>
+        <AgentInfoContainer>
+          <AgentAvatar
+            src={record.avatarUrl}
+            icon={!record.avatarUrl && <RobotOutlined />}
+          />
+          <AgentDetails>
+            <AgentName>{text}</AgentName>
+            <TagsContainer>
+              {record.roles.map((role, index) => (
+                <AgentTag key={index} color="blue">{role}</AgentTag>
+              ))}
+              <AgentTag>{record.modelType}</AgentTag>
+            </TagsContainer>
+          </AgentDetails>
+        </AgentInfoContainer>
       ),
       width: 250,
     },
