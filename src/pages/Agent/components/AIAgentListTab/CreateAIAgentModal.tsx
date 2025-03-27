@@ -88,7 +88,7 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
         </Form.Item>
 
         <Form.Item
-          name="roleIds"
+          name="roles"
           label="角色"
           rules={[{ required: true, message: '请选择AI员工角色' }]}
           tooltip="选择AI员工可以扮演的角色，支持多选"
