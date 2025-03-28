@@ -1,12 +1,23 @@
 import axios from 'axios';
 import { message } from 'antd';
 
-// 创建 axios 实例
-const isDevelopment = process.env.NODE_ENV === 'development';
-const baseURL = isDevelopment ? 'http://127.0.0.1:8080' : 'https://api.aimatex.com';
+// 获取当前网络设置
+const getCurrentNetwork = () => localStorage.getItem('network') || 'china';
 
+// 获取基地址
+const getBaseURL = () => {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  if (isDevelopment) {
+    return 'http://127.0.0.1:8080';
+  }
+  
+  const network = getCurrentNetwork();
+  return network === 'usa' ? 'https://usa.api.aimatex.com' : 'https://api.aimatex.com';
+};
+
+// 创建 axios 实例
 const instance = axios.create({
-  baseURL,
+  baseURL: getBaseURL(),
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

@@ -6,6 +6,7 @@ import UserSettingsModal from '../../modals/UserSettingsModal';
 import UserProfileModalEntry from '../../modals/UserProfileModalEntry';
 import instance from '../../../api/axios';
 import { message } from 'antd';
+import NetworkSwitchModal from '../../modals/NetworkSwitchModal';
 
 const UserMenuContainer = styled.div`
   position: relative;
@@ -293,6 +294,10 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [localUserInfo, setLocalUserInfo] = useState(userInfo);
   const { showUserProfileModal, UserProfileModalComponent } = UserProfileModalEntry();
+  const [showNetworkModal, setShowNetworkModal] = useState(false);
+  const [currentNetwork, setCurrentNetwork] = useState(() => 
+    localStorage.getItem('network') || 'china'
+  );
 
   useEffect(() => {
     setLocalUserInfo(userInfo);
@@ -336,6 +341,13 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
     e.preventDefault();
     setShowUserMenu(false);
     showUserProfileModal();
+  };
+
+  const handleNetworkChange = (network) => {
+    setCurrentNetwork(network);
+    localStorage.setItem('network', network);
+    window.location.reload(); // 重新加载页面以应用新的 API 基地址
+    setShowNetworkModal(false);
   };
 
   return (
@@ -388,6 +400,23 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           <i className="bi bi-gear icon" />
           账号设置
         </UserMenuItem>
+        <UserMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
+            setShowNetworkModal(true);
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-globe icon" />
+              切换网络
+            </div>
+            <span style={{ fontSize: '0.8em', opacity: 0.7 }}>
+              {currentNetwork === 'china' ? '中国节点' : '美国节点'}
+            </span>
+          </MenuItemContent>
+        </UserMenuItem>
         <LogoutMenuItem 
           isDark={isDark}
           onClick={() => {
@@ -404,6 +433,13 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
         open={showSettingsModal}
         onClose={() => setShowSettingsModal(false)}
         onSuccess={handleSettingsSuccess}
+      />
+      
+      <NetworkSwitchModal
+        open={showNetworkModal}
+        onClose={() => setShowNetworkModal(false)}
+        currentNetwork={currentNetwork}
+        onNetworkChange={handleNetworkChange}
       />
       
       {UserProfileModalComponent}
