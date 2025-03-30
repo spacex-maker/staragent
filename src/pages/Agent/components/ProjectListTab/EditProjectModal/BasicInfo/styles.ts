@@ -41,6 +41,18 @@ export const StyledCascader = styled(Cascader)`
 
   .ant-cascader-menu-item {
     border-radius: 6px;
+    padding: 5px 12px;
+    margin: 2px 0;
+    
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      font-size: 14px;
+    }
   }
 
   .ant-cascader-menu-item:hover {

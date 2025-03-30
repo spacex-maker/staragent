@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
 import { Form, Input, Radio, Space, Tooltip, Tag, Select } from 'antd';
 import { LockOutlined, GlobalOutlined } from '@ant-design/icons';
+import * as AntdIcons from '@ant-design/icons';
+import CIcon from '@coreui/icons-react';
+import * as icons from '@coreui/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { BasicInfoFormProps } from './types';
 import { useIndustries } from '../../../../contexts/IndustryContext';
 import { StyledCascader } from './styles';
+
+// 添加所有 solid 图标到库中
+library.add(fas);
 
 const { Option } = Select;
 
@@ -36,6 +45,25 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
         }
       }
     }
+    return null;
+  };
+
+  const renderIcon = (iconName: string) => {
+    if (!iconName) return null;
+
+    if (iconName.startsWith('cil')) {
+      return <CIcon icon={icons[iconName]} style={{ width: '20px', height: '20px' }} />;
+    }
+
+    if (iconName.endsWith('Outlined')) {
+      const AntIcon = AntdIcons[iconName];
+      return <AntIcon style={{ fontSize: '20px' }} />;
+    }
+
+    if (iconName.startsWith('fa')) {
+      return <FontAwesomeIcon icon={fas[iconName]} style={{ fontSize: '16px' }} />;
+    }
+
     return null;
   };
 
@@ -92,10 +120,12 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
                   alignItems: 'center',
                 }}
               >
-                {option?.icon && (
-                  <i className={option.icon} style={{ width: 16, textAlign: 'center', color: option.iconColor || 'var(--ant-color-text-secondary)', marginRight: 4 }} />
+                {option && (
+                  <span style={{ color: option.iconColor || '#8c8c8c' }}>
+                    {option.icon && renderIcon(option.icon)}
+                  </span>
                 )}
-                {label}
+                <span style={{ marginLeft: option?.icon ? '4px' : 0 }}>{label}</span>
               </Tag>
             );
           }}
@@ -112,14 +142,23 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
             
             return (
               <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                {lastOption?.icon && (
-                  <i className={lastOption.icon} style={{ width: 16, textAlign: 'center', color: lastOption.iconColor || 'var(--ant-color-text-secondary)' }} />
-                )}
+                <span style={{ color: lastOption?.iconColor || '#8c8c8c' }}>
+                  {lastOption?.icon && renderIcon(lastOption.icon)}
+                </span>
                 <span>{lastOption?.name || ''}</span>
               </div>
             );
           }}
           style={{ width: '100%' }}
+          dropdownRender={(menus) => {
+            return React.cloneElement(menus as React.ReactElement, {
+              style: { 
+                maxHeight: '400px',
+                overflow: 'auto'
+              }
+            });
+          }}
+          expandIcon={<AntdIcons.RightOutlined />}
         />
       </Form.Item>
       <Form.Item

@@ -2,6 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from '../../../api/axios';
 import type { DefaultOptionType } from 'antd/es/cascader';
 import { Industry } from '../types';
+import * as AntdIcons from '@ant-design/icons';
+import CIcon from '@coreui/icons-react';
+import * as icons from '@coreui/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 interface IndustryTreeNode extends Industry {
   children?: IndustryTreeNode[];
@@ -22,6 +27,25 @@ interface IndustryContextType {
   loading: boolean;
 }
 
+const renderIcon = (iconName: string) => {
+  if (!iconName) return null;
+
+  if (iconName.startsWith('cil')) {
+    return <CIcon icon={icons[iconName]} style={{ width: '20px', height: '20px' }} />;
+  }
+
+  if (iconName.endsWith('Outlined')) {
+    const AntIcon = AntdIcons[iconName];
+    return <AntIcon style={{ fontSize: '20px' }} />;
+  }
+
+  if (iconName.startsWith('fa')) {
+    return <FontAwesomeIcon icon={fas[iconName]} style={{ fontSize: '16px' }} />;
+  }
+
+  return null;
+};
+
 const IndustryContext = createContext<IndustryContextType>({
   industries: [],
   loading: false
@@ -33,9 +57,11 @@ const formatIndustryData = (data: IndustryTreeNode[]): CascaderOption[] => {
   return data.map(item => ({
     value: item.id,
     label: (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <i className={item.icon} style={{ width: 16, textAlign: 'center', color: item.iconColor || '#8c8c8c' }} />
-        <span>{item.name}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0' }}>
+        <span style={{ color: item.iconColor || '#8c8c8c' }}>
+          {item.icon && renderIcon(item.icon)}
+        </span>
+        <span style={{ flex: 1 }}>{item.name}</span>
       </div>
     ),
     children: item.children ? formatIndustryData(item.children) : undefined,
