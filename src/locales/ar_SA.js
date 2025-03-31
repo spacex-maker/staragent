@@ -192,5 +192,8 @@ export default {
   'terms.lastUpdated': 'آخر تحديث: {date}',
   
   'terms.related.title': 'روابط ذات صلة',
-  'terms.related.privacy': 'سياسة الخصوصية'
+  'terms.related.privacy': 'سياسة الخصوصية',
+  'worldmap.page.title': 'البلدان والمناطق المدعومة - AIMateX',
+  'worldmap.legend.supported': 'مدعوم',
+  'worldmap.legend.unsupported': 'غير مدعوم'
 };

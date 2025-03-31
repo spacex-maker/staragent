@@ -181,5 +181,8 @@ export default {
   'terms.contact.content': '本利用規約に関するご質問やご提案がございましたら、以下の方法でお問い合わせください：\n\n1. 連絡方法\n- メール：aimatex2024@gmail.com\n- オンラインサポート：平日9:00-18:00\n- 緊急連絡先：support@aimatex.com\n\n2. 対応約束\n- 一般的な問題：1-2営業日以内に回答\n- 緊急の問題：24時間以内に対応\n- 重要な問題：専任者が対応\n\n3. フィードバック\n- 改善提案を歓迎します\n- ユーザーフィードバックを重視\n- サービスの継続的な最適化\n\nお問い合わせいただいてから15営業日以内に回答することをお約束します。重要な問題については、合理的に必要な時間内に適切な対応を取らせていただきます。',
   'terms.lastUpdated': '最終更新日：{date}',
   'terms.related.title': '関連リンク',
-  'terms.related.privacy': 'プライバシーポリシー'
+  'terms.related.privacy': 'プライバシーポリシー',
+  'worldmap.page.title': '対応国と地域 - AIMateX',
+  'worldmap.legend.supported': '対応',
+  'worldmap.legend.unsupported': '未対応'
 };

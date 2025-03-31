@@ -151,5 +151,8 @@ export default {
   'signup.privacy.link': 'Política de Privacidade',
   'signup.privacy.and': 'e os',
   'signup.terms.link': 'Termos de Serviço',
-  'signup.privacy.error': 'Por favor, leia e aceite a Política de Privacidade e os Termos de Serviço'
+  'signup.privacy.error': 'Por favor, leia e aceite a Política de Privacidade e os Termos de Serviço',
+  'worldmap.page.title': 'Países e Regiões Suportados - AIMateX',
+  'worldmap.legend.supported': 'Suportado',
+  'worldmap.legend.unsupported': 'Não suportado'
 };

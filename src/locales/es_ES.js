@@ -204,5 +204,8 @@ export default {
   'terms.lastUpdated': 'Última actualización: {date}',
   
   'terms.related.title': 'Enlaces Relacionados',
-  'terms.related.privacy': 'Política de Privacidad'
+  'terms.related.privacy': 'Política de Privacidad',
+  'worldmap.page.title': 'Países y Regiones Soportados - AIMateX',
+  'worldmap.legend.supported': 'Soportado',
+  'worldmap.legend.unsupported': 'No soportado',
 };

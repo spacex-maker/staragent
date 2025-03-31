@@ -192,5 +192,8 @@ export default {
   'terms.lastUpdated': 'Dernière mise à jour : {date}',
   
   'terms.related.title': 'Liens Connexes',
-  'terms.related.privacy': 'Politique de Confidentialité'
+  'terms.related.privacy': 'Politique de Confidentialité',
+  'worldmap.page.title': 'Pays et Régions Pris en Charge - AIMateX',
+  'worldmap.legend.supported': 'Pris en charge',
+  'worldmap.legend.unsupported': 'Non pris en charge'
 };

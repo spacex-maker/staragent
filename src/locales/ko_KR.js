@@ -207,5 +207,8 @@ export default {
   'terms.lastUpdated': '마지막 업데이트: {date}',
   
   'terms.related.title': '관련 링크',
-  'terms.related.privacy': '개인정보 처리방침'
+  'terms.related.privacy': '개인정보 처리방침',
+  'worldmap.page.title': '지원되는 국가 및 지역 - AIMateX',
+  'worldmap.legend.supported': '지원됨',
+  'worldmap.legend.unsupported': '지원되지 않음'
 };
