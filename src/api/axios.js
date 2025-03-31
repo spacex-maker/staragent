@@ -12,7 +12,14 @@ const getBaseURL = () => {
   }
   
   const network = getCurrentNetwork();
-  return network === 'usa' ? 'https://usa.api.aimatex.com' : 'https://api.aimatex.com';
+  switch (network) {
+    case 'usa':
+      return 'https://usa.api.aimatex.com';
+    case 'japan':
+      return 'https://ja.api.aimatex.com';
+    default:
+      return 'https://api.aimatex.com';
+  }
 };
 
 // 创建 axios 实例

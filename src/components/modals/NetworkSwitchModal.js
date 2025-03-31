@@ -144,6 +144,22 @@ const NetworkSwitchModal = ({ open, onClose, currentNetwork, onNetworkChange }) 
             海外优化线路，无地域限制访问
           </NetworkDescription>
         </NetworkCard>
+
+        <NetworkCard 
+          isSelected={currentNetwork === 'japan'} 
+          onClick={() => onNetworkChange('japan')}
+        >
+          <StatusBadge isSelected={currentNetwork === 'japan'}>
+            {currentNetwork === 'japan' ? '当前使用中' : '点击切换'}
+          </StatusBadge>
+          <NetworkTitle>
+            <span>🇯🇵</span>
+            日本节点
+          </NetworkTitle>
+          <NetworkDescription>
+            亚太地区优化线路，低延迟高速访问
+          </NetworkDescription>
+        </NetworkCard>
       </Space>
     </StyledModal>
   );
