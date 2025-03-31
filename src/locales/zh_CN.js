@@ -204,5 +204,9 @@ export default {
   'terms.lastUpdated': '最后更新时间：{date}',
   
   'terms.related.title': '相关链接',
-  'terms.related.privacy': '隐私政策'
+  'terms.related.privacy': '隐私政策',
+  'worldmap.page.title': '支持的国家和地区 - AIMateX',
+  'worldmap.title': '支持的国家和地区',
+  'worldmap.legend.supported': '已支持',
+  'worldmap.legend.unsupported': '未支持'
 }; 

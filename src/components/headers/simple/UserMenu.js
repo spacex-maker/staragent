@@ -417,6 +417,20 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
             </span>
           </MenuItemContent>
         </UserMenuItem>
+        <UserMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
+            navigate('/world-map');
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-map icon" />
+              地区支持
+            </div>
+          </MenuItemContent>
+        </UserMenuItem>
         <LogoutMenuItem 
           isDark={isDark}
           onClick={() => {
