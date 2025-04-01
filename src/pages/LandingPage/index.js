@@ -17,6 +17,7 @@ import PlatformIntegration from './sections/PlatformIntegration';
 import Testimonials from './sections/Testimonials';
 import CallToAction from './sections/CallToAction';
 import Footer from './sections/Footer';
+import AITeamShowcase from './sections/AITeamShowcase';
 
 // Styles
 import { 
@@ -162,6 +163,8 @@ const LandingPage = ({ onLanguageChange, currentLocale }) => {
 
         {/* Call to Action */}
         <CallToAction onGetStarted={handleGetStarted} />
+
+        <AITeamShowcase />
       </MainContent>
 
       {/* Footer */}

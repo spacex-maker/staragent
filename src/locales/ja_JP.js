@@ -185,7 +185,7 @@ export default {
   'worldmap.page.title': '対応国と地域 - AIMateX',
   'worldmap.legend.supported': '対応',
   'worldmap.legend.unsupported': '未対応',
-  'landing.hero.title': 'あなたのパーソナルAIチーム、協業の未来を再定義',
+  'landing.hero.title': 'あなたの時代に、あなただけのAIブレインを構築',
   'landing.hero.subtitle': 'カスタマイズされたAIエージェントを構築、トレーニング、取引し、各業界のAIエキスパートがあなたの仕事とクリエイティビティをサポート',
   'landing.hero.getStarted': '無料で始める',
   'landing.hero.exploreFeatures': '機能を探る',
@@ -215,5 +215,17 @@ export default {
   'landing.hero.agent.research.description': 'データの収集と分析、研究レポートと市場動向分析の提供を専門としています',
   'landing.hero.agent.research.skill1': 'データ分析',
   'landing.hero.agent.research.skill2': '市場調査',
-  'landing.hero.agent.research.skill3': 'トレンド予測'
+  'landing.hero.agent.research.skill3': 'トレンド予測',
+  'landing.showcase.title': '一人の開発者、無限の可能性',
+  'landing.showcase.subtitle': 'AnakkixがAIチームと共にAIMateXをコンセプトから本番まで構築した過程をご覧ください',
+  'landing.showcase.role.design': 'UI/UXデザイン',
+  'landing.showcase.role.design.desc': 'AIと協力して革新的なインターフェースデザインを作成し、最適なユーザー体験と視覚的魅力を確保',
+  'landing.showcase.role.frontend': 'フロントエンド開発',
+  'landing.showcase.role.frontend.desc': 'AIペアプログラミングを活用して、レスポンシブで高性能なReactアプリケーションを構築',
+  'landing.showcase.role.backend': 'バックエンド開発',
+  'landing.showcase.role.backend.desc': 'AIの支援を受けて、スケーラビリティとセキュリティを備えた堅牢なサーバーアーキテクチャを構築',
+  'landing.showcase.role.testing': 'テスト＆DevOps',
+  'landing.showcase.role.testing.desc': 'AI駆動の自動化による包括的なテストとデプロイメント戦略を実装',
+  'landing.showcase.highlight.title': '人間とAIのコラボレーションの力',
+  'landing.showcase.highlight.description': 'AIMateXはソフトウェア開発の未来を示しています - 専門的なAIエージェントチームを備えた一人の先見的な開発者が、野心的なプロジェクトを実現できる時代。この革新的なアプローチは、人間の創造性とAIの効率性を組み合わせて、卓越した結果を生み出します。'
 };

@@ -196,7 +196,7 @@ export default {
   'worldmap.page.title': 'Paesi e Regioni Supportati - AIMateX',
   'worldmap.legend.supported': 'Supportato',
   'worldmap.legend.unsupported': 'Non supportato',
-  'landing.hero.title': 'Il tuo team IA personale, ridefinisce la collaborazione',
+  'landing.hero.title': 'Nella Tua Era, Costruisci il Tuo Think Tank di IA',
   'landing.hero.subtitle': 'Costruisci, addestra e scambia agenti IA personalizzati - lascia che esperti IA di vari settori potenzino il tuo lavoro e la tua creatività',
   'landing.hero.getStarted': 'Inizia gratuitamente',
   'landing.hero.exploreFeatures': 'Esplora le funzionalità',
@@ -226,5 +226,17 @@ export default {
   'landing.hero.agent.research.description': 'Mi specializzo nella raccolta e analisi dei dati, fornendo report di ricerca e analisi delle tendenze di mercato',
   'landing.hero.agent.research.skill1': 'Analisi dei Dati',
   'landing.hero.agent.research.skill2': 'Ricerca di Mercato',
-  'landing.hero.agent.research.skill3': 'Previsione delle Tendenze'
+  'landing.hero.agent.research.skill3': 'Previsione delle Tendenze',
+  'landing.showcase.title': 'Un Sviluppatore, Possibilità Infinite',
+  'landing.showcase.subtitle': 'Scopri come Anakkix, supportato da un team di IA, ha costruito AIMateX dal concetto alla produzione',
+  'landing.showcase.role.design': 'Design UI/UX',
+  'landing.showcase.role.design.desc': 'Collaborazione con l\'IA per un design dell\'interfaccia innovativo, garantendo un\'esperienza utente ottimale e un appeal visivo',
+  'landing.showcase.role.frontend': 'Sviluppo Frontend',
+  'landing.showcase.role.frontend.desc': 'Utilizzo della programmazione in coppia con l\'IA per costruire applicazioni React reattive e performanti',
+  'landing.showcase.role.backend': 'Sviluppo Backend',
+  'landing.showcase.role.backend.desc': 'Creazione di un\'architettura server robusta con assistenza IA per scalabilità e sicurezza',
+  'landing.showcase.role.testing': 'Testing & DevOps',
+  'landing.showcase.role.testing.desc': 'Implementazione di strategie complete di test e deployment con automazione basata su IA',
+  'landing.showcase.highlight.title': 'Il Potere della Collaborazione Uomo-IA',
+  'landing.showcase.highlight.description': 'AIMateX dimostra il futuro dello sviluppo software - dove uno sviluppatore visionario, armato di un team di agenti IA specializzati, può dare vita a progetti ambiziosi. Questo approccio rivoluzionario combina la creatività umana con l\'efficienza dell\'IA per risultati eccezionali.'
 };

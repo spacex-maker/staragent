@@ -209,7 +209,7 @@ export default {
   'worldmap.legend.supported': 'Soportado',
   'worldmap.legend.unsupported': 'No soportado',
   // Sección Hero
-  'landing.hero.title': 'Tu equipo de IA personal, redefiniendo la colaboración',
+  'landing.hero.title': 'En Tu Era, Construye Tu Think Tank de IA',
   'landing.hero.subtitle': 'Construye, entrena e intercambia agentes de IA personalizados - deja que expertos en IA de diversas industrias potencien tu trabajo y creatividad',
   'landing.hero.getStarted': 'Comenzar gratis',
   'landing.hero.exploreFeatures': 'Explorar funciones',
@@ -247,4 +247,18 @@ export default {
   'landing.hero.agent.research.skill1': 'Análisis de Datos',
   'landing.hero.agent.research.skill2': 'Investigación de Mercado',
   'landing.hero.agent.research.skill3': 'Predicción de Tendencias',
+
+  // AITeamShowcase Section
+  'landing.showcase.title': 'Un Desarrollador, Posibilidades Infinitas',
+  'landing.showcase.subtitle': 'Descubre cómo Anakkix, potenciado por un equipo de IA, construyó AIMateX desde el concepto hasta la producción',
+  'landing.showcase.role.design': 'Diseño UI/UX',
+  'landing.showcase.role.design.desc': 'Colaboración con IA para un diseño de interfaz innovador, asegurando una experiencia de usuario óptima y atractivo visual',
+  'landing.showcase.role.frontend': 'Desarrollo Frontend',
+  'landing.showcase.role.frontend.desc': 'Aprovechando la programación en pareja con IA para construir aplicaciones React responsivas y de alto rendimiento',
+  'landing.showcase.role.backend': 'Desarrollo Backend',
+  'landing.showcase.role.backend.desc': 'Creación de arquitectura de servidor robusta con asistencia de IA para escalabilidad y seguridad',
+  'landing.showcase.role.testing': 'Testing & DevOps',
+  'landing.showcase.role.testing.desc': 'Implementación de estrategias integrales de prueba y despliegue con automatización impulsada por IA',
+  'landing.showcase.highlight.title': 'El Poder de la Colaboración Humano-IA',
+  'landing.showcase.highlight.description': 'AIMateX demuestra el futuro del desarrollo de software - donde un desarrollador visionario, armado con un equipo de agentes de IA especializados, puede dar vida a proyectos ambiciosos. Este enfoque revolucionario combina la creatividad humana con la eficiencia de la IA para lograr resultados excepcionales.',
 };

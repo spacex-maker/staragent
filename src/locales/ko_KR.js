@@ -213,7 +213,7 @@ export default {
   'worldmap.legend.unsupported': '지원되지 않음',
 
   // 히어로 섹션
-  'landing.hero.title': '당신의 개인 AI 팀, 협업의 미래를 재정의합니다',
+  'landing.hero.title': '당신의 시대에, 당신만의 AI 싱크탱크를 구축하세요',
   'landing.hero.subtitle': '맞춤형 AI 에이전트를 구축, 훈련, 거래하여 각 산업 분야의 AI 전문가가 당신의 업무와 창의성을 지원합니다',
   'landing.hero.getStarted': '무료로 시작하기',
   'landing.hero.exploreFeatures': '기능 살펴보기',
@@ -251,4 +251,18 @@ export default {
   'landing.hero.agent.research.skill1': '데이터 분석',
   'landing.hero.agent.research.skill2': '시장 조사',
   'landing.hero.agent.research.skill3': '트렌드 예측',
+
+  // AITeamShowcase Section
+  'landing.showcase.title': '한 명의 개발자, 무한한 가능성',
+  'landing.showcase.subtitle': 'Anakkix가 AI 팀과 함께 AIMateX를 컨셉에서 프로덕션까지 구축한 과정을 확인하세요',
+  'landing.showcase.role.design': 'UI/UX 디자인',
+  'landing.showcase.role.design.desc': 'AI와 협력하여 혁신적인 인터페이스 디자인을 만들고, 최적의 사용자 경험과 시각적 매력을 보장',
+  'landing.showcase.role.frontend': '프론트엔드 개발',
+  'landing.showcase.role.frontend.desc': 'AI 페어 프로그래밍을 활용하여 반응형이고 고성능인 React 애플리케이션 구축',
+  'landing.showcase.role.backend': '백엔드 개발',
+  'landing.showcase.role.backend.desc': 'AI 지원을 받아 확장성과 보안성을 갖춘 견고한 서버 아키텍처 구축',
+  'landing.showcase.role.testing': '테스팅 & DevOps',
+  'landing.showcase.role.testing.desc': 'AI 기반 자동화를 통한 포괄적인 테스트 및 배포 전략 구현',
+  'landing.showcase.highlight.title': '인간과 AI 협업의 힘',
+  'landing.showcase.highlight.description': 'AIMateX는 소프트웨어 개발의 미래를 보여줍니다 - 전문 AI 에이전트 팀을 갖춘 한 명의 선구적인 개발자가 야심찬 프로젝트를 실현할 수 있는 시대. 이 혁신적인 접근 방식은 인간의 창의성과 AI의 효율성을 결합하여 탁월한 결과를 만들어냅니다.',
 };

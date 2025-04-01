@@ -208,7 +208,7 @@ export default {
   'worldmap.legend.supported': 'Supported',
   'worldmap.legend.unsupported': 'Unsupported',
   // Hero Section
-  'landing.hero.title': 'Your Personal AI Team, Redefining Collaboration',
+  'landing.hero.title': 'In Your Era, Build Your AI Think Tank',
   'landing.hero.subtitle': 'Build, train, and trade customized AI agents - let AI experts from various industries empower your work and creativity',
   'landing.hero.getStarted': 'Get Started Free',
   'landing.hero.exploreFeatures': 'Explore Features',
@@ -244,4 +244,17 @@ export default {
   'landing.hero.agent.research.skill1': 'Data Analysis',
   'landing.hero.agent.research.skill2': 'Market Research',
   'landing.hero.agent.research.skill3': 'Trend Prediction',
+  // AITeamShowcase Section
+  'landing.showcase.title': 'One Developer, Infinite Possibilities',
+  'landing.showcase.subtitle': 'Witness how Anakkix, powered by an AI team, built AIMateX from concept to production',
+  'landing.showcase.role.design': 'UI/UX Design',
+  'landing.showcase.role.design.desc': 'Collaborating with AI for innovative interface design, ensuring optimal user experience and visual appeal',
+  'landing.showcase.role.frontend': 'Frontend Development',
+  'landing.showcase.role.frontend.desc': 'Leveraging AI pair programming to build responsive and performant React applications',
+  'landing.showcase.role.backend': 'Backend Development',
+  'landing.showcase.role.backend.desc': 'Creating robust server architecture with AI assistance for scalability and security',
+  'landing.showcase.role.testing': 'Testing & DevOps',
+  'landing.showcase.role.testing.desc': 'Implementing comprehensive testing and deployment strategies with AI-powered automation',
+  'landing.showcase.highlight.title': 'The Power of Human-AI Collaboration',
+  'landing.showcase.highlight.description': 'AIMateX demonstrates the future of software development - where one visionary developer, armed with a team of specialized AI agents, can bring ambitious projects to life. This revolutionary approach combines human creativity with AI efficiency to deliver exceptional results.',
 };

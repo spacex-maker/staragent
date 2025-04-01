@@ -310,7 +310,7 @@ const Hero = ({ onGetStarted, onExploreFeatures }) => {
           <HeroTitle variants={itemVariants}>
             <FormattedMessage
               id="landing.hero.title"
-              defaultMessage="您的个人AI团队，重新定义协作未来"
+              defaultMessage="在属于你的时代，打造属于你的AI智囊团"
             />
           </HeroTitle>
           <HeroSubtitle variants={itemVariants}>

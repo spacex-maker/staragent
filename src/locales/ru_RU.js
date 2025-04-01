@@ -185,7 +185,7 @@ export default {
   'worldmap.page.title': 'Поддерживаемые страны и регионы - AIMateX',
   'worldmap.legend.supported': 'Поддерживается',
   'worldmap.legend.unsupported': 'Не поддерживается',
-  'landing.hero.title': 'Ваша персональная команда ИИ, переопределяющая сотрудничество',
+  'landing.hero.title': 'В Вашу Эпоху, Создайте Свой ИИ Мозговой Центр',
   'landing.hero.subtitle': 'Создавайте, обучайте и обменивайтесь персонализированными ИИ-агентами - позвольте экспертам ИИ из разных отраслей усилить вашу работу и креативность',
   'landing.hero.getStarted': 'Начать бесплатно',
   'landing.hero.exploreFeatures': 'Исследовать функции',
@@ -215,5 +215,17 @@ export default {
   'landing.hero.agent.research.description': 'Я специализируюсь на сборе и анализе данных, предоставлении исследовательских отчетов и анализе рыночных тенденций',
   'landing.hero.agent.research.skill1': 'Анализ данных',
   'landing.hero.agent.research.skill2': 'Исследование рынка',
-  'landing.hero.agent.research.skill3': 'Прогнозирование трендов'
+  'landing.hero.agent.research.skill3': 'Прогнозирование трендов',
+  'landing.showcase.title': 'Один Разработчик, Бесконечные Возможности',
+  'landing.showcase.subtitle': 'Узнайте, как Anakkix с помощью команды ИИ создал AIMateX от концепции до продакшена',
+  'landing.showcase.role.design': 'UI/UX Дизайн',
+  'landing.showcase.role.design.desc': 'Сотрудничество с ИИ для создания инновационного дизайна интерфейса, обеспечивая оптимальный пользовательский опыт и визуальную привлекательность',
+  'landing.showcase.role.frontend': 'Frontend Разработка',
+  'landing.showcase.role.frontend.desc': 'Парное программирование с ИИ для создания отзывчивых и производительных React-приложений',
+  'landing.showcase.role.backend': 'Backend Разработка',
+  'landing.showcase.role.backend.desc': 'Создание надежной серверной архитектуры с помощью ИИ для обеспечения масштабируемости и безопасности',
+  'landing.showcase.role.testing': 'Тестирование и DevOps',
+  'landing.showcase.role.testing.desc': 'Внедрение комплексных стратегий тестирования и развертывания с автоматизацией на базе ИИ',
+  'landing.showcase.highlight.title': 'Сила Сотрудничества Человека и ИИ',
+  'landing.showcase.highlight.description': 'AIMateX демонстрирует будущее разработки программного обеспечения - где один дальновидный разработчик, вооруженный командой специализированных ИИ-агентов, может воплощать в жизнь амбициозные проекты. Этот революционный подход сочетает человеческую креативность с эффективностью ИИ для достижения исключительных результатов.'
 };

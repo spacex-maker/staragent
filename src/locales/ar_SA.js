@@ -198,7 +198,7 @@ export default {
   'worldmap.legend.unsupported': 'غير مدعوم',
 
   // قسم البطل
-  'landing.hero.title': 'فريقك الشخصي للذكاء الاصطناعي، يعيد تعريف التعاون',
+  'landing.hero.title': 'في عصرك، ابنِ مركز تفكيرك للذكاء الاصطناعي',
   'landing.hero.subtitle': 'قم ببناء وتدريب وتبادل وكلاء الذكاء الاصطناعي المخصصين - دع خبراء الذكاء الاصطناعي من مختلف الصناعات يعززون عملك وإبداعك',
   'landing.hero.getStarted': 'ابدأ مجاناً',
   'landing.hero.exploreFeatures': 'استكشف الميزات',
@@ -236,4 +236,18 @@ export default {
   'landing.hero.agent.research.skill1': 'تحليل البيانات',
   'landing.hero.agent.research.skill2': 'أبحاث السوق',
   'landing.hero.agent.research.skill3': 'التنبؤ بالاتجاهات',
+
+  // AITeamShowcase Section
+  'landing.showcase.title': 'مطور واحد، إمكانيات لا حدود لها',
+  'landing.showcase.subtitle': 'اكتشف كيف قام Anakkix، بدعم من فريق الذكاء الاصطناعي، ببناء AIMateX من المفهوم إلى الإنتاج',
+  'landing.showcase.role.design': 'تصميم واجهة المستخدم/تجربة المستخدم',
+  'landing.showcase.role.design.desc': 'التعاون مع الذكاء الاصطناعي لتصميم واجهة مبتكرة، مع ضمان تجربة مستخدم مثالية وجاذبية بصرية',
+  'landing.showcase.role.frontend': 'تطوير الواجهة الأمامية',
+  'landing.showcase.role.frontend.desc': 'البرمجة المزدوجة مع الذكاء الاصطناعي لبناء تطبيقات React سريعة الاستجابة وعالية الأداء',
+  'landing.showcase.role.backend': 'تطوير الخلفية',
+  'landing.showcase.role.backend.desc': 'إنشاء بنية خادم قوية بمساعدة الذكاء الاصطناعي للقابلية للتوسع والأمان',
+  'landing.showcase.role.testing': 'الاختبار وDevOps',
+  'landing.showcase.role.testing.desc': 'تنفيذ استراتيجيات شاملة للاختبار والنشر مع أتمتة قائمة على الذكاء الاصطناعي',
+  'landing.showcase.highlight.title': 'قوة التعاون بين الإنسان والذكاء الاصطناعي',
+  'landing.showcase.highlight.description': 'يوضح AIMateX مستقبل تطوير البرمجيات - حيث يمكن لمطور صاحب رؤية، مسلح بفريق من وكلاء الذكاء الاصطناعي المتخصصين، إحياء المشاريع الطموحة. يجمع هذا النهج الثوري بين الإبداع البشري وكفاءة الذكاء الاصطناعي لتحقيق نتائج استثنائية.',
 };
