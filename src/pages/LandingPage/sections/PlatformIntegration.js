@@ -195,27 +195,27 @@ const PlatformIntegration = () => {
     {
       id: 1,
       name: "ChatGPT",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+      logo: "https://aimatex.com/ChatGPT-Logo.svg"
     },
     {
       id: 2,
       name: "DeepSeek",
-      logo: "https://via.placeholder.com/150?text=DeepSeek"
+      logo: "https://aimatex.com/DeepSeek_logo.svg"
     },
     {
       id: 3,
       name: "Grok",
-      logo: "https://via.placeholder.com/150?text=Grok"
+      logo: "https://aimatex.com/grok.svg.png"
     },
     {
       id: 4,
       name: "Claude",
-      logo: "https://via.placeholder.com/150?text=Claude"
+      logo: "https://aimatex.com/Claude_AI_logo.svg.png"
     },
     {
       id: 5,
       name: "Gemini",
-      logo: "https://via.placeholder.com/150?text=Gemini"
+      logo: "https://aimatex.com/Gemini_language_model_logo.png"
     }
   ];
 

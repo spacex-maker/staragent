@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import { useTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { Layout } from 'antd';
 import styled from 'styled-components';
 
 // Components
+import SEO from '../../components/SEO';
 import SimpleHeader from '../../components/headers/simple';
 import Hero from './sections/Hero';
 import Features from './sections/Features';
@@ -17,6 +17,7 @@ import PlatformIntegration from './sections/PlatformIntegration';
 import Testimonials from './sections/Testimonials';
 import CallToAction from './sections/CallToAction';
 import Footer from './sections/Footer';
+import AITeamShowcase from './sections/AITeamShowcase';
 
 // Styles
 import { 
@@ -99,7 +100,7 @@ const LandingPage = ({ onLanguageChange, currentLocale }) => {
 
   // Handle CTAs
   const handleGetStarted = () => {
-    navigate('/register');
+    navigate('/signup');
   };
 
   const handleExploreFeatures = () => {
@@ -118,14 +119,15 @@ const LandingPage = ({ onLanguageChange, currentLocale }) => {
 
   return (
     <LandingPageContainer>
-      <Helmet>
-        <title>AI MateX - 您的个人 AI 团队平台</title>
-        <meta name="description" content="AI MateX 是一个全新的 AI 团队平台，让您创建、定制和交易个性化 AI 角色。整合 ChatGPT、Deepseek、Grok 等先进模型，打造属于您的 AI 团队。" />
-        <meta property="og:title" content="AI MateX - 您的个人 AI 团队平台" />
-        <meta property="og:description" content="创建、定制和交易个性化 AI 角色，打造属于您的 AI 团队。" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/ai-team-og-image.jpg" />
-      </Helmet>
+      <SEO 
+        title="您的个人 AI 团队平台"
+        description="AI MateX 是一个全新的 AI 团队平台，让您创建、定制和交易个性化 AI 角色。整合 ChatGPT、Deepseek、Grok 等先进模型，打造属于您的 AI 团队。"
+        keywords="AI团队,人工智能,AI助手,ChatGPT,Deepseek,Grok,AI定制,AI交易,AI平台,AI协作,AI训练,AI开发"
+        image="/images/ai-team-og-image.jpg"
+        url="https://aimatex.com"
+        type="website"
+        locale={currentLocale}
+      />
 
       {/* Scroll Progress Indicator */}
       <ScrollProgress>
@@ -162,6 +164,8 @@ const LandingPage = ({ onLanguageChange, currentLocale }) => {
 
         {/* Call to Action */}
         <CallToAction onGetStarted={handleGetStarted} />
+
+        <AITeamShowcase />
       </MainContent>
 
       {/* Footer */}

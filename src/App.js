@@ -10,6 +10,7 @@ import ResetPasswordPage from "./pages/ResetPassword";
 import AgentPage from "./pages/Agent";
 import OAuthCallback from './pages/OAuth/Callback';
 import WorldMap from './pages/WorldMap';
+import LandingPage from './pages/LandingPage';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
@@ -254,6 +255,7 @@ export default function App() {
           <Router>
             <Routes>
               <Route path="/" element={<RootRoute />} />
+              <Route path="/welcome" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />

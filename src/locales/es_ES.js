@@ -208,4 +208,57 @@ export default {
   'worldmap.page.title': 'Países y Regiones Soportados - AIMateX',
   'worldmap.legend.supported': 'Soportado',
   'worldmap.legend.unsupported': 'No soportado',
+  // Sección Hero
+  'landing.hero.title': 'En Tu Era, Construye Tu Think Tank de IA',
+  'landing.hero.subtitle': 'Construye, entrena e intercambia agentes de IA personalizados - deja que expertos en IA de diversas industrias potencien tu trabajo y creatividad',
+  'landing.hero.getStarted': 'Comenzar gratis',
+  'landing.hero.exploreFeatures': 'Explorar funciones',
+  
+  // Estadísticas
+  'landing.hero.stats.experts': 'Expertos en IA',
+  'landing.hero.stats.users': 'Usuarios activos',
+  'landing.hero.stats.satisfaction': 'Satisfacción',
+
+  // Agentes de IA
+  'landing.hero.agent.finance.name': 'Asesor Financiero',
+  'landing.hero.agent.finance.role': 'Experto en Análisis Financiero',
+  'landing.hero.agent.finance.description': 'Puedo analizar datos financieros, proporcionar consejos de inversión y ayudar a optimizar la gestión presupuestaria',
+  'landing.hero.agent.finance.skill1': 'Análisis Financiero',
+  'landing.hero.agent.finance.skill2': 'Estrategia de Inversión',
+  'landing.hero.agent.finance.skill3': 'Planificación Presupuestaria',
+  
+  'landing.hero.agent.creative.name': 'Asistente Creativo',
+  'landing.hero.agent.creative.role': 'Experto en Creatividad y Diseño',
+  'landing.hero.agent.creative.description': 'Destaco en escritura creativa, creación de contenido y conceptos de diseño para inspirar tu creatividad',
+  'landing.hero.agent.creative.skill1': 'Creación de Contenido',
+  'landing.hero.agent.creative.skill2': 'Escritura Creativa',
+  'landing.hero.agent.creative.skill3': 'Design Thinking',
+  
+  'landing.hero.agent.tech.name': 'Experto Técnico',
+  'landing.hero.agent.tech.role': 'Experto en Programación y Desarrollo',
+  'landing.hero.agent.tech.description': 'Puedo proporcionar ayuda en programación, resolver problemas técnicos y asesorar en desarrollo de software',
+  'landing.hero.agent.tech.skill1': 'Programación',
+  'landing.hero.agent.tech.skill2': 'Soporte Técnico',
+  'landing.hero.agent.tech.skill3': 'Diseño de Sistemas',
+  
+  'landing.hero.agent.research.name': 'Asistente de Investigación',
+  'landing.hero.agent.research.role': 'Experto en Datos y Análisis',
+  'landing.hero.agent.research.description': 'Me especializo en recopilar y analizar datos, proporcionando informes de investigación y análisis de tendencias del mercado',
+  'landing.hero.agent.research.skill1': 'Análisis de Datos',
+  'landing.hero.agent.research.skill2': 'Investigación de Mercado',
+  'landing.hero.agent.research.skill3': 'Predicción de Tendencias',
+
+  // AITeamShowcase Section
+  'landing.showcase.title': 'Un Desarrollador, Posibilidades Infinitas',
+  'landing.showcase.subtitle': 'Descubre cómo Anakkix, potenciado por un equipo de IA, construyó AIMateX desde el concepto hasta la producción',
+  'landing.showcase.role.design': 'Diseño UI/UX',
+  'landing.showcase.role.design.desc': 'Colaboración con IA para un diseño de interfaz innovador, asegurando una experiencia de usuario óptima y atractivo visual',
+  'landing.showcase.role.frontend': 'Desarrollo Frontend',
+  'landing.showcase.role.frontend.desc': 'Aprovechando la programación en pareja con IA para construir aplicaciones React responsivas y de alto rendimiento',
+  'landing.showcase.role.backend': 'Desarrollo Backend',
+  'landing.showcase.role.backend.desc': 'Creación de arquitectura de servidor robusta con asistencia de IA para escalabilidad y seguridad',
+  'landing.showcase.role.testing': 'Testing & DevOps',
+  'landing.showcase.role.testing.desc': 'Implementación de estrategias integrales de prueba y despliegue con automatización impulsada por IA',
+  'landing.showcase.highlight.title': 'El Poder de la Colaboración Humano-IA',
+  'landing.showcase.highlight.description': 'AIMateX demuestra el futuro del desarrollo de software - donde un desarrollador visionario, armado con un equipo de agentes de IA especializados, puede dar vida a proyectos ambiciosos. Este enfoque revolucionario combina la creatividad humana con la eficiencia de la IA para lograr resultados excepcionales.',
 };

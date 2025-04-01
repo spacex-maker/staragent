@@ -23,7 +23,7 @@ export const TopControls = ({
 
   return (
     <TopRightControls>
-      <IconButton as={Link} to="/" title="返回官网">
+      <IconButton as={Link} to="/welcome" title="返回官网">
         <HomeOutlined />
       </IconButton>
       <IconButton onClick={toggleTheme}>

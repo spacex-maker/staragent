@@ -195,5 +195,59 @@ export default {
   'terms.related.privacy': 'سياسة الخصوصية',
   'worldmap.page.title': 'البلدان والمناطق المدعومة - AIMateX',
   'worldmap.legend.supported': 'مدعوم',
-  'worldmap.legend.unsupported': 'غير مدعوم'
+  'worldmap.legend.unsupported': 'غير مدعوم',
+
+  // قسم البطل
+  'landing.hero.title': 'في عصرك، ابنِ مركز تفكيرك للذكاء الاصطناعي',
+  'landing.hero.subtitle': 'قم ببناء وتدريب وتبادل وكلاء الذكاء الاصطناعي المخصصين - دع خبراء الذكاء الاصطناعي من مختلف الصناعات يعززون عملك وإبداعك',
+  'landing.hero.getStarted': 'ابدأ مجاناً',
+  'landing.hero.exploreFeatures': 'استكشف الميزات',
+  
+  // الإحصائيات
+  'landing.hero.stats.experts': 'خبراء الذكاء الاصطناعي',
+  'landing.hero.stats.users': 'المستخدمين النشطين',
+  'landing.hero.stats.satisfaction': 'نسبة الرضا',
+
+  // وكلاء الذكاء الاصطناعي
+  'landing.hero.agent.finance.name': 'المستشار المالي',
+  'landing.hero.agent.finance.role': 'خبير التحليل المالي',
+  'landing.hero.agent.finance.description': 'يمكنني تحليل البيانات المالية وتقديم المشورة الاستثمارية والمساعدة في تحسين إدارة الميزانية',
+  'landing.hero.agent.finance.skill1': 'التحليل المالي',
+  'landing.hero.agent.finance.skill2': 'استراتيجية الاستثمار',
+  'landing.hero.agent.finance.skill3': 'تخطيط الميزانية',
+  
+  'landing.hero.agent.creative.name': 'المساعد الإبداعي',
+  'landing.hero.agent.creative.role': 'خبير الإبداع والتصميم',
+  'landing.hero.agent.creative.description': 'أتفوق في الكتابة الإبداعية وإنشاء المحتوى ومفاهيم التصميم لتحفيز إلهامك الإبداعي',
+  'landing.hero.agent.creative.skill1': 'إنشاء المحتوى',
+  'landing.hero.agent.creative.skill2': 'الكتابة الإبداعية',
+  'landing.hero.agent.creative.skill3': 'التفكير التصميمي',
+  
+  'landing.hero.agent.tech.name': 'الخبير التقني',
+  'landing.hero.agent.tech.role': 'خبير البرمجة والتطوير',
+  'landing.hero.agent.tech.description': 'يمكنني تقديم المساعدة في البرمجة وحل المشكلات التقنية وتقديم المشورة في تطوير البرمجيات',
+  'landing.hero.agent.tech.skill1': 'البرمجة',
+  'landing.hero.agent.tech.skill2': 'الدعم التقني',
+  'landing.hero.agent.tech.skill3': 'تصميم النظم',
+  
+  'landing.hero.agent.research.name': 'مساعد البحث',
+  'landing.hero.agent.research.role': 'خبير البيانات والتحليل',
+  'landing.hero.agent.research.description': 'أتخصص في جمع وتحليل البيانات وتقديم تقارير البحث وتحليل اتجاهات السوق',
+  'landing.hero.agent.research.skill1': 'تحليل البيانات',
+  'landing.hero.agent.research.skill2': 'أبحاث السوق',
+  'landing.hero.agent.research.skill3': 'التنبؤ بالاتجاهات',
+
+  // AITeamShowcase Section
+  'landing.showcase.title': 'مطور واحد، إمكانيات لا حدود لها',
+  'landing.showcase.subtitle': 'اكتشف كيف قام Anakkix، بدعم من فريق الذكاء الاصطناعي، ببناء AIMateX من المفهوم إلى الإنتاج',
+  'landing.showcase.role.design': 'تصميم واجهة المستخدم/تجربة المستخدم',
+  'landing.showcase.role.design.desc': 'التعاون مع الذكاء الاصطناعي لتصميم واجهة مبتكرة، مع ضمان تجربة مستخدم مثالية وجاذبية بصرية',
+  'landing.showcase.role.frontend': 'تطوير الواجهة الأمامية',
+  'landing.showcase.role.frontend.desc': 'البرمجة المزدوجة مع الذكاء الاصطناعي لبناء تطبيقات React سريعة الاستجابة وعالية الأداء',
+  'landing.showcase.role.backend': 'تطوير الخلفية',
+  'landing.showcase.role.backend.desc': 'إنشاء بنية خادم قوية بمساعدة الذكاء الاصطناعي للقابلية للتوسع والأمان',
+  'landing.showcase.role.testing': 'الاختبار وDevOps',
+  'landing.showcase.role.testing.desc': 'تنفيذ استراتيجيات شاملة للاختبار والنشر مع أتمتة قائمة على الذكاء الاصطناعي',
+  'landing.showcase.highlight.title': 'قوة التعاون بين الإنسان والذكاء الاصطناعي',
+  'landing.showcase.highlight.description': 'يوضح AIMateX مستقبل تطوير البرمجيات - حيث يمكن لمطور صاحب رؤية، مسلح بفريق من وكلاء الذكاء الاصطناعي المتخصصين، إحياء المشاريع الطموحة. يجمع هذا النهج الثوري بين الإبداع البشري وكفاءة الذكاء الاصطناعي لتحقيق نتائج استثنائية.',
 };

@@ -195,5 +195,51 @@ export default {
   'terms.related.privacy': 'Datenschutzerklärung',
   'worldmap.page.title': 'Unterstützte Länder und Regionen - AIMateX',
   'worldmap.legend.supported': 'Unterstützt',
-  'worldmap.legend.unsupported': 'Nicht unterstützt'
+  'worldmap.legend.unsupported': 'Nicht unterstützt',
+
+  // Hero Section
+  'landing.hero.title': 'In Ihrer Ära, Bauen Sie Ihren KI-Thinktank',
+  'landing.hero.subtitle': 'Erstellen, trainieren und handeln Sie mit maßgeschneiderten KI-Agenten - lassen Sie KI-Experten aus verschiedenen Branchen Ihre Arbeit und Kreativität unterstützen',
+  'landing.hero.getStarted': 'Kostenlos starten',
+  'landing.hero.exploreFeatures': 'Funktionen entdecken',
+  
+  // Hero Stats
+  'landing.hero.stats.experts': 'KI-Experten',
+  'landing.hero.stats.users': 'Aktive Nutzer',
+  'landing.hero.stats.satisfaction': 'Zufriedenheit',
+
+  // AI Agents
+  'landing.hero.agents.finance.name': 'Finanz-KI',
+  'landing.hero.agents.finance.role': 'Finanzexperte',
+  'landing.hero.agents.finance.description': 'Spezialisiert auf Finanzanalyse, Investitionsberatung und Portfoliomanagement',
+  'landing.hero.agents.finance.skills': 'Marktanalyse, Risikobewertung, Anlagestrategien',
+
+  'landing.hero.agents.creative.name': 'Kreativ-KI',
+  'landing.hero.agents.creative.role': 'Kreativdirektor',
+  'landing.hero.agents.creative.description': 'Experte für kreatives Design, Content-Erstellung und visuelle Kommunikation',
+  'landing.hero.agents.creative.skills': 'Grafikdesign, Storytelling, Markenentwicklung',
+
+  'landing.hero.agents.tech.name': 'Tech-KI',
+  'landing.hero.agents.tech.role': 'Technologie-Architekt',
+  'landing.hero.agents.tech.description': 'Fokussiert auf Softwareentwicklung, Systemarchitektur und technische Lösungen',
+  'landing.hero.agents.tech.skills': 'Programmierung, Cloud-Computing, DevOps',
+
+  'landing.hero.agents.research.name': 'Forschungs-KI',
+  'landing.hero.agents.research.role': 'Forschungsanalyst',
+  'landing.hero.agents.research.description': 'Spezialisiert auf Datenanalyse, Marktforschung und Trendanalyse',
+  'landing.hero.agents.research.skills': 'Datenanalyse, Berichterstattung, Prognosen',
+
+  // AITeamShowcase Section
+  'landing.showcase.title': 'Ein Entwickler, Unendliche Möglichkeiten',
+  'landing.showcase.subtitle': 'Erleben Sie, wie Anakkix mit einem KI-Team AIMateX von der Konzeption bis zur Produktion aufgebaut hat',
+  'landing.showcase.role.design': 'UI/UX Design',
+  'landing.showcase.role.design.desc': 'Zusammenarbeit mit KI für innovatives Interface-Design, optimale Benutzererfahrung und visuelle Attraktivität',
+  'landing.showcase.role.frontend': 'Frontend-Entwicklung',
+  'landing.showcase.role.frontend.desc': 'Nutzung von KI-Pair-Programming zum Aufbau reaktionsschneller und leistungsstarker React-Anwendungen',
+  'landing.showcase.role.backend': 'Backend-Entwicklung',
+  'landing.showcase.role.backend.desc': 'Erstellung robuster Serverarchitektur mit KI-Unterstützung für Skalierbarkeit und Sicherheit',
+  'landing.showcase.role.testing': 'Testing & DevOps',
+  'landing.showcase.role.testing.desc': 'Implementierung umfassender Test- und Deployment-Strategien mit KI-gestützter Automatisierung',
+  'landing.showcase.highlight.title': 'Die Kraft der Mensch-KI-Zusammenarbeit',
+  'landing.showcase.highlight.description': 'AIMateX zeigt die Zukunft der Softwareentwicklung - wo ein visionärer Entwickler, ausgestattet mit einem Team spezialisierter KI-Agenten, ambitionierte Projekte zum Leben erwecken kann. Dieser revolutionäre Ansatz verbindet menschliche Kreativität mit KI-Effizienz für außergewöhnliche Ergebnisse.',
 };
