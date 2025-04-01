@@ -200,7 +200,7 @@ const PlatformIntegration = () => {
     {
       id: 2,
       name: "DeepSeek",
-      logo: "https://via.placeholder.com/150?text=DeepSeek"
+      logo: "https://cdn.deepseek.com/platform/favicon.png"
     },
     {
       id: 3,

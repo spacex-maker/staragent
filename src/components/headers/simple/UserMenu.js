@@ -431,6 +431,20 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
             </div>
           </MenuItemContent>
         </UserMenuItem>
+        <UserMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
+            navigate('/welcome');
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-house icon" />
+              官网首页
+            </div>
+          </MenuItemContent>
+        </UserMenuItem>
         <LogoutMenuItem 
           isDark={isDark}
           onClick={() => {

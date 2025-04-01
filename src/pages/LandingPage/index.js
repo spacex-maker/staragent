@@ -99,7 +99,7 @@ const LandingPage = ({ onLanguageChange, currentLocale }) => {
 
   // Handle CTAs
   const handleGetStarted = () => {
-    navigate('/register');
+    navigate('/signup');
   };
 
   const handleExploreFeatures = () => {
