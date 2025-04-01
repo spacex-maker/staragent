@@ -345,9 +345,25 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
 
   const handleNetworkChange = (network) => {
     setCurrentNetwork(network);
+    setShowUserMenu(false);
     localStorage.setItem('network', network);
-    window.location.reload(); // 重新加载页面以应用新的 API 基地址
+    message.success('网络切换中，请稍候...', 1, () => {
+      window.location.reload();
+    });
     setShowNetworkModal(false);
+  };
+
+  const getNetworkDisplayName = (network) => {
+    switch (network) {
+      case 'china':
+        return '中国节点';
+      case 'usa':
+        return '美国节点';
+      case 'japan':
+        return '日本节点';
+      default:
+        return '中国节点';
+    }
   };
 
   return (
@@ -413,7 +429,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
               切换网络
             </div>
             <span style={{ fontSize: '0.8em', opacity: 0.7 }}>
-              {currentNetwork === 'china' ? '中国节点' : '美国节点'}
+              {getNetworkDisplayName(currentNetwork)}
             </span>
           </MenuItemContent>
         </UserMenuItem>
