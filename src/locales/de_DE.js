@@ -195,5 +195,37 @@ export default {
   'terms.related.privacy': 'Datenschutzerklärung',
   'worldmap.page.title': 'Unterstützte Länder und Regionen - AIMateX',
   'worldmap.legend.supported': 'Unterstützt',
-  'worldmap.legend.unsupported': 'Nicht unterstützt'
+  'worldmap.legend.unsupported': 'Nicht unterstützt',
+
+  // Hero Section
+  'landing.hero.title': 'Ihr persönliches KI-Team, neu definiert Zusammenarbeit',
+  'landing.hero.subtitle': 'Erstellen, trainieren und handeln Sie mit maßgeschneiderten KI-Agenten - lassen Sie KI-Experten aus verschiedenen Branchen Ihre Arbeit und Kreativität unterstützen',
+  'landing.hero.getStarted': 'Kostenlos starten',
+  'landing.hero.exploreFeatures': 'Funktionen entdecken',
+  
+  // Hero Stats
+  'landing.hero.stats.experts': 'KI-Experten',
+  'landing.hero.stats.users': 'Aktive Nutzer',
+  'landing.hero.stats.satisfaction': 'Zufriedenheit',
+
+  // AI Agents
+  'landing.hero.agents.finance.name': 'Finanz-KI',
+  'landing.hero.agents.finance.role': 'Finanzexperte',
+  'landing.hero.agents.finance.description': 'Spezialisiert auf Finanzanalyse, Investitionsberatung und Portfoliomanagement',
+  'landing.hero.agents.finance.skills': 'Marktanalyse, Risikobewertung, Anlagestrategien',
+
+  'landing.hero.agents.creative.name': 'Kreativ-KI',
+  'landing.hero.agents.creative.role': 'Kreativdirektor',
+  'landing.hero.agents.creative.description': 'Experte für kreatives Design, Content-Erstellung und visuelle Kommunikation',
+  'landing.hero.agents.creative.skills': 'Grafikdesign, Storytelling, Markenentwicklung',
+
+  'landing.hero.agents.tech.name': 'Tech-KI',
+  'landing.hero.agents.tech.role': 'Technologie-Architekt',
+  'landing.hero.agents.tech.description': 'Fokussiert auf Softwareentwicklung, Systemarchitektur und technische Lösungen',
+  'landing.hero.agents.tech.skills': 'Programmierung, Cloud-Computing, DevOps',
+
+  'landing.hero.agents.research.name': 'Forschungs-KI',
+  'landing.hero.agents.research.role': 'Forschungsanalyst',
+  'landing.hero.agents.research.description': 'Spezialisiert auf Datenanalyse, Marktforschung und Trendanalyse',
+  'landing.hero.agents.research.skills': 'Datenanalyse, Berichterstattung, Prognosen',
 };

@@ -206,5 +206,42 @@ export default {
   'terms.related.privacy': 'Privacy Policy',
   'worldmap.page.title': 'Supported Countries and Regions - AIMateX',
   'worldmap.legend.supported': 'Supported',
-  'worldmap.legend.unsupported': 'Unsupported'
+  'worldmap.legend.unsupported': 'Unsupported',
+  // Hero Section
+  'landing.hero.title': 'Your Personal AI Team, Redefining Collaboration',
+  'landing.hero.subtitle': 'Build, train, and trade customized AI agents - let AI experts from various industries empower your work and creativity',
+  'landing.hero.getStarted': 'Get Started Free',
+  'landing.hero.exploreFeatures': 'Explore Features',
+  // Hero Statistics
+  'landing.hero.stats.experts': 'AI Experts',
+  'landing.hero.stats.users': 'Active Users',
+  'landing.hero.stats.satisfaction': 'Satisfaction',
+  // Hero AI Agents
+  'landing.hero.agent.finance.name': 'Financial Advisor',
+  'landing.hero.agent.finance.role': 'Financial Analysis Expert',
+  'landing.hero.agent.finance.description': 'I can analyze financial data, provide investment advice, and help optimize budget management',
+  'landing.hero.agent.finance.skill1': 'Financial Analysis',
+  'landing.hero.agent.finance.skill2': 'Investment Strategy',
+  'landing.hero.agent.finance.skill3': 'Budget Planning',
+  
+  'landing.hero.agent.creative.name': 'Creative Assistant',
+  'landing.hero.agent.creative.role': 'Creative & Design Expert',
+  'landing.hero.agent.creative.description': 'I excel at creative writing, content creation, and design concepts to spark your creative inspiration',
+  'landing.hero.agent.creative.skill1': 'Content Creation',
+  'landing.hero.agent.creative.skill2': 'Creative Writing',
+  'landing.hero.agent.creative.skill3': 'Design Thinking',
+  
+  'landing.hero.agent.tech.name': 'Tech Expert',
+  'landing.hero.agent.tech.role': 'Programming & Development Expert',
+  'landing.hero.agent.tech.description': 'I can provide programming help, technical problem-solving, and software development advice',
+  'landing.hero.agent.tech.skill1': 'Programming',
+  'landing.hero.agent.tech.skill2': 'Tech Support',
+  'landing.hero.agent.tech.skill3': 'System Design',
+  
+  'landing.hero.agent.research.name': 'Research Assistant',
+  'landing.hero.agent.research.role': 'Data & Analytics Expert',
+  'landing.hero.agent.research.description': 'I specialize in collecting and analyzing data, providing research reports and market trend analysis',
+  'landing.hero.agent.research.skill1': 'Data Analysis',
+  'landing.hero.agent.research.skill2': 'Market Research',
+  'landing.hero.agent.research.skill3': 'Trend Prediction',
 };

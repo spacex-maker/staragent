@@ -15,10 +15,13 @@ import {
 const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 2;
-  padding: 4rem 0;
+  padding: 0 0 4rem 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
 
   @media (max-width: 768px) {
-    padding: 2rem 0;
+    padding: 0 0 2rem 0;
   }
 `;
 
@@ -52,9 +55,10 @@ const HeroSubtitle = styled(motion.p)`
   font-size: 1.5rem;
   color: var(--ant-color-text-secondary);
   margin-bottom: 2.5rem;
-  max-width: 600px;
+  max-width: 800px;
   line-height: 1.6;
   opacity: 0.9;
+  margin: 0 auto 2.5rem;
 
   @media (max-width: 768px) {
     font-size: 1.25rem;
@@ -65,6 +69,7 @@ const ButtonGroup = styled(motion.div)`
   display: flex;
   gap: 1.25rem;
   margin-bottom: 3rem;
+  justify-content: center;
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -77,6 +82,7 @@ const StatsGroup = styled(motion.div)`
   display: flex;
   gap: 3rem;
   margin-top: 4rem;
+  justify-content: center;
 
   @media (max-width: 768px) {
     gap: 2rem;
@@ -111,11 +117,13 @@ const HeroImageContainer = styled(motion.div)`
   height: 100%;
   min-height: 600px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding-top: 2rem;
 
   @media (max-width: 768px) {
-    min-height: 400px;
+    min-height: auto;
+    padding-top: 1rem;
   }
 `;
 
@@ -124,18 +132,20 @@ const AIAgentGrid = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
     padding: 1rem;
+    gap: 1.25rem;
   }
 `;
 
 const AIAgentCard = styled(motion.div)`
-  padding: 1.5rem;
+  padding: 2rem 2.5rem;
   background: ${props => props.theme.mode === 'dark' 
     ? 'rgba(15, 23, 42, 0.75)' 
     : 'rgba(255, 255, 255, 0.85)'};
@@ -151,12 +161,20 @@ const AIAgentCard = styled(motion.div)`
     transform: translateY(-5px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
 `;
 
 const AIAgentHeader = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${props => props.theme.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'rgba(0, 0, 0, 0.05)'};
 `;
 
 const AIAgentAvatar = styled.div`
@@ -217,23 +235,23 @@ const AIAgentBody = styled.div`
   background: ${props => props.theme.mode === 'dark' 
     ? 'rgba(30, 41, 59, 0.5)' 
     : 'rgba(241, 245, 249, 0.7)'};
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
   color: var(--ant-color-text);
-  line-height: 1.5;
+  line-height: 1.6;
 `;
 
 const AIAgentSkills = styled.div`
   display: flex;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
 `;
 
 const AIAgentSkill = styled.span`
-  font-size: 0.75rem;
-  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+  padding: 0.4rem 1rem;
   border-radius: 20px;
   background: ${props => props.bg || 'rgba(59, 130, 246, 0.1)'};
   color: ${props => props.color || 'var(--ant-color-primary)'};
@@ -268,13 +286,14 @@ const Hero = ({ onGetStarted, onExploreFeatures }) => {
   };
 
   const cardVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { x: -20, opacity: 0 },
     visible: (i) => ({
-      y: 0,
+      x: 0,
       opacity: 1,
       transition: {
-        delay: i * 0.2,
-        duration: 0.5
+        delay: i * 0.15,
+        duration: 0.5,
+        ease: "easeOut"
       }
     })
   };
@@ -283,134 +302,150 @@ const Hero = ({ onGetStarted, onExploreFeatures }) => {
     <HeroSection>
       <GradientBackground />
       <SectionContainer>
-        <Row gutter={[48, 48]} align="middle">
-          <Col xs={24} lg={12}>
-            <HeroContent
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
+        <HeroContent
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <HeroTitle variants={itemVariants}>
+            <FormattedMessage
+              id="landing.hero.title"
+              defaultMessage="您的个人AI团队，重新定义协作未来"
+            />
+          </HeroTitle>
+          <HeroSubtitle variants={itemVariants}>
+            <FormattedMessage
+              id="landing.hero.subtitle"
+              defaultMessage="打造、训练与交易定制化AI角色，让各行各业的AI专家助力您的工作与创造"
+            />
+          </HeroSubtitle>
+          <ButtonGroup variants={itemVariants}>
+            <PrimaryButton 
+              onClick={onGetStarted}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <HeroTitle variants={itemVariants}>
-                <FormattedMessage
-                  id="landing.hero.title"
-                  defaultMessage="您的个人AI团队，重新定义协作未来"
-                />
-              </HeroTitle>
-              <HeroSubtitle variants={itemVariants}>
-                <FormattedMessage
-                  id="landing.hero.subtitle"
-                  defaultMessage="打造、训练与交易定制化AI角色，让各行各业的AI专家助力您的工作与创造"
-                />
-              </HeroSubtitle>
-              <ButtonGroup variants={itemVariants}>
-                <PrimaryButton 
-                  onClick={onGetStarted}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FormattedMessage
-                    id="landing.hero.getStarted"
-                    defaultMessage="免费开始使用"
-                  />
-                </PrimaryButton>
-                <SecondaryButton 
-                  onClick={onExploreFeatures}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FormattedMessage
-                    id="landing.hero.exploreFeatures"
-                    defaultMessage="探索功能"
-                  />
-                </SecondaryButton>
-              </ButtonGroup>
-              <StatsGroup variants={itemVariants}>
-                <StatItem>
-                  <StatNumber>100+</StatNumber>
-                  <StatLabel>AI专家角色</StatLabel>
-                </StatItem>
-                <StatItem>
-                  <StatNumber>50K+</StatNumber>
-                  <StatLabel>活跃用户</StatLabel>
-                </StatItem>
-                <StatItem>
-                  <StatNumber>99%</StatNumber>
-                  <StatLabel>用户满意度</StatLabel>
-                </StatItem>
-              </StatsGroup>
-            </HeroContent>
-          </Col>
-          
-          <Col xs={24} lg={12}>
-            <HeroImageContainer>
-              <AIAgentGrid>
-                {[
-                  {
-                    avatar: 'F',
-                    name: '财务顾问',
-                    role: '财务分析专家',
-                    description: '我可以分析财务数据，提供投资建议，并帮助优化预算管理',
-                    color: '#10b981',
-                    skills: ['财务分析', '投资策略', '预算规划']
-                  },
-                  {
-                    avatar: 'C',
-                    name: '创意助手',
-                    role: '创意与设计专家',
-                    description: '我擅长创意写作、内容创作和设计概念，可以激发您的创意灵感',
-                    color: '#f59e0b',
-                    skills: ['内容创作', '创意写作', '设计思维']
-                  },
-                  {
-                    avatar: 'T',
-                    name: '技术专家',
-                    role: '编程与开发专家',
-                    description: '我可以提供编程帮助、技术问题解答和软件开发建议',
-                    color: '#6366f1',
-                    skills: ['编程开发', '技术支持', '系统设计']
-                  },
-                  {
-                    avatar: 'R',
-                    name: '研究助理',
-                    role: '数据与分析专家',
-                    description: '我擅长收集和分析数据，提供研究报告和市场趋势分析',
-                    color: '#ec4899',
-                    skills: ['数据分析', '市场调研', '趋势预测']
-                  }
-                ].map((agent, index) => (
-                  <AIAgentCard
-                    key={agent.name}
-                    custom={index}
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate="visible"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <AIAgentHeader>
-                      <AIAgentAvatar bg={agent.color}>{agent.avatar}</AIAgentAvatar>
-                      <AIAgentInfo>
-                        <AIAgentName>{agent.name}</AIAgentName>
-                        <AIAgentRole>{agent.role}</AIAgentRole>
-                      </AIAgentInfo>
-                    </AIAgentHeader>
-                    <AIAgentBody>{agent.description}</AIAgentBody>
-                    <AIAgentSkills>
-                      {agent.skills.map(skill => (
-                        <AIAgentSkill
-                          key={skill}
-                          bg={`${agent.color}15`}
-                          color={agent.color}
-                        >
-                          {skill}
-                        </AIAgentSkill>
-                      ))}
-                    </AIAgentSkills>
-                  </AIAgentCard>
-                ))}
-              </AIAgentGrid>
-            </HeroImageContainer>
-          </Col>
-        </Row>
+              <FormattedMessage
+                id="landing.hero.getStarted"
+                defaultMessage="免费开始使用"
+              />
+            </PrimaryButton>
+            <SecondaryButton 
+              onClick={onExploreFeatures}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <FormattedMessage
+                id="landing.hero.exploreFeatures"
+                defaultMessage="探索功能"
+              />
+            </SecondaryButton>
+          </ButtonGroup>
+          <StatsGroup variants={itemVariants}>
+            <StatItem>
+              <StatNumber>100+</StatNumber>
+              <StatLabel>
+                <FormattedMessage id="landing.hero.stats.experts" defaultMessage="AI专家角色" />
+              </StatLabel>
+            </StatItem>
+            <StatItem>
+              <StatNumber>50K+</StatNumber>
+              <StatLabel>
+                <FormattedMessage id="landing.hero.stats.users" defaultMessage="活跃用户" />
+              </StatLabel>
+            </StatItem>
+            <StatItem>
+              <StatNumber>99%</StatNumber>
+              <StatLabel>
+                <FormattedMessage id="landing.hero.stats.satisfaction" defaultMessage="用户满意度" />
+              </StatLabel>
+            </StatItem>
+          </StatsGroup>
+        </HeroContent>
+        
+        <HeroImageContainer>
+          <AIAgentGrid>
+            {[
+              {
+                avatar: 'F',
+                name: <FormattedMessage id="landing.hero.agent.finance.name" defaultMessage="财务顾问" />,
+                role: <FormattedMessage id="landing.hero.agent.finance.role" defaultMessage="财务分析专家" />,
+                description: <FormattedMessage id="landing.hero.agent.finance.description" defaultMessage="我可以分析财务数据，提供投资建议，并帮助优化预算管理" />,
+                color: '#10b981',
+                skills: [
+                  <FormattedMessage id="landing.hero.agent.finance.skill1" defaultMessage="财务分析" />,
+                  <FormattedMessage id="landing.hero.agent.finance.skill2" defaultMessage="投资策略" />,
+                  <FormattedMessage id="landing.hero.agent.finance.skill3" defaultMessage="预算规划" />
+                ]
+              },
+              {
+                avatar: 'C',
+                name: <FormattedMessage id="landing.hero.agent.creative.name" defaultMessage="创意助手" />,
+                role: <FormattedMessage id="landing.hero.agent.creative.role" defaultMessage="创意与设计专家" />,
+                description: <FormattedMessage id="landing.hero.agent.creative.description" defaultMessage="我擅长创意写作、内容创作和设计概念，可以激发您的创意灵感" />,
+                color: '#f59e0b',
+                skills: [
+                  <FormattedMessage id="landing.hero.agent.creative.skill1" defaultMessage="内容创作" />,
+                  <FormattedMessage id="landing.hero.agent.creative.skill2" defaultMessage="创意写作" />,
+                  <FormattedMessage id="landing.hero.agent.creative.skill3" defaultMessage="设计思维" />
+                ]
+              },
+              {
+                avatar: 'T',
+                name: <FormattedMessage id="landing.hero.agent.tech.name" defaultMessage="技术专家" />,
+                role: <FormattedMessage id="landing.hero.agent.tech.role" defaultMessage="编程与开发专家" />,
+                description: <FormattedMessage id="landing.hero.agent.tech.description" defaultMessage="我可以提供编程帮助、技术问题解答和软件开发建议" />,
+                color: '#6366f1',
+                skills: [
+                  <FormattedMessage id="landing.hero.agent.tech.skill1" defaultMessage="编程开发" />,
+                  <FormattedMessage id="landing.hero.agent.tech.skill2" defaultMessage="技术支持" />,
+                  <FormattedMessage id="landing.hero.agent.tech.skill3" defaultMessage="系统设计" />
+                ]
+              },
+              {
+                avatar: 'R',
+                name: <FormattedMessage id="landing.hero.agent.research.name" defaultMessage="研究助理" />,
+                role: <FormattedMessage id="landing.hero.agent.research.role" defaultMessage="数据与分析专家" />,
+                description: <FormattedMessage id="landing.hero.agent.research.description" defaultMessage="我擅长收集和分析数据，提供研究报告和市场趋势分析" />,
+                color: '#ec4899',
+                skills: [
+                  <FormattedMessage id="landing.hero.agent.research.skill1" defaultMessage="数据分析" />,
+                  <FormattedMessage id="landing.hero.agent.research.skill2" defaultMessage="市场调研" />,
+                  <FormattedMessage id="landing.hero.agent.research.skill3" defaultMessage="趋势预测" />
+                ]
+              }
+            ].map((agent, index) => (
+              <AIAgentCard
+                key={agent.name}
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover={{ scale: 1.02 }}
+              >
+                <AIAgentHeader>
+                  <AIAgentAvatar bg={agent.color}>{agent.avatar}</AIAgentAvatar>
+                  <AIAgentInfo>
+                    <AIAgentName>{agent.name}</AIAgentName>
+                    <AIAgentRole>{agent.role}</AIAgentRole>
+                  </AIAgentInfo>
+                </AIAgentHeader>
+                <AIAgentBody>{agent.description}</AIAgentBody>
+                <AIAgentSkills>
+                  {agent.skills.map(skill => (
+                    <AIAgentSkill
+                      key={skill}
+                      bg={`${agent.color}15`}
+                      color={agent.color}
+                    >
+                      {skill}
+                    </AIAgentSkill>
+                  ))}
+                </AIAgentSkills>
+              </AIAgentCard>
+            ))}
+          </AIAgentGrid>
+        </HeroImageContainer>
       </SectionContainer>
     </HeroSection>
   );

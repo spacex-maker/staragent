@@ -195,5 +195,45 @@ export default {
   'terms.related.privacy': 'سياسة الخصوصية',
   'worldmap.page.title': 'البلدان والمناطق المدعومة - AIMateX',
   'worldmap.legend.supported': 'مدعوم',
-  'worldmap.legend.unsupported': 'غير مدعوم'
+  'worldmap.legend.unsupported': 'غير مدعوم',
+
+  // قسم البطل
+  'landing.hero.title': 'فريقك الشخصي للذكاء الاصطناعي، يعيد تعريف التعاون',
+  'landing.hero.subtitle': 'قم ببناء وتدريب وتبادل وكلاء الذكاء الاصطناعي المخصصين - دع خبراء الذكاء الاصطناعي من مختلف الصناعات يعززون عملك وإبداعك',
+  'landing.hero.getStarted': 'ابدأ مجاناً',
+  'landing.hero.exploreFeatures': 'استكشف الميزات',
+  
+  // الإحصائيات
+  'landing.hero.stats.experts': 'خبراء الذكاء الاصطناعي',
+  'landing.hero.stats.users': 'المستخدمين النشطين',
+  'landing.hero.stats.satisfaction': 'نسبة الرضا',
+
+  // وكلاء الذكاء الاصطناعي
+  'landing.hero.agent.finance.name': 'المستشار المالي',
+  'landing.hero.agent.finance.role': 'خبير التحليل المالي',
+  'landing.hero.agent.finance.description': 'يمكنني تحليل البيانات المالية وتقديم المشورة الاستثمارية والمساعدة في تحسين إدارة الميزانية',
+  'landing.hero.agent.finance.skill1': 'التحليل المالي',
+  'landing.hero.agent.finance.skill2': 'استراتيجية الاستثمار',
+  'landing.hero.agent.finance.skill3': 'تخطيط الميزانية',
+  
+  'landing.hero.agent.creative.name': 'المساعد الإبداعي',
+  'landing.hero.agent.creative.role': 'خبير الإبداع والتصميم',
+  'landing.hero.agent.creative.description': 'أتفوق في الكتابة الإبداعية وإنشاء المحتوى ومفاهيم التصميم لتحفيز إلهامك الإبداعي',
+  'landing.hero.agent.creative.skill1': 'إنشاء المحتوى',
+  'landing.hero.agent.creative.skill2': 'الكتابة الإبداعية',
+  'landing.hero.agent.creative.skill3': 'التفكير التصميمي',
+  
+  'landing.hero.agent.tech.name': 'الخبير التقني',
+  'landing.hero.agent.tech.role': 'خبير البرمجة والتطوير',
+  'landing.hero.agent.tech.description': 'يمكنني تقديم المساعدة في البرمجة وحل المشكلات التقنية وتقديم المشورة في تطوير البرمجيات',
+  'landing.hero.agent.tech.skill1': 'البرمجة',
+  'landing.hero.agent.tech.skill2': 'الدعم التقني',
+  'landing.hero.agent.tech.skill3': 'تصميم النظم',
+  
+  'landing.hero.agent.research.name': 'مساعد البحث',
+  'landing.hero.agent.research.role': 'خبير البيانات والتحليل',
+  'landing.hero.agent.research.description': 'أتخصص في جمع وتحليل البيانات وتقديم تقارير البحث وتحليل اتجاهات السوق',
+  'landing.hero.agent.research.skill1': 'تحليل البيانات',
+  'landing.hero.agent.research.skill2': 'أبحاث السوق',
+  'landing.hero.agent.research.skill3': 'التنبؤ بالاتجاهات',
 };

@@ -210,5 +210,45 @@ export default {
   'terms.related.privacy': '개인정보 처리방침',
   'worldmap.page.title': '지원되는 국가 및 지역 - AIMateX',
   'worldmap.legend.supported': '지원됨',
-  'worldmap.legend.unsupported': '지원되지 않음'
+  'worldmap.legend.unsupported': '지원되지 않음',
+
+  // 히어로 섹션
+  'landing.hero.title': '당신의 개인 AI 팀, 협업의 미래를 재정의합니다',
+  'landing.hero.subtitle': '맞춤형 AI 에이전트를 구축, 훈련, 거래하여 각 산업 분야의 AI 전문가가 당신의 업무와 창의성을 지원합니다',
+  'landing.hero.getStarted': '무료로 시작하기',
+  'landing.hero.exploreFeatures': '기능 살펴보기',
+  
+  // 통계 데이터
+  'landing.hero.stats.experts': 'AI 전문가',
+  'landing.hero.stats.users': '활성 사용자',
+  'landing.hero.stats.satisfaction': '만족도',
+  
+  // AI 에이전트
+  'landing.hero.agent.finance.name': '재무 어드바이저',
+  'landing.hero.agent.finance.role': '재무 분석 전문가',
+  'landing.hero.agent.finance.description': '재무 데이터를 분석하고 투자 조언을 제공하며 예산 관리를 최적화하는 데 도움을 드립니다',
+  'landing.hero.agent.finance.skill1': '재무 분석',
+  'landing.hero.agent.finance.skill2': '투자 전략',
+  'landing.hero.agent.finance.skill3': '예산 계획',
+  
+  'landing.hero.agent.creative.name': '크리에이티브 어시스턴트',
+  'landing.hero.agent.creative.role': '창작 및 디자인 전문가',
+  'landing.hero.agent.creative.description': '창의적인 글쓰기, 콘텐츠 제작, 디자인 컨셉을 전문으로 하며 당신의 창의성을 자극합니다',
+  'landing.hero.agent.creative.skill1': '콘텐츠 제작',
+  'landing.hero.agent.creative.skill2': '창의적 글쓰기',
+  'landing.hero.agent.creative.skill3': '디자인 사고',
+  
+  'landing.hero.agent.tech.name': '기술 전문가',
+  'landing.hero.agent.tech.role': '프로그래밍 및 개발 전문가',
+  'landing.hero.agent.tech.description': '프로그래밍 지원, 기술적 문제 해결, 소프트웨어 개발 조언을 제공합니다',
+  'landing.hero.agent.tech.skill1': '프로그래밍',
+  'landing.hero.agent.tech.skill2': '기술 지원',
+  'landing.hero.agent.tech.skill3': '시스템 설계',
+  
+  'landing.hero.agent.research.name': '연구 어시스턴트',
+  'landing.hero.agent.research.role': '데이터 및 분석 전문가',
+  'landing.hero.agent.research.description': '데이터 수집과 분석, 연구 보고서 및 시장 동향 분석을 전문으로 합니다',
+  'landing.hero.agent.research.skill1': '데이터 분석',
+  'landing.hero.agent.research.skill2': '시장 조사',
+  'landing.hero.agent.research.skill3': '트렌드 예측',
 };

@@ -207,5 +207,44 @@ export default {
   'terms.related.privacy': '隐私政策',
   'worldmap.page.title': '支持的国家和地区 - AIMateX',
   'worldmap.legend.supported': '已支持',
-  'worldmap.legend.unsupported': '未支持'
+  'worldmap.legend.unsupported': '未支持',
+  // Hero 区域
+  'landing.hero.title': '您的个人AI团队，重新定义协作未来',
+  'landing.hero.subtitle': '打造、训练与交易定制化AI角色，让各行各业的AI专家助力您的工作与创造',
+  'landing.hero.getStarted': '免费开始使用',
+  'landing.hero.exploreFeatures': '探索功能',
+  
+  // Hero 区域统计数据
+  'landing.hero.stats.experts': 'AI专家角色',
+  'landing.hero.stats.users': '活跃用户',
+  'landing.hero.stats.satisfaction': '用户满意度',
+  
+  // Hero 区域 AI 代理
+  'landing.hero.agent.finance.name': '财务顾问',
+  'landing.hero.agent.finance.role': '财务分析专家',
+  'landing.hero.agent.finance.description': '我可以分析财务数据，提供投资建议，并帮助优化预算管理',
+  'landing.hero.agent.finance.skill1': '财务分析',
+  'landing.hero.agent.finance.skill2': '投资策略',
+  'landing.hero.agent.finance.skill3': '预算规划',
+  
+  'landing.hero.agent.creative.name': '创意助手',
+  'landing.hero.agent.creative.role': '创意与设计专家',
+  'landing.hero.agent.creative.description': '我擅长创意写作、内容创作和设计概念，可以激发您的创意灵感',
+  'landing.hero.agent.creative.skill1': '内容创作',
+  'landing.hero.agent.creative.skill2': '创意写作',
+  'landing.hero.agent.creative.skill3': '设计思维',
+  
+  'landing.hero.agent.tech.name': '技术专家',
+  'landing.hero.agent.tech.role': '编程与开发专家',
+  'landing.hero.agent.tech.description': '我可以提供编程帮助、技术问题解答和软件开发建议',
+  'landing.hero.agent.tech.skill1': '编程开发',
+  'landing.hero.agent.tech.skill2': '技术支持',
+  'landing.hero.agent.tech.skill3': '系统设计',
+  
+  'landing.hero.agent.research.name': '研究助理',
+  'landing.hero.agent.research.role': '数据与分析专家',
+  'landing.hero.agent.research.description': '我擅长收集和分析数据，提供研究报告和市场趋势分析',
+  'landing.hero.agent.research.skill1': '数据分析',
+  'landing.hero.agent.research.skill2': '市场调研',
+  'landing.hero.agent.research.skill3': '趋势预测',
 }; 
