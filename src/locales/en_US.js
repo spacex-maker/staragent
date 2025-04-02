@@ -257,4 +257,105 @@ export default {
   'landing.showcase.role.testing.desc': 'Implementing comprehensive testing and deployment strategies with AI-powered automation',
   'landing.showcase.highlight.title': 'The Power of Human-AI Collaboration',
   'landing.showcase.highlight.description': 'AIMateX demonstrates the future of software development - where one visionary developer, armed with a team of specialized AI agents, can bring ambitious projects to life. This revolutionary approach combines human creativity with AI efficiency to deliver exceptional results.',
+  'landing.features.title': 'Powerful Features, Unlimited Possibilities',
+  'landing.features.subtitle': 'AI MateX provides comprehensive features to help you easily build your own AI team and boost your work efficiency',
+  
+  // Features
+  'landing.features.customization.title': 'Personalized AI Character Customization',
+  'landing.features.customization.description': 'Support MBTI personality type customization, set humanized features like age and gender to create unique AI assistants for more natural interactions',
+  
+  'landing.features.marketplace.title': 'AI Character Marketplace',
+  'landing.features.marketplace.description': 'Share, buy, or sell your trained AI characters in the global marketplace, letting expertise cross boundaries',
+  
+  'landing.features.integration.title': 'Multi-Platform AI Integration',
+  'landing.features.integration.description': 'Seamlessly integrate leading AI platforms like ChatGPT, Deepseek, and Grok, accessing multiple AI capabilities in one interface',
+  
+  'landing.features.communication.title': 'AI Character Collaboration',
+  'landing.features.communication.description': 'Create AI character groups to enable collaboration between different professional domains, solving complex problems while sharing context',
+  
+  'landing.features.privacy.title': 'Privacy & Data Security',
+  'landing.features.privacy.description': 'Your conversations and data are strictly protected with end-to-end encryption and data isolation to ensure your privacy',
+  
+  'landing.features.training.title': 'Continuous Learning & Optimization',
+  'landing.features.training.description': 'AI characters learn and improve through interactions with you, better understanding your needs and preferences over time',
+  
+  'landing.features.vectordb.title': 'Vector Database + RAG Technology',
+  'landing.features.vectordb.description': 'Utilize vector database and RAG technology for enhanced knowledge retrieval, enabling reliable long-term memory and precise knowledge Q&A with real-time learning of documents, conversations, and knowledge',
+  
+  'landing.features.industry.title': 'Industry-wide Template Support',
+  'landing.features.industry.description': 'Provide professional prompt templates for finance, healthcare, legal, education, and more, with built-in industry knowledge bases and best practices',
+  
+  'landing.features.function.title': 'Function Calling Capability',
+  'landing.features.function.description': 'Support powerful function calling capabilities, allowing AI to directly operate files, send emails, control devices, access databases, and call APIs',
+  // AI Team Customization Section
+  'landing.customization.title': 'Customize Your AI Characters',
+  'landing.customization.subtitle': 'Easily create AI characters for various scenarios, customizing everything from professional expertise to personality traits',
+  'landing.customization.step1.title': 'Choose Base Model',
+  'landing.customization.step1.description': 'Select from leading AI models like ChatGPT, Deepseek, and Grok to find the perfect foundation for your needs',
+  'landing.customization.step2.title': 'Define Expertise',
+  'landing.customization.step2.description': 'Set professional domains, personality traits, and communication styles to create specialized AI team members',
+  'landing.customization.step3.title': 'Train & Optimize',
+  'landing.customization.step3.description': 'Train your AI characters through example dialogues and feedback, continuously improving their performance and response quality',
+  'landing.customization.createButton': 'Create Your AI Character',
+  
+  // AI Profiles
+  'landing.customization.profiles.analyst': 'Business Analyst',
+  'landing.customization.profiles.analyst.description': 'Focuses on market research, competitive analysis, and business strategy to help you make informed decisions.',
+  'landing.customization.profiles.creator': 'Content Creator',
+  'landing.customization.profiles.creator.description': 'Excels in content creation, copywriting, and brand promotion to inject creative vitality into your brand.',
+  'landing.customization.profiles.tutor': 'Education Mentor',
+  'landing.customization.profiles.tutor.description': 'Designed for learning and teaching scenarios, providing personalized tutoring, curriculum planning, and knowledge expansion.',
+  'landing.customization.profiles.architect': 'System Architect',
+  'landing.customization.profiles.architect.description': 'Focuses on system design, technology selection, and architecture optimization to help you build scalable high-performance systems.',
+  'landing.customization.profiles.guide': 'Smart Guide',
+  'landing.customization.profiles.guide.description': 'Provides in-depth travel planning, cultural interpretation, and local experience recommendations to enrich your journey.',
+  'landing.customization.profiles.director': 'Creative Director',
+  'landing.customization.profiles.director.description': 'Focuses on visual creativity, storytelling, and project planning to help you create unique visual works.',
+  'landing.customization.profiles.users': 'users',
+  // AI Community Page
+  'landing.community.title': 'Global AI Character Marketplace',
+  'landing.community.subtitle': 'Join a vibrant community of AI creators to share, trade, and discover professional AI characters across industries',
+  
+  // Statistics
+  'landing.community.stats.aiRoles': 'AI Characters',
+  'landing.community.stats.creators': 'Creators',
+  'landing.community.stats.countries': 'Countries',
+  'landing.community.stats.users': 'Active Users',
+  
+  // Features
+  'landing.community.features.monetize.title': 'Monetize Your AI Creations',
+  'landing.community.features.monetize.description': 'Sell your carefully trained AI characters in the global marketplace and earn from your expertise and creativity',
+  'landing.community.features.collaborate.title': 'Community Collaboration',
+  'landing.community.features.collaborate.description': 'Collaborate with other creators to develop complex AI characters, share resources and knowledge for stronger AI experiences',
+  'landing.community.features.discover.title': 'Discover Professional AI Characters',
+  'landing.community.features.discover.description': 'Browse professional AI characters across industries to find the perfect customized AI assistant for your specific needs',
+  
+  // Button
+  'landing.community.exploreButton': 'Explore AI Character Market',
+  // Platform Integration Section
+  'landing.integration.title': 'Multi-Platform AI Integration',
+  'landing.integration.subtitle': 'Seamlessly integrate multiple leading AI platforms, leveraging their unique advantages in a unified interface for intelligent collaboration',
+  
+  // AI Teams
+  'landing.integration.aiTeams.title': 'Create Multi-Model AI Teams with Shared Context',
+  'landing.integration.aiTeams.description1': 'AI MateX breaks the limitations of single models, allowing you to simultaneously use',
+  'landing.integration.aiTeams.description2': 'and other AI models to create specialized AI teams that solve complex problems together.',
+  'landing.integration.aiTeams.description3': 'Each AI role can access shared conversation context, enabling true multi-model collaboration and maximizing the unique advantages of each AI platform.',
+  
+  // Chat Interface
+  'landing.integration.chat.teamName': 'AI Team:',
+  'landing.integration.chat.teamType': 'Business Strategy Team',
+  'landing.integration.chat.input': 'Type your message...',
+  
+  // Agent Roles
+  'landing.integration.agent.user': 'User',
+  'landing.integration.agent.analyst': 'Data Analyst',
+  'landing.integration.agent.strategist': 'Strategic Advisor',
+  'landing.integration.agent.creative': 'Creative Director',
+  
+  // Messages
+  'landing.integration.message.user': 'I need to analyze this market research report, provide strategic recommendations, and create an attractive presentation.',
+  'landing.integration.message.analyst': 'I will analyze the data trends and market insights in depth, providing you with detailed data analysis and predictive models.',
+  'landing.integration.message.strategist': 'Based on the data analysis, I will develop strategic recommendations, including market positioning, competitive analysis, and growth strategies.',
+  'landing.integration.message.creative': 'I will design an eye-catching presentation, using visual elements and creative layouts to highlight your key points and strategic recommendations.',
 };

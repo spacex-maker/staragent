@@ -228,4 +228,106 @@ export default {
   'landing.showcase.role.testing.desc': '借助AI自动化实现全面的测试和部署策略',
   'landing.showcase.highlight.title': '人机协作的力量',
   'landing.showcase.highlight.description': 'AIMateX展示了软件开发的未来 - 一个富有远见的开发者，配合专业的AI团队，能够将雄心勃勃的项目变为现实。这种革命性的方法将人类的创造力与AI的效率完美结合，带来卓越的成果。',
+  'landing.features.title': '强大功能，无限可能',
+  'landing.features.subtitle': 'AI MateX 提供全方位的功能，让您轻松打造专属 AI 团队，全面提升工作和创作效率',
+  
+  // 功能特性
+  'landing.features.customization.title': '个性化 AI 角色定制',
+  'landing.features.customization.description': '支持 MBTI 性格类型定制，可设定年龄、性别等拟人化特征，打造独特个性的 AI 助手，让交互更自然真实',
+  
+  'landing.features.marketplace.title': 'AI 角色交易市场',
+  'landing.features.marketplace.description': '在全球 AI 角色市场中分享、购买或出售您训练的 AI 角色，让专业知识跨越边界',
+  
+  'landing.features.integration.title': '多平台 AI 集成',
+  'landing.features.integration.description': '无缝整合 ChatGPT、Deepseek、Grok 等领先 AI 平台，在同一界面使用多种 AI 能力',
+  
+  'landing.features.communication.title': 'AI 角色协作沟通',
+  'landing.features.communication.description': '创建 AI 角色组，让不同专业领域的 AI 共同协作，解决复杂问题，共享上下文',
+  
+  'landing.features.privacy.title': '隐私与数据安全',
+  'landing.features.privacy.description': '您的对话和数据安全受到严格保护，提供端对端加密和数据隔离，保障您的隐私',
+  
+  'landing.features.training.title': '持续学习与优化',
+  'landing.features.training.description': 'AI 角色通过与您的互动不断学习和改进，随着时间推移，更好地理解您的需求和偏好',
+  
+  'landing.features.vectordb.title': '向量数据库 + RAG 技术',
+  'landing.features.vectordb.description': '采用向量数据库 + RAG 技术，实现知识库智能检索增强，让 AI 具备可靠的长期记忆和精准的知识问答能力，支持文档、对话、知识的实时学习',
+  
+  'landing.features.industry.title': '全行业模板支持',
+  'landing.features.industry.description': '提供金融、医疗、法律、教育等全行业专业提示词模板，内置行业知识库和最佳实践，让 AI 快速适配您的专业领域',
+  
+  'landing.features.function.title': 'Function Calling 能力',
+  'landing.features.function.description': '支持强大的函数调用能力，AI 可直接操作文件、发送邮件、控制设备、访问数据库、调用 API，让 AI 具备真正的执行力',
+  
+  // AI团队定制化部分
+  'landing.customization.title': '定制个性化 AI 角色',
+  'landing.customization.subtitle': '轻松创建适合各种场景的 AI 角色，从专业领域知识到个性特点，全方位定制您的专属 AI 团队成员',
+  'landing.customization.step1.title': '选择基础模型',
+  'landing.customization.step1.description': '从 ChatGPT、Deepseek、Grok 等多种领先 AI 模型中选择最适合您需求的基础模型',
+  'landing.customization.step2.title': '定义专业领域',
+  'landing.customization.step2.description': '为 AI 角色设置专业知识领域、个性特点和交流风格，打造专业的AI团队成员',
+  'landing.customization.step3.title': '训练与优化',
+  'landing.customization.step3.description': '通过提供示例对话和反馈训练您的 AI 角色，不断优化其性能和回应质量',
+  'landing.customization.createButton': '创建您的 AI 角色',
+  
+  // AI角色配置
+  'landing.customization.profiles.analyst': '商业分析师',
+  'landing.customization.profiles.analyst.description': '专注于市场研究、竞争分析和商业策略，帮助您做出明智的商业决策。',
+  'landing.customization.profiles.creator': '内容创作专家',
+  'landing.customization.profiles.creator.description': '擅长内容创作、文案撰写和品牌推广，为您的品牌注入创意活力。',
+  'landing.customization.profiles.tutor': '教育导师',
+  'landing.customization.profiles.tutor.description': '专为学习和教学场景设计，提供个性化辅导、课程规划和知识拓展。',
+  'landing.customization.profiles.architect': '系统架构师',
+  'landing.customization.profiles.architect.description': '专注于系统设计、技术选型和架构优化，帮助您构建可扩展的高性能系统。',
+  'landing.customization.profiles.guide': '智能导游',
+  'landing.customization.profiles.guide.description': '提供深度旅游规划、文化解说和当地体验推荐，让您的旅程更加丰富多彩。',
+  'landing.customization.profiles.director': '创意导演',
+  'landing.customization.profiles.director.description': '专注于视觉创意、故事叙述和项目策划，帮助您打造独特的视觉作品。',
+  'landing.customization.profiles.users': '用户',
+  // AI 社区页面
+  'landing.community.title': '全球 AI 角色交易市场',
+  'landing.community.subtitle': '加入充满活力的 AI 创作者社区，分享、交易和发现各行各业的专业 AI 角色',
+  
+  // 统计数据
+  'landing.community.stats.aiRoles': 'AI 角色',
+  'landing.community.stats.creators': '创作者',
+  'landing.community.stats.countries': '国家和地区',
+  'landing.community.stats.users': '活跃用户',
+  
+  // 特性
+  'landing.community.features.monetize.title': '变现您的 AI 创作',
+  'landing.community.features.monetize.description': '将您精心训练的 AI 角色在全球市场出售，通过您的专业知识和创造力获得收入',
+  'landing.community.features.collaborate.title': '社区协作',
+  'landing.community.features.collaborate.description': '与其他创作者合作开发复杂的 AI 角色，共享资源和知识，共创更强大的 AI 体验',
+  'landing.community.features.discover.title': '发现专业 AI 角色',
+  'landing.community.features.discover.description': '浏览全球各行各业的专业 AI 角色，找到最适合您特定需求的定制 AI 助手',
+  
+  // 按钮
+  'landing.community.exploreButton': '探索 AI 角色市场',
+  // 平台集成部分
+  'landing.integration.title': '多平台智能集成',
+  'landing.integration.subtitle': '无缝整合多种领先 AI 平台，在统一界面中同时利用各平台的独特优势，实现智能协作',
+  
+  // AI 团队
+  'landing.integration.aiTeams.title': '创建多模型 AI 团队，共享上下文',
+  'landing.integration.aiTeams.description1': 'AI MateX 突破单一模型的限制，让您同时使用',
+  'landing.integration.aiTeams.description2': '等多种 AI 模型，创建具有不同专长的 AI 团队，共同解决复杂问题。',
+  'landing.integration.aiTeams.description3': '每个 AI 角色都可以访问共享的对话上下文，实现真正的多模型协作，充分发挥各 AI 平台的独特优势。',
+  
+  // 聊天界面
+  'landing.integration.chat.teamName': 'AI团队:',
+  'landing.integration.chat.teamType': '业务战略团队',
+  'landing.integration.chat.input': '输入您的消息...',
+  
+  // 角色名称
+  'landing.integration.agent.user': '用户',
+  'landing.integration.agent.analyst': '数据分析师',
+  'landing.integration.agent.strategist': '战略顾问',
+  'landing.integration.agent.creative': '创意总监',
+  
+  // 对话消息
+  'landing.integration.message.user': '我需要分析这篇市场研究报告并提出策略建议，同时创建一个漂亮的演示文稿。',
+  'landing.integration.message.analyst': '我会深入分析报告中的数据趋势和市场洞察，为您提供详细的数据分析和预测模型。',
+  'landing.integration.message.strategist': '根据数据分析，我会制定战略建议，包括市场定位、竞争分析和增长策略。',
+  'landing.integration.message.creative': '我将设计引人注目的演示文稿，利用视觉元素和创意布局突出您的关键观点和策略建议。',
 }; 

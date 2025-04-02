@@ -242,4 +242,109 @@ export default {
   'landing.showcase.role.testing.desc': 'Implementierung umfassender Test- und Deployment-Strategien mit KI-gestützter Automatisierung',
   'landing.showcase.highlight.title': 'Die Kraft der Mensch-KI-Zusammenarbeit',
   'landing.showcase.highlight.description': 'AIMateX zeigt die Zukunft der Softwareentwicklung - wo ein visionärer Entwickler, ausgestattet mit einem Team spezialisierter KI-Agenten, ambitionierte Projekte zum Leben erwecken kann. Dieser revolutionäre Ansatz verbindet menschliche Kreativität mit KI-Effizienz für außergewöhnliche Ergebnisse.',
+
+  'landing.features.title': 'Leistungsstarke Funktionen, Unbegrenzte Möglichkeiten',
+  'landing.features.subtitle': 'AI MateX bietet umfassende Funktionen, mit denen Sie einfach Ihr eigenes KI-Team aufbauen und Ihre Arbeitseffizienz steigern können',
+  
+  // Features
+  'landing.features.customization.title': 'Personalisierte KI-Charakter-Anpassung',
+  'landing.features.customization.description': 'Unterstützt MBTI-Persönlichkeitstyp-Anpassung, ermöglicht die Einstellung menschlicher Merkmale wie Alter und Geschlecht, um einzigartige KI-Assistenten für natürlichere Interaktionen zu erstellen',
+  
+  'landing.features.marketplace.title': 'KI-Charakter-Marktplatz',
+  'landing.features.marketplace.description': 'Teilen, kaufen oder verkaufen Sie Ihre trainierten KI-Charaktere auf dem globalen Marktplatz und lassen Sie Fachwissen Grenzen überschreiten',
+  
+  'landing.features.integration.title': 'Multi-Plattform KI-Integration',
+  'landing.features.integration.description': 'Nahtlose Integration führender KI-Plattformen wie ChatGPT, Deepseek und Grok, Zugriff auf mehrere KI-Fähigkeiten in einer Oberfläche',
+  
+  'landing.features.communication.title': 'KI-Charakter-Zusammenarbeit',
+  'landing.features.communication.description': 'Erstellen Sie KI-Charaktergruppen für die Zusammenarbeit zwischen verschiedenen Fachbereichen, lösen Sie komplexe Probleme und teilen Sie Kontext',
+  
+  'landing.features.privacy.title': 'Datenschutz & Datensicherheit',
+  'landing.features.privacy.description': 'Ihre Gespräche und Daten sind durch Ende-zu-Ende-Verschlüsselung und Datenisolierung streng geschützt, um Ihre Privatsphäre zu gewährleisten',
+  
+  'landing.features.training.title': 'Kontinuierliches Lernen & Optimierung',
+  'landing.features.training.description': 'KI-Charaktere lernen und verbessern sich durch Interaktionen mit Ihnen und verstehen Ihre Bedürfnisse und Präferenzen im Laufe der Zeit besser',
+  
+  'landing.features.vectordb.title': 'Vektordatenbank + RAG-Technologie',
+  'landing.features.vectordb.description': 'Nutzt Vektordatenbank und RAG-Technologie für verbesserte Wissensabfrage, ermöglicht zuverlässiges Langzeitgedächtnis und präzise Wissens-Q&A mit Echtzeit-Lernen von Dokumenten, Gesprächen und Wissen',
+  
+  'landing.features.industry.title': 'Branchenweite Vorlagenunterstützung',
+  'landing.features.industry.description': 'Bietet professionelle Prompt-Vorlagen für Finanzen, Gesundheitswesen, Recht, Bildung und mehr, mit integrierten Branchenwissensbasen und Best Practices',
+  
+  'landing.features.function.title': 'Funktionsaufruf-Fähigkeit',
+  'landing.features.function.description': 'Unterstützt leistungsstarke Funktionsaufruf-Fähigkeiten, ermöglicht KI die direkte Bedienung von Dateien, E-Mail-Versand, Gerätekontrolle, Datenbankzugriff und API-Aufrufe',
+
+  // AI-Team Anpassungsbereich
+  'landing.customization.title': 'Passen Sie Ihre KI-Charaktere an',
+  'landing.customization.subtitle': 'Erstellen Sie einfach KI-Charaktere für verschiedene Szenarien und passen Sie alles von Fachkenntnissen bis zu Persönlichkeitsmerkmalen an',
+  'landing.customization.step1.title': 'Basismodell wählen',
+  'landing.customization.step1.description': 'Wählen Sie aus führenden KI-Modellen wie ChatGPT, Deepseek und Grok das perfekte Fundament für Ihre Bedürfnisse',
+  'landing.customization.step2.title': 'Expertise definieren',
+  'landing.customization.step2.description': 'Legen Sie Fachbereiche, Persönlichkeitsmerkmale und Kommunikationsstile fest, um spezialisierte KI-Teammitglieder zu erstellen',
+  'landing.customization.step3.title': 'Training & Optimierung',
+  'landing.customization.step3.description': 'Trainieren Sie Ihre KI-Charaktere durch Beispieldialoge und Feedback, um ihre Leistung und Antwortqualität kontinuierlich zu verbessern',
+  'landing.customization.createButton': 'KI-Charakter erstellen',
+  
+  // KI-Profile
+  'landing.customization.profiles.analyst': 'Business Analyst',
+  'landing.customization.profiles.analyst.description': 'Spezialisiert auf Marktforschung, Wettbewerbsanalyse und Geschäftsstrategie, um fundierte Entscheidungen zu unterstützen.',
+  'landing.customization.profiles.creator': 'Content Creator',
+  'landing.customization.profiles.creator.description': 'Experte für Content-Erstellung, Copywriting und Markenförderung, um Ihrer Marke kreative Vitalität zu verleihen.',
+  'landing.customization.profiles.tutor': 'Bildungsmentor',
+  'landing.customization.profiles.tutor.description': 'Konzipiert für Lern- und Lehrszenarien, bietet personalisiertes Tutoring, Lehrplanplanung und Wissenserweiterung.',
+  'landing.customization.profiles.architect': 'Systemarchitekt',
+  'landing.customization.profiles.architect.description': 'Fokussiert auf Systemdesign, Technologieauswahl und Architekturoptimierung, um skalierbare Hochleistungssysteme aufzubauen.',
+  'landing.customization.profiles.guide': 'Intelligenter Guide',
+  'landing.customization.profiles.guide.description': 'Bietet detaillierte Reiseplanung, kulturelle Interpretation und lokale Erlebnisempfehlungen für eine bereichernde Reise.',
+  'landing.customization.profiles.director': 'Kreativdirektor',
+  'landing.customization.profiles.director.description': 'Spezialisiert auf visuelle Kreativität, Storytelling und Projektplanung, um einzigartige visuelle Werke zu schaffen.',
+  'landing.customization.profiles.users': 'Benutzer',
+
+  // AI-Community-Seite
+  'landing.community.title': 'Globaler KI-Charakter-Marktplatz',
+  'landing.community.subtitle': 'Treten Sie einer lebendigen Community von KI-Entwicklern bei, um professionelle KI-Charaktere branchenübergreifend zu teilen, zu handeln und zu entdecken',
+  
+  // Statistiken
+  'landing.community.stats.aiRoles': 'KI-Charaktere',
+  'landing.community.stats.creators': 'Entwickler',
+  'landing.community.stats.countries': 'Länder',
+  'landing.community.stats.users': 'Aktive Nutzer',
+  
+  // Funktionen
+  'landing.community.features.monetize.title': 'Monetarisieren Sie Ihre KI-Kreationen',
+  'landing.community.features.monetize.description': 'Verkaufen Sie Ihre sorgfältig trainierten KI-Charaktere auf dem globalen Marktplatz und verdienen Sie mit Ihrem Fachwissen und Ihrer Kreativität',
+  'landing.community.features.collaborate.title': 'Community-Zusammenarbeit',
+  'landing.community.features.collaborate.description': 'Arbeiten Sie mit anderen Entwicklern zusammen, um komplexe KI-Charaktere zu entwickeln, teilen Sie Ressourcen und Wissen für stärkere KI-Erlebnisse',
+  'landing.community.features.discover.title': 'Entdecken Sie professionelle KI-Charaktere',
+  'landing.community.features.discover.description': 'Durchsuchen Sie professionelle KI-Charaktere aus allen Branchen, um den perfekten, maßgeschneiderten KI-Assistenten für Ihre spezifischen Bedürfnisse zu finden',
+  
+  // Button
+  'landing.community.exploreButton': 'KI-Charakter-Markt erkunden',
+
+  // Plattform-Integration
+  'landing.integration.title': 'Multi-Plattform KI-Integration',
+  'landing.integration.subtitle': 'Nahtlose Integration mehrerer führender KI-Plattformen, Nutzung ihrer einzigartigen Vorteile in einer einheitlichen Schnittstelle für intelligente Zusammenarbeit',
+  
+  // KI-Teams
+  'landing.integration.aiTeams.title': 'Multi-Modell KI-Teams erstellen, Kontext teilen',
+  'landing.integration.aiTeams.description1': 'AI MateX überwindet die Grenzen einzelner Modelle und ermöglicht die gleichzeitige Nutzung von',
+  'landing.integration.aiTeams.description2': 'und anderen KI-Modellen, um spezialisierte KI-Teams zu erstellen, die gemeinsam komplexe Probleme lösen.',
+  'landing.integration.aiTeams.description3': 'Jeder KI-Charakter hat Zugriff auf den gemeinsamen Gesprächskontext, ermöglicht echte Multi-Modell-Zusammenarbeit und maximiert die einzigartigen Vorteile jeder KI-Plattform.',
+  
+  // Chat-Oberfläche
+  'landing.integration.chat.teamName': 'KI-Team:',
+  'landing.integration.chat.teamType': 'Business-Strategie-Team',
+  'landing.integration.chat.input': 'Nachricht eingeben...',
+  
+  // Agenten-Rollen
+  'landing.integration.agent.user': 'Benutzer',
+  'landing.integration.agent.analyst': 'Datenanalyst',
+  'landing.integration.agent.strategist': 'Strategieberater',
+  'landing.integration.agent.creative': 'Kreativdirektor',
+  
+  // Nachrichten
+  'landing.integration.message.user': 'Ich muss diesen Marktforschungsbericht analysieren, strategische Empfehlungen geben und eine attraktive Präsentation erstellen.',
+  'landing.integration.message.analyst': 'Ich werde die Datentrends und Markteinblicke des Berichts eingehend analysieren und Ihnen detaillierte Datenanalysen und Prognosemodelle zur Verfügung stellen.',
+  'landing.integration.message.strategist': 'Basierend auf der Datenanalyse werde ich strategische Empfehlungen entwickeln, einschließlich Marktpositionierung, Wettbewerbsanalyse und Wachstumsstrategien.',
+  'landing.integration.message.creative': 'Ich werde eine ansprechende Präsentation gestalten und visuelle Elemente und kreative Layouts verwenden, um Ihre Kernpunkte und strategischen Empfehlungen hervorzuheben.',
 };

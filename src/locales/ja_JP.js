@@ -227,5 +227,108 @@ export default {
   'landing.showcase.role.testing': 'テスト＆DevOps',
   'landing.showcase.role.testing.desc': 'AI駆動の自動化による包括的なテストとデプロイメント戦略を実装',
   'landing.showcase.highlight.title': '人間とAIのコラボレーションの力',
-  'landing.showcase.highlight.description': 'AIMateXはソフトウェア開発の未来を示しています - 専門的なAIエージェントチームを備えた一人の先見的な開発者が、野心的なプロジェクトを実現できる時代。この革新的なアプローチは、人間の創造性とAIの効率性を組み合わせて、卓越した結果を生み出します。'
+  'landing.showcase.highlight.description': 'AIMateXはソフトウェア開発の未来を示しています - 専門的なAIエージェントチームを備えた一人の先見的な開発者が、野心的なプロジェクトを実現できる時代。この革新的なアプローチは、人間の創造性とAIの効率性を組み合わせて、卓越した結果を生み出します。',
+  'landing.features.title': '強力な機能、無限の可能性',
+  'landing.features.subtitle': 'AI MateXは、あなた専用のAIチームを簡単に構築し、作業効率を向上させるための包括的な機能を提供します',
+  
+  // 機能
+  'landing.features.customization.title': 'パーソナライズされたAIキャラクターカスタマイズ',
+  'landing.features.customization.description': 'MBTI性格タイプのカスタマイズをサポートし、年齢や性別などの人間的な特徴を設定して、より自然な対話を実現する独自のAIアシスタントを作成',
+  
+  'landing.features.marketplace.title': 'AIキャラクターマーケットプレイス',
+  'landing.features.marketplace.description': 'グローバルなマーケットプレイスで、トレーニングされたAIキャラクターを共有、購入、販売し、専門知識を国境を越えて共有',
+  
+  'landing.features.integration.title': 'マルチプラットフォームAI統合',
+  'landing.features.integration.description': 'ChatGPT、Deepseek、Grokなどの主要なAIプラットフォームをシームレスに統合し、1つのインターフェースで複数のAI機能にアクセス',
+  
+  'landing.features.communication.title': 'AIキャラクター間のコラボレーション',
+  'landing.features.communication.description': 'AIキャラクターグループを作成し、異なる専門分野間のコラボレーションを実現し、複雑な問題を解決しながらコンテキストを共有',
+  
+  'landing.features.privacy.title': 'プライバシーとデータセキュリティ',
+  'landing.features.privacy.description': '会話とデータはエンドツーエンドの暗号化とデータ分離により厳重に保護され、プライバシーを確保',
+  
+  'landing.features.training.title': '継続的な学習と最適化',
+  'landing.features.training.description': 'AIキャラクターはあなたとの対話を通じて学習し改善を続け、時間とともにニーズと好みをより深く理解',
+  
+  'landing.features.vectordb.title': 'ベクトルデータベース + RAG技術',
+  'landing.features.vectordb.description': 'ベクトルデータベースとRAG技術を活用して知識検索を強化し、信頼性の高い長期記憶と正確な知識Q&A機能を実現、文書、会話、知識のリアルタイム学習をサポート',
+  
+  'landing.features.industry.title': '業界全体のテンプレートサポート',
+  'landing.features.industry.description': '金融、医療、法律、教育など、各業界向けの専門的なプロンプトテンプレートを提供し、業界知識ベースとベストプラクティスを内蔵',
+  
+  'landing.features.function.title': 'ファンクションコール機能',
+  'landing.features.function.description': '強力なファンクションコール機能をサポートし、AIがファイルの操作、メールの送信、デバイスの制御、データベースへのアクセス、APIの呼び出しを直接実行可能',
+  
+  // AI チームカスタマイズセクション
+  'landing.customization.title': 'AIキャラクターをカスタマイズ',
+  'landing.customization.subtitle': '様々なシーンに合わせたAIキャラクターを簡単に作成。専門知識から性格特性まで、あなただけのAIチームメンバーを全方位的にカスタマイズ',
+  'landing.customization.step1.title': 'ベースモデルを選択',
+  'landing.customization.step1.description': 'ChatGPT、Deepseek、Grokなど、ニーズに最適な先進的なAIモデルから選択',
+  'landing.customization.step2.title': '専門分野を定義',
+  'landing.customization.step2.description': 'AIキャラクターに専門知識分野、性格特性、コミュニケーションスタイルを設定し、プロフェッショナルなチームメンバーを作成',
+  'landing.customization.step3.title': 'トレーニングと最適化',
+  'landing.customization.step3.description': '対話例とフィードバックを通じてAIキャラクターをトレーニングし、パフォーマンスと応答品質を継続的に改善',
+  'landing.customization.createButton': 'AIキャラクターを作成',
+  
+  // AIプロファイル
+  'landing.customization.profiles.analyst': 'ビジネスアナリスト',
+  'landing.customization.profiles.analyst.description': '市場調査、競合分析、事業戦略に特化し、賢明なビジネス判断をサポート。',
+  'landing.customization.profiles.creator': 'コンテンツクリエイター',
+  'landing.customization.profiles.creator.description': 'コンテンツ制作、コピーライティング、ブランドプロモーションに長け、ブランドに創造的な活力を注入。',
+  'landing.customization.profiles.tutor': '教育メンター',
+  'landing.customization.profiles.tutor.description': '学習と教育のシーンに特化し、パーソナライズされた指導、カリキュラム計画、知識拡張を提供。',
+  'landing.customization.profiles.architect': 'システムアーキテクト',
+  'landing.customization.profiles.architect.description': 'システム設計、技術選定、アーキテクチャ最適化に特化し、スケーラブルな高性能システムの構築をサポート。',
+  'landing.customization.profiles.guide': 'スマートガイド',
+  'landing.customization.profiles.guide.description': '詳細な旅行プラン、文化解説、現地体験のレコメンドを提供し、旅をより豊かに。',
+  'landing.customization.profiles.director': 'クリエイティブディレクター',
+  'landing.customization.profiles.director.description': 'ビジュアルクリエイティブ、ストーリーテリング、プロジェクト企画に特化し、ユニークな視覚作品の制作をサポート。',
+  'landing.customization.profiles.users': 'ユーザー',
+  // AI コミュニティページ
+  'landing.community.title': 'グローバル AI キャラクター マーケットプレイス',
+  'landing.community.subtitle': '活気あふれる AI クリエイターのコミュニティに参加し、業界を超えたプロフェッショナルな AI キャラクターを共有、取引、発見しましょう',
+  
+  // 統計
+  'landing.community.stats.aiRoles': 'AI キャラクター',
+  'landing.community.stats.creators': 'クリエイター',
+  'landing.community.stats.countries': '国と地域',
+  'landing.community.stats.users': 'アクティブユーザー',
+  
+  // 特徴
+  'landing.community.features.monetize.title': 'AI 作品の収益化',
+  'landing.community.features.monetize.description': '丁寧にトレーニングされた AI キャラクターをグローバル市場で販売し、あなたの専門知識と創造性から収入を得ることができます',
+  'landing.community.features.collaborate.title': 'コミュニティ協力',
+  'landing.community.features.collaborate.description': '他のクリエイターと協力して複雑な AI キャラクターを開発し、リソースと知識を共有してより強力な AI 体験を創造します',
+  'landing.community.features.discover.title': 'プロフェッショナルな AI キャラクターを発見',
+  'landing.community.features.discover.description': '業界を超えたプロフェッショナルな AI キャラクターを閲覧し、あなたの特定のニーズに最適なカスタマイズされた AI アシスタントを見つけましょう',
+  
+  // ボタン
+  'landing.community.exploreButton': 'AI キャラクター マーケットを探索',
+  
+  // プラットフォーム統合セクション
+  'landing.integration.title': 'マルチプラットフォームAI統合',
+  'landing.integration.subtitle': '複数の先進的なAIプラットフォームをシームレスに統合し、統一されたインターフェースで各プラットフォームの独自の利点を活用し、インテリジェントな協力を実現',
+  
+  // AIチーム
+  'landing.integration.aiTeams.title': 'マルチモデルAIチームの作成、コンテキスト共有',
+  'landing.integration.aiTeams.description1': 'AI MateXは単一モデルの制限を打破し、同時に',
+  'landing.integration.aiTeams.description2': 'などの複数のAIモデルを使用して、専門性の異なるAIチームを作成し、複雑な問題を共同で解決します。',
+  'landing.integration.aiTeams.description3': '各AIキャラクターは共有された会話コンテキストにアクセスでき、真のマルチモデル協力を実現し、各AIプラットフォームの独自の利点を最大限に活用します。',
+  
+  // チャットインターフェース
+  'landing.integration.chat.teamName': 'AIチーム:',
+  'landing.integration.chat.teamType': 'ビジネス戦略チーム',
+  'landing.integration.chat.input': 'メッセージを入力...',
+  
+  // エージェントの役割
+  'landing.integration.agent.user': 'ユーザー',
+  'landing.integration.agent.analyst': 'データアナリスト',
+  'landing.integration.agent.strategist': '戦略アドバイザー',
+  'landing.integration.agent.creative': 'クリエイティブディレクター',
+  
+  // メッセージ
+  'landing.integration.message.user': 'この市場調査レポートを分析し、戦略的な提案を行い、魅力的なプレゼンテーションを作成する必要があります。',
+  'landing.integration.message.analyst': 'レポートのデータトレンドと市場洞察を深く分析し、詳細なデータ分析と予測モデルを提供します。',
+  'landing.integration.message.strategist': 'データ分析に基づいて、市場ポジショニング、競合分析、成長戦略を含む戦略的な提案を策定します。',
+  'landing.integration.message.creative': '視覚的要素とクリエイティブなレイアウトを活用して、重要なポイントと戦略的提案を強調する魅力的なプレゼンテーションをデザインします。'
 };

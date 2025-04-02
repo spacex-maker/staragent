@@ -238,5 +238,109 @@ export default {
   'landing.showcase.role.testing': 'Tests & DevOps',
   'landing.showcase.role.testing.desc': 'Mise en œuvre de stratégies complètes de test et de déploiement avec l\'automatisation basée sur l\'IA',
   'landing.showcase.highlight.title': 'La Puissance de la Collaboration Humain-IA',
-  'landing.showcase.highlight.description': 'AIMateX démontre l\'avenir du développement logiciel - où un développeur visionnaire, armé d\'une équipe d\'agents IA spécialisés, peut donner vie à des projets ambitieux. Cette approche révolutionnaire combine la créativité humaine et l\'efficacité de l\'IA pour des résultats exceptionnels.'
+  'landing.showcase.highlight.description': 'AIMateX démontre l\'avenir du développement logiciel - où un développeur visionnaire, armé d\'une équipe d\'agents IA spécialisés, peut donner vie à des projets ambitieux. Cette approche révolutionnaire combine la créativité humaine et l\'efficacité de l\'IA pour des résultats exceptionnels.',
+  'landing.features.title': 'Fonctionnalités Puissantes, Possibilités Illimitées',
+  'landing.features.subtitle': 'AI MateX fournit des fonctionnalités complètes pour vous aider à construire facilement votre propre équipe d\'IA et à améliorer votre efficacité au travail',
+  
+  // Fonctionnalités
+  'landing.features.customization.title': 'Personnalisation des Caractères IA',
+  'landing.features.customization.description': 'Prend en charge la personnalisation du type de personnalité MBTI, permet de définir des caractéristiques humaines comme l\'âge et le genre pour créer des assistants IA uniques pour des interactions plus naturelles',
+  
+  'landing.features.marketplace.title': 'Marché des Caractères IA',
+  'landing.features.marketplace.description': 'Partagez, achetez ou vendez vos caractères IA entraînés sur le marché mondial, permettant à l\'expertise de traverser les frontières',
+  
+  'landing.features.integration.title': 'Intégration IA Multi-Plateformes',
+  'landing.features.integration.description': 'Intégration transparente des principales plateformes d\'IA comme ChatGPT, Deepseek et Grok, accès à de multiples capacités d\'IA dans une seule interface',
+  
+  'landing.features.communication.title': 'Collaboration entre Caractères IA',
+  'landing.features.communication.description': 'Créez des groupes de caractères IA pour permettre la collaboration entre différents domaines professionnels, résolvez des problèmes complexes tout en partageant le contexte',
+  
+  'landing.features.privacy.title': 'Confidentialité et Sécurité des Données',
+  'landing.features.privacy.description': 'Vos conversations et données sont strictement protégées par un chiffrement de bout en bout et une isolation des données pour assurer votre confidentialité',
+  
+  'landing.features.training.title': 'Apprentissage et Optimisation Continus',
+  'landing.features.training.description': 'Les caractères IA apprennent et s\'améliorent à travers les interactions avec vous, comprenant mieux vos besoins et préférences au fil du temps',
+  
+  'landing.features.vectordb.title': 'Base de Données Vectorielle + Technologie RAG',
+  'landing.features.vectordb.description': 'Utilise la base de données vectorielle et la technologie RAG pour une recherche de connaissances améliorée, permettant une mémoire à long terme fiable et des Q&R de connaissances précises avec apprentissage en temps réel des documents, conversations et connaissances',
+  
+  'landing.features.industry.title': 'Support de Modèles pour Toute l\'Industrie',
+  'landing.features.industry.description': 'Fournit des modèles de prompts professionnels pour la finance, la santé, le droit, l\'éducation et plus encore, avec des bases de connaissances intégrées et des meilleures pratiques',
+  
+  'landing.features.function.title': 'Capacité d\'Appel de Fonctions',
+  'landing.features.function.description': 'Prend en charge de puissantes capacités d\'appel de fonctions, permettant à l\'IA d\'opérer directement sur les fichiers, d\'envoyer des emails, de contrôler des appareils, d\'accéder aux bases de données et d\'appeler des API',
+
+  // Section de personnalisation de l'équipe IA
+  'landing.customization.title': 'Personnalisez vos personnages IA',
+  'landing.customization.subtitle': 'Créez facilement des personnages IA pour différents scénarios, en personnalisant tout, des compétences professionnelles aux traits de personnalité',
+  'landing.customization.step1.title': 'Choisir le modèle de base',
+  'landing.customization.step1.description': 'Sélectionnez parmi les modèles IA leaders comme ChatGPT, Deepseek et Grok pour trouver la base parfaite pour vos besoins',
+  'landing.customization.step2.title': 'Définir l\'expertise',
+  'landing.customization.step2.description': 'Définissez les domaines professionnels, les traits de personnalité et les styles de communication pour créer des membres d\'équipe IA spécialisés',
+  'landing.customization.step3.title': 'Entraînement et optimisation',
+  'landing.customization.step3.description': 'Entraînez vos personnages IA à travers des dialogues d\'exemple et des retours, en améliorant continuellement leurs performances et la qualité des réponses',
+  'landing.customization.createButton': 'Créer votre personnage IA',
+  
+  // Profils IA
+  'landing.customization.profiles.analyst': 'Analyste d\'affaires',
+  'landing.customization.profiles.analyst.description': 'Se concentre sur l\'étude de marché, l\'analyse concurrentielle et la stratégie commerciale pour vous aider à prendre des décisions éclairées.',
+  'landing.customization.profiles.creator': 'Créateur de contenu',
+  'landing.customization.profiles.creator.description': 'Excelle dans la création de contenu, la rédaction et la promotion de marque pour insuffler une vitalité créative à votre marque.',
+  'landing.customization.profiles.tutor': 'Mentor éducatif',
+  'landing.customization.profiles.tutor.description': 'Conçu pour les scénarios d\'apprentissage et d\'enseignement, offrant du tutorat personnalisé, la planification des programmes et l\'expansion des connaissances.',
+  'landing.customization.profiles.architect': 'Architecte système',
+  'landing.customization.profiles.architect.description': 'Se concentre sur la conception de systèmes, la sélection de technologies et l\'optimisation de l\'architecture pour vous aider à construire des systèmes haute performance évolutifs.',
+  'landing.customization.profiles.guide': 'Guide intelligent',
+  'landing.customization.profiles.guide.description': 'Fournit une planification détaillée des voyages, une interprétation culturelle et des recommandations d\'expériences locales pour enrichir votre voyage.',
+  'landing.customization.profiles.director': 'Directeur créatif',
+  'landing.customization.profiles.director.description': 'Se concentre sur la créativité visuelle, la narration et la planification de projets pour vous aider à créer des œuvres visuelles uniques.',
+  'landing.customization.profiles.users': 'utilisateurs',
+
+  // Page de la communauté IA
+  'landing.community.title': 'Marché mondial des personnages IA',
+  'landing.community.subtitle': 'Rejoignez une communauté dynamique de créateurs IA pour partager, échanger et découvrir des personnages IA professionnels à travers les industries',
+  
+  // Statistiques
+  'landing.community.stats.aiRoles': 'Personnages IA',
+  'landing.community.stats.creators': 'Créateurs',
+  'landing.community.stats.countries': 'Pays',
+  'landing.community.stats.users': 'Utilisateurs actifs',
+  
+  // Fonctionnalités
+  'landing.community.features.monetize.title': 'Monétisez vos créations IA',
+  'landing.community.features.monetize.description': 'Vendez vos personnages IA soigneusement entraînés sur le marché mondial et gagnez grâce à votre expertise et votre créativité',
+  'landing.community.features.collaborate.title': 'Collaboration communautaire',
+  'landing.community.features.collaborate.description': 'Collaborez avec d\'autres créateurs pour développer des personnages IA complexes, partagez des ressources et des connaissances pour des expériences IA plus puissantes',
+  'landing.community.features.discover.title': 'Découvrez des personnages IA professionnels',
+  'landing.community.features.discover.description': 'Parcourez des personnages IA professionnels à travers les industries pour trouver l\'assistant IA personnalisé parfait pour vos besoins spécifiques',
+  
+  // Bouton
+  'landing.community.exploreButton': 'Explorer le marché des personnages IA',
+
+  // Section Intégration de Plateformes
+  'landing.integration.title': 'Intégration Multi-Plateformes IA',
+  'landing.integration.subtitle': 'Intégration transparente de multiples plateformes IA leaders, exploitant leurs avantages uniques dans une interface unifiée pour une collaboration intelligente',
+  
+  // Équipes IA
+  'landing.integration.aiTeams.title': 'Créer des Équipes IA Multi-Modèles, Partager le Contexte',
+  'landing.integration.aiTeams.description1': 'AI MateX brise les limites des modèles uniques, vous permettant d\'utiliser simultanément',
+  'landing.integration.aiTeams.description2': 'et d\'autres modèles IA pour créer des équipes IA spécialisées qui résolvent ensemble des problèmes complexes.',
+  'landing.integration.aiTeams.description3': 'Chaque personnage IA peut accéder au contexte de conversation partagé, permettant une véritable collaboration multi-modèles et maximisant les avantages uniques de chaque plateforme IA.',
+  
+  // Interface de Chat
+  'landing.integration.chat.teamName': 'Équipe IA:',
+  'landing.integration.chat.teamType': 'Équipe Stratégie Business',
+  'landing.integration.chat.input': 'Tapez votre message...',
+  
+  // Rôles des Agents
+  'landing.integration.agent.user': 'Utilisateur',
+  'landing.integration.agent.analyst': 'Analyste de Données',
+  'landing.integration.agent.strategist': 'Conseiller Stratégique',
+  'landing.integration.agent.creative': 'Directeur Créatif',
+  
+  // Messages
+  'landing.integration.message.user': 'Je dois analyser ce rapport d\'étude de marché, fournir des recommandations stratégiques et créer une présentation attractive.',
+  'landing.integration.message.analyst': 'Je vais analyser en profondeur les tendances des données et les insights du marché, vous fournissant des analyses détaillées et des modèles prédictifs.',
+  'landing.integration.message.strategist': 'Sur la base de l\'analyse des données, je vais développer des recommandations stratégiques, incluant le positionnement marché, l\'analyse concurrentielle et les stratégies de croissance.',
+  'landing.integration.message.creative': 'Je vais concevoir une présentation captivante, utilisant des éléments visuels et des mises en page créatives pour mettre en valeur vos points clés et recommandations stratégiques.'
 };

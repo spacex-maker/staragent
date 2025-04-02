@@ -102,27 +102,51 @@ const AITeamCustomization = () => {
   const aiProfiles = [
     {
       id: 1,
-      name: "商业分析师",
-      description: "专注于市场研究、竞争分析和商业策略，帮助您做出明智的商业决策。",
+      nameKey: "landing.customization.profiles.analyst",
+      descriptionKey: "landing.customization.profiles.analyst.description",
       image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
       rating: 4.9,
       users: 1248
     },
     {
       id: 2,
-      name: "内容创作专家",
-      description: "擅长内容创作、文案撰写和品牌推广，为您的品牌注入创意活力。",
+      nameKey: "landing.customization.profiles.creator",
+      descriptionKey: "landing.customization.profiles.creator.description",
       image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
       rating: 4.8,
       users: 978
     },
     {
       id: 3,
-      name: "教育导师",
-      description: "专为学习和教学场景设计，提供个性化辅导、课程规划和知识拓展。",
+      nameKey: "landing.customization.profiles.tutor",
+      descriptionKey: "landing.customization.profiles.tutor.description",
       image: "https://images.unsplash.com/photo-1605711285791-0219e80e43a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
       rating: 4.7,
       users: 723
+    },
+    {
+      id: 4,
+      nameKey: "landing.customization.profiles.architect",
+      descriptionKey: "landing.customization.profiles.architect.description",
+      image: "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      users: 856
+    },
+    {
+      id: 5,
+      nameKey: "landing.customization.profiles.guide",
+      descriptionKey: "landing.customization.profiles.guide.description",
+      image: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      users: 1034
+    },
+    {
+      id: 6,
+      nameKey: "landing.customization.profiles.director",
+      descriptionKey: "landing.customization.profiles.director.description",
+      image: "https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      users: 892
     }
   ];
 
@@ -133,13 +157,10 @@ const AITeamCustomization = () => {
         <Row justify="center" style={{ textAlign: 'center' }}>
           <Col xs={24} md={16}>
             <SectionTitle>
-              <FormattedMessage id="landing.customization.title" defaultMessage="定制个性化 AI 角色" />
+              <FormattedMessage id="landing.customization.title" />
             </SectionTitle>
             <SectionSubtitle style={{ margin: '0 auto' }}>
-              <FormattedMessage 
-                id="landing.customization.subtitle" 
-                defaultMessage="轻松创建适合各种场景的 AI 角色，从专业领域知识到个性特点，全方位定制您的专属 AI 团队成员" 
-              />
+              <FormattedMessage id="landing.customization.subtitle" />
             </SectionSubtitle>
           </Col>
         </Row>
@@ -155,39 +176,30 @@ const AITeamCustomization = () => {
               <Col xs={24} md={8} as={motion.div} variants={itemVariants}>
                 <StepNumber>1</StepNumber>
                 <StepTitle>
-                  <FormattedMessage id="landing.customization.step1.title" defaultMessage="选择基础模型" />
+                  <FormattedMessage id="landing.customization.step1.title" />
                 </StepTitle>
                 <StepDescription>
-                  <FormattedMessage 
-                    id="landing.customization.step1.description" 
-                    defaultMessage="从 ChatGPT、Deepseek、Grok 等多种领先 AI 模型中选择最适合您需求的基础模型" 
-                  />
+                  <FormattedMessage id="landing.customization.step1.description" />
                 </StepDescription>
               </Col>
               
               <Col xs={24} md={8} as={motion.div} variants={itemVariants}>
                 <StepNumber>2</StepNumber>
                 <StepTitle>
-                  <FormattedMessage id="landing.customization.step2.title" defaultMessage="定义专业领域" />
+                  <FormattedMessage id="landing.customization.step2.title" />
                 </StepTitle>
                 <StepDescription>
-                  <FormattedMessage 
-                    id="landing.customization.step2.description" 
-                    defaultMessage="为 AI 角色设置专业知识领域、个性特点和交流风格，打造专业的AI团队成员" 
-                  />
+                  <FormattedMessage id="landing.customization.step2.description" />
                 </StepDescription>
               </Col>
               
               <Col xs={24} md={8} as={motion.div} variants={itemVariants}>
                 <StepNumber>3</StepNumber>
                 <StepTitle>
-                  <FormattedMessage id="landing.customization.step3.title" defaultMessage="训练与优化" />
+                  <FormattedMessage id="landing.customization.step3.title" />
                 </StepTitle>
                 <StepDescription>
-                  <FormattedMessage 
-                    id="landing.customization.step3.description" 
-                    defaultMessage="通过提供示例对话和反馈训练您的 AI 角色，不断优化其性能和回应质量" 
-                  />
+                  <FormattedMessage id="landing.customization.step3.description" />
                 </StepDescription>
               </Col>
             </Row>
@@ -202,17 +214,21 @@ const AITeamCustomization = () => {
             {aiProfiles.map((profile, index) => (
               <AIProfileCard key={index} as={motion.div} variants={itemVariants}>
                 <AIProfileImage>
-                  <img src={profile.image} alt={profile.name} />
+                  <img src={profile.image} alt={profile.nameKey} />
                 </AIProfileImage>
                 <AIProfileContent>
-                  <AIProfileTitle>{profile.name}</AIProfileTitle>
-                  <AIProfileDescription>{profile.description}</AIProfileDescription>
+                  <AIProfileTitle>
+                    <FormattedMessage id={profile.nameKey} />
+                  </AIProfileTitle>
+                  <AIProfileDescription>
+                    <FormattedMessage id={profile.descriptionKey} />
+                  </AIProfileDescription>
                   <AIProfileStats>
                     <span>
                       <StarIcon /> {profile.rating}
                     </span>
                     <span>
-                      <UsersIcon /> {profile.users} 用户
+                      <UsersIcon /> {profile.users} <FormattedMessage id="landing.customization.profiles.users" />
                     </span>
                   </AIProfileStats>
                 </AIProfileContent>
@@ -226,7 +242,7 @@ const AITeamCustomization = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FormattedMessage id="landing.customization.createButton" defaultMessage="创建您的 AI 角色" />
+              <FormattedMessage id="landing.customization.createButton" />
             </PrimaryButton>
           </Row>
         </CustomizationContainer>

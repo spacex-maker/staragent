@@ -3,6 +3,12 @@ import { Row, Col } from 'antd';
 import { motion } from 'framer-motion';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faMoneyBillWave,
+  faHandshake,
+  faMagnifyingGlass
+} from '@fortawesome/free-solid-svg-icons';
 import { 
   Section, 
   SectionContainer, 
@@ -105,7 +111,7 @@ const FeatureIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   flex-shrink: 0;
 `;
 
@@ -168,7 +174,7 @@ const AICommunity = () => {
   // Features data
   const features = [
     {
-      icon: "💰",
+      icon: <FontAwesomeIcon icon={faMoneyBillWave} />,
       title: <FormattedMessage id="landing.community.features.monetize.title" defaultMessage="变现您的 AI 创作" />,
       description: <FormattedMessage 
         id="landing.community.features.monetize.description" 
@@ -176,7 +182,7 @@ const AICommunity = () => {
       />
     },
     {
-      icon: "🤝",
+      icon: <FontAwesomeIcon icon={faHandshake} />,
       title: <FormattedMessage id="landing.community.features.collaborate.title" defaultMessage="社区协作" />,
       description: <FormattedMessage 
         id="landing.community.features.collaborate.description" 
@@ -184,7 +190,7 @@ const AICommunity = () => {
       />
     },
     {
-      icon: "🔍",
+      icon: <FontAwesomeIcon icon={faMagnifyingGlass} />,
       title: <FormattedMessage id="landing.community.features.discover.title" defaultMessage="发现专业 AI 角色" />,
       description: <FormattedMessage 
         id="landing.community.features.discover.description" 

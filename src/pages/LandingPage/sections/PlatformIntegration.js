@@ -168,25 +168,85 @@ const ChatInput = styled.div`
   cursor: text;
 `;
 
+const BrandLogo = styled(motion.div)`
+  position: relative;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.theme.mode === 'dark' ? 'rgba(30, 41, 59, 0.7)' : 'rgba(255, 255, 255, 0.7)'};
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.8)'},
+      transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+  
+  &:hover::before {
+    transform: translateX(100%);
+  }
+
+  img {
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+    filter: ${props => props.theme.mode === 'dark' ? 'brightness(0.9)' : 'none'};
+  }
+`;
+
 const PlatformIntegration = () => {
   // Animation variants
-  const staggerContainer = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
+        staggerChildren: 0.15,
+        delayChildren: 0.3
       }
     }
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+  const brandVariants = {
+    hidden: { 
+      y: 50,
+      opacity: 0,
+      rotateX: 45
+    },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
+      rotateX: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+        duration: 0.8
+      }
+    },
+    hover: {
+      scale: 1.05,
+      rotateY: [-1, 1],
+      transition: {
+        rotateY: {
+          repeat: Infinity,
+          repeatType: "reverse",
+          duration: 2
+        }
+      }
     }
   };
 
@@ -223,26 +283,46 @@ const PlatformIntegration = () => {
   const messages = [
     {
       id: 1,
-      agent: { name: "用户", initial: "U", model: null, color: "#3b82f6" },
-      content: "我需要分析这篇市场研究报告并提出策略建议，同时创建一个漂亮的演示文稿。",
+      agent: { 
+        name: <FormattedMessage id="landing.integration.agent.user" />, 
+        initial: "U", 
+        model: null, 
+        color: "#3b82f6" 
+      },
+      content: <FormattedMessage id="landing.integration.message.user" />,
       isUser: true
     },
     {
       id: 2,
-      agent: { name: "数据分析师", initial: "D", model: "DeepSeek", color: "#0ea5e9" },
-      content: "我会深入分析报告中的数据趋势和市场洞察，为您提供详细的数据分析和预测模型。",
+      agent: { 
+        name: <FormattedMessage id="landing.integration.agent.analyst" />, 
+        initial: "D", 
+        model: "DeepSeek", 
+        color: "#0ea5e9" 
+      },
+      content: <FormattedMessage id="landing.integration.message.analyst" />,
       isUser: false
     },
     {
       id: 3,
-      agent: { name: "战略顾问", initial: "S", model: "ChatGPT", color: "#10b981" },
-      content: "根据数据分析，我会制定战略建议，包括市场定位、竞争分析和增长策略。",
+      agent: { 
+        name: <FormattedMessage id="landing.integration.agent.strategist" />, 
+        initial: "S", 
+        model: "ChatGPT", 
+        color: "#10b981" 
+      },
+      content: <FormattedMessage id="landing.integration.message.strategist" />,
       isUser: false
     },
     {
       id: 4,
-      agent: { name: "创意总监", initial: "C", model: "Grok", color: "#f59e0b" },
-      content: "我将设计引人注目的演示文稿，利用视觉元素和创意布局突出您的关键观点和策略建议。",
+      agent: { 
+        name: <FormattedMessage id="landing.integration.agent.creative" />, 
+        initial: "C", 
+        model: "Grok", 
+        color: "#f59e0b" 
+      },
+      content: <FormattedMessage id="landing.integration.message.creative" />,
       isUser: false
     }
   ];
@@ -254,59 +334,55 @@ const PlatformIntegration = () => {
         <Row justify="center" style={{ textAlign: 'center' }}>
           <Col xs={24} md={16}>
             <SectionTitle>
-              <FormattedMessage id="landing.integration.title" defaultMessage="多平台智能集成" />
+              <FormattedMessage id="landing.integration.title" />
             </SectionTitle>
             <SectionSubtitle style={{ margin: '0 auto' }}>
-              <FormattedMessage 
-                id="landing.integration.subtitle" 
-                defaultMessage="无缝整合多种领先 AI 平台，在统一界面中同时利用各平台的独特优势，实现智能协作" 
-              />
+              <FormattedMessage id="landing.integration.subtitle" />
             </SectionSubtitle>
           </Col>
         </Row>
         
         <IntegrationContainer>
-          <IntegrationGrid as={motion.div}
-            variants={staggerContainer}
+          <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
           >
-            {platforms.map((platform, index) => (
-              <IntegrationCard 
-                key={index} 
-                as={motion.div}
-                variants={itemVariants}
-              >
-                <img src={platform.logo} alt={platform.name} />
-              </IntegrationCard>
-            ))}
-          </IntegrationGrid>
+            <IntegrationGrid>
+              {platforms.map((platform, index) => (
+                <BrandLogo
+                  key={platform.id}
+                  variants={brandVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true }}
+                  custom={index}
+                >
+                  <motion.img
+                    src={platform.logo}
+                    alt={platform.name}
+                    draggable={false}
+                  />
+                </BrandLogo>
+              ))}
+            </IntegrationGrid>
+          </motion.div>
           
           <Row gutter={[48, 48]} align="middle">
             <Col xs={24} lg={12}>
               <IntegrationDescription>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem' }}>
-                  <FormattedMessage 
-                    id="landing.integration.aiTeams.title" 
-                    defaultMessage="创建多模型 AI 团队，共享上下文" 
-                  />
+                  <FormattedMessage id="landing.integration.aiTeams.title" />
                 </h3>
                 <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--ant-color-text-secondary)', marginBottom: '1.5rem' }}>
-                  <FormattedMessage 
-                    id="landing.integration.aiTeams.description1" 
-                    defaultMessage="AI MateX 突破单一模型的限制，让您同时使用" 
-                  /> <HighlightText>ChatGPT、DeepSeek、Grok</HighlightText>
-                  <FormattedMessage 
-                    id="landing.integration.aiTeams.description2" 
-                    defaultMessage="等多种 AI 模型，创建具有不同专长的 AI 团队，共同解决复杂问题。" 
-                  />
+                  <FormattedMessage id="landing.integration.aiTeams.description1" />
+                  <HighlightText>ChatGPT、DeepSeek、Grok</HighlightText>
+                  <FormattedMessage id="landing.integration.aiTeams.description2" />
                 </p>
                 <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--ant-color-text-secondary)' }}>
-                  <FormattedMessage 
-                    id="landing.integration.aiTeams.description3" 
-                    defaultMessage="每个 AI 角色都可以访问共享的对话上下文，实现真正的多模型协作，充分发挥各 AI 平台的独特优势。" 
-                  />
+                  <FormattedMessage id="landing.integration.aiTeams.description3" />
                 </p>
               </IntegrationDescription>
             </Col>
@@ -320,7 +396,8 @@ const PlatformIntegration = () => {
               >
                 <ChatHeader>
                   <TeamName>
-                    <span>AI团队:</span> 业务战略团队 
+                    <span><FormattedMessage id="landing.integration.chat.teamName" /></span>
+                    <FormattedMessage id="landing.integration.chat.teamType" />
                   </TeamName>
                 </ChatHeader>
                 
@@ -344,7 +421,9 @@ const PlatformIntegration = () => {
                 </ChatBody>
                 
                 <ChatFooter>
-                  <ChatInput>输入您的消息...</ChatInput>
+                  <ChatInput>
+                    <FormattedMessage id="landing.integration.chat.input" />
+                  </ChatInput>
                 </ChatFooter>
               </ChatInterface>
             </Col>

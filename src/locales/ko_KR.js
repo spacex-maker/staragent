@@ -265,4 +265,110 @@ export default {
   'landing.showcase.role.testing.desc': 'AI 기반 자동화를 통한 포괄적인 테스트 및 배포 전략 구현',
   'landing.showcase.highlight.title': '인간과 AI 협업의 힘',
   'landing.showcase.highlight.description': 'AIMateX는 소프트웨어 개발의 미래를 보여줍니다 - 전문 AI 에이전트 팀을 갖춘 한 명의 선구적인 개발자가 야심찬 프로젝트를 실현할 수 있는 시대. 이 혁신적인 접근 방식은 인간의 창의성과 AI의 효율성을 결합하여 탁월한 결과를 만들어냅니다.',
+
+  // Features Section
+  'landing.features.title': '강력한 기능, 무한한 가능성',
+  'landing.features.subtitle': 'AI MateX는 당신만의 AI 팀을 쉽게 구축하고 업무 효율성을 향상시키기 위한 포괄적인 기능을 제공합니다',
+  
+  // 기능
+  'landing.features.customization.title': '개인화된 AI 캐릭터 커스터마이징',
+  'landing.features.customization.description': 'MBTI 성격 유형 커스터마이징을 지원하고, 나이와 성별 등 인간적인 특성을 설정하여 더 자연스러운 상호작용을 위한 독특한 AI 어시스턴트 생성',
+  
+  'landing.features.marketplace.title': 'AI 캐릭터 마켓플레이스',
+  'landing.features.marketplace.description': '글로벌 마켓플레이스에서 훈련된 AI 캐릭터를 공유, 구매 또는 판매하여 전문 지식이 경계를 넘어 공유되도록 지원',
+  
+  'landing.features.integration.title': '멀티 플랫폼 AI 통합',
+  'landing.features.integration.description': 'ChatGPT, Deepseek, Grok 등 주요 AI 플랫폼을 원활하게 통합하여 하나의 인터페이스에서 다양한 AI 기능에 접근',
+  
+  'landing.features.communication.title': 'AI 캐릭터 협업',
+  'landing.features.communication.description': 'AI 캐릭터 그룹을 생성하여 서로 다른 전문 분야 간의 협업을 가능하게 하고, 컨텍스트를 공유하며 복잡한 문제 해결',
+  
+  'landing.features.privacy.title': '프라이버시 및 데이터 보안',
+  'landing.features.privacy.description': '대화와 데이터는 엔드투엔드 암호화와 데이터 격리를 통해 엄격하게 보호되어 개인정보를 보장',
+  
+  'landing.features.training.title': '지속적인 학습 및 최적화',
+  'landing.features.training.description': 'AI 캐릭터는 사용자와의 상호작용을 통해 학습하고 개선되어 시간이 지남에 따라 사용자의 요구와 선호도를 더 잘 이해',
+  
+  'landing.features.vectordb.title': '벡터 데이터베이스 + RAG 기술',
+  'landing.features.vectordb.description': '벡터 데이터베이스와 RAG 기술을 활용하여 지식 검색을 강화하고, 신뢰할 수 있는 장기 기억과 정확한 지식 Q&A를 실현하며, 문서, 대화, 지식의 실시간 학습 지원',
+  
+  'landing.features.industry.title': '전 산업 템플릿 지원',
+  'landing.features.industry.description': '금융, 의료, 법률, 교육 등 각 산업을 위한 전문적인 프롬프트 템플릿을 제공하고, 산업 지식 베이스와 모범 사례를 내장',
+  
+  'landing.features.function.title': '함수 호출 기능',
+  'landing.features.function.description': '강력한 함수 호출 기능을 지원하여 AI가 파일 조작, 이메일 전송, 장치 제어, 데이터베이스 접근, API 호출을 직접 실행 가능',
+
+  // AI 팀 커스터마이징 섹션
+  'landing.customization.title': 'AI 캐릭터 커스터마이징',
+  'landing.customization.subtitle': '다양한 시나리오에 맞는 AI 캐릭터를 쉽게 생성하고, 전문 지식부터 성격 특성까지 모든 것을 맞춤 설정',
+  'landing.customization.step1.title': '기본 모델 선택',
+  'landing.customization.step1.description': 'ChatGPT, Deepseek, Grok 등 최고의 AI 모델 중에서 귀하의 요구에 가장 적합한 기반을 선택',
+  'landing.customization.step2.title': '전문성 정의',
+  'landing.customization.step2.description': '전문 분야, 성격 특성, 커뮤니케이션 스타일을 설정하여 전문화된 AI 팀 멤버 생성',
+  'landing.customization.step3.title': '훈련 및 최적화',
+  'landing.customization.step3.description': '예시 대화와 피드백을 통해 AI 캐릭터를 훈련시키고, 성능과 응답 품질을 지속적으로 개선',
+  'landing.customization.createButton': 'AI 캐릭터 생성',
+  
+  // AI 프로필
+  'landing.customization.profiles.analyst': '비즈니스 애널리스트',
+  'landing.customization.profiles.analyst.description': '시장 조사, 경쟁 분석, 비즈니스 전략에 중점을 두어 현명한 의사 결정을 지원합니다.',
+  'landing.customization.profiles.creator': '콘텐츠 크리에이터',
+  'landing.customization.profiles.creator.description': '콘텐츠 제작, 카피라이팅, 브랜드 홍보에 능숙하여 브랜드에 창의적 활력을 불어넣습니다.',
+  'landing.customization.profiles.tutor': '교육 멘토',
+  'landing.customization.profiles.tutor.description': '학습과 교육 시나리오를 위해 설계되어 맞춤형 튜터링, 커리큘럼 계획, 지식 확장을 제공합니다.',
+  'landing.customization.profiles.architect': '시스템 아키텍트',
+  'landing.customization.profiles.architect.description': '시스템 설계, 기술 선택, 아키텍처 최적화에 중점을 두어 확장 가능한 고성능 시스템 구축을 지원합니다.',
+  'landing.customization.profiles.guide': '스마트 가이드',
+  'landing.customization.profiles.guide.description': '상세한 여행 계획, 문화 해설, 현지 체험 추천을 제공하여 여행을 더욱 풍부하게 만듭니다.',
+  'landing.customization.profiles.director': '크리에이티브 디렉터',
+  'landing.customization.profiles.director.description': '비주얼 크리에이티브, 스토리텔링, 프로젝트 기획에 특화되어 독특한 시각 작품 제작을 지원합니다.',
+  'landing.customization.profiles.users': '사용자',
+
+  // AI 커뮤니티 페이지
+  'landing.community.title': '글로벌 AI 캐릭터 마켓플레이스',
+  'landing.community.subtitle': '활기찬 AI 크리에이터 커뮤니티에 참여하여 산업 전반의 전문 AI 캐릭터를 공유, 거래하고 발견하세요',
+  
+  // 통계
+  'landing.community.stats.aiRoles': 'AI 캐릭터',
+  'landing.community.stats.creators': '크리에이터',
+  'landing.community.stats.countries': '국가 및 지역',
+  'landing.community.stats.users': '활성 사용자',
+  
+  // 특징
+  'landing.community.features.monetize.title': 'AI 창작물 수익화',
+  'landing.community.features.monetize.description': '정성스럽게 훈련된 AI 캐릭터를 글로벌 마켓에서 판매하고 전문성과 창의성으로 수익을 창출하세요',
+  'landing.community.features.collaborate.title': '커뮤니티 협업',
+  'landing.community.features.collaborate.description': '다른 크리에이터와 협력하여 복잡한 AI 캐릭터를 개발하고 리소스와 지식을 공유하여 더 강력한 AI 경험을 만들어보세요',
+  'landing.community.features.discover.title': '전문 AI 캐릭터 발견',
+  'landing.community.features.discover.description': '산업 전반의 전문 AI 캐릭터를 탐색하여 귀하의 특정 요구에 맞는 맞춤형 AI 어시스턴트를 찾아보세요',
+  
+  // 버튼
+  'landing.community.exploreButton': 'AI 캐릭터 마켓 탐색',
+
+  // 플랫폼 통합 섹션
+  'landing.integration.title': '멀티 플랫폼 AI 통합',
+  'landing.integration.subtitle': '여러 선도적인 AI 플랫폼을 원활하게 통합하여 통일된 인터페이스에서 각 플랫폼의 고유한 장점을 활용하고 지능적인 협업을 실현',
+  
+  // AI 팀
+  'landing.integration.aiTeams.title': '멀티 모델 AI 팀 생성, 컨텍스트 공유',
+  'landing.integration.aiTeams.description1': 'AI MateX는 단일 모델의 한계를 극복하고 동시에',
+  'landing.integration.aiTeams.description2': '등 여러 AI 모델을 사용하여 전문성이 다른 AI 팀을 구성하고 복잡한 문제를 함께 해결합니다.',
+  'landing.integration.aiTeams.description3': '각 AI 캐릭터는 공유된 대화 컨텍스트에 접근할 수 있어 진정한 멀티 모델 협업을 실현하고 각 AI 플랫폼의 고유한 장점을 최대한 활용합니다.',
+  
+  // 채팅 인터페이스
+  'landing.integration.chat.teamName': 'AI 팀:',
+  'landing.integration.chat.teamType': '비즈니스 전략 팀',
+  'landing.integration.chat.input': '메시지를 입력하세요...',
+  
+  // 에이전트 역할
+  'landing.integration.agent.user': '사용자',
+  'landing.integration.agent.analyst': '데이터 분석가',
+  'landing.integration.agent.strategist': '전략 고문',
+  'landing.integration.agent.creative': '크리에이티브 디렉터',
+  
+  // 메시지
+  'landing.integration.message.user': '이 시장 조사 보고서를 분석하고 전략적 제안을 하며 매력적인 프레젠테이션을 만들어야 합니다.',
+  'landing.integration.message.analyst': '보고서의 데이터 트렌드와 시장 통찰력을 심층 분석하여 상세한 데이터 분석과 예측 모델을 제공하겠습니다.',
+  'landing.integration.message.strategist': '데이터 분석을 바탕으로 시장 포지셔닝, 경쟁 분석, 성장 전략을 포함한 전략적 제안을 수립하겠습니다.',
+  'landing.integration.message.creative': '시각적 요소와 창의적인 레이아웃을 활용하여 핵심 포인트와 전략적 제안을 강조하는 매력적인 프레젠테이션을 디자인하겠습니다.',
 };

@@ -250,4 +250,109 @@ export default {
   'landing.showcase.role.testing.desc': 'تنفيذ استراتيجيات شاملة للاختبار والنشر مع أتمتة قائمة على الذكاء الاصطناعي',
   'landing.showcase.highlight.title': 'قوة التعاون بين الإنسان والذكاء الاصطناعي',
   'landing.showcase.highlight.description': 'يوضح AIMateX مستقبل تطوير البرمجيات - حيث يمكن لمطور صاحب رؤية، مسلح بفريق من وكلاء الذكاء الاصطناعي المتخصصين، إحياء المشاريع الطموحة. يجمع هذا النهج الثوري بين الإبداع البشري وكفاءة الذكاء الاصطناعي لتحقيق نتائج استثنائية.',
+
+  'landing.features.title': 'ميزات قوية، إمكانيات لا حدود لها',
+  'landing.features.subtitle': 'يوفر AI MateX ميزات شاملة لمساعدتك في بناء فريق الذكاء الاصطناعي الخاص بك بسهولة وتحسين كفاءة عملك',
+  
+  // الميزات
+  'landing.features.customization.title': 'تخصيص شخصيات الذكاء الاصطناعي',
+  'landing.features.customization.description': 'يدعم تخصيص نوع شخصية MBTI، ويتيح تعيين الخصائص البشرية مثل العمر والجنس لإنشاء مساعدين ذكاء اصطناعي فريدين للتفاعلات الأكثر طبيعية',
+  
+  'landing.features.marketplace.title': 'سوق شخصيات الذكاء الاصطناعي',
+  'landing.features.marketplace.description': 'شارك أو اشتر أو بع شخصيات الذكاء الاصطناعي المدربة في السوق العالمي، مما يتيح للخبرة عبور الحدود',
+  
+  'landing.features.integration.title': 'تكامل الذكاء الاصطناعي متعدد المنصات',
+  'landing.features.integration.description': 'تكامل سلس مع منصات الذكاء الاصطناعي الرائدة مثل ChatGPT وDeepseek وGrok، والوصول إلى قدرات ذكاء اصطناعي متعددة في واجهة واحدة',
+  
+  'landing.features.communication.title': 'تعاون شخصيات الذكاء الاصطناعي',
+  'landing.features.communication.description': 'إنشاء مجموعات شخصيات الذكاء الاصطناعي لتمكين التعاون بين المجالات المهنية المختلفة، وحل المشكلات المعقدة أثناء مشاركة السياق',
+  
+  'landing.features.privacy.title': 'الخصوصية وأمن البيانات',
+  'landing.features.privacy.description': 'محادثاتك وبياناتك محمية بشكل صارم بواسطة التشفير من طرف إلى طرف وعزل البيانات لضمان خصوصيتك',
+  
+  'landing.features.training.title': 'التعلم والتحسين المستمر',
+  'landing.features.training.description': 'تتعلم شخصيات الذكاء الاصطناعي وتتحسن من خلال التفاعلات معك، وتفهم احتياجاتك وتفضيلاتك بشكل أفضل مع مرور الوقت',
+  
+  'landing.features.vectordb.title': 'قاعدة بيانات المتجهات + تقنية RAG',
+  'landing.features.vectordb.description': 'يستخدم قاعدة بيانات المتجهات وتقنية RAG لتحسين استرجاع المعرفة، مما يتيح ذاكرة طويلة المدى موثوقة وأسئلة وأجوبة دقيقة مع التعلم في الوقت الفعلي للمستندات والمحادثات والمعرفة',
+  
+  'landing.features.industry.title': 'دعم القوالب لجميع الصناعات',
+  'landing.features.industry.description': 'يوفر قوالب محترفة للتلميحات للتمويل والرعاية الصحية والقانون والتعليم والمزيد، مع قواعد معرفة مدمجة وأفضل الممارسات',
+  
+  'landing.features.function.title': 'قدرة استدعاء الوظائف',
+  'landing.features.function.description': 'يدعم قدرات قوية لاستدعاء الوظائف، مما يتيح للذكاء الاصطناعي تشغيل الملفات مباشرة وإرسال رسائل البريد الإلكتروني والتحكم في الأجهزة والوصول إلى قواعد البيانات واستدعاء واجهات برمجة التطبيقات',
+
+  // قسم تخصيص فريق الذكاء الاصطناعي
+  'landing.customization.title': 'خصص شخصيات الذكاء الاصطناعي الخاصة بك',
+  'landing.customization.subtitle': 'أنشئ بسهولة شخصيات ذكاء اصطناعي لمختلف السيناريوهات، مع تخصيص كل شيء من الخبرة المهنية إلى السمات الشخصية',
+  'landing.customization.step1.title': 'اختر النموذج الأساسي',
+  'landing.customization.step1.description': 'اختر من بين نماذج الذكاء الاصطناعي الرائدة مثل ChatGPT وDeepseek وGrok للعثور على الأساس المثالي لاحتياجاتك',
+  'landing.customization.step2.title': 'حدد الخبرة',
+  'landing.customization.step2.description': 'قم بإعداد المجالات المهنية وسمات الشخصية وأنماط التواصل لإنشاء أعضاء متخصصين في فريق الذكاء الاصطناعي',
+  'landing.customization.step3.title': 'التدريب والتحسين',
+  'landing.customization.step3.description': 'درّب شخصيات الذكاء الاصطناعي من خلال حوارات وتعليقات نموذجية، مع تحسين أدائهم وجودة استجاباتهم باستمرار',
+  'landing.customization.createButton': 'إنشاء شخصية الذكاء الاصطناعي',
+  
+  // ملفات تعريف الذكاء الاصطناعي
+  'landing.customization.profiles.analyst': 'محلل الأعمال',
+  'landing.customization.profiles.analyst.description': 'يركز على أبحاث السوق والتحليل التنافسي واستراتيجية الأعمال لمساعدتك في اتخاذ قرارات مستنيرة.',
+  'landing.customization.profiles.creator': 'منشئ المحتوى',
+  'landing.customization.profiles.creator.description': 'يتفوق في إنشاء المحتوى وكتابة النصوص الإعلانية وتعزيز العلامة التجارية لإضفاء حيوية إبداعية على علامتك التجارية.',
+  'landing.customization.profiles.tutor': 'المرشد التعليمي',
+  'landing.customization.profiles.tutor.description': 'مصمم لسيناريوهات التعلم والتعليم، يوفر التوجيه الشخصي وتخطيط المناهج وتوسيع المعرفة.',
+  'landing.customization.profiles.architect': 'مهندس النظام',
+  'landing.customization.profiles.architect.description': 'يركز على تصميم الأنظمة واختيار التكنولوجيا وتحسين البنية لمساعدتك في بناء أنظمة قابلة للتطوير وعالية الأداء.',
+  'landing.customization.profiles.guide': 'المرشد الذكي',
+  'landing.customization.profiles.guide.description': 'يوفر تخطيطاً مفصلاً للرحلات وتفسيراً ثقافياً وتوصيات بالتجارب المحلية لإثراء رحلتك.',
+  'landing.customization.profiles.director': 'المدير الإبداعي',
+  'landing.customization.profiles.director.description': 'يركز على الإبداع البصري ورواية القصص وتخطيط المشاريع لمساعدتك في إنشاء أعمال بصرية فريدة.',
+  'landing.customization.profiles.users': 'مستخدمين',
+
+  // صفحة مجتمع الذكاء الاصطناعي
+  'landing.community.title': 'السوق العالمي لشخصيات الذكاء الاصطناعي',
+  'landing.community.subtitle': 'انضم إلى مجتمع نابض بالحياة من مبتكري الذكاء الاصطناعي لمشاركة وتداول واكتشاف شخصيات الذكاء الاصطناعي المهنية عبر مختلف الصناعات',
+  
+  // الإحصائيات
+  'landing.community.stats.aiRoles': 'شخصيات الذكاء الاصطناعي',
+  'landing.community.stats.creators': 'المبتكرون',
+  'landing.community.stats.countries': 'البلدان',
+  'landing.community.stats.users': 'المستخدمون النشطون',
+  
+  // المميزات
+  'landing.community.features.monetize.title': 'حقق الربح من إبداعات الذكاء الاصطناعي',
+  'landing.community.features.monetize.description': 'بيع شخصيات الذكاء الاصطناعي المدربة بعناية في السوق العالمي واكسب من خبرتك وإبداعك',
+  'landing.community.features.collaborate.title': 'تعاون المجتمع',
+  'landing.community.features.collaborate.description': 'تعاون مع المبتكرين الآخرين لتطوير شخصيات ذكاء اصطناعي معقدة، وشارك الموارد والمعرفة لتجارب ذكاء اصطناعي أكثر قوة',
+  'landing.community.features.discover.title': 'اكتشف شخصيات الذكاء الاصطناعي المهنية',
+  'landing.community.features.discover.description': 'استكشف شخصيات الذكاء الاصطناعي المهنية عبر جميع الصناعات للعثور على المساعد الشخصي المثالي لاحتياجاتك المحددة',
+  
+  // الزر
+  'landing.community.exploreButton': 'استكشف سوق شخصيات الذكاء الاصطناعي',
+
+  // قسم تكامل المنصات
+  'landing.integration.title': 'تكامل منصات الذكاء الاصطناعي المتعددة',
+  'landing.integration.subtitle': 'دمج سلس للعديد من منصات الذكاء الاصطناعي الرائدة، والاستفادة من مزاياها الفريدة في واجهة موحدة للتعاون الذكي',
+  
+  // فرق الذكاء الاصطناعي
+  'landing.integration.aiTeams.title': 'إنشاء فرق ذكاء اصطناعي متعددة النماذج، مشاركة السياق',
+  'landing.integration.aiTeams.description1': 'يتجاوز AI MateX حدود النماذج الفردية، مما يتيح لك استخدام',
+  'landing.integration.aiTeams.description2': 'ونماذج ذكاء اصطناعي أخرى في وقت واحد لإنشاء فرق ذكاء اصطناعي متخصصة تحل المشكلات المعقدة معًا.',
+  'landing.integration.aiTeams.description3': 'يمكن لكل شخصية ذكاء اصطناعي الوصول إلى سياق المحادثة المشترك، مما يتيح تعاونًا حقيقيًا متعدد النماذج ويعظم المزايا الفريدة لكل منصة ذكاء اصطناعي.',
+  
+  // واجهة الدردشة
+  'landing.integration.chat.teamName': 'فريق الذكاء الاصطناعي:',
+  'landing.integration.chat.teamType': 'فريق استراتيجية الأعمال',
+  'landing.integration.chat.input': 'اكتب رسالتك...',
+  
+  // أدوار الوكلاء
+  'landing.integration.agent.user': 'المستخدم',
+  'landing.integration.agent.analyst': 'محلل البيانات',
+  'landing.integration.agent.strategist': 'المستشار الاستراتيجي',
+  'landing.integration.agent.creative': 'المدير الإبداعي',
+  
+  // الرسائل
+  'landing.integration.message.user': 'أحتاج إلى تحليل تقرير بحث السوق هذا وتقديم توصيات استراتيجية وإنشاء عرض تقديمي جذاب.',
+  'landing.integration.message.analyst': 'سأقوم بتحليل متعمق لاتجاهات البيانات ورؤى السوق، وتزويدك بتحليلات مفصلة ونماذج تنبؤية.',
+  'landing.integration.message.strategist': 'بناءً على تحليل البيانات، سأطور توصيات استراتيجية، بما في ذلك تحديد موقع السوق وتحليل المنافسة واستراتيجيات النمو.',
+  'landing.integration.message.creative': 'سأصمم عرضًا تقديميًا ملفتًا للنظر، باستخدام العناصر المرئية والتخطيطات الإبداعية لإبراز نقاطك الرئيسية وتوصياتك الاستراتيجية.',
 };
