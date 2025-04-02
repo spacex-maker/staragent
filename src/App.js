@@ -11,6 +11,7 @@ import AgentPage from "./pages/Agent";
 import OAuthCallback from './pages/OAuth/Callback';
 import WorldMap from './pages/WorldMap';
 import LandingPage from './pages/LandingPage';
+import CareersPage from './pages/Careers';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
@@ -267,6 +268,7 @@ export default function App() {
               <Route path="/oauth/callback" element={<OAuthCallback />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/careers" element={<CareersPage />} />
               <Route path="/world-map" element={<WorldMap />} />
             </Routes>
           </Router>

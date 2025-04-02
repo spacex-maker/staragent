@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const FooterSection = styled.footer`
   background-color: var(--background-color);
@@ -52,6 +53,16 @@ const FooterLinkItem = styled.li`
 `;
 
 const FooterLink = styled(motion.a)`
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: var(--ant-color-primary);
+  }
+`;
+
+const FooterRouterLink = styled(motion(Link))`
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.2s;
@@ -201,9 +212,9 @@ const Footer = ({ onLanguageChange, currentLocale }) => {
                 </FooterLink>
               </FooterLinkItem>
               <FooterLinkItem>
-                <FooterLink href="#" whileHover={{ x: 3 }}>
+                <FooterRouterLink to="/careers" whileHover={{ x: 3 }}>
                   <FormattedMessage id="footer.careers" defaultMessage="招贤纳士" />
-                </FooterLink>
+                </FooterRouterLink>
               </FooterLinkItem>
               <FooterLinkItem>
                 <FooterLink href="#" whileHover={{ x: 3 }}>
@@ -252,14 +263,14 @@ const Footer = ({ onLanguageChange, currentLocale }) => {
             </FooterLinksTitle>
             <FooterLinksList>
               <FooterLinkItem>
-                <FooterLink href="#" whileHover={{ x: 3 }}>
+                <FooterRouterLink to="/terms" whileHover={{ x: 3 }}>
                   <FormattedMessage id="footer.terms" defaultMessage="服务条款" />
-                </FooterLink>
+                </FooterRouterLink>
               </FooterLinkItem>
               <FooterLinkItem>
-                <FooterLink href="#" whileHover={{ x: 3 }}>
+                <FooterRouterLink to="/privacy" whileHover={{ x: 3 }}>
                   <FormattedMessage id="footer.privacy" defaultMessage="隐私政策" />
-                </FooterLink>
+                </FooterRouterLink>
               </FooterLinkItem>
               <FooterLinkItem>
                 <FooterLink href="#" whileHover={{ x: 3 }}>
