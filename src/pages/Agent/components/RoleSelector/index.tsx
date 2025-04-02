@@ -91,13 +91,13 @@ const CategoryTag = styled(Tag)`
 const RoleOption = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 0;
+  gap: 12px;
+  padding: 8px 0;
   
   img {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     object-fit: cover;
   }
 `;
@@ -174,9 +174,9 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
             src={role.icon} 
             alt={role.name}
             style={{
-              width: '16px',
-              height: '16px',
-              borderRadius: '4px',
+              width: '24px',
+              height: '24px',
+              borderRadius: '6px',
               objectFit: 'cover',
               flexShrink: 0
             }}
@@ -187,15 +187,15 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
               if (parent) {
                 const iconElement = document.createElement('i');
                 iconElement.className = 'bi bi-person-circle';
-                iconElement.style.fontSize = '16px';
+                iconElement.style.fontSize = '24px';
                 parent.insertBefore(iconElement, parent.firstChild);
               }
             }}
           />
         ) : (
-          <i className="bi bi-person-circle" style={{ fontSize: '16px', flexShrink: 0 }} />
+          <i className="bi bi-person-circle" style={{ fontSize: '24px', flexShrink: 0 }} />
         )}
-        <span style={{ fontSize: '12px' }}>{role.name}</span>
+        <span style={{ fontSize: '14px' }}>{role.name}</span>
       </>
     );
   };
