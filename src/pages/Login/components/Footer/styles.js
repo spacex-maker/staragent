@@ -13,15 +13,6 @@ const textReveal = keyframes`
   }
 `;
 
-const glowEffect = keyframes`
-  0%, 100% {
-    text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
-  }
-  50% {
-    text-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
-  }
-`;
-
 export const PhilosophyQuoteWrapper = styled.div`
   position: fixed;
   bottom: 3.5rem;

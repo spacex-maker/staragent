@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'styled-components';
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Layout } from 'antd';
+import { useIntl } from 'react-intl';
 import styled from 'styled-components';
 
 // Components
