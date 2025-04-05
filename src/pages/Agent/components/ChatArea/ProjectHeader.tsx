@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Dropdown, Button, Space, Table } from 'antd';
-import { ProjectOutlined, EllipsisOutlined, RobotOutlined } from '@ant-design/icons';
+import { ProjectOutlined, EllipsisOutlined, RobotOutlined, CloudSyncOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Project, ProjectAgent } from '../../types';
 import { useProjectAgents } from 'hooks/useProjectAgents';
+import AgentMemoryModal from './AgentMemoryModal';
 
 const { Title, Text } = Typography;
 
@@ -68,12 +69,31 @@ const AgentTag = styled(Text)`
   margin-left: 8px;
 `;
 
+const AgentActionButton = styled(Button)`
+  padding: 4px 8px;
+  height: 24px;
+  font-size: 12px;
+  border-radius: 12px;
+  
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+`;
+
 interface ProjectHeaderProps {
   project: Project;
 }
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
   const { projectAgents, loading, fetchAgents } = useProjectAgents(project.id);
+  const [selectedAgent, setSelectedAgent] = useState<ProjectAgent | null>(null);
+  const [memoryModalVisible, setMemoryModalVisible] = useState(false);
+
+  const handleViewMemory = (agent: ProjectAgent) => {
+    setSelectedAgent(agent);
+    setMemoryModalVisible(true);
+  };
 
   const columns = [
     {
@@ -99,6 +119,24 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
       key: 'priority',
       width: 80,
       align: 'center' as const,
+    },
+    {
+      title: '操作',
+      key: 'action',
+      width: 100,
+      align: 'center' as const,
+      render: (_: any, record: ProjectAgent) => (
+        <AgentActionButton
+          type="primary"
+          icon={<CloudSyncOutlined />}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleViewMemory(record);
+          }}
+        >
+          记忆
+        </AgentActionButton>
+      ),
     }
   ];
 
@@ -117,30 +155,43 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
   );
 
   return (
-    <ProjectTitleBar>
-      <ProjectIcon>
-        <ProjectOutlined />
-      </ProjectIcon>
-      <div style={{ overflow: 'hidden', flex: 1 }}>
-        <ProjectTitle level={4}>{project.name}</ProjectTitle>
-        {project.description && (
-          <ProjectDescription>
-            {project.description}
-          </ProjectDescription>
-        )}
-      </div>
-      <Dropdown 
-        trigger={['click']} 
-        dropdownRender={() => dropdownContent}
-        onOpenChange={(visible) => {
-          if (visible) {
-            fetchAgents();
-          }
-        }}
-      >
-        <MoreButton type="text" icon={<EllipsisOutlined />} />
-      </Dropdown>
-    </ProjectTitleBar>
+    <>
+      <ProjectTitleBar>
+        <ProjectIcon>
+          <ProjectOutlined />
+        </ProjectIcon>
+        <div style={{ overflow: 'hidden', flex: 1 }}>
+          <ProjectTitle level={4}>{project.name}</ProjectTitle>
+          {project.description && (
+            <ProjectDescription>
+              {project.description}
+            </ProjectDescription>
+          )}
+        </div>
+        <Dropdown 
+          trigger={['click']} 
+          dropdownRender={() => dropdownContent}
+          onOpenChange={(visible) => {
+            if (visible) {
+              fetchAgents();
+            }
+          }}
+        >
+          <MoreButton type="text" icon={<EllipsisOutlined />} />
+        </Dropdown>
+      </ProjectTitleBar>
+
+      {selectedAgent && (
+        <AgentMemoryModal
+          open={memoryModalVisible}
+          onClose={() => setMemoryModalVisible(false)}
+          agent={{
+            agentId: selectedAgent.agentId,
+            agentName: selectedAgent.agentName
+          }}
+        />
+      )}
+    </>
   );
 };
 
