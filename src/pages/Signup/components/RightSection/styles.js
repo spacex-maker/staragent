@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
-import { slideInFromRight, fadeInScale, marqueeGlow, sendingPulse, glowRipple } from '../../styles';
+import { slideInFromRight, marqueeGlow, sendingPulse, glowRipple } from '../../styles';
 
 const slideUpFade = keyframes`
   0% {

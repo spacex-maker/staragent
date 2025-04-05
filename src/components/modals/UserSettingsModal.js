@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Form, Input, message, Divider, Row, Col, Statistic, Card, Avatar, Typography, Upload, Tabs, Radio, Button } from 'antd';
+import { Modal, Form, Input, message, Divider, Row, Col, Statistic, Card, Avatar, Typography, Upload, Tabs, Radio, Button, Spin } from 'antd';
 import styled from 'styled-components';
 import instance from 'api/axios';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UserOutlined, CameraOutlined, UploadOutlined } from '@ant-design/icons';
+import { UserOutlined, CameraOutlined, UploadOutlined, LoadingOutlined } from '@ant-design/icons';
 
 const { Text, Title } = Typography;
 
@@ -238,6 +238,31 @@ const AvatarActions = styled.div`
   justify-content: flex-end;
 `;
 
+const UploadWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  
+  .upload-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    border-radius: 6px;
+  }
+`;
+
+const StyledSpin = styled(Spin)`
+  .ant-spin-dot-item {
+    background-color: var(--ant-color-primary);
+  }
+`;
+
 const PREDEFINED_AVATARS = {
   female: [
     'https://anakki-1258150206.cos.ap-nanjing.myqcloud.com/images/70703158abc1a7a168cafa664f660f3ddac44374af437c6d8c12e79c2af74a47.png',
@@ -269,6 +294,63 @@ const PREDEFINED_AVATARS = {
     'https://anakki-1258150206.cos.ap-nanjing.myqcloud.com/images/d39b076fa2d6f9792eedecf9afbbe519612a97117eceb166d73f8029396d400a.png',
     'https://anakki-1258150206.cos.ap-nanjing.myqcloud.com/images/e58b3f6462eb0f7eb1f82c0aa630aef39fbfbf8208ef07e85d1dc0de42f11959.png'
   ]
+};
+
+// 图片压缩工具函数
+const compressImage = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        
+        // 如果图片大于800px，按比例缩小
+        if (width > 800) {
+          height = Math.round((height * 800) / width);
+          width = 800;
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // 压缩图片，调整quality直到大小小于200KB
+        let quality = 0.9;
+        let compressedFile;
+        
+        const compress = () => {
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          const binaryData = atob(dataUrl.split(',')[1]);
+          const uint8Array = new Uint8Array(binaryData.length);
+          for (let i = 0; i < binaryData.length; i++) {
+            uint8Array[i] = binaryData.charCodeAt(i);
+          }
+          compressedFile = new Blob([uint8Array], { type: 'image/jpeg' });
+          
+          if (compressedFile.size > 200 * 1024 && quality > 0.1) {
+            quality -= 0.1;
+            compress();
+          } else {
+            const compressedImageFile = new File([compressedFile], file.name, {
+              type: 'image/jpeg',
+            });
+            resolve(compressedImageFile);
+          }
+        };
+        
+        compress();
+      };
+      img.onerror = (error) => reject(error);
+    };
+    reader.onerror = (error) => reject(error);
+  });
 };
 
 const UserSettingsModal = ({ open, onClose, onSuccess }) => {
@@ -371,9 +453,15 @@ const UserSettingsModal = ({ open, onClose, onSuccess }) => {
 
     try {
       setUploadLoading(true);
+      message.loading(intl.formatMessage({ id: 'avatar.upload.compressing', defaultMessage: '正在处理图片...' }), 0);
+      
+      // 压缩图片
+      const compressedFile = await compressImage(file);
+      
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', compressedFile);
 
+      message.loading(intl.formatMessage({ id: 'avatar.upload.uploading', defaultMessage: '正在上传...' }), 0);
       const response = await instance.post('/productx/user/avatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -381,13 +469,16 @@ const UserSettingsModal = ({ open, onClose, onSuccess }) => {
       });
 
       if (response.data.success) {
+        message.destroy();
         message.success(intl.formatMessage({ id: 'avatar.upload.success', defaultMessage: '头像上传成功' }));
         await fetchUserDetails();
         onSuccess?.();
       } else {
+        message.destroy();
         message.error(response.data.message || intl.formatMessage({ id: 'avatar.upload.error', defaultMessage: '头像上传失败' }));
       }
     } catch (error) {
+      message.destroy();
       message.error(intl.formatMessage({ id: 'avatar.upload.error', defaultMessage: '头像上传失败' }));
     } finally {
       setUploadLoading(false);
@@ -409,20 +500,28 @@ const UserSettingsModal = ({ open, onClose, onSuccess }) => {
         ))}
       </AvatarGrid>
       <AvatarActions>
-        <Upload
-          name="avatar"
-          showUploadList={false}
-          beforeUpload={handleAvatarUpload}
-          accept="image/png,image/jpeg"
-        >
-          <Button icon={<UploadOutlined />}>
-            <FormattedMessage id="avatar.upload" defaultMessage="上传头像" />
-          </Button>
-        </Upload>
+        <UploadWrapper>
+          <Upload
+            name="avatar"
+            showUploadList={false}
+            beforeUpload={handleAvatarUpload}
+            accept="image/png,image/jpeg"
+            disabled={uploadLoading}
+          >
+            <Button icon={<UploadOutlined />} disabled={uploadLoading}>
+              <FormattedMessage id="avatar.upload" defaultMessage="上传头像" />
+            </Button>
+          </Upload>
+          {uploadLoading && (
+            <div className="upload-loading">
+              <StyledSpin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
+            </div>
+          )}
+        </UploadWrapper>
         <Button 
           type="primary"
           onClick={() => handleAvatarSelect(selectedAvatar)}
-          disabled={!selectedAvatar}
+          disabled={!selectedAvatar || uploadLoading}
           loading={loading}
         >
           <FormattedMessage id="avatar.confirm" defaultMessage="确认选择" />

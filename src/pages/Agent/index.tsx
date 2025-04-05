@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, PropsWithChildren } from 'react';
+import React, { useState, useEffect, PropsWithChildren } from 'react';
 import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import SimpleHeader from '../../components/headers/simple';
@@ -27,84 +27,7 @@ const MainContainer = styled.div`
   overflow: hidden;
 `;
 
-interface SidebarProps extends PropsWithChildren<{ collapsed: boolean }> {}
-interface SidebarContentProps extends PropsWithChildren<{ collapsed: boolean }> {}
-interface SidebarResizerProps extends PropsWithChildren<{ 
-  $collapsed: boolean;
-  onClick?: (e: React.MouseEvent) => void;
-  title?: string;
-}> {}
-interface MaskProps extends PropsWithChildren<{ 
-  visible: boolean;
-  onClick?: () => void;
-}> {}
 
-const SidebarContent = styled.div<SidebarContentProps>`
-  width: 300px;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transform: translateX(${props => props.collapsed ? '-300px' : '0'});
-  transition: transform 0.2s ease-in-out;
-`;
-
-const SidebarResizer = styled.div<SidebarResizerProps>`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: -12px;
-  width: 4px;
-  height: 80px;
-  background-color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#000000'};
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 1000;
-  transition: all 0.2s ease-in-out;
-  opacity: 0.8;
-  pointer-events: auto;
-  
-  &:hover {
-    opacity: 1;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: -4px;
-    right: -4px;
-    top: 0;
-    bottom: 0;
-  }
-`;
-
-const Mask = styled.div<MaskProps>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 999;
-  display: ${props => props.visible ? 'block' : 'none'};
-  
-  @media (min-width: 769px) {
-    display: none;
-  }
-`;
-
-interface ChatAreaProps {
-  messages: Message[];
-  inputValue: string;
-  setInputValue: (value: string) => void;
-  activeProject: Project | undefined;
-  handleSend: (sessionId?: string) => Promise<string | undefined>;
-  sendLoading?: boolean;
-  onCancelRequest?: () => void;
-  onClearMessages?: () => void;
-  activeSessionId: string | null;
-  setActiveSessionId: (sessionId: string | null) => void;
-  onSendMessage: (sessionId?: string) => Promise<string | undefined>;
-}
 
 const AgentPage: React.FC = () => {
   const [projects, setProjects] = React.useState<Project[]>([]);
@@ -356,15 +279,6 @@ const AgentPage: React.FC = () => {
     }
     
     return undefined;
-  };
-
-  const toggleSidebar = () => {
-    setCollapsed(!collapsed);
-  };
-
-  // 在移动端点击遮罩时收起侧边栏
-  const handleMaskClick = () => {
-    setCollapsed(true);
   };
 
   // 清空当前项目的消息

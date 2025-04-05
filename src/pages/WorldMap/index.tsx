@@ -27,18 +27,6 @@ const ContentWrapper = styled.div`
   position: relative;
 `;
 
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--ant-color-text);
-  margin-bottom: 2rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-`;
-
 const fadeOutKeyframes = `
   @keyframes fadeOut {
     0% {
@@ -380,10 +368,6 @@ const WorldMap: React.FC = () => {
       color: countryColors[countryCode as keyof typeof countryColors]
     };
   }, [selectedPlatform]);
-
-  const theme = {
-    mode: document.documentElement.getAttribute('data-theme') as 'dark' | 'light'
-  };
 
   return (
     <>
