@@ -104,40 +104,7 @@ const Copyright = styled.div`
   font-size: 0.9rem;
 `;
 
-const LanguageSelector = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 2rem;
-`;
-
-const LanguageOption = styled.button`
-  background: none;
-  border: none;
-  color: ${props => props.active ? 'var(--ant-color-primary)' : 'var(--text-secondary)'};
-  cursor: pointer;
-  font-size: 0.9rem;
-  padding: 0.3rem 0.5rem;
-  border-radius: 4px;
-  transition: all 0.2s;
-  
-  &:hover {
-    color: var(--ant-color-primary);
-    background: rgba(59, 130, 246, 0.1);
-  }
-  
-  ${props => props.active && `
-    background: rgba(59, 130, 246, 0.1);
-  `}
-`;
-
 const Footer = ({ onLanguageChange, currentLocale }) => {
-  const languages = [
-    { code: 'zh', name: '中文' },
-    { code: 'en', name: 'English' },
-    { code: 'ja', name: '日本語' },
-    { code: 'ko', name: '한국어' }
-  ];
-  
   return (
     <FooterSection>
       <FooterContainer>
@@ -188,17 +155,6 @@ const Footer = ({ onLanguageChange, currentLocale }) => {
                 </svg>
               </SocialLink>
             </SocialLinks>
-            <LanguageSelector>
-              {languages.map(lang => (
-                <LanguageOption 
-                  key={lang.code}
-                  active={currentLocale === lang.code}
-                  onClick={() => onLanguageChange(lang.code)}
-                >
-                  {lang.name}
-                </LanguageOption>
-              ))}
-            </LanguageSelector>
           </Col>
           
           <Col xs={12} sm={8} md={5} lg={5}>
