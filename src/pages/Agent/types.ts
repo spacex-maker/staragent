@@ -90,8 +90,8 @@ export interface AIAgent {
   maxTokens: number;
   prompt: string;
   avatarUrl?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  createTime: string;
+  updateTime: string;
 }
 
 export interface ProjectAgent {

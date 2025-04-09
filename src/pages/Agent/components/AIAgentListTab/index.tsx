@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, List, message } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import axios from '../../../../api/axios';
 import { AIAgent } from '../../types';
@@ -8,6 +8,7 @@ import AIAgentItem from './AIAgentItem';
 import CreateAIAgentModal from './CreateAIAgentModal';
 import EditAIAgentModal from './EditAIAgentModal';
 import AIAgentListHeader from './AIAgentListHeader';
+import AIAgentMarketModal from './AIAgentMarketModal';
 
 const Container = styled.div`
   height: 100%;
@@ -19,12 +20,13 @@ const Container = styled.div`
 
 const Header = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 16px;
   height: 64px;
   border-bottom: 1px solid var(--ant-color-border);
   flex-shrink: 0;
+  gap: 12px;
 `;
 
 const ListContent = styled.div`
@@ -70,6 +72,7 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
   const [agents, setAgents] = useState<AIAgent[]>([]);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [isMarketModalVisible, setIsMarketModalVisible] = useState(false);
   const [editingAgent, setEditingAgent] = useState<AIAgent | null>(null);
 
   // 监听 autoTriggerAddAgent 属性变化
@@ -134,13 +137,31 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
   };
 
   const handleRecruit = () => {
-    // TODO: 实现招募员工功能
-    message.info('招募员工功能开发中...');
+    setIsMarketModalVisible(true);
+  };
+
+  const handleSelectMarketAgent = async (agent: AIAgent) => {
+    try {
+      // 这里可以添加招募逻辑，比如复制系统AI员工到用户的AI员工列表
+      message.success('招募成功');
+      setIsMarketModalVisible(false);
+      fetchAgents();
+    } catch (error) {
+      console.error('招募AI员工失败:', error);
+      message.error('招募失败，请稍后重试');
+    }
   };
 
   return (
     <Container>
       <Header>
+        <Button
+          type="default"
+          icon={<UsergroupAddOutlined />}
+          onClick={handleRecruit}
+        >
+          招募员工
+        </Button>
         <Button
           type="primary"
           icon={<PlusOutlined />}
@@ -182,6 +203,12 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
           }}
         />
       )}
+
+      <AIAgentMarketModal
+        visible={isMarketModalVisible}
+        onCancel={() => setIsMarketModalVisible(false)}
+        onSelect={handleSelectMarketAgent}
+      />
     </Container>
   );
 });

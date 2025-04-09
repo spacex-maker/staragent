@@ -19,6 +19,8 @@ interface GroupedRoles {
 }
 
 const Container = styled.div`
+  width: 300px;
+  max-width: 100%;
   .ant-select {
     width: 100%;
   }
@@ -33,10 +35,46 @@ const StyledSelect = styled(Select)`
     border-radius: 20px;
     padding: 4px 8px;
     min-height: 40px;
+    max-height: 40px;
+    max-width: 100%;
+    
+    .ant-select-selection-overflow {
+      flex-wrap: wrap;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      max-width: 100%;
+      max-height: 32px;
+      align-content: flex-start;
+      
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--ant-color-split);
+        border-radius: 4px;
+      }
+      
+      &:hover::-webkit-scrollbar-thumb {
+        background-color: var(--ant-color-text-quaternary);
+      }
+      
+      .ant-select-selection-overflow-item {
+        flex-shrink: 0;
+      }
+    }
   }
   
   .ant-select-multiple .ant-select-selector {
     padding: 4px 8px;
+    height: 40px !important;
+    overflow: hidden;
   }
   
   .ant-select-multiple .ant-select-selection-item {
@@ -45,35 +83,51 @@ const StyledSelect = styled(Select)`
     color: var(--ant-color-primary);
     border-radius: 20px;
     margin: 2px 4px;
-    padding: 4px 8px;
-    height: 28px;
+    padding: 2px 8px;
+    height: 24px;
     line-height: 20px;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
+    flex-shrink: 0;
     
     .ant-select-selection-item-content {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       margin-right: 0;
+      white-space: nowrap;
+      font-size: 12px;
     }
     
     .ant-select-selection-item-remove {
       color: var(--ant-color-primary);
-      margin-left: 4px;
+      margin-left: 2px;
       padding: 0;
       border-radius: 50%;
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
       
       &:hover {
         color: var(--ant-color-primary-hover);
         background: rgba(0, 0, 0, 0.06);
       }
+    }
+  }
+  
+  .ant-select-selection-search {
+    position: relative !important;
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+    max-width: 100%;
+    
+    input {
+      min-width: 60px;
     }
   }
 `;
@@ -121,9 +175,14 @@ const RoleDescription = styled.span`
 interface RoleSelectorProps {
   value?: string[];
   onChange?: (value: string[]) => void;
+  dropdownMatchSelectWidth?: boolean;
 }
 
-const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
+const RoleSelector: React.FC<RoleSelectorProps> = ({ 
+  value, 
+  onChange,
+  dropdownMatchSelectWidth = false 
+}) => {
   const [loading, setLoading] = useState(false);
   const [roles, setRoles] = useState<Role[]>([]);
   const [groupedRoles, setGroupedRoles] = useState<GroupedRoles>({});
@@ -211,9 +270,8 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onChange }) => {
         value={value}
         onChange={handleChange}
         placeholder="请选择角色"
-        maxTagCount="responsive"
-        maxTagPlaceholder={(omittedValues) => `+${omittedValues.length} 个角色`}
         optionFilterProp="children"
+        dropdownMatchSelectWidth={dropdownMatchSelectWidth}
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
         }

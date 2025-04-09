@@ -110,9 +110,14 @@ const LoadingContainer = styled.div`
 interface ModelSelectorProps {
   value?: string;
   onChange?: (value: string) => void;
+  dropdownMatchSelectWidth?: boolean;
 }
 
-const ModelSelector: React.FC<ModelSelectorProps> = ({ value, onChange }) => {
+const ModelSelector: React.FC<ModelSelectorProps> = ({ 
+  value, 
+  onChange,
+  dropdownMatchSelectWidth = false 
+}) => {
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState<AICompany[]>([]);
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
@@ -206,7 +211,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({ value, onChange }) => {
         value={value}
         onChange={handleModelChange}
         disabled={!selectedCompany}
-        dropdownMatchSelectWidth
+        dropdownMatchSelectWidth={dropdownMatchSelectWidth}
         listHeight={400}
         optionLabelProp="label"
       >
