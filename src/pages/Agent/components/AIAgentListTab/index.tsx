@@ -141,15 +141,10 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
   };
 
   const handleSelectMarketAgent = async (agent: AIAgent) => {
-    try {
-      // 这里可以添加招募逻辑，比如复制系统AI员工到用户的AI员工列表
-      message.success('招募成功');
-      setIsMarketModalVisible(false);
-      fetchAgents();
-    } catch (error) {
-      console.error('招募AI员工失败:', error);
-      message.error('招募失败，请稍后重试');
-    }
+    // 招募逻辑已经在 AIAgentMarketModal 中处理
+    // 这里只需要关闭模态框并刷新列表
+    setIsMarketModalVisible(false);
+    fetchAgents();
   };
 
   return (

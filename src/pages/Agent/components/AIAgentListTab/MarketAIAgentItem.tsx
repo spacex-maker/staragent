@@ -169,9 +169,10 @@ const ModelTag = styled(Tag)`
 interface MarketAIAgentItemProps {
   agent: AIAgent;
   onRecruit: (agent: AIAgent) => void;
+  loading?: boolean;
 }
 
-const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit }) => {
+const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit, loading = false }) => {
   const [isDetailModalVisible, setIsDetailModalVisible] = useState(false);
 
   return (
@@ -219,6 +220,7 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit 
                 type="primary"
                 icon={<UserAddOutlined />}
                 onClick={() => onRecruit(agent)}
+                loading={loading}
               >
                 招募
               </ActionButton>

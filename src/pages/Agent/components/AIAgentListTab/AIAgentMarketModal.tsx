@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Tabs, List, Input, Select, Space, Empty, Spin } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Modal, Tabs, List, Input, Select, Space, Empty, Spin, message } from 'antd';
+import { SearchOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import axios from '../../../../api/axios';
 import { AIAgent } from '../../types';
@@ -9,6 +9,7 @@ import ModelSelector from '../ModelSelector';
 import RoleSelector from '../RoleSelector';
 
 const { TabPane } = Tabs;
+const { confirm } = Modal;
 
 const FilterContainer = styled.div`
   margin-bottom: 16px;
@@ -60,6 +61,7 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState('official');
   const [loading, setLoading] = useState(false);
+  const [recruitLoading, setRecruitLoading] = useState(false);
   const [agents, setAgents] = useState<AIAgent[]>([]);
   const [searchName, setSearchName] = useState('');
   const [selectedRole, setSelectedRole] = useState<string[]>([]);
@@ -102,6 +104,30 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
     setSelectedModel(value);
   };
 
+  const handleRecruitAgent = async (agent: AIAgent) => {
+    confirm({
+      title: '确认招募',
+      icon: <QuestionCircleOutlined />,
+      content: `确定要招募 "${agent.name}" 作为您的AI员工吗？`,
+      okText: '确认招募',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          setRecruitLoading(true);
+          await axios.post('/productx/sa-ai-agent/copy', {
+            aiAgentId: agent.id
+          });
+          
+          onSelect?.(agent);
+        } catch (error) {
+          console.error('招募AI员工失败:', error);
+        } finally {
+          setRecruitLoading(false);
+        }
+      }
+    });
+  };
+
   return (
     <Modal
       title="AI员工市场"
@@ -139,7 +165,8 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
                   renderItem={(agent) => (
                     <MarketAIAgentItem
                       agent={agent}
-                      onRecruit={() => onSelect?.(agent)}
+                      onRecruit={handleRecruitAgent}
+                      loading={recruitLoading}
                     />
                   )}
                 />
