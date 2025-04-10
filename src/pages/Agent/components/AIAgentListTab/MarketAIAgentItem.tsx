@@ -13,18 +13,43 @@ interface ThemeProps {
 
 const { Text } = Typography;
 
-const AgentItem = styled(List.Item)<ThemeProps>`
+const AgentItem = styled(List.Item)<ThemeProps & { $bgImg?: string }>`
   padding: 8px !important;
   margin: 8px 0;
-  border-radius: 8px !important;
+  border-radius: 20px !important;
   background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)'};
   position: relative;
   border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'};
   transition: all 0.3s ease;
+  overflow: hidden;
   
   &:hover {
     background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)'};
     box-shadow: 0 2px 8px ${({ theme }) => theme.mode === 'dark' ? 'rgba(0, 0, 0, 0.32)' : 'rgba(0, 0, 0, 0.08)'};
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    bottom: 0;
+    background-image: ${props => props.$bgImg ? `url(${props.$bgImg})` : 'none'};
+    background-size: cover;
+    background-position: right center;
+    opacity: 0.38;
+    z-index: 0;
+    transition: all 0.3s ease;
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
+  }
+  
+  &:hover::before {
+    opacity: ${props => props.$bgImg ? '0.45' : '0'};
+    width: 55%;
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0));
   }
 `;
 
@@ -32,7 +57,8 @@ const AgentContent = styled.div`
   display: flex;
   width: 100%;
   position: relative;
-  padding: 4px;
+  padding: 8px;
+  z-index: 1;
 `;
 
 const LeftSection = styled.div`
@@ -45,17 +71,17 @@ const AgentIcon = styled.div`
   font-size: 24px;
   color: var(--ant-color-primary);
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const AgentAvatar = styled(Avatar)`
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--ant-color-primary);
+  width: 56px;
+  height: 56px;
+  border: 3px solid var(--ant-color-primary);
   background: var(--ant-color-bg-container);
   color: var(--ant-color-primary);
   display: flex;
@@ -63,7 +89,7 @@ const AgentAvatar = styled(Avatar)`
   justify-content: center;
   
   .anticon {
-    font-size: 20px;
+    font-size: 28px;
   }
 
   &:hover {
@@ -150,7 +176,7 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit 
 
   return (
     <>
-      <AgentItem>
+      <AgentItem $bgImg={agent.bgImg}>
         <AgentContent>
           <LeftSection>
             <AgentIcon>

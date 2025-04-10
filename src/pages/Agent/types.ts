@@ -90,6 +90,7 @@ export interface AIAgent {
   maxTokens: number;
   prompt: string;
   avatarUrl?: string | null;
+  bgImg?: string | null;
   createTime: string;
   updateTime: string;
 }
