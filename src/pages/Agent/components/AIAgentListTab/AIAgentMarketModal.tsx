@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Tabs, List, Input, Select, Space, Empty, Spin, message } from 'antd';
-import { SearchOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { Modal, Tabs, List, Input, Button, Row, Col, Empty, Spin, message, Typography } from 'antd';
+import { SearchOutlined, QuestionCircleOutlined, ReloadOutlined, TeamOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { FormattedMessage, useIntl } from 'react-intl';
 import axios from '../../../../api/axios';
 import { AIAgent } from '../../types';
 import MarketAIAgentItem from './MarketAIAgentItem';
@@ -10,29 +11,47 @@ import RoleSelector from '../RoleSelector';
 
 const { TabPane } = Tabs;
 const { confirm } = Modal;
+const { Text } = Typography;
 
 const FilterContainer = styled.div`
   margin-bottom: 16px;
   padding: 16px;
   background: var(--ant-color-bg-container-disabled);
   border-radius: 8px;
-  display: grid;
-  grid-template-columns: 200px 1fr 1fr;
-  gap: 16px;
-  
-  .ant-input-affix-wrapper {
-    border-radius: 20px;
-  }
 `;
 
-const StyledSpace = styled(Space)`
-  width: 100%;
+const StyledRow = styled(Row)`
+  margin-bottom: 16px;
+  
+  .ant-col {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-wrapper, .selector-wrapper {
+    width: 100%;
+  }
+  
+  .buttons-wrapper {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+  }
 `;
 
 const ListContainer = styled.div`
   height: 60vh;
   overflow-y: auto;
-  padding: 0 4px;
+  padding: 8px 12px;
+  position: relative;
+  
+  .ant-list {
+    overflow: visible;
+  }
+  
+  .ant-list-item {
+    overflow: visible;
+  }
   
   &::-webkit-scrollbar {
     width: 4px;
@@ -48,6 +67,18 @@ const ListContainer = styled.div`
   }
 `;
 
+const TotalCountFooter = styled.div`
+  padding: 12px 0;
+  text-align: right;
+  border-top: 1px solid var(--ant-color-border);
+  margin-top: 16px;
+  color: var(--ant-color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+`;
+
 interface AIAgentMarketModalProps {
   visible: boolean;
   onCancel: () => void;
@@ -59,10 +90,12 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
   onCancel,
   onSelect
 }) => {
+  const intl = useIntl();
   const [activeTab, setActiveTab] = useState('official');
   const [loading, setLoading] = useState(false);
   const [recruitLoading, setRecruitLoading] = useState(false);
   const [agents, setAgents] = useState<AIAgent[]>([]);
+  const [searchInput, setSearchInput] = useState('');
   const [searchName, setSearchName] = useState('');
   const [selectedRole, setSelectedRole] = useState<string[]>([]);
   const [selectedModel, setSelectedModel] = useState<string>();
@@ -80,7 +113,7 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
         setAgents(response.data.data);
       }
     } catch (error) {
-      console.error('获取官方AI员工列表失败:', error);
+      console.error(intl.formatMessage({ id: 'aiAgent.market.fetchError' }), error);
     } finally {
       setLoading(false);
     }
@@ -90,10 +123,15 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
     if (visible && activeTab === 'official') {
       fetchOfficialAgents();
     }
-  }, [visible, activeTab, searchName, selectedRole, selectedModel]);
+  }, [visible, activeTab]);
 
-  const handleSearch = (value: string) => {
-    setSearchName(value);
+  const handleSearch = () => {
+    setSearchName(searchInput);
+    fetchOfficialAgents();
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
   };
 
   const handleRoleChange = (value: string[]) => {
@@ -106,11 +144,14 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
 
   const handleRecruitAgent = async (agent: AIAgent) => {
     confirm({
-      title: '确认招募',
+      title: intl.formatMessage({ id: 'aiAgent.market.confirmRecruit.title' }),
       icon: <QuestionCircleOutlined />,
-      content: `确定要招募 "${agent.name}" 作为您的AI员工吗？`,
-      okText: '确认招募',
-      cancelText: '取消',
+      content: intl.formatMessage(
+        { id: 'aiAgent.market.confirmRecruit.content' },
+        { name: agent.name }
+      ),
+      okText: intl.formatMessage({ id: 'aiAgent.market.confirmRecruit.ok' }),
+      cancelText: intl.formatMessage({ id: 'aiAgent.market.confirmRecruit.cancel' }),
       onOk: async () => {
         try {
           setRecruitLoading(true);
@@ -120,7 +161,7 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
           
           onSelect?.(agent);
         } catch (error) {
-          console.error('招募AI员工失败:', error);
+          console.error(intl.formatMessage({ id: 'aiAgent.market.recruitError' }), error);
         } finally {
           setRecruitLoading(false);
         }
@@ -128,57 +169,112 @@ const AIAgentMarketModal: React.FC<AIAgentMarketModalProps> = ({
     });
   };
 
+  const handleReset = () => {
+    setSearchInput('');
+    setSearchName('');
+    setSelectedRole([]);
+    setSelectedModel(undefined);
+    fetchOfficialAgents();
+  };
+
   return (
     <Modal
-      title="AI员工市场"
+      title={intl.formatMessage({ id: 'aiAgent.market.title' })}
       open={visible}
       onCancel={onCancel}
       width={1000}
       footer={null}
     >
       <Tabs activeKey={activeTab} onChange={setActiveTab}>
-        <TabPane tab="官方AI员工" key="official">
+        <TabPane tab={intl.formatMessage({ id: 'aiAgent.market.tab.official' })} key="official">
           <FilterContainer>
-            <Input
-              placeholder="搜索AI员工名称"
-              prefix={<SearchOutlined />}
-              onChange={(e) => handleSearch(e.target.value)}
-              allowClear
-            />
-            <RoleSelector
-              value={selectedRole}
-              onChange={handleRoleChange}
-              dropdownMatchSelectWidth={false}
-            />
-            <ModelSelector
-              value={selectedModel}
-              onChange={handleModelChange}
-              dropdownMatchSelectWidth={false}
-            />
+            <StyledRow gutter={16}>
+              <Col span={14}>
+                <div className="input-wrapper">
+                  <Input
+                    placeholder={intl.formatMessage({ id: 'aiAgent.market.search.placeholder' })}
+                    prefix={<SearchOutlined />}
+                    value={searchInput}
+                    onChange={handleInputChange}
+                    onPressEnter={handleSearch}
+                    allowClear
+                    style={{ borderRadius: '20px', width: '100%' }}
+                  />
+                </div>
+              </Col>
+              <Col span={10}>
+                <div className="buttons-wrapper">
+                  <Button 
+                    type="primary" 
+                    onClick={handleSearch} 
+                    icon={<SearchOutlined />}
+                    loading={loading}
+                  >
+                    <FormattedMessage id="aiAgent.market.search.button" />
+                  </Button>
+                  <Button 
+                    onClick={handleReset}
+                    icon={<ReloadOutlined />}
+                  >
+                    <FormattedMessage id="aiAgent.market.reset.button" />
+                  </Button>
+                </div>
+              </Col>
+            </StyledRow>
+            
+            <StyledRow gutter={16}>
+              <Col span={12}>
+                <div className="selector-wrapper">
+                  <RoleSelector
+                    value={selectedRole}
+                    onChange={handleRoleChange}
+                  />
+                </div>
+              </Col>
+              <Col span={12}>
+                <div className="selector-wrapper">
+                  <ModelSelector
+                    value={selectedModel}
+                    onChange={handleModelChange}
+                  />
+                </div>
+              </Col>
+            </StyledRow>
           </FilterContainer>
 
           <ListContainer>
             <Spin spinning={loading}>
               {agents.length > 0 ? (
-                <List
-                  dataSource={agents}
-                  renderItem={(agent) => (
-                    <MarketAIAgentItem
-                      agent={agent}
-                      onRecruit={handleRecruitAgent}
-                      loading={recruitLoading}
-                    />
-                  )}
-                />
+                <>
+                  <List
+                    dataSource={agents}
+                    renderItem={(agent) => (
+                      <MarketAIAgentItem
+                        agent={agent}
+                        onRecruit={handleRecruitAgent}
+                        loading={recruitLoading}
+                      />
+                    )}
+                  />
+                  <TotalCountFooter>
+                    <TeamOutlined />
+                    <Text type="secondary">
+                      <FormattedMessage 
+                        id="aiAgent.market.total" 
+                        values={{ count: agents.length }} 
+                      />
+                    </Text>
+                  </TotalCountFooter>
+                </>
               ) : (
-                <Empty description="暂无符合条件的AI员工" />
+                <Empty description={intl.formatMessage({ id: 'aiAgent.market.empty' })} />
               )}
             </Spin>
           </ListContainer>
         </TabPane>
         
-        <TabPane tab="用户共享AI员工" key="shared">
-          <Empty description="即将推出，敬请期待" />
+        <TabPane tab={intl.formatMessage({ id: 'aiAgent.market.tab.shared' })} key="shared">
+          <Empty description={intl.formatMessage({ id: 'aiAgent.market.comingSoon' })} />
         </TabPane>
       </Tabs>
     </Modal>

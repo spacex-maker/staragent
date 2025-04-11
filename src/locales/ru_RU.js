@@ -330,5 +330,23 @@ export default {
   'landing.integration.message.user': 'Мне нужно проанализировать этот отчет по исследованию рынка, предоставить стратегические рекомендации и создать привлекательную презентацию.',
   'landing.integration.message.analyst': 'Я проведу глубокий анализ тенденций данных и рыночных инсайтов, предоставив вам подробный анализ и прогнозные модели.',
   'landing.integration.message.strategist': 'На основе анализа данных я разработаю стратегические рекомендации, включая позиционирование на рынке, конкурентный анализ и стратегии роста.',
-  'landing.integration.message.creative': 'Я разработаю привлекательную презентацию, используя визуальные элементы и креативные макеты, чтобы подчеркнуть ваши ключевые моменты и стратегические рекомендации.'
+  'landing.integration.message.creative': 'Я разработаю привлекательную презентацию, используя визуальные элементы и креативные макеты, чтобы подчеркнуть ваши ключевые моменты и стратегические рекомендации.',
+  // Сообщения, связанные с рынком ИИ-ассистентов
+  'aiAgent.market.title': 'Рынок ИИ-ассистентов',
+  'aiAgent.market.tab.official': 'Официальные ИИ-ассистенты',
+  'aiAgent.market.tab.shared': 'Пользовательские ИИ-ассистенты',
+  'aiAgent.market.search.placeholder': 'Поиск ИИ-ассистента по имени',
+  'aiAgent.market.search.button': 'Поиск',
+  'aiAgent.market.reset.button': 'Сбросить',
+  'aiAgent.market.total': 'Всего {count} ИИ-ассистентов',
+  'aiAgent.market.empty': 'Не найдено подходящих ИИ-ассистентов',
+  'aiAgent.market.comingSoon': 'Скоро будет доступно, следите за обновлениями',
+  'aiAgent.market.confirmRecruit.title': 'Подтверждение найма',
+  'aiAgent.market.confirmRecruit.content': 'Вы уверены, что хотите нанять "{name}" в качестве вашего ИИ-ассистента?',
+  'aiAgent.market.confirmRecruit.ok': 'Подтвердить',
+  'aiAgent.market.confirmRecruit.cancel': 'Отмена',
+  'aiAgent.market.fetchError': 'Не удалось получить список официальных ИИ-ассистентов:',
+  'aiAgent.market.recruitError': 'Не удалось нанять ИИ-ассистента:',
+  'aiAgent.market.button.details': 'Подробности',
+  'aiAgent.market.button.recruit': 'Нанять'
 };

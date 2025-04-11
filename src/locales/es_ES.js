@@ -366,4 +366,23 @@ export default {
   'landing.integration.message.analyst': 'Analizaré en profundidad las tendencias de datos y los insights del mercado, proporcionándote análisis detallados y modelos predictivos.',
   'landing.integration.message.strategist': 'Basándome en el análisis de datos, desarrollaré recomendaciones estratégicas, incluyendo posicionamiento de mercado, análisis competitivo y estrategias de crecimiento.',
   'landing.integration.message.creative': 'Diseñaré una presentación llamativa, utilizando elementos visuales y diseños creativos para resaltar tus puntos clave y recomendaciones estratégicas.',
+
+  // Mensajes relacionados con el Mercado de Asistentes IA
+  'aiAgent.market.title': 'Mercado de Asistentes IA',
+  'aiAgent.market.tab.official': 'Asistentes IA Oficiales',
+  'aiAgent.market.tab.shared': 'Asistentes IA Compartidos',
+  'aiAgent.market.search.placeholder': 'Buscar nombre de asistente IA',
+  'aiAgent.market.search.button': 'Buscar',
+  'aiAgent.market.reset.button': 'Restablecer',
+  'aiAgent.market.total': 'Total {count} Asistentes IA',
+  'aiAgent.market.empty': 'No se encontraron asistentes IA',
+  'aiAgent.market.comingSoon': 'Próximamente, estén atentos',
+  'aiAgent.market.confirmRecruit.title': 'Confirmar Reclutamiento',
+  'aiAgent.market.confirmRecruit.content': '¿Está seguro de que desea reclutar a "{name}" como su asistente IA?',
+  'aiAgent.market.confirmRecruit.ok': 'Confirmar',
+  'aiAgent.market.confirmRecruit.cancel': 'Cancelar',
+  'aiAgent.market.fetchError': 'Error al obtener la lista de asistentes IA oficiales:',
+  'aiAgent.market.recruitError': 'Error al reclutar asistente IA:',
+  'aiAgent.market.button.details': 'Detalles',
+  'aiAgent.market.button.recruit': 'Reclutar'
 };

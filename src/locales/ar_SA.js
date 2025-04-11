@@ -355,4 +355,23 @@ export default {
   'landing.integration.message.analyst': 'سأقوم بتحليل متعمق لاتجاهات البيانات ورؤى السوق، وتزويدك بتحليلات مفصلة ونماذج تنبؤية.',
   'landing.integration.message.strategist': 'بناءً على تحليل البيانات، سأطور توصيات استراتيجية، بما في ذلك تحديد موقع السوق وتحليل المنافسة واستراتيجيات النمو.',
   'landing.integration.message.creative': 'سأصمم عرضًا تقديميًا ملفتًا للنظر، باستخدام العناصر المرئية والتخطيطات الإبداعية لإبراز نقاطك الرئيسية وتوصياتك الاستراتيجية.',
+
+  // رسائل متعلقة بسوق مساعدي الذكاء الاصطناعي
+  'aiAgent.market.title': 'سوق مساعدي الذكاء الاصطناعي',
+  'aiAgent.market.tab.official': 'مساعدو الذكاء الاصطناعي الرسميون',
+  'aiAgent.market.tab.shared': 'مساعدو الذكاء الاصطناعي المشاركة من المستخدمين',
+  'aiAgent.market.search.placeholder': 'البحث عن اسم مساعد الذكاء الاصطناعي',
+  'aiAgent.market.search.button': 'بحث',
+  'aiAgent.market.reset.button': 'إعادة تعيين',
+  'aiAgent.market.total': 'إجمالي {count} من مساعدي الذكاء الاصطناعي',
+  'aiAgent.market.empty': 'لم يتم العثور على مساعدي ذكاء اصطناعي مطابقين',
+  'aiAgent.market.comingSoon': 'قريباً، ترقبوا',
+  'aiAgent.market.confirmRecruit.title': 'تأكيد التوظيف',
+  'aiAgent.market.confirmRecruit.content': 'هل أنت متأكد من رغبتك في توظيف "{name}" كمساعد ذكاء اصطناعي لك؟',
+  'aiAgent.market.confirmRecruit.ok': 'تأكيد',
+  'aiAgent.market.confirmRecruit.cancel': 'إلغاء',
+  'aiAgent.market.fetchError': 'فشل في جلب قائمة مساعدي الذكاء الاصطناعي الرسميين:',
+  'aiAgent.market.recruitError': 'فشل في توظيف مساعد الذكاء الاصطناعي:',
+  'aiAgent.market.button.details': 'التفاصيل',
+  'aiAgent.market.button.recruit': 'توظيف'
 };

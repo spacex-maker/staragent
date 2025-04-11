@@ -358,4 +358,23 @@ export default {
   'landing.integration.message.analyst': 'I will analyze the data trends and market insights in depth, providing you with detailed data analysis and predictive models.',
   'landing.integration.message.strategist': 'Based on the data analysis, I will develop strategic recommendations, including market positioning, competitive analysis, and growth strategies.',
   'landing.integration.message.creative': 'I will design an eye-catching presentation, using visual elements and creative layouts to highlight your key points and strategic recommendations.',
+
+  // AI Assistant Market related messages
+  'aiAgent.market.title': 'AI Assistant Market',
+  'aiAgent.market.tab.official': 'Official AI Assistants',
+  'aiAgent.market.tab.shared': 'User Shared AI Assistants',
+  'aiAgent.market.search.placeholder': 'Search AI assistant name',
+  'aiAgent.market.search.button': 'Search',
+  'aiAgent.market.reset.button': 'Reset',
+  'aiAgent.market.total': 'Total {count} AI Assistants',
+  'aiAgent.market.empty': 'No matching AI assistants found',
+  'aiAgent.market.comingSoon': 'Coming soon, stay tuned',
+  'aiAgent.market.confirmRecruit.title': 'Confirm Recruit',
+  'aiAgent.market.confirmRecruit.content': 'Are you sure you want to recruit "{name}" as your AI assistant?',
+  'aiAgent.market.confirmRecruit.ok': 'Confirm',
+  'aiAgent.market.confirmRecruit.cancel': 'Cancel',
+  'aiAgent.market.fetchError': 'Failed to fetch official AI assistant list:',
+  'aiAgent.market.recruitError': 'Failed to recruit AI assistant:',
+  'aiAgent.market.button.details': 'Details',
+  'aiAgent.market.button.recruit': 'Recruit'
 };

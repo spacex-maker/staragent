@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { List, Typography, Tag, Button, Avatar, Space } from 'antd';
 import { RobotOutlined, UserAddOutlined, EyeOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 import { AIAgent } from '../../types';
 import AIAgentDetailModal from './AIAgentDetailModal';
 
@@ -14,18 +15,23 @@ interface ThemeProps {
 const { Text } = Typography;
 
 const AgentItem = styled(List.Item)<ThemeProps & { $bgImg?: string }>`
-  padding: 8px !important;
-  margin: 8px 0;
+  padding: 14px !important;
+  margin: 12px 0;
   border-radius: 20px !important;
   background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)'};
   position: relative;
   border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'};
   transition: all 0.3s ease;
-  overflow: hidden;
+  overflow: visible !important;
+  transform: scale(1);
+  transform-origin: center;
+  z-index: 1;
   
   &:hover {
     background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)'};
-    box-shadow: 0 2px 8px ${({ theme }) => theme.mode === 'dark' ? 'rgba(0, 0, 0, 0.32)' : 'rgba(0, 0, 0, 0.08)'};
+    box-shadow: 0 4px 12px ${({ theme }) => theme.mode === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(0, 0, 0, 0.12)'};
+    transform: scale(1.02);
+    z-index: 2;
   }
   
   &::before {
@@ -38,15 +44,16 @@ const AgentItem = styled(List.Item)<ThemeProps & { $bgImg?: string }>`
     background-image: ${props => props.$bgImg ? `url(${props.$bgImg})` : 'none'};
     background-size: cover;
     background-position: right center;
-    opacity: 0.38;
+    opacity: 0.55;
     z-index: 0;
     transition: all 0.3s ease;
     mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
     -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
+    border-radius: 0 20px 20px 0;
   }
   
   &:hover::before {
-    opacity: ${props => props.$bgImg ? '0.45' : '0'};
+    opacity: ${props => props.$bgImg ? '0.9' : '0'};
     width: 55%;
     mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0));
     -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0));
@@ -57,30 +64,31 @@ const AgentContent = styled.div`
   display: flex;
   width: 100%;
   position: relative;
-  padding: 8px;
+  padding: 14px;
   z-index: 1;
 `;
 
 const LeftSection = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex: 1;
+  align-items: center;
 `;
 
 const AgentIcon = styled.div`
-  font-size: 24px;
+  font-size: 28px;
   color: var(--ant-color-primary);
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const AgentAvatar = styled(Avatar)`
-  width: 56px;
-  height: 56px;
+  width: 70px;
+  height: 70px;
   border: 3px solid var(--ant-color-primary);
   background: var(--ant-color-bg-container);
   color: var(--ant-color-primary);
@@ -89,7 +97,7 @@ const AgentAvatar = styled(Avatar)`
   justify-content: center;
   
   .anticon {
-    font-size: 28px;
+    font-size: 36px;
   }
 
   &:hover {
@@ -104,9 +112,10 @@ const AgentInfo = styled.div`
 `;
 
 const AgentName = styled(Text)`
-  font-size: 16px;
+  font-size: 18px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-weight: 500;
 `;
 
 const AgentDetails = styled.div`
@@ -114,8 +123,8 @@ const AgentDetails = styled.div`
   color: var(--ant-color-text-secondary);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  line-height: 1.4;
+  gap: 6px;
+  line-height: 1.5;
 `;
 
 const RightSection = styled.div`
@@ -127,7 +136,7 @@ const RightSection = styled.div`
 `;
 
 const ButtonGroup = styled(Space)`
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 `;
 
 const ActionButton = styled(Button)`
@@ -192,14 +201,15 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit,
                 <div>温度: {agent.temperature}</div>
                 <div>最大Token: {agent.maxTokens}</div>
                 <div style={{ 
-                  marginTop: 4,
+                  marginTop: 6,
                   fontSize: '12px',
                   color: 'var(--ant-color-text-secondary)',
                   display: '-webkit-box',
-                  WebkitLineClamp: 2,
+                  WebkitLineClamp: 3,
                   WebkitBoxOrient: 'vertical',
                   overflow: 'hidden',
-                  textOverflow: 'ellipsis'
+                  textOverflow: 'ellipsis',
+                  lineHeight: '1.6'
                 }}>
                   {agent.prompt}
                 </div>
@@ -214,7 +224,7 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit,
                 icon={<EyeOutlined />}
                 onClick={() => setIsDetailModalVisible(true)}
               >
-                详情
+                <FormattedMessage id="aiAgent.market.button.details" />
               </ActionButton>
               <ActionButton
                 type="primary"
@@ -222,7 +232,7 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit,
                 onClick={() => onRecruit(agent)}
                 loading={loading}
               >
-                招募
+                <FormattedMessage id="aiAgent.market.button.recruit" />
               </ActionButton>
             </ButtonGroup>
             <TagsWrapper>

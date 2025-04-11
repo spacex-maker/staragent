@@ -347,4 +347,23 @@ export default {
   'landing.integration.message.analyst': 'Ich werde die Datentrends und Markteinblicke des Berichts eingehend analysieren und Ihnen detaillierte Datenanalysen und Prognosemodelle zur Verfügung stellen.',
   'landing.integration.message.strategist': 'Basierend auf der Datenanalyse werde ich strategische Empfehlungen entwickeln, einschließlich Marktpositionierung, Wettbewerbsanalyse und Wachstumsstrategien.',
   'landing.integration.message.creative': 'Ich werde eine ansprechende Präsentation gestalten und visuelle Elemente und kreative Layouts verwenden, um Ihre Kernpunkte und strategischen Empfehlungen hervorzuheben.',
+
+  // Nachrichten für den KI-Assistenten Markt
+  'aiAgent.market.title': 'KI-Assistenten Markt',
+  'aiAgent.market.tab.official': 'Offizielle KI-Assistenten',
+  'aiAgent.market.tab.shared': 'Nutzergeteilte KI-Assistenten',
+  'aiAgent.market.search.placeholder': 'KI-Assistent Namen suchen',
+  'aiAgent.market.search.button': 'Suchen',
+  'aiAgent.market.reset.button': 'Zurücksetzen',
+  'aiAgent.market.total': 'Insgesamt {count} KI-Assistenten',
+  'aiAgent.market.empty': 'Keine passenden KI-Assistenten gefunden',
+  'aiAgent.market.comingSoon': 'Demnächst verfügbar, bleiben Sie dran',
+  'aiAgent.market.confirmRecruit.title': 'Rekrutierung bestätigen',
+  'aiAgent.market.confirmRecruit.content': 'Sind Sie sicher, dass Sie "{name}" als Ihren KI-Assistenten rekrutieren möchten?',
+  'aiAgent.market.confirmRecruit.ok': 'Bestätigen',
+  'aiAgent.market.confirmRecruit.cancel': 'Abbrechen',
+  'aiAgent.market.fetchError': 'Fehler beim Abrufen der offiziellen KI-Assistentenliste:',
+  'aiAgent.market.recruitError': 'Fehler bei der Rekrutierung des KI-Assistenten:',
+  'aiAgent.market.button.details': 'Details',
+  'aiAgent.market.button.recruit': 'Rekrutieren'
 };

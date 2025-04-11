@@ -342,5 +342,24 @@ export default {
   'landing.integration.message.user': 'Je dois analyser ce rapport d\'étude de marché, fournir des recommandations stratégiques et créer une présentation attractive.',
   'landing.integration.message.analyst': 'Je vais analyser en profondeur les tendances des données et les insights du marché, vous fournissant des analyses détaillées et des modèles prédictifs.',
   'landing.integration.message.strategist': 'Sur la base de l\'analyse des données, je vais développer des recommandations stratégiques, incluant le positionnement marché, l\'analyse concurrentielle et les stratégies de croissance.',
-  'landing.integration.message.creative': 'Je vais concevoir une présentation captivante, utilisant des éléments visuels et des mises en page créatives pour mettre en valeur vos points clés et recommandations stratégiques.'
+  'landing.integration.message.creative': 'Je vais concevoir une présentation captivante, utilisant des éléments visuels et des mises en page créatives pour mettre en valeur vos points clés et recommandations stratégiques.',
+
+  // Messages liés au Marché des Assistants IA
+  'aiAgent.market.title': 'Marché des Assistants IA',
+  'aiAgent.market.tab.official': 'Assistants IA Officiels',
+  'aiAgent.market.tab.shared': 'Assistants IA Partagés',
+  'aiAgent.market.search.placeholder': 'Rechercher un assistant IA',
+  'aiAgent.market.search.button': 'Rechercher',
+  'aiAgent.market.reset.button': 'Réinitialiser',
+  'aiAgent.market.total': 'Total {count} Assistants IA',
+  'aiAgent.market.empty': 'Aucun assistant IA trouvé',
+  'aiAgent.market.comingSoon': 'Bientôt disponible, restez à l\'écoute',
+  'aiAgent.market.confirmRecruit.title': 'Confirmer le Recrutement',
+  'aiAgent.market.confirmRecruit.content': 'Êtes-vous sûr de vouloir recruter "{name}" comme votre assistant IA ?',
+  'aiAgent.market.confirmRecruit.ok': 'Confirmer',
+  'aiAgent.market.confirmRecruit.cancel': 'Annuler',
+  'aiAgent.market.fetchError': 'Échec de récupération de la liste des assistants IA officiels :',
+  'aiAgent.market.recruitError': 'Échec du recrutement de l\'assistant IA :',
+  'aiAgent.market.button.details': 'Détails',
+  'aiAgent.market.button.recruit': 'Recruter'
 };

@@ -342,5 +342,24 @@ export default {
   'landing.integration.message.user': 'Ho bisogno di analizzare questo report di ricerca di mercato, fornire raccomandazioni strategiche e creare una presentazione accattivante.',
   'landing.integration.message.analyst': 'Analizzerò approfonditamente i trend dei dati e gli insight di mercato, fornendoti analisi dettagliate e modelli predittivi.',
   'landing.integration.message.strategist': 'Basandomi sull\'analisi dei dati, svilupperò raccomandazioni strategiche, inclusi posizionamento di mercato, analisi competitiva e strategie di crescita.',
-  'landing.integration.message.creative': 'Progetterò una presentazione accattivante, utilizzando elementi visivi e layout creativi per evidenziare i tuoi punti chiave e le raccomandazioni strategiche.'
+  'landing.integration.message.creative': 'Progetterò una presentazione accattivante, utilizzando elementi visivi e layout creativi per evidenziare i tuoi punti chiave e le raccomandazioni strategiche.',
+
+  // Messaggi relativi al Mercato degli Assistenti IA
+  'aiAgent.market.title': 'Mercato Assistenti IA',
+  'aiAgent.market.tab.official': 'Assistenti IA Ufficiali',
+  'aiAgent.market.tab.shared': 'Assistenti IA Condivisi',
+  'aiAgent.market.search.placeholder': 'Cerca nome assistente IA',
+  'aiAgent.market.search.button': 'Cerca',
+  'aiAgent.market.reset.button': 'Reimposta',
+  'aiAgent.market.total': 'Totale {count} Assistenti IA',
+  'aiAgent.market.empty': 'Nessun assistente IA trovato',
+  'aiAgent.market.comingSoon': 'Prossimamente, resta sintonizzato',
+  'aiAgent.market.confirmRecruit.title': 'Conferma Reclutamento',
+  'aiAgent.market.confirmRecruit.content': 'Sei sicuro di voler reclutare "{name}" come tuo assistente IA?',
+  'aiAgent.market.confirmRecruit.ok': 'Conferma',
+  'aiAgent.market.confirmRecruit.cancel': 'Annulla',
+  'aiAgent.market.fetchError': 'Impossibile recuperare la lista degli assistenti IA ufficiali:',
+  'aiAgent.market.recruitError': 'Impossibile reclutare l\'assistente IA:',
+  'aiAgent.market.button.details': 'Dettagli',
+  'aiAgent.market.button.recruit': 'Recluta'
 };

@@ -330,4 +330,23 @@ export default {
   'landing.integration.message.analyst': '我会深入分析报告中的数据趋势和市场洞察，为您提供详细的数据分析和预测模型。',
   'landing.integration.message.strategist': '根据数据分析，我会制定战略建议，包括市场定位、竞争分析和增长策略。',
   'landing.integration.message.creative': '我将设计引人注目的演示文稿，利用视觉元素和创意布局突出您的关键观点和策略建议。',
+  
+  // AI助手市场相关消息
+  'aiAgent.market.title': 'AI助手市场',
+  'aiAgent.market.tab.official': '官方AI助手',
+  'aiAgent.market.tab.shared': '用户共享AI助手',
+  'aiAgent.market.search.placeholder': '搜索AI助手名称',
+  'aiAgent.market.search.button': '搜索',
+  'aiAgent.market.reset.button': '重置',
+  'aiAgent.market.total': '总计 {count} 个AI助手',
+  'aiAgent.market.empty': '暂无符合条件的AI助手',
+  'aiAgent.market.comingSoon': '即将推出，敬请期待',
+  'aiAgent.market.confirmRecruit.title': '确认招募',
+  'aiAgent.market.confirmRecruit.content': '确定要招募 "{name}" 作为您的AI助手吗？',
+  'aiAgent.market.confirmRecruit.ok': '确认招募',
+  'aiAgent.market.confirmRecruit.cancel': '取消',
+  'aiAgent.market.fetchError': '获取官方AI助手列表失败:',
+  'aiAgent.market.recruitError': '招募AI助手失败:',
+  'aiAgent.market.button.details': '详情',
+  'aiAgent.market.button.recruit': '招募',
 }; 

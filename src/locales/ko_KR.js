@@ -371,4 +371,23 @@ export default {
   'landing.integration.message.analyst': '보고서의 데이터 트렌드와 시장 통찰력을 심층 분석하여 상세한 데이터 분석과 예측 모델을 제공하겠습니다.',
   'landing.integration.message.strategist': '데이터 분석을 바탕으로 시장 포지셔닝, 경쟁 분석, 성장 전략을 포함한 전략적 제안을 수립하겠습니다.',
   'landing.integration.message.creative': '시각적 요소와 창의적인 레이아웃을 활용하여 핵심 포인트와 전략적 제안을 강조하는 매력적인 프레젠테이션을 디자인하겠습니다.',
+
+  // AI 어시스턴트 마켓 관련 메시지
+  'aiAgent.market.title': 'AI 어시스턴트 마켓',
+  'aiAgent.market.tab.official': '공식 AI 어시스턴트',
+  'aiAgent.market.tab.shared': '사용자 공유 AI 어시스턴트',
+  'aiAgent.market.search.placeholder': 'AI 어시스턴트 이름 검색',
+  'aiAgent.market.search.button': '검색',
+  'aiAgent.market.reset.button': '초기화',
+  'aiAgent.market.total': '총 {count}개의 AI 어시스턴트',
+  'aiAgent.market.empty': '일치하는 AI 어시스턴트를 찾을 수 없습니다',
+  'aiAgent.market.comingSoon': '곧 출시 예정, 기대해 주세요',
+  'aiAgent.market.confirmRecruit.title': '채용 확인',
+  'aiAgent.market.confirmRecruit.content': '"{name}"을(를) AI 어시스턴트로 채용하시겠습니까?',
+  'aiAgent.market.confirmRecruit.ok': '확인',
+  'aiAgent.market.confirmRecruit.cancel': '취소',
+  'aiAgent.market.fetchError': '공식 AI 어시스턴트 목록을 가져오는데 실패했습니다:',
+  'aiAgent.market.recruitError': 'AI 어시스턴트 채용에 실패했습니다:',
+  'aiAgent.market.button.details': '상세정보',
+  'aiAgent.market.button.recruit': '채용'
 };

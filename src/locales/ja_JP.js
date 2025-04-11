@@ -330,5 +330,24 @@ export default {
   'landing.integration.message.user': 'この市場調査レポートを分析し、戦略的な提案を行い、魅力的なプレゼンテーションを作成する必要があります。',
   'landing.integration.message.analyst': 'レポートのデータトレンドと市場洞察を深く分析し、詳細なデータ分析と予測モデルを提供します。',
   'landing.integration.message.strategist': 'データ分析に基づいて、市場ポジショニング、競合分析、成長戦略を含む戦略的な提案を策定します。',
-  'landing.integration.message.creative': '視覚的要素とクリエイティブなレイアウトを活用して、重要なポイントと戦略的提案を強調する魅力的なプレゼンテーションをデザインします。'
+  'landing.integration.message.creative': '視覚的要素とクリエイティブなレイアウトを活用して、重要なポイントと戦略的提案を強調する魅力的なプレゼンテーションをデザインします。',
+
+  // AIアシスタントマーケット関連メッセージ
+  'aiAgent.market.title': 'AIアシスタントマーケット',
+  'aiAgent.market.tab.official': '公式AIアシスタント',
+  'aiAgent.market.tab.shared': 'ユーザー共有AIアシスタント',
+  'aiAgent.market.search.placeholder': 'AIアシスタント名を検索',
+  'aiAgent.market.search.button': '検索',
+  'aiAgent.market.reset.button': 'リセット',
+  'aiAgent.market.total': '合計 {count} 個のAIアシスタント',
+  'aiAgent.market.empty': '条件に一致するAIアシスタントが見つかりません',
+  'aiAgent.market.comingSoon': '近日公開予定、お楽しみに',
+  'aiAgent.market.confirmRecruit.title': '採用の確認',
+  'aiAgent.market.confirmRecruit.content': '"{name}"をあなたのAIアシスタントとして採用しますか？',
+  'aiAgent.market.confirmRecruit.ok': '確認',
+  'aiAgent.market.confirmRecruit.cancel': 'キャンセル',
+  'aiAgent.market.fetchError': '公式AIアシスタントリストの取得に失敗しました:',
+  'aiAgent.market.recruitError': 'AIアシスタントの採用に失敗しました:',
+  'aiAgent.market.button.details': '詳細',
+  'aiAgent.market.button.recruit': '採用'
 };
