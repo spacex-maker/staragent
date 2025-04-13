@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ProjectListTab from '../ProjectListTab';
 import AIAgentListTab from '../AIAgentListTab';
 import { Project } from '../../types';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface StyledSidebarProps {
   $collapsed: boolean;
@@ -211,6 +212,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   autoTriggerAddAgent = false,
   loading = false,
 }) => {
+  const intl = useIntl();
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
 
   // 监听窗口大小变化
@@ -234,7 +236,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const items = [
     {
       key: 'projects',
-      label: '项目列表',
+      label: <FormattedMessage id="sidebar.projects" defaultMessage="项目列表" />,
       children: (
         <ProjectListTab
           projects={projects}
@@ -249,7 +251,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     },
     {
       key: 'agents',
-      label: 'AI员工',
+      label: <FormattedMessage id="sidebar.agents" defaultMessage="AI助手" />,
       children: (
         <AIAgentListTab
           autoTriggerAddAgent={autoTriggerAddAgent}
@@ -277,7 +279,10 @@ const Sidebar: React.FC<SidebarProps> = ({
             e.stopPropagation();
             toggleSidebar();
           }}
-          title={collapsed ? "展开侧边栏" : "收起侧边栏"}
+          title={collapsed 
+            ? intl.formatMessage({ id: 'sidebar.expand', defaultMessage: '展开侧边栏' }) 
+            : intl.formatMessage({ id: 'sidebar.collapse', defaultMessage: '收起侧边栏' })
+          }
         />
       </SidebarWrapper>
       <Mask visible={!collapsed && window.innerWidth <= 768} onClick={handleMaskClick} />

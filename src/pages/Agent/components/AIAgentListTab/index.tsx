@@ -2,6 +2,7 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, List, message } from 'antd';
 import { PlusOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { FormattedMessage, useIntl } from 'react-intl';
 import axios from '../../../../api/axios';
 import { AIAgent } from '../../types';
 import AIAgentItem from './AIAgentItem';
@@ -23,10 +24,27 @@ const Header = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 16px;
-  height: 64px;
+  min-height: 64px;
   border-bottom: 1px solid var(--ant-color-border);
   flex-shrink: 0;
   gap: 12px;
+  flex-wrap: wrap;
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
+
+const ActionButton = styled(Button)`
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 const ListContent = styled.div`
@@ -74,6 +92,7 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isMarketModalVisible, setIsMarketModalVisible] = useState(false);
   const [editingAgent, setEditingAgent] = useState<AIAgent | null>(null);
+  const intl = useIntl();
 
   // 监听 autoTriggerAddAgent 属性变化
   React.useEffect(() => {
@@ -97,11 +116,11 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
       if (response.data.success) {
         setAgents(response.data.data);
       } else {
-        message.error(response.data.message || '获取AI员工列表失败');
+        message.error(response.data.message || intl.formatMessage({ id: 'aiAgentList.getListError' }));
       }
     } catch (error) {
-      console.error('获取AI员工列表错误:', error);
-      message.error('获取AI员工列表失败');
+      console.error('获取AI助手列表错误:', error);
+      message.error(intl.formatMessage({ id: 'aiAgentList.getListError' }));
     } finally {
       setLoading(false);
     }
@@ -150,20 +169,20 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
   return (
     <Container>
       <Header>
-        <Button
+        <ActionButton
           type="default"
           icon={<UsergroupAddOutlined />}
           onClick={handleRecruit}
         >
-          招募员工
-        </Button>
-        <Button
+          <FormattedMessage id="aiAgentList.recruitAgent" defaultMessage="招募助手" />
+        </ActionButton>
+        <ActionButton
           type="primary"
           icon={<PlusOutlined />}
           onClick={handleAddAgent}
         >
-          新增AI员工
-        </Button>
+          <FormattedMessage id="aiAgentList.addNewAgent" defaultMessage="新增助手" />
+        </ActionButton>
       </Header>
 
       <ListContent>
@@ -177,7 +196,12 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
               onDelete={handleDelete}
             />
           )}
-          locale={{ emptyText: '暂无AI员工，点击上方按钮添加' }}
+          locale={{ 
+            emptyText: intl.formatMessage({ 
+              id: 'aiAgentList.emptyText', 
+              defaultMessage: '暂无AI助手，点击上方按钮添加' 
+            }) 
+          }}
         />
       </ListContent>
 

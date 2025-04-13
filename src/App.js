@@ -12,6 +12,7 @@ import OAuthCallback from './pages/OAuth/Callback';
 import WorldMap from './pages/WorldMap';
 import LandingPage from './pages/LandingPage';
 import CareersPage from './pages/Careers';
+import UserGuide from './pages/UserGuide';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
@@ -270,6 +271,7 @@ export default function App() {
               <Route path="/terms" element={<Terms />} />
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/world-map" element={<WorldMap />} />
+              <Route path="/user-guide" element={<UserGuide />} />
             </Routes>
           </Router>
         </ConfigProvider>

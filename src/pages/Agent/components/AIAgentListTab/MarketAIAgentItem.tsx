@@ -44,7 +44,7 @@ const AgentItem = styled(List.Item)<ThemeProps & { $bgImg?: string }>`
     background-image: ${props => props.$bgImg ? `url(${props.$bgImg})` : 'none'};
     background-size: cover;
     background-position: right center;
-    opacity: 0.55;
+    opacity: 0.35;
     z-index: 0;
     transition: all 0.3s ease;
     mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));

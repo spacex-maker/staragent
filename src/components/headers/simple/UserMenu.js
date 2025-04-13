@@ -420,6 +420,20 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           isDark={isDark}
           onClick={() => {
             setShowUserMenu(false);
+            navigate('/user-guide');
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-book icon" />
+              使用指南
+            </div>
+          </MenuItemContent>
+        </UserMenuItem>
+        <UserMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
             setShowNetworkModal(true);
           }}
         >

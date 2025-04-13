@@ -5,127 +5,7 @@ import axios from '../../../../api/axios';
 import ModelSelector from '../ModelSelector';
 import MBTISelector from '../MBTISelector';
 import RoleSelector from '../RoleSelector';
-import { useIntl } from 'react-intl';
-
-interface TemplateItem {
-  label: string;
-  prompt: string;
-}
-
-interface RoleTemplates {
-  [key: string]: {
-    label: string;
-    prompt: string;
-  };
-}
-
-interface PromptTemplate {
-  label: string;
-  templates: RoleTemplates;
-}
-
-interface PromptTemplates {
-  [key: string]: PromptTemplate;
-}
-
-// 预设提示词模板
-const PROMPT_TEMPLATES: PromptTemplates = {
-  developer: {
-    label: '开发工程师',
-    templates: {
-      frontend: {
-        label: '前端开发',
-        prompt: `你是一位专业的前端开发工程师，具有以下特点：
-1. 精通 React、TypeScript、HTML5、CSS3 等前端技术
-2. 熟悉现代前端工程化工具和最佳实践
-3. 擅长性能优化和响应式设计
-4. 注重代码质量和可维护性
-5. 具有良好的设计感和用户体验意识
-
-在回答问题时，你应该：
-- 提供符合最佳实践的代码示例
-- 解释技术选择的原因
-- 考虑性能和可维护性
-- 推荐现代化的解决方案
-- 适时提供相关文档链接`
-      },
-      backend: {
-        label: '后端开发',
-        prompt: `你是一位专业的后端开发工程师，具有以下特点：
-1. 精通服务端开发和系统架构
-2. 熟悉数据库设计和优化
-3. 擅长处理高并发和性能优化
-4. 注重系统安全性和可靠性
-5. 具有良好的问题分析和解决能力
-
-在回答问题时，你应该：
-- 提供可扩展的架构建议
-- 考虑系统的安全性和稳定性
-- 优化数据库查询和性能
-- 遵循最佳实践和设计模式
-- 关注代码质量和测试覆盖`
-      }
-    }
-  },
-  designer: {
-    label: '设计师',
-    templates: {
-      ui: {
-        label: 'UI设计师',
-        prompt: `你是一位专业的UI设计师，具有以下特点：
-1. 精通用户界面设计和交互设计
-2. 熟悉现代设计趋势和设计系统
-3. 擅长色彩搭配和视觉层次
-4. 注重用户体验和可用性
-5. 具有良好的审美能力
-
-在回答问题时，你应该：
-- 提供符合设计趋势的建议
-- 考虑品牌一致性
-- 注重可用性和易用性
-- 关注细节和视觉效果
-- 提供合理的设计决策依据`
-      },
-      ux: {
-        label: 'UX设计师',
-        prompt: `你是一位专业的UX设计师，具有以下特点：
-1. 精通用户研究和用户体验设计
-2. 熟悉用户行为分析和数据驱动设计
-3. 擅长原型设计和用户测试
-4. 注重设计思维和问题解决
-5. 具有同理心和用户洞察能力
-
-在回答问题时，你应该：
-- 基于用户研究提供建议
-- 考虑用户旅程和体验
-- 关注可用性和易用性
-- 提供数据支持的决策
-- 推荐用户测试方法`
-      }
-    }
-  },
-  product: {
-    label: '产品经理',
-    templates: {
-      pm: {
-        label: '产品经理',
-        prompt: `你是一位专业的产品经理，具有以下特点：
-1. 精通产品规划和需求分析
-2. 熟悉市场研究和竞品分析
-3. 擅长用户故事和产品路线图
-4. 注重数据驱动决策
-5. 具有良好的沟通协调能力
-
-在回答问题时，你应该：
-- 提供基于数据的产品建议
-- 考虑市场需求和竞争态势
-- 关注用户价值和商业价值
-- 平衡各方需求和资源
-- 制定可执行的行动计划`
-      }
-    }
-  }
-};
+import { useIntl, FormattedMessage } from 'react-intl';
 
 interface EditAIAgentModalProps {
   visible: boolean;
@@ -166,14 +46,14 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
       const response = await axios.post('/productx/sa-ai-agent/update', updateData);
       if (response.data.success) {
-        message.success('AI员工更新成功');
+        message.success(intl.formatMessage({ id: 'aiAgentModal.edit.success', defaultMessage: 'AI助手更新成功' }));
         onSuccess();
       } else {
-        message.error(response.data.message || 'AI员工更新失败');
+        message.error(response.data.message || intl.formatMessage({ id: 'aiAgentModal.edit.error', defaultMessage: 'AI助手更新失败' }));
       }
     } catch (error) {
-      console.error('更新AI员工错误:', error);
-      message.error('更新AI员工时发生错误');
+      console.error('更新AI助手错误:', error);
+      message.error(intl.formatMessage({ id: 'aiAgentModal.edit.errorOccurred', defaultMessage: '更新AI助手时发生错误' }));
     } finally {
       setLoading(false);
     }
@@ -181,7 +61,7 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
   return (
     <Modal
-      title="编辑AI员工"
+      title={intl.formatMessage({ id: 'aiAgentModal.edit.title', defaultMessage: '编辑AI助手' })}
       open={visible}
       onOk={handleOk}
       onCancel={onCancel}
@@ -195,45 +75,49 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
       >
         <Form.Item
           name="name"
-          label="名称"
-          rules={[{ required: true, message: '请输入AI员工名称' }]}
+          label={intl.formatMessage({ id: 'aiAgentModal.form.name', defaultMessage: '名称' })}
+          rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.name.required', defaultMessage: '请输入AI助手名称' }) }]}
         >
-          <Input placeholder="请输入AI员工名称" maxLength={50} showCount />
+          <Input 
+            placeholder={intl.formatMessage({ id: 'aiAgentModal.form.name.placeholder', defaultMessage: '请输入AI助手名称' })} 
+            maxLength={50} 
+            showCount 
+          />
         </Form.Item>
 
         <Form.Item
           name="modelType"
-          label="使用模型"
-          rules={[{ required: true, message: '请选择使用模型' }]}
+          label={intl.formatMessage({ id: 'aiAgentModal.form.model', defaultMessage: '使用模型' })}
+          rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.model.required', defaultMessage: '请选择使用模型' }) }]}
         >
           <ModelSelector />
         </Form.Item>
 
         <Form.Item
           name="mbtiCode"
-          label="MBTI性格"
-          tooltip="选择AI员工的MBTI性格类型，这将影响其行为方式和沟通风格"
+          label={intl.formatMessage({ id: 'aiAgentModal.form.mbti', defaultMessage: 'MBTI性格' })}
+          tooltip={intl.formatMessage({ id: 'aiAgentModal.form.mbti.tooltip', defaultMessage: '选择AI助手的MBTI性格类型，这将影响其行为方式和沟通风格' })}
         >
           <MBTISelector />
         </Form.Item>
 
         <Form.Item
           name="roles"
-          label="角色"
-          rules={[{ required: true, message: '请选择AI员工角色' }]}
-          tooltip="选择AI员工可以扮演的角色，支持多选"
+          label={intl.formatMessage({ id: 'aiAgentModal.form.roles', defaultMessage: '角色' })}
+          rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.roles.required', defaultMessage: '请选择AI助手角色' }) }]}
+          tooltip={intl.formatMessage({ id: 'aiAgentModal.form.roles.tooltip', defaultMessage: '选择AI助手可以扮演的角色，支持多选' })}
         >
           <RoleSelector />
         </Form.Item>
 
         <Form.Item
           name="prompt"
-          label="预设提示词"
-          rules={[{ required: true, message: '请输入预设提示词' }]}
-          tooltip="定义AI员工的行为和专业领域"
+          label={intl.formatMessage({ id: 'aiAgentModal.form.prompt', defaultMessage: '预设提示词' })}
+          rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.prompt.required', defaultMessage: '请输入预设提示词' }) }]}
+          tooltip={intl.formatMessage({ id: 'aiAgentModal.form.prompt.tooltip', defaultMessage: '定义AI助手的行为和专业领域' })}
         >
           <Input.TextArea
-            placeholder="请输入预设提示词"
+            placeholder={intl.formatMessage({ id: 'aiAgentModal.form.prompt.placeholder', defaultMessage: '请输入预设提示词' })}
             maxLength={2000}
             showCount
             autoSize={{ minRows: 6, maxRows: 12 }}
@@ -242,14 +126,14 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
         <Form.Item
           name="temperature"
-          label="随机性"
+          label={intl.formatMessage({ id: 'aiAgentModal.form.temperature', defaultMessage: '随机性' })}
           rules={[
-            { required: true, message: '请输入随机性参数' },
-            { type: 'number', min: 0, max: 1, message: '随机性参数必须在0-1之间' }
+            { required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.temperature.required', defaultMessage: '请输入随机性参数' }) },
+            { type: 'number', min: 0, max: 1, message: intl.formatMessage({ id: 'aiAgentModal.form.temperature.range', defaultMessage: '随机性参数必须在0-1之间' }) }
           ]}
         >
           <InputNumber
-            placeholder="请输入随机性参数"
+            placeholder={intl.formatMessage({ id: 'aiAgentModal.form.temperature.placeholder', defaultMessage: '请输入随机性参数' })}
             step={0.1}
             min={0}
             max={1}
@@ -259,14 +143,14 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
         <Form.Item
           name="maxTokens"
-          label="最大Token数"
+          label={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens', defaultMessage: '最大Token数' })}
           rules={[
-            { required: true, message: '请输入最大Token数' },
-            { type: 'number', min: 1, message: '最大Token数必须大于0' }
+            { required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.required', defaultMessage: '请输入最大Token数' }) },
+            { type: 'number', min: 1, message: intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.min', defaultMessage: '最大Token数必须大于0' }) }
           ]}
         >
           <InputNumber
-            placeholder="请输入最大Token数"
+            placeholder={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.placeholder', defaultMessage: '请输入最大Token数' })}
             min={1}
             style={{ width: '100%' }}
           />
@@ -274,12 +158,12 @@ const EditAIAgentModal: React.FC<EditAIAgentModalProps> = ({
 
         <Form.Item
           name="status"
-          label="状态"
-          rules={[{ required: true, message: '请选择状态' }]}
+          label={intl.formatMessage({ id: 'aiAgentModal.form.status', defaultMessage: '状态' })}
+          rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.status.required', defaultMessage: '请选择状态' }) }]}
         >
           <Select>
-            <Select.Option value="active">启用</Select.Option>
-            <Select.Option value="inactive">禁用</Select.Option>
+            <Select.Option value="active">{intl.formatMessage({ id: 'aiAgentModal.form.status.active', defaultMessage: '启用' })}</Select.Option>
+            <Select.Option value="inactive">{intl.formatMessage({ id: 'aiAgentModal.form.status.inactive', defaultMessage: '禁用' })}</Select.Option>
           </Select>
         </Form.Item>
       </Form>
