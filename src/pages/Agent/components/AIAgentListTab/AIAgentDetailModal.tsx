@@ -1,8 +1,9 @@
 import React from 'react';
-import { Modal, Typography, Descriptions, Tag, Avatar } from 'antd';
+import { Modal, Typography, Tag, Avatar, Row, Col, Space, Divider } from 'antd';
 import { RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { AIAgent } from '../../types';
+import CommentSection from './CommentSection';
 
 const { Title, Paragraph } = Typography;
 
@@ -12,12 +13,21 @@ const ModalContent = styled.div`
   position: relative;
 `;
 
+const HeaderContainer = styled.div`
+  position: relative;
+  height: 300px;
+`;
+
 const HeaderBackground = styled.div<{ bgImg?: string }>`
-  height: 320px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
   background-image: ${props => props.bgImg ? `url(${props.bgImg})` : 'linear-gradient(135deg, var(--ant-color-primary), #2563eb)'};
   background-size: cover;
   background-position: center;
-  position: relative;
+  border-radius: 20px 20px 0 0;
   overflow: hidden;
   
   &::before {
@@ -304,92 +314,149 @@ const Particles = styled.div`
 `;
 
 const AvatarContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  position: relative;
-  margin-top: -50px;
-  margin-bottom: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 40px;
+  z-index: 10;
+  transform: translateY(50%);
 `;
 
 const StyledAvatar = styled(Avatar)`
-  width: 100px;
-  height: 100px;
-  border: 4px solid var(--ant-color-bg-container);
+  width: 90px;
+  height: 90px;
+  border: 5px solid var(--ant-color-bg-container);
   background: var(--ant-color-bg-container);
   color: var(--ant-color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   
   .anticon {
-    font-size: 50px;
+    font-size: 45px;
   }
 `;
 
 const ContentSection = styled.div`
   padding: 0 24px 24px;
   background: var(--ant-color-bg-container);
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  padding-top: 35px;
+  border-radius: 0 0 20px 20px;
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--ant-color-border);
+    border-radius: 2px;
+  }
 `;
 
-const HeaderSection = styled.div`
+const InfoHeader = styled.div`
+  display: flex;
+  margin-left: 120px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+`;
+
+const NameSection = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-  text-align: center;
+  align-items: flex-start;
+  margin-left: 14px;
 `;
 
 const AgentName = styled(Title)`
-  margin: 0 0 8px 0 !important;
+  margin: 0 0 2px 0 !important;
+  text-align: left;
+  font-size: 20px;
 `;
 
-const RoleTagsContainer = styled.div`
+const TagsContainer = styled.div`
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 12px;
-`;
-
-const StyledTag = styled(Tag)`
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  margin: 0;
+  gap: 6px;
 `;
 
 const ModelTag = styled(Tag)`
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 2px 8px;
+  border-radius: 16px;
+  font-size: 13px;
   background: var(--ant-color-primary-bg);
   color: var(--ant-color-primary);
   border-color: var(--ant-color-primary-border);
 `;
 
-const PromptSection = styled.div`
-  margin: 24px 0;
-  padding: 20px;
-  background: var(--ant-color-bg-container-disabled);
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+const StyledTag = styled(Tag)`
+  padding: 2px 8px;
+  border-radius: 16px;
+  font-size: 13px;
+  margin: 0;
 `;
 
-const StyledDescriptions = styled(Descriptions)`
-  .ant-descriptions-item-label {
-    font-weight: 500;
-    color: var(--ant-color-text-secondary);
+const InfoGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  margin: 16px 0;
+`;
+
+const InfoItem = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const InfoLabel = styled.span`
+  color: var(--ant-color-text-secondary);
+  margin-right: 8px;
+  font-weight: 500;
+  min-width: 70px;
+`;
+
+const InfoValue = styled.span`
+  color: var(--ant-color-text);
+`;
+
+const PromptSection = styled.div`
+  margin: 12px 0;
+  padding: 16px;
+  background: var(--ant-color-bg-container-disabled);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+`;
+
+const PromptContent = styled.div`
+  max-height: 200px;
+  overflow-y: auto;
+  position: relative;
+  padding-right: 6px;
+  
+  &::-webkit-scrollbar {
+    width: 4px;
   }
   
-  .ant-descriptions-row {
-    margin-bottom: 8px;
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--ant-color-border);
+    border-radius: 2px;
   }
 `;
 
 const StatusTag = styled(Tag)<{ $isActive: boolean }>`
-  border-radius: 20px;
-  padding: 2px 12px;
+  border-radius: 16px;
+  padding: 1px 8px;
   font-weight: 500;
   background: ${props => props.$isActive ? 'rgba(82, 196, 26, 0.1)' : 'rgba(0, 0, 0, 0.04)'};
   color: ${props => props.$isActive ? '#52c41a' : 'rgba(0, 0, 0, 0.45)'};
@@ -417,64 +484,81 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
       bodyStyle={{ padding: 0 }}
     >
       <ModalContent>
-        <HeaderBackground bgImg={agent.bgImg}>
-          <LightEffects>
-            <LightBeam1 />
-            <LightBeam2 />
-            <LightBeam3 />
-            <Particles>
-              {[...Array(8)].map((_, i) => (
-                <FloatingParticle key={i} />
-              ))}
-            </Particles>
-          </LightEffects>
-        </HeaderBackground>
-        
-        <ContentSection>
+        <HeaderContainer>
+          <HeaderBackground bgImg={agent.bgImg}>
+            <LightEffects>
+              <LightBeam1 />
+              <LightBeam2 />
+              <LightBeam3 />
+              <Particles>
+                {[...Array(8)].map((_, i) => (
+                  <FloatingParticle key={i} />
+                ))}
+              </Particles>
+            </LightEffects>
+          </HeaderBackground>
+          
           <AvatarContainer>
             <StyledAvatar
               src={agent.avatarUrl}
               icon={!agent.avatarUrl && <RobotOutlined />}
             />
           </AvatarContainer>
+        </HeaderContainer>
+        
+        <ContentSection>
+          <InfoHeader>
+            <NameSection>
+              <AgentName level={4}>{agent.name}</AgentName>
+              <TagsContainer>
+                <ModelTag>{agent.modelType}</ModelTag>
+                {agent.roles.map((role, index) => (
+                  <StyledTag key={index} color="processing">{role}</StyledTag>
+                ))}
+              </TagsContainer>
+            </NameSection>
+          </InfoHeader>
           
-          <HeaderSection>
-            <AgentName level={3}>{agent.name}</AgentName>
-            <ModelTag>{agent.modelType}</ModelTag>
-            <RoleTagsContainer>
-              {agent.roles.map((role, index) => (
-                <StyledTag key={index} color="processing">{role}</StyledTag>
-              ))}
-            </RoleTagsContainer>
-          </HeaderSection>
-
-          <StyledDescriptions column={2}>
-            <Descriptions.Item label="温度" span={1}>
-              {agent.temperature}
-            </Descriptions.Item>
-            <Descriptions.Item label="最大Token数" span={1}>
-              {agent.maxTokens}
-            </Descriptions.Item>
-            <Descriptions.Item label="状态" span={1}>
-              <StatusTag $isActive={agent.status === 'active'}>
-                {agent.status === 'active' ? '启用' : '禁用'}
-              </StatusTag>
-            </Descriptions.Item>
-            <Descriptions.Item label="创建时间" span={1}>
-              {agent.createTime}
-            </Descriptions.Item>
-          </StyledDescriptions>
+          <Divider style={{ margin: '-2px 0 12px 0' }} />
+          
+          <InfoGrid>
+            <InfoItem>
+              <InfoLabel>温度:</InfoLabel>
+              <InfoValue>{agent.temperature}</InfoValue>
+            </InfoItem>
+            <InfoItem>
+              <InfoLabel>状态:</InfoLabel>
+              <InfoValue>
+                <StatusTag $isActive={agent.status === 'active'}>
+                  {agent.status === 'active' ? '启用' : '禁用'}
+                </StatusTag>
+              </InfoValue>
+            </InfoItem>
+            <InfoItem>
+              <InfoLabel>最大Token:</InfoLabel>
+              <InfoValue>{agent.maxTokens}</InfoValue>
+            </InfoItem>
+            <InfoItem>
+              <InfoLabel>创建时间:</InfoLabel>
+              <InfoValue>{agent.createTime}</InfoValue>
+            </InfoItem>
+          </InfoGrid>
 
           <PromptSection>
-            <Title level={5} style={{ marginBottom: 16 }}>预设提示词</Title>
-            <Paragraph style={{ 
-              whiteSpace: 'pre-wrap',
-              margin: 0,
-              color: 'var(--ant-color-text-secondary)'
-            }}>
-              {agent.prompt}
-            </Paragraph>
+            <Title level={5} style={{ marginBottom: 8, fontSize: 14 }}>预设提示词</Title>
+            <PromptContent>
+              <Paragraph style={{ 
+                whiteSpace: 'pre-wrap',
+                margin: 0,
+                color: 'var(--ant-color-text-secondary)',
+                fontSize: 13
+              }}>
+                {agent.prompt}
+              </Paragraph>
+            </PromptContent>
           </PromptSection>
+
+          <CommentSection agentId={agent.id} />
         </ContentSection>
       </ModalContent>
     </Modal>
