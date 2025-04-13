@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { List, Avatar, Button, Input, Space, Tabs, Typography, Spin, Empty, Divider, Badge } from 'antd';
-import { LikeOutlined, LikeFilled, MessageOutlined, SendOutlined, ClockCircleOutlined, FireOutlined } from '@ant-design/icons';
+import { List, Avatar, Button, Input, Space, Tabs, Typography, Spin, Empty, Divider, Badge, message } from 'antd';
+import { LikeOutlined, LikeFilled, MessageOutlined, SendOutlined, ClockCircleOutlined, FireOutlined, LoadingOutlined, ArrowLeftOutlined, CloseOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import axios from '../../../../api/axios';
@@ -46,7 +46,7 @@ const UserRow = styled.div`
 // 用户名
 const Username = styled(Text)`
   font-weight: 500;
-  margin-left: 10px;
+  margin-left: 12px;
 `;
 
 // 评论日期
@@ -58,7 +58,7 @@ const CommentDate = styled(Text)`
 
 // 评论内容
 const Content = styled(Paragraph)`
-  margin: 8px 0 8px 34px;
+  margin: 8px 0 8px 60px;
   color: var(--ant-color-text);
 `;
 
@@ -66,7 +66,7 @@ const Content = styled(Paragraph)`
 const ActionRow = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 34px;
+  margin-left: 60px;
 `;
 
 // 操作按钮
@@ -84,6 +84,11 @@ const Action = styled.button<{ $active?: boolean }>`
     color: var(--ant-color-primary);
   }
   
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
   .anticon {
     margin-right: 4px;
   }
@@ -96,7 +101,7 @@ const InputArea = styled.div`
   gap: 12px;
   
   .ant-input {
-    border-radius: 8px;
+    border-radius: 20px;
   }
 `;
 
@@ -127,6 +132,51 @@ const CommentList = styled.div`
   }
 `;
 
+// 回复区域容器
+const ReplyArea = styled.div`
+  margin-left: 60px;
+  margin-top: 12px;
+  padding: 12px;
+  background-color: var(--ant-color-bg-container-disabled);
+  border-radius: 8px;
+`;
+
+const ReplyHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const ReplyTitle = styled(Text)`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ant-color-text-secondary);
+  
+  &:hover {
+    color: var(--ant-color-text);
+  }
+`;
+
+// 回复输入区域
+const ReplyInputArea = styled.div`
+  display: flex;
+  gap: 12px;
+  
+  .ant-input {
+    border-radius: 20px;
+  }
+`;
+
 // 类型定义
 interface Comment {
   id: number;
@@ -153,6 +203,127 @@ interface CommentSectionProps {
   agentId: number;
 }
 
+// 递归渲染评论组件
+const CommentTree: React.FC<{
+  comment: Comment;
+  level: number;
+  onLike: (id: number) => void;
+  onReply: (comment: Comment) => void;
+  replyToComment: Comment | null;
+  replyContent: string;
+  setReplyContent: (content: string) => void;
+  onCloseReply: () => void;
+  onSubmitReply: () => void;
+  replying: boolean;
+  likingCommentIds: number[];
+}> = ({ 
+  comment, 
+  level, 
+  onLike, 
+  onReply, 
+  replyToComment, 
+  replyContent, 
+  setReplyContent,
+  onCloseReply,
+  onSubmitReply,
+  replying,
+  likingCommentIds
+}) => {
+  const intl = useIntl();
+  const indent = level * 16; // 每层缩进16px
+  const avatarSize = Math.max(48 - level * 8, 24); // 头像大小随层级减小，最小24px
+  const contentMargin = avatarSize + 12; // 内容区左边距
+
+  return (
+    <CommentItem key={comment.id} style={{ padding: level === 0 ? '12px 0' : '8px 0' }}>
+      <UserRow>
+        <Avatar src={comment.avatar} size={avatarSize} />
+        <Username>{comment.nickname}</Username>
+        <CommentDate>{comment.createTime}</CommentDate>
+      </UserRow>
+      <Content 
+        ellipsis={{ rows: 3, expandable: true, symbol: '展开' }}
+        style={{ 
+          marginLeft: contentMargin, 
+          fontSize: level === 0 ? 14 : 13 
+        }}
+      >
+        {comment.content}
+      </Content>
+      <ActionRow style={{ marginLeft: contentMargin }}>
+        <Action 
+          $active={comment.isLiked}
+          onClick={() => onLike(comment.id)}
+          disabled={likingCommentIds.includes(comment.id)}
+        >
+          {likingCommentIds.includes(comment.id) ? (
+            <LoadingOutlined />
+          ) : (
+            comment.isLiked ? <LikeFilled /> : <LikeOutlined />
+          )}
+          {comment.likeCount > 0 && comment.likeCount}
+        </Action>
+        <Action onClick={() => onReply(comment)}>
+          <MessageOutlined />
+          {comment.replyCount > 0 && comment.replyCount}
+        </Action>
+      </ActionRow>
+
+      {replyToComment && replyToComment.id === comment.id && (
+        <ReplyArea style={{ marginLeft: contentMargin }}>
+          <ReplyHeader>
+            <ReplyTitle>
+              <ArrowLeftOutlined style={{ marginRight: 8 }} />
+              <FormattedMessage id="aiAgent.comments.replyTo" /> {comment.nickname}
+            </ReplyTitle>
+            <CloseButton onClick={onCloseReply}>
+              <CloseOutlined />
+            </CloseButton>
+          </ReplyHeader>
+          <ReplyInputArea>
+            <Input.TextArea
+              placeholder={intl.formatMessage({ id: 'aiAgent.comments.replyPlaceholder' })}
+              value={replyContent}
+              onChange={(e) => setReplyContent(e.target.value)}
+              autoSize={{ minRows: 1, maxRows: 4 }}
+              style={{ flex: 1 }}
+            />
+            <Button
+              type="primary"
+              onClick={onSubmitReply}
+              loading={replying}
+              icon={<SendOutlined />}
+            >
+              <FormattedMessage id="aiAgent.comments.submit" />
+            </Button>
+          </ReplyInputArea>
+        </ReplyArea>
+      )}
+
+      {comment.children && comment.children.length > 0 && (
+        <div style={{ marginLeft: contentMargin, marginTop: 12 }}>
+          {comment.children.map(childComment => (
+            <CommentTree
+              key={childComment.id}
+              comment={childComment}
+              level={level + 1}
+              onLike={onLike}
+              onReply={onReply}
+              replyToComment={replyToComment}
+              replyContent={replyContent}
+              setReplyContent={setReplyContent}
+              onCloseReply={onCloseReply}
+              onSubmitReply={onSubmitReply}
+              replying={replying}
+              likingCommentIds={likingCommentIds}
+            />
+          ))}
+        </div>
+      )}
+    </CommentItem>
+  );
+};
+
 const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -160,6 +331,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
   const [orderType, setOrderType] = useState(1);
   const [newComment, setNewComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [likingCommentIds, setLikingCommentIds] = useState<number[]>([]);
+  const [replyToComment, setReplyToComment] = useState<Comment | null>(null);
+  const [replyContent, setReplyContent] = useState('');
+  const [replying, setReplying] = useState(false);
   const intl = useIntl();
 
   const fetchComments = async () => {
@@ -189,20 +364,40 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
     fetchComments();
   }, [agentId, orderType]);
 
+  // 递归查找评论
+  const findCommentById = (commentId: number, commentList: Comment[]): Comment | null => {
+    for (const comment of commentList) {
+      if (comment.id === commentId) {
+        return comment;
+      }
+      if (comment.children && comment.children.length > 0) {
+        const found = findCommentById(commentId, comment.children);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+
   const handleLike = async (commentId: number) => {
     try {
-      const currentComment = comments.find(comment => comment.id === commentId);
-      if (!currentComment) return;
+      const comment = findCommentById(commentId, comments);
+      if (!comment) return;
       
-      if (currentComment.isLiked) {
-        await axios.post(`/productx/sa-ai-agent-comment/unlike`, { commentId });
+      // 添加到正在点赞的ID列表中
+      setLikingCommentIds(prev => [...prev, commentId]);
+      
+      if (comment.isLiked) {
+        await axios.post(`/productx/sa-ai-agent-comment/${commentId}/unlike`);
       } else {
-        await axios.post(`/productx/sa-ai-agent-comment/like`, { commentId });
+        await axios.post(`/productx/sa-ai-agent-comment/${commentId}/like`);
       }
       
       await fetchComments();
     } catch (error) {
       console.error('点赞操作失败:', error);
+    } finally {
+      // 从正在点赞的ID列表中移除
+      setLikingCommentIds(prev => prev.filter(id => id !== commentId));
     }
   };
 
@@ -219,10 +414,45 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
       
       setNewComment('');
       await fetchComments();
+      message.success(intl.formatMessage({ id: 'aiAgent.comments.success' }));
     } catch (error) {
       console.error('提交评论失败:', error);
+      message.error(intl.formatMessage({ id: 'aiAgent.comments.error' }));
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleReply = (comment: Comment) => {
+    setReplyToComment(comment);
+    setReplyContent('');
+  };
+
+  const closeReply = () => {
+    setReplyToComment(null);
+    setReplyContent('');
+  };
+
+  const submitReply = async () => {
+    if (!replyToComment || !replyContent.trim()) return;
+
+    try {
+      setReplying(true);
+      await axios.post(`/productx/sa-ai-agent-comment/create`, {
+        agentId,
+        content: replyContent,
+        parentId: replyToComment.id
+      });
+      
+      setReplyContent('');
+      setReplyToComment(null);
+      await fetchComments();
+      message.success(intl.formatMessage({ id: 'aiAgent.comments.replySuccess' }));
+    } catch (error) {
+      console.error('回复评论失败:', error);
+      message.error(intl.formatMessage({ id: 'aiAgent.comments.error' }));
+    } finally {
+      setReplying(false);
     }
   };
 
@@ -235,7 +465,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
       <TitleRow>
         <Space>
           <Text strong style={{ fontSize: 16 }}>
-            <FormattedMessage id="aiAgent.comments.title" defaultMessage="用户评论" />
+            <FormattedMessage id="aiAgent.comments.title" />
           </Text>
           <Badge count={totalCount} showZero color="var(--ant-color-primary)" />
         </Space>
@@ -251,7 +481,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
           tab={
             <Space>
               <ClockCircleOutlined />
-              <FormattedMessage id="aiAgent.comments.latest" defaultMessage="最新" />
+              <FormattedMessage id="aiAgent.comments.latest" />
             </Space>
           } 
           key="1" 
@@ -260,7 +490,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
           tab={
             <Space>
               <FireOutlined />
-              <FormattedMessage id="aiAgent.comments.hottest" defaultMessage="最热" />
+              <FormattedMessage id="aiAgent.comments.hottest" />
             </Space>
           } 
           key="2" 
@@ -270,35 +500,26 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
       <Spin spinning={loading}>
         {comments && comments.length > 0 ? (
           <CommentList>
-            {comments.map(item => (
-              <CommentItem key={item.id}>
-                <UserRow>
-                  <Avatar src={item.avatar} size="small" />
-                  <Username>{item.nickname}</Username>
-                  <CommentDate>{item.createTime}</CommentDate>
-                </UserRow>
-                <Content ellipsis={{ rows: 3, expandable: true, symbol: '展开' }}>
-                  {item.content}
-                </Content>
-                <ActionRow>
-                  <Action 
-                    $active={item.isLiked}
-                    onClick={() => handleLike(item.id)}
-                  >
-                    {item.isLiked ? <LikeFilled /> : <LikeOutlined />}
-                    {item.likeCount > 0 && item.likeCount}
-                  </Action>
-                  <Action>
-                    <MessageOutlined />
-                    {item.replyCount > 0 && item.replyCount}
-                  </Action>
-                </ActionRow>
-              </CommentItem>
+            {comments.map(comment => (
+              <CommentTree
+                key={comment.id}
+                comment={comment}
+                level={0}
+                onLike={handleLike}
+                onReply={handleReply}
+                replyToComment={replyToComment}
+                replyContent={replyContent}
+                setReplyContent={setReplyContent}
+                onCloseReply={closeReply}
+                onSubmitReply={submitReply}
+                replying={replying}
+                likingCommentIds={likingCommentIds}
+              />
             ))}
             
             {totalCount > comments.length && (
               <LoadMoreButton type="link">
-                <FormattedMessage id="aiAgent.comments.loadMore" defaultMessage="加载更多" />
+                <FormattedMessage id="aiAgent.comments.loadMore" />
               </LoadMoreButton>
             )}
           </CommentList>
@@ -307,8 +528,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             description={
               <FormattedMessage 
-                id="aiAgent.comments.empty" 
-                defaultMessage="暂无评论" 
+                id="aiAgent.comments.empty"
               />
             }
           />
@@ -316,18 +536,17 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
       </Spin>
       
       <Divider plain>
-        <FormattedMessage id="aiAgent.comments.leaveComment" defaultMessage="发表评论" />
+        <FormattedMessage id="aiAgent.comments.leaveComment" />
       </Divider>
       
       <InputArea>
         <Input.TextArea
           placeholder={intl.formatMessage({
-            id: 'aiAgent.comments.placeholder',
-            defaultMessage: '写下你的评论...'
+            id: 'aiAgent.comments.placeholder'
           })}
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          autoSize={{ minRows: 2, maxRows: 4 }}
+          autoSize={{ minRows: 1, maxRows: 4 }}
           style={{ flex: 1 }}
         />
         <Button
@@ -336,7 +555,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
           loading={submitting}
           icon={<SendOutlined />}
         >
-          <FormattedMessage id="aiAgent.comments.submit" defaultMessage="发送" />
+          <FormattedMessage id="aiAgent.comments.submit" />
         </Button>
       </InputArea>
     </CommentWrapper>

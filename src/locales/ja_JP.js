@@ -504,5 +504,24 @@ export default {
   'userMenu.logout': 'ログアウト',
   'userMenu.network.china': '中国ノード',
   'userMenu.network.usa': '米国ノード',
-  'userMenu.network.japan': '日本ノード'
+  'userMenu.network.japan': '日本ノード',
+  
+  // AI Assistant Detail Modal
+  'agent.detail.temperature': '温度',
+  'agent.detail.status': 'ステータス',
+  'agent.detail.maxTokens': '最大トークン数',
+  'agent.detail.createTime': '作成日時',
+  'agent.detail.prompt': 'プリセットプロンプト',
+  'agent.detail.status.active': '有効',
+  'agent.detail.status.inactive': '無効',
+  
+  // コメントセクション
+  'aiAgent.comments.title': 'ユーザーコメント',
+  'aiAgent.comments.latest': '最新',
+  'aiAgent.comments.hottest': '人気',
+  'aiAgent.comments.loadMore': 'もっと見る',
+  'aiAgent.comments.empty': 'コメントはまだありません',
+  'aiAgent.comments.leaveComment': 'コメントを残す',
+  'aiAgent.comments.placeholder': 'コメントを書く...',
+  'aiAgent.comments.submit': '送信',
 };

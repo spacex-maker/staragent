@@ -527,4 +527,22 @@ export default {
   'userMenu.network.china': 'عقدة الصين',
   'userMenu.network.usa': 'عقدة الولايات المتحدة',
   'userMenu.network.japan': 'عقدة اليابان',
+
+  'agent.detail.temperature': 'درجة الحرارة',
+  'agent.detail.status': 'الحالة',
+  'agent.detail.maxTokens': 'الحد الأقصى للرموز',
+  'agent.detail.createTime': 'وقت الإنشاء',
+  'agent.detail.prompt': 'النص التلقائي',
+  'agent.detail.status.active': 'نشط',
+  'agent.detail.status.inactive': 'غير نشط',
+  
+  // قسم التعليقات
+  'aiAgent.comments.title': 'تعليقات المستخدمين',
+  'aiAgent.comments.latest': 'الأحدث',
+  'aiAgent.comments.hottest': 'الأكثر شعبية',
+  'aiAgent.comments.loadMore': 'تحميل المزيد',
+  'aiAgent.comments.empty': 'لا توجد تعليقات حتى الآن',
+  'aiAgent.comments.leaveComment': 'اترك تعليقاً',
+  'aiAgent.comments.placeholder': 'اكتب تعليقك...',
+  'aiAgent.comments.submit': 'إرسال',
 };

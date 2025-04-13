@@ -519,4 +519,21 @@ export default {
   'userMenu.network.china': 'China-Knoten',
   'userMenu.network.usa': 'USA-Knoten',
   'userMenu.network.japan': 'Japan-Knoten',
+  'agent.detail.temperature': 'Temperatur',
+  'agent.detail.status': 'Status',
+  'agent.detail.maxTokens': 'Maximale Token',
+  'agent.detail.createTime': 'Erstellungszeit',
+  'agent.detail.prompt': 'Voreingestellter Prompt',
+  'agent.detail.status.active': 'Aktiv',
+  'agent.detail.status.inactive': 'Inaktiv',
+  
+  // Kommentarbereich
+  'aiAgent.comments.title': 'Benutzer-Kommentare',
+  'aiAgent.comments.latest': 'Neueste',
+  'aiAgent.comments.hottest': 'Beliebteste',
+  'aiAgent.comments.loadMore': 'Mehr laden',
+  'aiAgent.comments.empty': 'Noch keine Kommentare',
+  'aiAgent.comments.leaveComment': 'Kommentar hinterlassen',
+  'aiAgent.comments.placeholder': 'Schreiben Sie Ihren Kommentar...',
+  'aiAgent.comments.submit': 'Senden',
 };

@@ -517,4 +517,21 @@ export default {
   'userMenu.network.china': 'Nodo Cina',
   'userMenu.network.usa': 'Nodo USA',
   'userMenu.network.japan': 'Nodo Giappone',
+  'agent.detail.temperature': 'Temperatura',
+  'agent.detail.status': 'Stato',
+  'agent.detail.maxTokens': 'Token Massimi',
+  'agent.detail.createTime': 'Data di Creazione',
+  'agent.detail.prompt': 'Prompt Predefinito',
+  'agent.detail.status.active': 'Attivo',
+  'agent.detail.status.inactive': 'Inattivo',
+  
+  // Sezione Commenti
+  'aiAgent.comments.title': 'Commenti degli Utenti',
+  'aiAgent.comments.latest': 'Più Recenti',
+  'aiAgent.comments.hottest': 'Più Popolari',
+  'aiAgent.comments.loadMore': 'Carica Altri',
+  'aiAgent.comments.empty': 'Ancora nessun commento',
+  'aiAgent.comments.leaveComment': 'Lascia un Commento',
+  'aiAgent.comments.placeholder': 'Scrivi il tuo commento...',
+  'aiAgent.comments.submit': 'Invia',
 };

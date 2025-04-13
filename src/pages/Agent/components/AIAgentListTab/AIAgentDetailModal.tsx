@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Typography, Tag, Avatar, Row, Col, Space, Divider } from 'antd';
 import { RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 import { AIAgent } from '../../types';
 import CommentSection from './CommentSection';
 
@@ -319,18 +320,57 @@ const AvatarContainer = styled.div`
   left: 40px;
   z-index: 10;
   transform: translateY(50%);
+  
+  &:hover {
+    .avatar-img {
+      transform: rotate(10deg) scale(1.05);
+      border-width: 8px;
+      border-color: #60a5fa !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 40px 15px rgba(59, 130, 246, 0.85) !important;
+    }
+  }
 `;
 
 const StyledAvatar = styled(Avatar)`
   width: 90px;
   height: 90px;
-  border: 5px solid var(--ant-color-bg-container);
+  border: none;
   background: var(--ant-color-bg-container);
   color: var(--ant-color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 0 20px 5px rgba(59, 130, 246, 0.6);
+  position: relative;
+  z-index: 1;
+  border: 7px solid #3b82f6;
+  animation: borderColorChange 3s linear infinite, pulseGlow 2s ease-in-out infinite alternate;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow, border-color, border-width;
+  
+  &.avatar-img {
+    cursor: pointer;
+  }
+  
+  @keyframes borderColorChange {
+    0% { border-color: #3b82f6; }
+    20% { border-color: #4f46e5; }
+    40% { border-color: #2563eb; }
+    60% { border-color: #6366f1; }
+    80% { border-color: #818cf8; }
+    100% { border-color: #3b82f6; }
+  }
+  
+  @keyframes pulseGlow {
+    0% { 
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 0 20px 5px rgba(59, 130, 246, 0.6);
+      transform: scale(1);
+    }
+    100% { 
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 0 25px 8px rgba(59, 130, 246, 0.7);
+      transform: scale(1.02);
+    }
+  }
   
   .anticon {
     font-size: 45px;
@@ -474,6 +514,8 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
   agent,
   onCancel
 }) => {
+  const intl = useIntl();
+
   return (
     <Modal
       title={null}
@@ -500,6 +542,7 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
           
           <AvatarContainer>
             <StyledAvatar
+              className="avatar-img"
               src={agent.avatarUrl}
               icon={!agent.avatarUrl && <RobotOutlined />}
             />
@@ -523,29 +566,35 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
           
           <InfoGrid>
             <InfoItem>
-              <InfoLabel>温度:</InfoLabel>
+              <InfoLabel>{intl.formatMessage({ id: 'agent.detail.temperature' })}:</InfoLabel>
               <InfoValue>{agent.temperature}</InfoValue>
             </InfoItem>
             <InfoItem>
-              <InfoLabel>状态:</InfoLabel>
+              <InfoLabel>{intl.formatMessage({ id: 'agent.detail.status' })}:</InfoLabel>
               <InfoValue>
                 <StatusTag $isActive={agent.status === 'active'}>
-                  {agent.status === 'active' ? '启用' : '禁用'}
+                  {intl.formatMessage({ 
+                    id: agent.status === 'active' 
+                      ? 'agent.detail.status.active' 
+                      : 'agent.detail.status.inactive' 
+                  })}
                 </StatusTag>
               </InfoValue>
             </InfoItem>
             <InfoItem>
-              <InfoLabel>最大Token:</InfoLabel>
+              <InfoLabel>{intl.formatMessage({ id: 'agent.detail.maxTokens' })}:</InfoLabel>
               <InfoValue>{agent.maxTokens}</InfoValue>
             </InfoItem>
             <InfoItem>
-              <InfoLabel>创建时间:</InfoLabel>
+              <InfoLabel>{intl.formatMessage({ id: 'agent.detail.createTime' })}:</InfoLabel>
               <InfoValue>{agent.createTime}</InfoValue>
             </InfoItem>
           </InfoGrid>
 
           <PromptSection>
-            <Title level={5} style={{ marginBottom: 8, fontSize: 14 }}>预设提示词</Title>
+            <Title level={5} style={{ marginBottom: 8, fontSize: 14 }}>
+              {intl.formatMessage({ id: 'agent.detail.prompt' })}
+            </Title>
             <PromptContent>
               <Paragraph style={{ 
                 whiteSpace: 'pre-wrap',

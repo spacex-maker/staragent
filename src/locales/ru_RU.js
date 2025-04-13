@@ -503,5 +503,22 @@ export default {
   'userMenu.logout': 'Выйти',
   'userMenu.network.china': 'Узел Китай',
   'userMenu.network.usa': 'Узел США',
-  'userMenu.network.japan': 'Узел Япония'
+  'userMenu.network.japan': 'Узел Япония',
+  'agent.detail.temperature': 'Температура',
+  'agent.detail.status': 'Статус',
+  'agent.detail.maxTokens': 'Максимум токенов',
+  'agent.detail.createTime': 'Время создания',
+  'agent.detail.prompt': 'Предустановленный промпт',
+  'agent.detail.status.active': 'Активный',
+  'agent.detail.status.inactive': 'Неактивный',
+  
+  // Раздел комментариев
+  'aiAgent.comments.title': 'Комментарии пользователей',
+  'aiAgent.comments.latest': 'Новые',
+  'aiAgent.comments.hottest': 'Популярные',
+  'aiAgent.comments.loadMore': 'Загрузить еще',
+  'aiAgent.comments.empty': 'Пока нет комментариев',
+  'aiAgent.comments.leaveComment': 'Оставить комментарий',
+  'aiAgent.comments.placeholder': 'Напишите ваш комментарий...',
+  'aiAgent.comments.submit': 'Отправить',
 };

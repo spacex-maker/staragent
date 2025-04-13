@@ -544,5 +544,24 @@ export default {
   'userMenu.logout': '로그아웃',
   'userMenu.network.china': '중국 노드',
   'userMenu.network.usa': '미국 노드',
-  'userMenu.network.japan': '일본 노드'
+  'userMenu.network.japan': '일본 노드',
+
+  // Agent Detail
+  'agent.detail.temperature': '온도',
+  'agent.detail.status': '상태',
+  'agent.detail.maxTokens': '최대 토큰',
+  'agent.detail.createTime': '생성 시간',
+  'agent.detail.prompt': '프리셋 프롬프트',
+  'agent.detail.status.active': '활성화',
+  'agent.detail.status.inactive': '비활성화',
+  
+  // 댓글 섹션
+  'aiAgent.comments.title': '사용자 댓글',
+  'aiAgent.comments.latest': '최신순',
+  'aiAgent.comments.hottest': '인기순',
+  'aiAgent.comments.loadMore': '더 보기',
+  'aiAgent.comments.empty': '아직 댓글이 없습니다',
+  'aiAgent.comments.leaveComment': '댓글 남기기',
+  'aiAgent.comments.placeholder': '댓글을 작성하세요...',
+  'aiAgent.comments.submit': '전송',
 };
