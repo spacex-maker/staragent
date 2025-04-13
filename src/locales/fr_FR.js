@@ -504,4 +504,17 @@ export default {
   'aiAgentModal.form.status.required': 'Veuillez sélectionner un statut',
   'aiAgentModal.form.status.active': 'Actif',
   'aiAgentModal.form.status.inactive': 'Inactif',
+
+  // UserMenu
+  'userMenu.header': 'Compte',
+  'userMenu.profile': 'Centre Personnel',
+  'userMenu.settings': 'Paramètres du Compte',
+  'userMenu.guide': 'Guide d\'Utilisation',
+  'userMenu.switchNetwork': 'Changer de Réseau',
+  'userMenu.regions': 'Support Régional',
+  'userMenu.homepage': 'Site Officiel',
+  'userMenu.logout': 'Déconnexion',
+  'userMenu.network.china': 'Nœud Chine',
+  'userMenu.network.usa': 'Nœud États-Unis',
+  'userMenu.network.japan': 'Nœud Japon',
 };

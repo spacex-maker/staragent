@@ -7,6 +7,7 @@ import UserProfileModalEntry from '../../modals/UserProfileModalEntry';
 import instance from '../../../api/axios';
 import { message } from 'antd';
 import NetworkSwitchModal from '../../modals/NetworkSwitchModal';
+import { useIntl } from 'react-intl';
 
 const UserMenuContainer = styled.div`
   position: relative;
@@ -160,7 +161,9 @@ const UserDropdown = styled.div`
   position: absolute;
   right: 0;
   top: calc(100% + 8px);
-  width: 220px;
+  min-width: 220px;
+  width: max-content;
+  max-width: 320px;
   background: ${props => props.isDark ? 'rgba(22, 24, 29, 0.85)' : 'rgba(255, 255, 255, 0.7)'};
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -209,6 +212,9 @@ const UserMenuItem = styled.button`
   align-items: center;
   border-radius: 6px;
   transition: all 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     background: ${props => props.isDark ? 'rgba(59, 130, 246, 0.25)' : 'rgba(59, 130, 246, 0.1)'};
@@ -219,6 +225,7 @@ const UserMenuItem = styled.button`
     margin-right: 10px;
     font-size: 1rem;
     color: ${props => props.isDark ? 'rgba(255, 255, 255, 0.45)' : 'rgba(0, 0, 0, 0.45)'};
+    flex-shrink: 0;
   }
 
   &:hover .icon {
@@ -241,55 +248,30 @@ const LogoutMenuItem = styled(UserMenuItem)`
   }
 `;
 
-const DevelopmentBadge = styled.span`
-  font-size: 0.65rem;
-  padding: 2px 6px;
-  border-radius: 10px;
-  background: ${props => props.isDark ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.1)'};
-  color: #10b981;
-  margin-left: 8px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #10b981;
-    margin-right: 4px;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      opacity: 0.6;
-      transform: scale(0.8);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0.6;
-      transform: scale(0.8);
-    }
-  }
-`;
-
 const MenuItemContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 8px;
+  
+  > div {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
+  }
+  
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const navigate = useNavigate();
+  const intl = useIntl();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [localUserInfo, setLocalUserInfo] = useState(userInfo);
@@ -356,13 +338,13 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const getNetworkDisplayName = (network) => {
     switch (network) {
       case 'china':
-        return '中国节点';
+        return intl.formatMessage({ id: 'userMenu.network.china', defaultMessage: '中国节点' });
       case 'usa':
-        return '美国节点';
+        return intl.formatMessage({ id: 'userMenu.network.usa', defaultMessage: '美国节点' });
       case 'japan':
-        return '日本节点';
+        return intl.formatMessage({ id: 'userMenu.network.japan', defaultMessage: '日本节点' });
       default:
-        return '中国节点';
+        return intl.formatMessage({ id: 'userMenu.network.china', defaultMessage: '中国节点' });
     }
   };
 
@@ -397,7 +379,9 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
         show={showUserMenu} 
         isDark={isDark}
       >
-        <DropdownHeader isDark={isDark}>账号</DropdownHeader>
+        <DropdownHeader isDark={isDark}>
+          {intl.formatMessage({ id: 'userMenu.header', defaultMessage: '账号' })}
+        </DropdownHeader>
         <UserMenuItem 
           isDark={isDark}
           onClick={handleProfileClick}
@@ -405,7 +389,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           <MenuItemContent>
             <div>
               <i className="bi bi-person icon" />
-              个人中心
+              {intl.formatMessage({ id: 'userMenu.profile', defaultMessage: '个人中心' })}
             </div>
           </MenuItemContent>
         </UserMenuItem>
@@ -414,7 +398,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           onClick={handleSettingsClick}
         >
           <i className="bi bi-gear icon" />
-          账号设置
+          {intl.formatMessage({ id: 'userMenu.settings', defaultMessage: '账号设置' })}
         </UserMenuItem>
         <UserMenuItem 
           isDark={isDark}
@@ -426,7 +410,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           <MenuItemContent>
             <div>
               <i className="bi bi-book icon" />
-              使用指南
+              {intl.formatMessage({ id: 'userMenu.guide', defaultMessage: '使用指南' })}
             </div>
           </MenuItemContent>
         </UserMenuItem>
@@ -440,7 +424,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           <MenuItemContent>
             <div>
               <i className="bi bi-globe icon" />
-              切换网络
+              {intl.formatMessage({ id: 'userMenu.switchNetwork', defaultMessage: '切换网络' })}
             </div>
             <span style={{ fontSize: '0.8em', opacity: 0.7 }}>
               {getNetworkDisplayName(currentNetwork)}
@@ -457,7 +441,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           <MenuItemContent>
             <div>
               <i className="bi bi-map icon" />
-              地区支持
+              {intl.formatMessage({ id: 'userMenu.regions', defaultMessage: '地区支持' })}
             </div>
           </MenuItemContent>
         </UserMenuItem>
@@ -471,7 +455,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           <MenuItemContent>
             <div>
               <i className="bi bi-house icon" />
-              官网首页
+              {intl.formatMessage({ id: 'userMenu.homepage', defaultMessage: '官网首页' })}
             </div>
           </MenuItemContent>
         </UserMenuItem>
@@ -483,7 +467,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           }}
         >
           <i className="bi bi-box-arrow-right icon" />
-          退出登录
+          {intl.formatMessage({ id: 'userMenu.logout', defaultMessage: '退出登录' })}
         </LogoutMenuItem>
       </UserDropdown>
 

@@ -491,5 +491,18 @@ export default {
   'aiAgentModal.form.status': 'ステータス',
   'aiAgentModal.form.status.required': 'ステータスを選択してください',
   'aiAgentModal.form.status.active': '有効',
-  'aiAgentModal.form.status.inactive': '無効'
+  'aiAgentModal.form.status.inactive': '無効',
+  
+  // UserMenu
+  'userMenu.header': 'アカウント',
+  'userMenu.profile': '個人センター',
+  'userMenu.settings': 'アカウント設定',
+  'userMenu.guide': 'ユーザーガイド',
+  'userMenu.switchNetwork': 'ネットワーク切替',
+  'userMenu.regions': '地域サポート',
+  'userMenu.homepage': '公式ウェブサイト',
+  'userMenu.logout': 'ログアウト',
+  'userMenu.network.china': '中国ノード',
+  'userMenu.network.usa': '米国ノード',
+  'userMenu.network.japan': '日本ノード'
 };

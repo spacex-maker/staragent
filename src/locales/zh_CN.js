@@ -491,4 +491,17 @@ export default {
   'aiAgentModal.form.status.required': '请选择状态',
   'aiAgentModal.form.status.active': '启用',
   'aiAgentModal.form.status.inactive': '禁用',
+  
+  // UserMenu
+  'userMenu.header': '账号',
+  'userMenu.profile': '个人中心',
+  'userMenu.settings': '账号设置',
+  'userMenu.guide': '使用指南',
+  'userMenu.switchNetwork': '切换网络',
+  'userMenu.regions': '地区支持',
+  'userMenu.homepage': '官网首页',
+  'userMenu.logout': '退出登录',
+  'userMenu.network.china': '中国节点',
+  'userMenu.network.usa': '美国节点',
+  'userMenu.network.japan': '日本节点',
 }; 

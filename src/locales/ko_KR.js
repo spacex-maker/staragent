@@ -532,4 +532,17 @@ export default {
   'aiAgentModal.form.status.required': '상태를 선택해주세요',
   'aiAgentModal.form.status.active': '활성화',
   'aiAgentModal.form.status.inactive': '비활성화',
+
+  // UserMenu
+  'userMenu.header': '계정',
+  'userMenu.profile': '개인 센터',
+  'userMenu.settings': '계정 설정',
+  'userMenu.guide': '사용자 가이드',
+  'userMenu.switchNetwork': '네트워크 전환',
+  'userMenu.regions': '지역 지원',
+  'userMenu.homepage': '공식 웹사이트',
+  'userMenu.logout': '로그아웃',
+  'userMenu.network.china': '중국 노드',
+  'userMenu.network.usa': '미국 노드',
+  'userMenu.network.japan': '일본 노드'
 };

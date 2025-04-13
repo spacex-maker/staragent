@@ -504,4 +504,17 @@ export default {
   'aiAgentModal.form.status.required': 'Seleziona uno stato',
   'aiAgentModal.form.status.active': 'Attivo',
   'aiAgentModal.form.status.inactive': 'Inattivo',
+
+  // UserMenu
+  'userMenu.header': 'Account',
+  'userMenu.profile': 'Centro Personale',
+  'userMenu.settings': 'Impostazioni Account',
+  'userMenu.guide': 'Guida Utente',
+  'userMenu.switchNetwork': 'Cambia Rete',
+  'userMenu.regions': 'Supporto Regionale',
+  'userMenu.homepage': 'Sito Web Ufficiale',
+  'userMenu.logout': 'Disconnettiti',
+  'userMenu.network.china': 'Nodo Cina',
+  'userMenu.network.usa': 'Nodo USA',
+  'userMenu.network.japan': 'Nodo Giappone',
 };

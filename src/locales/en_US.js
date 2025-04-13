@@ -519,4 +519,17 @@ export default {
   'aiAgentModal.form.status.required': 'Please select status',
   'aiAgentModal.form.status.active': 'Active',
   'aiAgentModal.form.status.inactive': 'Inactive',
+
+  // UserMenu
+  'userMenu.header': 'Account',
+  'userMenu.profile': 'Personal Center',
+  'userMenu.settings': 'Account Settings',
+  'userMenu.guide': 'User Guide',
+  'userMenu.switchNetwork': 'Switch Network',
+  'userMenu.regions': 'Regional Support',
+  'userMenu.homepage': 'Official Website',
+  'userMenu.logout': 'Log Out',
+  'userMenu.network.china': 'China Node',
+  'userMenu.network.usa': 'USA Node',
+  'userMenu.network.japan': 'Japan Node',
 };

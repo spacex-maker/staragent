@@ -462,4 +462,17 @@ export default {
   'aiAgentModal.form.status.required': 'Por favor, selecione um estado',
   'aiAgentModal.form.status.active': 'Ativo',
   'aiAgentModal.form.status.inactive': 'Inativo',
+
+  // UserMenu
+  'userMenu.header': 'Conta',
+  'userMenu.profile': 'Centro Pessoal',
+  'userMenu.settings': 'Configurações da Conta',
+  'userMenu.guide': 'Guia do Usuário',
+  'userMenu.switchNetwork': 'Mudar Rede',
+  'userMenu.regions': 'Suporte Regional',
+  'userMenu.homepage': 'Site Oficial',
+  'userMenu.logout': 'Sair',
+  'userMenu.network.china': 'Nó China',
+  'userMenu.network.usa': 'Nó EUA',
+  'userMenu.network.japan': 'Nó Japão',
 };

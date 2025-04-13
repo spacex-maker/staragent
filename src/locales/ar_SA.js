@@ -514,4 +514,17 @@ export default {
   'aiAgentModal.form.status.required': 'الرجاء اختيار حالة',
   'aiAgentModal.form.status.active': 'نشط',
   'aiAgentModal.form.status.inactive': 'غير نشط',
+
+  // UserMenu
+  'userMenu.header': 'الحساب',
+  'userMenu.profile': 'المركز الشخصي',
+  'userMenu.settings': 'إعدادات الحساب',
+  'userMenu.guide': 'دليل المستخدم',
+  'userMenu.switchNetwork': 'تبديل الشبكة',
+  'userMenu.regions': 'الدعم الإقليمي',
+  'userMenu.homepage': 'الموقع الرسمي',
+  'userMenu.logout': 'تسجيل الخروج',
+  'userMenu.network.china': 'عقدة الصين',
+  'userMenu.network.usa': 'عقدة الولايات المتحدة',
+  'userMenu.network.japan': 'عقدة اليابان',
 };

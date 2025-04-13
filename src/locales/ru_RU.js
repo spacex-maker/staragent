@@ -490,5 +490,18 @@ export default {
   'aiAgentModal.form.status': 'Статус',
   'aiAgentModal.form.status.required': 'Пожалуйста, выберите статус',
   'aiAgentModal.form.status.active': 'Активен',
-  'aiAgentModal.form.status.inactive': 'Неактивен'
+  'aiAgentModal.form.status.inactive': 'Неактивен',
+  
+  // UserMenu
+  'userMenu.header': 'Аккаунт',
+  'userMenu.profile': 'Личный кабинет',
+  'userMenu.settings': 'Настройки аккаунта',
+  'userMenu.guide': 'Руководство пользователя',
+  'userMenu.switchNetwork': 'Переключить сеть',
+  'userMenu.regions': 'Региональная поддержка',
+  'userMenu.homepage': 'Официальный сайт',
+  'userMenu.logout': 'Выйти',
+  'userMenu.network.china': 'Узел Китай',
+  'userMenu.network.usa': 'Узел США',
+  'userMenu.network.japan': 'Узел Япония'
 };
