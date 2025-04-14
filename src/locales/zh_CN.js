@@ -347,8 +347,10 @@ export default {
   'aiAgent.market.confirmRecruit.cancel': '取消',
   'aiAgent.market.fetchError': '获取官方AI助手列表失败:',
   'aiAgent.market.recruitError': '招募AI助手失败:',
-  'aiAgent.market.button.details': '详情',
-  'aiAgent.market.button.recruit': '招募',
+  'aiAgent.market.button.details': '查看详情',
+  'aiAgent.market.button.recruit': '招募助手',
+  'aiAgent.market.recruitCount': '已被招募 {count} 次',
+  'aiAgent.market.recruitCount.tooltip': '该AI助手被用户招募的总次数',
   
   // 用户指南页面
   'userGuide.title': 'AI助手使用指南',

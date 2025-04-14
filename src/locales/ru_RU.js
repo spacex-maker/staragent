@@ -521,4 +521,9 @@ export default {
   'aiAgent.comments.leaveComment': 'Оставить комментарий',
   'aiAgent.comments.placeholder': 'Напишите ваш комментарий...',
   'aiAgent.comments.submit': 'Отправить',
+  'aiAgent.comments.replySuccess': 'Ответ успешно отправлен',
+  
+  // AI Agent Market
+  'aiAgent.market.recruitCount': 'Нанят {count} раз',
+  'aiAgent.market.recruitCount.tooltip': 'Общее количество раз, которое этот ИИ-ассистент был нанят пользователями',
 };

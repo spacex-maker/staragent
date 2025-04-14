@@ -607,7 +607,7 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
             </PromptContent>
           </PromptSection>
 
-          <CommentSection agentId={agent.id} />
+          <CommentSection agentId={agent.id} visible={visible} />
         </ContentSection>
       </ModalContent>
     </Modal>

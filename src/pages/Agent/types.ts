@@ -83,16 +83,16 @@ export interface PaginationResponse<T> {
 export interface AIAgent {
   id: number;
   name: string;
-  roles: string[];
   modelType: string;
-  status: string;
   temperature: number;
   maxTokens: number;
   prompt: string;
-  avatarUrl?: string | null;
-  bgImg?: string | null;
+  roles: string[];
+  status: 'active' | 'inactive';
+  avatarUrl?: string;
+  bgImg?: string;
   createTime: string;
-  updateTime: string;
+  copyTimes?: number; // 被招募次数
 }
 
 export interface ProjectAgent {

@@ -377,6 +377,8 @@ export default {
   'aiAgent.market.recruitError': 'Failed to recruit AI assistant:',
   'aiAgent.market.button.details': 'Details',
   'aiAgent.market.button.recruit': 'Recruit',
+  'aiAgent.market.recruitCount': 'Recruited {count} times',
+  'aiAgent.market.recruitCount.tooltip': 'Total number of times this AI agent has been recruited by users',
 
   // User Guide Page
   'userGuide.title': 'AI Assistant User Guide',

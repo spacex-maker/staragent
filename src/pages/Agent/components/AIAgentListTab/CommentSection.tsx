@@ -201,6 +201,7 @@ interface CommentResponse {
 
 interface CommentSectionProps {
   agentId: number;
+  visible?: boolean;
 }
 
 // 递归渲染评论组件
@@ -324,7 +325,7 @@ const CommentTree: React.FC<{
   );
 };
 
-const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
+const CommentSection: React.FC<CommentSectionProps> = ({ agentId, visible = true }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -361,8 +362,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId }) => {
   };
 
   useEffect(() => {
-    fetchComments();
-  }, [agentId, orderType]);
+    if (visible && agentId) {
+      fetchComments();
+    }
+  }, [agentId, orderType, visible]);
 
   // 递归查找评论
   const findCommentById = (commentId: number, commentList: Comment[]): Comment | null => {

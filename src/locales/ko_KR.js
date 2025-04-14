@@ -564,4 +564,9 @@ export default {
   'aiAgent.comments.leaveComment': '댓글 남기기',
   'aiAgent.comments.placeholder': '댓글을 작성하세요...',
   'aiAgent.comments.submit': '전송',
+  'aiAgent.comments.replySuccess': '답글이 성공적으로 전송되었습니다',
+  
+  // AI Agent Market
+  'aiAgent.market.recruitCount': '채용 횟수: {count}회',
+  'aiAgent.market.recruitCount.tooltip': '이 AI 어시스턴트가 사용자들에 의해 채용된 총 횟수',
 };

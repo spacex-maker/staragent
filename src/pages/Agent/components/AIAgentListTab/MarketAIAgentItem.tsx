@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { List, Typography, Tag, Button, Avatar, Space } from 'antd';
-import { RobotOutlined, UserAddOutlined, EyeOutlined } from '@ant-design/icons';
+import { List, Typography, Tag, Button, Avatar, Space, Tooltip } from 'antd';
+import { RobotOutlined, UserAddOutlined, EyeOutlined, TeamOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { AIAgent } from '../../types';
 import AIAgentDetailModal from './AIAgentDetailModal';
 
@@ -175,6 +175,23 @@ const ModelTag = styled(Tag)`
   margin: 0;
 `;
 
+const RecruitCountBadge = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ant-color-text-secondary);
+  font-size: 12px;
+  margin-top: 8px;
+  
+  .anticon {
+    font-size: 14px;
+  }
+  
+  &:hover {
+    color: var(--ant-color-primary);
+  }
+`;
+
 interface MarketAIAgentItemProps {
   agent: AIAgent;
   onRecruit: (agent: AIAgent) => void;
@@ -183,6 +200,7 @@ interface MarketAIAgentItemProps {
 
 const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit, loading = false }) => {
   const [isDetailModalVisible, setIsDetailModalVisible] = useState(false);
+  const intl = useIntl();
 
   return (
     <>
@@ -240,6 +258,15 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit,
                 <RoleTag key={index}>{role}</RoleTag>
               ))}
               <ModelTag color="blue">{agent.modelType}</ModelTag>
+              <Tooltip title={intl.formatMessage({ id: 'aiAgent.market.recruitCount.tooltip' })}>
+                <RecruitCountBadge>
+                  <TeamOutlined />
+                  <FormattedMessage 
+                    id="aiAgent.market.recruitCount" 
+                    values={{ count: agent.copyTimes || 0 }}
+                  />
+                </RecruitCountBadge>
+              </Tooltip>
             </TagsWrapper>
           </RightSection>
         </AgentContent>

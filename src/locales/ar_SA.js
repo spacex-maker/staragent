@@ -545,4 +545,9 @@ export default {
   'aiAgent.comments.leaveComment': 'اترك تعليقاً',
   'aiAgent.comments.placeholder': 'اكتب تعليقك...',
   'aiAgent.comments.submit': 'إرسال',
+  'aiAgent.comments.replySuccess': 'تم إرسال الرد بنجاح',
+  
+  // AI Agent Market
+  'aiAgent.market.recruitCount': 'تم التوظيف {count} مرة',
+  'aiAgent.market.recruitCount.tooltip': 'إجمالي عدد المرات التي تم فيها توظيف مساعد الذكاء الاصطناعي هذا من قبل المستخدمين',
 };

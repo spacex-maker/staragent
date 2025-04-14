@@ -536,4 +536,8 @@ export default {
   'aiAgent.comments.leaveComment': 'Kommentar hinterlassen',
   'aiAgent.comments.placeholder': 'Schreiben Sie Ihren Kommentar...',
   'aiAgent.comments.submit': 'Senden',
+
+  // AI Agent Market
+  'aiAgent.market.recruitCount': '{count} mal rekrutiert',
+  'aiAgent.market.recruitCount.tooltip': 'Gesamtzahl der Rekrutierungen dieses KI-Assistenten durch Benutzer',
 };

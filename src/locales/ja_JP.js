@@ -524,4 +524,9 @@ export default {
   'aiAgent.comments.leaveComment': 'コメントを残す',
   'aiAgent.comments.placeholder': 'コメントを書く...',
   'aiAgent.comments.submit': '送信',
+  'aiAgent.comments.replySuccess': '返信が正常に送信されました',
+  
+  // AI Agent Market
+  'aiAgent.market.recruitCount': '採用回数: {count}回',
+  'aiAgent.market.recruitCount.tooltip': 'このAIアシスタントがユーザーに採用された合計回数',
 };

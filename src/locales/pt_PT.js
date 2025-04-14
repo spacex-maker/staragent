@@ -492,4 +492,9 @@ export default {
   'aiAgent.comments.leaveComment': 'Deixe um Comentário',
   'aiAgent.comments.placeholder': 'Escreva seu comentário...',
   'aiAgent.comments.submit': 'Enviar',
+  'aiAgent.comments.replySuccess': 'Resposta enviada com sucesso',
+  
+  // AI Agent Market
+  'aiAgent.market.recruitCount': 'Recrutado {count} vezes',
+  'aiAgent.market.recruitCount.tooltip': 'Número total de vezes que este assistente IA foi recrutado pelos usuários',
 };
