@@ -622,5 +622,29 @@ export default {
   'loanPayment.table.date': 'التاريخ',
   'loanPayment.table.income': 'مبلغ الدخل',
   'loanPayment.table.payment': 'مبلغ السداد',
-  'loanPayment.table.remainingLoan': 'القرض المتبقي'
+  'loanPayment.table.remainingLoan': 'القرض المتبقي',
+  'loanPayment.table.remainingDays': 'الأيام المتبقية',
+
+  // Save Plan Feature
+  'loanPayment.save.button': 'حفظ الخطة',
+  'loanPayment.save.modal.title': 'حفظ خطة السداد',
+  'loanPayment.save.modal.name': 'اسم الخطة',
+  'loanPayment.save.modal.name.placeholder': 'أدخل اسم الخطة',
+  'loanPayment.save.modal.description': 'وصف الخطة (اختياري)',
+  'loanPayment.save.modal.description.placeholder': 'أدخل وصف الخطة',
+  'loanPayment.save.modal.submit': 'حفظ',
+  'loanPayment.save.modal.cancel': 'إلغاء',
+  'loanPayment.save.success': 'تم حفظ الخطة بنجاح',
+  'loanPayment.save.error': 'فشل في حفظ الخطة',
+  
+  'loanPayment.load.button': 'تحميل الخطة',
+  'loanPayment.load.modal.title': 'تحميل خطة محفوظة',
+  'loanPayment.load.modal.empty': 'لا توجد خطط محفوظة',
+  'loanPayment.load.modal.submit': 'تحميل',
+  'loanPayment.load.modal.cancel': 'إلغاء',
+  'loanPayment.load.modal.delete': 'حذف',
+  'loanPayment.load.success': 'تم تحميل الخطة بنجاح',
+  'loanPayment.load.error': 'فشل في تحميل الخطة',
+  'loanPayment.load.delete.success': 'تم حذف الخطة بنجاح',
+  'loanPayment.load.delete.error': 'فشل في حذف الخطة'
 };

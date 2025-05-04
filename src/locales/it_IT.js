@@ -611,5 +611,29 @@ export default {
   'loanPayment.table.date': 'Data',
   'loanPayment.table.income': 'Importo del Reddito',
   'loanPayment.table.payment': 'Importo del Rimborso',
-  'loanPayment.table.remainingLoan': 'Prestito Restante'
+  'loanPayment.table.remainingLoan': 'Prestito Restante',
+  'loanPayment.table.remainingDays': 'Giorni Restanti',
+
+  // Save Plan Feature
+  'loanPayment.save.button': 'Salva Piano',
+  'loanPayment.save.modal.title': 'Salva Piano di Rimborso',
+  'loanPayment.save.modal.name': 'Nome del Piano',
+  'loanPayment.save.modal.name.placeholder': 'Inserisci il nome del piano',
+  'loanPayment.save.modal.description': 'Descrizione del Piano (Opzionale)',
+  'loanPayment.save.modal.description.placeholder': 'Inserisci la descrizione del piano',
+  'loanPayment.save.modal.submit': 'Salva',
+  'loanPayment.save.modal.cancel': 'Annulla',
+  'loanPayment.save.success': 'Piano salvato con successo',
+  'loanPayment.save.error': 'Impossibile salvare il piano',
+  
+  'loanPayment.load.button': 'Carica Piano',
+  'loanPayment.load.modal.title': 'Carica Piano Salvato',
+  'loanPayment.load.modal.empty': 'Nessun piano salvato',
+  'loanPayment.load.modal.submit': 'Carica',
+  'loanPayment.load.modal.cancel': 'Annulla',
+  'loanPayment.load.modal.delete': 'Elimina',
+  'loanPayment.load.success': 'Piano caricato con successo',
+  'loanPayment.load.error': 'Impossibile caricare il piano',
+  'loanPayment.load.delete.success': 'Piano eliminato con successo',
+  'loanPayment.load.delete.error': 'Impossibile eliminare il piano'
 };

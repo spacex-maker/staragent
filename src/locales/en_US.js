@@ -619,6 +619,30 @@ export default {
   'loanPayment.table.income': 'Income Amount',
   'loanPayment.table.payment': 'Payment Amount',
   'loanPayment.table.remainingLoan': 'Remaining Loan',
+  'loanPayment.table.remainingDays': 'Remaining Days',
+
+  // Save Plan Feature
+  'loanPayment.save.button': 'Save Plan',
+  'loanPayment.save.modal.title': 'Save Payment Plan',
+  'loanPayment.save.modal.name': 'Plan Name',
+  'loanPayment.save.modal.name.placeholder': 'Enter plan name',
+  'loanPayment.save.modal.description': 'Plan Description (Optional)',
+  'loanPayment.save.modal.description.placeholder': 'Enter plan description',
+  'loanPayment.save.modal.submit': 'Save',
+  'loanPayment.save.modal.cancel': 'Cancel',
+  'loanPayment.save.success': 'Plan saved successfully',
+  'loanPayment.save.error': 'Failed to save plan',
+  
+  'loanPayment.load.button': 'Load Plan',
+  'loanPayment.load.modal.title': 'Load Saved Plan',
+  'loanPayment.load.modal.empty': 'No saved plans',
+  'loanPayment.load.modal.submit': 'Load',
+  'loanPayment.load.modal.cancel': 'Cancel',
+  'loanPayment.load.modal.delete': 'Delete',
+  'loanPayment.load.success': 'Plan loaded successfully',
+  'loanPayment.load.error': 'Failed to load plan',
+  'loanPayment.load.delete.success': 'Plan deleted successfully',
+  'loanPayment.load.delete.error': 'Failed to delete plan',
 
   // Toolkit Related
   'toolkit.page.title': 'Toolkit - AIMateX',

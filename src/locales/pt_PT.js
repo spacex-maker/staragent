@@ -569,5 +569,29 @@ export default {
   'loanPayment.table.date': 'Data',
   'loanPayment.table.income': 'Valor da Receita',
   'loanPayment.table.payment': 'Valor do Pagamento',
-  'loanPayment.table.remainingLoan': 'Empréstimo Restante'
+  'loanPayment.table.remainingLoan': 'Empréstimo Restante',
+  'loanPayment.table.remainingDays': 'Dias Restantes',
+
+  // Save Plan Feature
+  'loanPayment.save.button': 'Salvar Plano',
+  'loanPayment.save.modal.title': 'Salvar Plano de Pagamento',
+  'loanPayment.save.modal.name': 'Nome do Plano',
+  'loanPayment.save.modal.name.placeholder': 'Insira o nome do plano',
+  'loanPayment.save.modal.description': 'Descrição do Plano (Opcional)',
+  'loanPayment.save.modal.description.placeholder': 'Insira a descrição do plano',
+  'loanPayment.save.modal.submit': 'Salvar',
+  'loanPayment.save.modal.cancel': 'Cancelar',
+  'loanPayment.save.success': 'Plano salvo com sucesso',
+  'loanPayment.save.error': 'Falha ao salvar o plano',
+  
+  'loanPayment.load.button': 'Carregar Plano',
+  'loanPayment.load.modal.title': 'Carregar Plano Salvo',
+  'loanPayment.load.modal.empty': 'Nenhum plano salvo',
+  'loanPayment.load.modal.submit': 'Carregar',
+  'loanPayment.load.modal.cancel': 'Cancelar',
+  'loanPayment.load.modal.delete': 'Excluir',
+  'loanPayment.load.success': 'Plano carregado com sucesso',
+  'loanPayment.load.error': 'Falha ao carregar o plano',
+  'loanPayment.load.delete.success': 'Plano excluído com sucesso',
+  'loanPayment.load.delete.error': 'Falha ao excluir o plano'
 };

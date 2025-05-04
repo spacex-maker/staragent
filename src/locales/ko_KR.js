@@ -641,5 +641,29 @@ export default {
   'loanPayment.table.date': '날짜',
   'loanPayment.table.income': '수입 금액',
   'loanPayment.table.payment': '상환 금액',
-  'loanPayment.table.remainingLoan': '남은 대출'
+  'loanPayment.table.remainingLoan': '남은 대출',
+  'loanPayment.table.remainingDays': '남은 일수',
+
+  // Save Plan Feature
+  'loanPayment.save.button': '계획 저장',
+  'loanPayment.save.modal.title': '상환 계획 저장',
+  'loanPayment.save.modal.name': '계획 이름',
+  'loanPayment.save.modal.name.placeholder': '계획 이름을 입력하세요',
+  'loanPayment.save.modal.description': '계획 설명 (선택사항)',
+  'loanPayment.save.modal.description.placeholder': '계획 설명을 입력하세요',
+  'loanPayment.save.modal.submit': '저장',
+  'loanPayment.save.modal.cancel': '취소',
+  'loanPayment.save.success': '계획이 성공적으로 저장되었습니다',
+  'loanPayment.save.error': '계획 저장에 실패했습니다',
+  
+  'loanPayment.load.button': '계획 불러오기',
+  'loanPayment.load.modal.title': '저장된 계획 불러오기',
+  'loanPayment.load.modal.empty': '저장된 계획이 없습니다',
+  'loanPayment.load.modal.submit': '불러오기',
+  'loanPayment.load.modal.cancel': '취소',
+  'loanPayment.load.modal.delete': '삭제',
+  'loanPayment.load.success': '계획이 성공적으로 불러와졌습니다',
+  'loanPayment.load.error': '계획 불러오기에 실패했습니다',
+  'loanPayment.load.delete.success': '계획이 성공적으로 삭제되었습니다',
+  'loanPayment.load.delete.error': '계획 삭제에 실패했습니다'
 };

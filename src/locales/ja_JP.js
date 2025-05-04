@@ -601,5 +601,29 @@ export default {
   'loanPayment.table.date': '日付',
   'loanPayment.table.income': '収入額',
   'loanPayment.table.payment': '返済額',
-  'loanPayment.table.remainingLoan': '残りのローン'
+  'loanPayment.table.remainingLoan': '残りのローン',
+  'loanPayment.table.remainingDays': '残り日数',
+
+  // Save Plan Feature
+  'loanPayment.save.button': '計画を保存',
+  'loanPayment.save.modal.title': '返済計画を保存',
+  'loanPayment.save.modal.name': '計画名',
+  'loanPayment.save.modal.name.placeholder': '計画名を入力してください',
+  'loanPayment.save.modal.description': '計画の説明（任意）',
+  'loanPayment.save.modal.description.placeholder': '計画の説明を入力してください',
+  'loanPayment.save.modal.submit': '保存',
+  'loanPayment.save.modal.cancel': 'キャンセル',
+  'loanPayment.save.success': '計画が正常に保存されました',
+  'loanPayment.save.error': '計画の保存に失敗しました',
+  
+  'loanPayment.load.button': '計画を読み込む',
+  'loanPayment.load.modal.title': '保存された計画を読み込む',
+  'loanPayment.load.modal.empty': '保存された計画はありません',
+  'loanPayment.load.modal.submit': '読み込む',
+  'loanPayment.load.modal.cancel': 'キャンセル',
+  'loanPayment.load.modal.delete': '削除',
+  'loanPayment.load.success': '計画が正常に読み込まれました',
+  'loanPayment.load.error': '計画の読み込みに失敗しました',
+  'loanPayment.load.delete.success': '計画が正常に削除されました',
+  'loanPayment.load.delete.error': '計画の削除に失敗しました'
 };

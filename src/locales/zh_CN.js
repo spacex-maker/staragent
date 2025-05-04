@@ -599,4 +599,28 @@ export default {
   'loanPayment.table.income': '收入金额',
   'loanPayment.table.payment': '还款金额',
   'loanPayment.table.remainingLoan': '剩余贷款',
+  'loanPayment.table.remainingDays': '剩余天数',
+
+  // 保存计划功能
+  'loanPayment.save.button': '保存计划',
+  'loanPayment.save.modal.title': '保存还款计划',
+  'loanPayment.save.modal.name': '计划名称',
+  'loanPayment.save.modal.name.placeholder': '请输入计划名称',
+  'loanPayment.save.modal.description': '计划描述（可选）',
+  'loanPayment.save.modal.description.placeholder': '请输入计划描述',
+  'loanPayment.save.modal.submit': '保存',
+  'loanPayment.save.modal.cancel': '取消',
+  'loanPayment.save.success': '计划保存成功',
+  'loanPayment.save.error': '计划保存失败',
+  
+  'loanPayment.load.button': '加载计划',
+  'loanPayment.load.modal.title': '加载已保存计划',
+  'loanPayment.load.modal.empty': '暂无保存的计划',
+  'loanPayment.load.modal.submit': '加载',
+  'loanPayment.load.modal.cancel': '取消',
+  'loanPayment.load.modal.delete': '删除',
+  'loanPayment.load.success': '计划加载成功',
+  'loanPayment.load.error': '计划加载失败',
+  'loanPayment.load.delete.success': '计划删除成功',
+  'loanPayment.load.delete.error': '计划删除失败',
 }; 

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Form, DatePicker, Button, Table, Select, Typography, Row, Col, InputNumber, Space, Divider, Tooltip, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Card, Form, DatePicker, Button, Table, Select, Typography, Row, Col, InputNumber, Space, Divider, Tooltip, Input, Modal, List, message } from 'antd';
 import styled from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs, { Dayjs } from 'dayjs';
-import { PlusOutlined, DeleteOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { PlusOutlined, DeleteOutlined, QuestionCircleOutlined, SaveOutlined, FolderOpenOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -310,6 +310,7 @@ interface TableDataItem {
   income: string;
   payment: string;
   remainingLoan: string;
+  remainingDays: number;
 }
 
 interface SummaryData {
@@ -332,10 +333,37 @@ interface FormValues {
   paymentPercentage: number;
 }
 
+// 保存计划接口定义
+interface SavedPlan {
+  id: string;
+  name: string;
+  description?: string;
+  createdAt: string;
+  formValues: FormValues;
+  incomeItems: {
+    id: string;
+    name: string;
+    frequency: 'monthly' | 'biweekly' | 'weekly' | 'yearly' | 'once';
+    amount: number;
+    startDate: string;
+  }[];
+  calculationResults?: {
+    tableData: TableDataItem[];
+    summaryData: SummaryData | null;
+  };
+}
+
+// 保存表单接口
+interface SaveFormValues {
+  name: string;
+  description?: string;
+}
+
 // 主组件
 const ToolkitLoanPayment: React.FC = () => {
   const intl = useIntl();
   const [form] = Form.useForm<FormValues>();
+  const [saveForm] = Form.useForm<SaveFormValues>();
   const [tableData, setTableData] = useState<TableDataItem[]>([]);
   const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -348,6 +376,30 @@ const ToolkitLoanPayment: React.FC = () => {
       startDate: dayjs()
     }
   ]);
+  
+  // 保存计划相关状态
+  const [saveModalVisible, setSaveModalVisible] = useState(false);
+  const [loadModalVisible, setLoadModalVisible] = useState(false);
+  const [savedPlans, setSavedPlans] = useState<SavedPlan[]>([]);
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
+
+  // 在组件加载时获取已保存的计划
+  useEffect(() => {
+    loadSavedPlans();
+  }, []);
+
+  // 加载本地存储的计划列表
+  const loadSavedPlans = () => {
+    try {
+      const savedPlansJson = localStorage.getItem('loanPaymentPlans');
+      if (savedPlansJson) {
+        const plans = JSON.parse(savedPlansJson);
+        setSavedPlans(plans);
+      }
+    } catch (error) {
+      console.error('Failed to load saved plans:', error);
+    }
+  };
 
   // 收入周期选项
   const incomeFrequencyOptions = [
@@ -376,25 +428,31 @@ const ToolkitLoanPayment: React.FC = () => {
       title: intl.formatMessage({ id: 'loanPayment.table.incomeSource' }) || '收入来源',
       dataIndex: 'incomeSource',
       key: 'incomeSource',
-      width: '20%',
+      width: '15%',
     },
     {
       title: intl.formatMessage({ id: 'loanPayment.table.income' }),
       dataIndex: 'income',
       key: 'income',
-      width: '15%',
+      width: '10%',
     },
     {
       title: intl.formatMessage({ id: 'loanPayment.table.payment' }),
       dataIndex: 'payment',
       key: 'payment',
-      width: '15%',
+      width: '10%',
     },
     {
       title: intl.formatMessage({ id: 'loanPayment.table.remainingLoan' }),
       dataIndex: 'remainingLoan',
       key: 'remainingLoan',
-      width: '25%',
+      width: '20%',
+    },
+    {
+      title: intl.formatMessage({ id: 'loanPayment.table.remainingDays' }),
+      dataIndex: 'remainingDays',
+      key: 'remainingDays',
+      width: '10%',
     }
   ];
 
@@ -499,7 +557,8 @@ const ToolkitLoanPayment: React.FC = () => {
         incomeSource: currentIncome.name,
         income: currentIncome.amount.toFixed(2),
         payment: payment.toFixed(2),
-        remainingLoan: remainingLoan.toFixed(2)
+        remainingLoan: remainingLoan.toFixed(2),
+        remainingDays: nextIncomeDate.diff(dayjs(), 'day')
       });
       
       // 更新该收入项的下一次收入日期
@@ -564,6 +623,168 @@ const ToolkitLoanPayment: React.FC = () => {
     }
     
     setLoading(false);
+  };
+
+  // 保存计划
+  const showSaveModal = () => {
+    saveForm.resetFields();
+    setSaveModalVisible(true);
+  };
+
+  const handleSaveModalCancel = () => {
+    setSaveModalVisible(false);
+  };
+
+  const handleSavePlan = () => {
+    saveForm
+      .validateFields()
+      .then(values => {
+        const formValues = form.getFieldsValue();
+        if (!formValues.loanAmount) {
+          message.error(intl.formatMessage({ id: 'loanPayment.form.loanAmount.required' }));
+          return;
+        }
+
+        // 如果还款计划尚未计算，先计算一次
+        if (tableData.length === 0) {
+          calculatePaymentSchedule();
+          // 短暂延迟，确保计算完成后再保存
+          setTimeout(() => handleSavePlan(), 300);
+          return;
+        }
+
+        // 转换income items中的dayjs对象为ISO字符串
+        const serializedIncomeItems = incomeItems.map(item => ({
+          ...item,
+          startDate: item.startDate.toISOString()
+        }));
+
+        // 保存计算结果
+        const serializedTableData = tableData.map(item => {
+          // 创建新对象而不是使用展开运算符，确保类型正确
+          return {
+            key: item.key,
+            period: item.period,
+            date: item.date,
+            incomeSource: item.incomeSource,
+            income: String(item.income),
+            payment: String(item.payment),
+            remainingLoan: String(item.remainingLoan),
+            remainingDays: item.remainingDays
+          };
+        });
+
+        const newPlan: SavedPlan = {
+          id: Date.now().toString(),
+          name: values.name,
+          description: values.description,
+          createdAt: new Date().toISOString(),
+          formValues,
+          incomeItems: serializedIncomeItems,
+          calculationResults: {
+            tableData: serializedTableData,
+            summaryData
+          }
+        };
+
+        // 添加到已保存的计划
+        const updatedPlans = [...savedPlans, newPlan];
+        setSavedPlans(updatedPlans);
+        
+        // 保存到localStorage
+        try {
+          localStorage.setItem('loanPaymentPlans', JSON.stringify(updatedPlans));
+          message.success(intl.formatMessage({ id: 'loanPayment.save.success' }));
+        } catch (error) {
+          console.error('Failed to save plan:', error);
+          message.error(intl.formatMessage({ id: 'loanPayment.save.error' }));
+        }
+
+        setSaveModalVisible(false);
+      })
+      .catch(info => {
+        console.log('Validate Failed:', info);
+      });
+  };
+
+  // 加载计划
+  const showLoadModal = () => {
+    setSelectedPlanId(null);
+    setLoadModalVisible(true);
+  };
+
+  const handleLoadModalCancel = () => {
+    setLoadModalVisible(false);
+  };
+
+  const handleLoadPlan = () => {
+    if (!selectedPlanId) {
+      message.error(intl.formatMessage({ id: 'loanPayment.load.error' }));
+      return;
+    }
+
+    const planToLoad = savedPlans.find(plan => plan.id === selectedPlanId);
+    if (!planToLoad) {
+      message.error(intl.formatMessage({ id: 'loanPayment.load.error' }));
+      return;
+    }
+
+    try {
+      // 加载表单值
+      form.setFieldsValue(planToLoad.formValues);
+
+      // 加载收入项
+      const loadedIncomeItems = planToLoad.incomeItems.map(item => ({
+        ...item,
+        startDate: dayjs(item.startDate)
+      }));
+      setIncomeItems(loadedIncomeItems);
+
+      // 加载计算结果（如果有）
+      if (planToLoad.calculationResults) {
+        setTableData(planToLoad.calculationResults.tableData);
+        setSummaryData(planToLoad.calculationResults.summaryData);
+      } else {
+        // 如果没有保存的计算结果，清空现有结果
+        setTableData([]);
+        setSummaryData(null);
+        
+        // 自动重新计算还款计划
+        setTimeout(() => {
+          calculatePaymentSchedule();
+        }, 100);
+      }
+
+      // 关闭对话框并显示成功消息
+      setLoadModalVisible(false);
+      message.success(intl.formatMessage({ id: 'loanPayment.load.success' }));
+    } catch (error) {
+      console.error('Failed to load plan:', error);
+      message.error(intl.formatMessage({ id: 'loanPayment.load.error' }));
+    }
+  };
+
+  // 删除计划
+  const handleDeletePlan = (planId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    try {
+      const updatedPlans = savedPlans.filter(plan => plan.id !== planId);
+      setSavedPlans(updatedPlans);
+      
+      // 更新localStorage
+      localStorage.setItem('loanPaymentPlans', JSON.stringify(updatedPlans));
+      
+      message.success(intl.formatMessage({ id: 'loanPayment.load.delete.success' }));
+      
+      // 如果当前选中的plan被删除，重置选中状态
+      if (selectedPlanId === planId) {
+        setSelectedPlanId(null);
+      }
+    } catch (error) {
+      console.error('Failed to delete plan:', error);
+      message.error(intl.formatMessage({ id: 'loanPayment.load.delete.error' }));
+    }
   };
 
   return (
@@ -735,6 +956,24 @@ const ToolkitLoanPayment: React.FC = () => {
               >
                 <FormattedMessage id="loanPayment.form.submit" />
               </Button>
+              
+              <Button
+                type="default"
+                onClick={showSaveModal}
+                icon={<SaveOutlined />}
+                style={{ flex: 1 }}
+              >
+                <FormattedMessage id="loanPayment.save.button" />
+              </Button>
+              
+              <Button
+                type="default"
+                onClick={showLoadModal}
+                icon={<FolderOpenOutlined />}
+                style={{ flex: 1 }}
+              >
+                <FormattedMessage id="loanPayment.load.button" />
+              </Button>
             </ActionButtonsWrapper>
           </Form>
         </StyledCard>
@@ -783,11 +1022,99 @@ const ToolkitLoanPayment: React.FC = () => {
                     <strong>¥{tableData.reduce((sum, item) => sum + parseFloat(item.payment), 0).toFixed(2)}</strong>
                   </Table.Summary.Cell>
                   <Table.Summary.Cell index={5}></Table.Summary.Cell>
+                  <Table.Summary.Cell index={6}></Table.Summary.Cell>
                 </Table.Summary.Row>
               </Table.Summary>
             )}
           />
         )}
+        
+        {/* 保存计划对话框 */}
+        <Modal
+          title={intl.formatMessage({ id: 'loanPayment.save.modal.title' })}
+          open={saveModalVisible}
+          onOk={handleSavePlan}
+          onCancel={handleSaveModalCancel}
+          okText={intl.formatMessage({ id: 'loanPayment.save.modal.submit' })}
+          cancelText={intl.formatMessage({ id: 'loanPayment.save.modal.cancel' })}
+        >
+          <Form
+            form={saveForm}
+            layout="vertical"
+          >
+            <Form.Item
+              name="name"
+              label={intl.formatMessage({ id: 'loanPayment.save.modal.name' })}
+              rules={[{ required: true, message: intl.formatMessage({ id: 'loanPayment.save.modal.name.placeholder' }) }]}
+            >
+              <Input placeholder={intl.formatMessage({ id: 'loanPayment.save.modal.name.placeholder' })} />
+            </Form.Item>
+            <Form.Item
+              name="description"
+              label={intl.formatMessage({ id: 'loanPayment.save.modal.description' })}
+            >
+              <Input.TextArea 
+                placeholder={intl.formatMessage({ id: 'loanPayment.save.modal.description.placeholder' })}
+                rows={4}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
+        
+        {/* 加载计划对话框 */}
+        <Modal
+          title={intl.formatMessage({ id: 'loanPayment.load.modal.title' })}
+          open={loadModalVisible}
+          onOk={handleLoadPlan}
+          onCancel={handleLoadModalCancel}
+          okText={intl.formatMessage({ id: 'loanPayment.load.modal.submit' })}
+          cancelText={intl.formatMessage({ id: 'loanPayment.load.modal.cancel' })}
+          okButtonProps={{ disabled: !selectedPlanId }}
+        >
+          {savedPlans.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '20px 0' }}>
+              {intl.formatMessage({ id: 'loanPayment.load.modal.empty' })}
+            </div>
+          ) : (
+            <List
+              dataSource={savedPlans}
+              renderItem={plan => (
+                <List.Item
+                  key={plan.id}
+                  onClick={() => setSelectedPlanId(plan.id)}
+                  style={{ 
+                    cursor: 'pointer', 
+                    padding: '8px 16px',
+                    backgroundColor: selectedPlanId === plan.id ? 'var(--ant-color-primary-bg)' : 'transparent',
+                    borderRadius: '4px'
+                  }}
+                  actions={[
+                    <Button 
+                      type="text" 
+                      danger 
+                      icon={<DeleteOutlined />} 
+                      onClick={(e) => handleDeletePlan(plan.id, e)}
+                    >
+                      {intl.formatMessage({ id: 'loanPayment.load.modal.delete' })}
+                    </Button>
+                  ]}
+                >
+                  <List.Item.Meta
+                    title={plan.name}
+                    description={
+                      <div>
+                        <div>{plan.description}</div>
+                        <div style={{ fontSize: '12px', color: 'var(--ant-color-text-secondary)' }}>
+                          {new Date(plan.createdAt).toLocaleString()}
+                        </div>
+                      </div>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          )}
+        </Modal>
       </ContentCard>
     </ContentWrapper>
   );

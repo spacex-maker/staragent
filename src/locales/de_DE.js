@@ -612,5 +612,29 @@ export default {
   'loanPayment.table.date': 'Datum',
   'loanPayment.table.income': 'Einkommensbetrag',
   'loanPayment.table.payment': 'Zahlungsbetrag',
-  'loanPayment.table.remainingLoan': 'Verbleibender Kredit'
+  'loanPayment.table.remainingLoan': 'Verbleibender Kredit',
+  'loanPayment.table.remainingDays': 'Verbleibende Tage',
+
+  // Save Plan Feature
+  'loanPayment.save.button': 'Plan speichern',
+  'loanPayment.save.modal.title': 'Rückzahlungsplan speichern',
+  'loanPayment.save.modal.name': 'Planname',
+  'loanPayment.save.modal.name.placeholder': 'Geben Sie einen Plannamen ein',
+  'loanPayment.save.modal.description': 'Planbeschreibung (Optional)',
+  'loanPayment.save.modal.description.placeholder': 'Geben Sie eine Planbeschreibung ein',
+  'loanPayment.save.modal.submit': 'Speichern',
+  'loanPayment.save.modal.cancel': 'Abbrechen',
+  'loanPayment.save.success': 'Plan erfolgreich gespeichert',
+  'loanPayment.save.error': 'Fehler beim Speichern des Plans',
+  
+  'loanPayment.load.button': 'Plan laden',
+  'loanPayment.load.modal.title': 'Gespeicherten Plan laden',
+  'loanPayment.load.modal.empty': 'Keine gespeicherten Pläne',
+  'loanPayment.load.modal.submit': 'Laden',
+  'loanPayment.load.modal.cancel': 'Abbrechen',
+  'loanPayment.load.modal.delete': 'Löschen',
+  'loanPayment.load.success': 'Plan erfolgreich geladen',
+  'loanPayment.load.error': 'Fehler beim Laden des Plans',
+  'loanPayment.load.delete.success': 'Plan erfolgreich gelöscht',
+  'loanPayment.load.delete.error': 'Fehler beim Löschen des Plans'
 };

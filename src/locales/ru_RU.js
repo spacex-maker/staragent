@@ -598,5 +598,29 @@ export default {
   'loanPayment.table.date': 'Дата',
   'loanPayment.table.income': 'Сумма дохода',
   'loanPayment.table.payment': 'Сумма платежа',
-  'loanPayment.table.remainingLoan': 'Остаток кредита'
+  'loanPayment.table.remainingLoan': 'Остаток кредита',
+  'loanPayment.table.remainingDays': 'Остаток дней',
+
+  // Save Plan Feature
+  'loanPayment.save.button': 'Сохранить план',
+  'loanPayment.save.modal.title': 'Сохранить план погашения',
+  'loanPayment.save.modal.name': 'Название плана',
+  'loanPayment.save.modal.name.placeholder': 'Введите название плана',
+  'loanPayment.save.modal.description': 'Описание плана (по желанию)',
+  'loanPayment.save.modal.description.placeholder': 'Введите описание плана',
+  'loanPayment.save.modal.submit': 'Сохранить',
+  'loanPayment.save.modal.cancel': 'Отмена',
+  'loanPayment.save.success': 'План успешно сохранен',
+  'loanPayment.save.error': 'Не удалось сохранить план',
+  
+  'loanPayment.load.button': 'Загрузить план',
+  'loanPayment.load.modal.title': 'Загрузить сохраненный план',
+  'loanPayment.load.modal.empty': 'Нет сохраненных планов',
+  'loanPayment.load.modal.submit': 'Загрузить',
+  'loanPayment.load.modal.cancel': 'Отмена',
+  'loanPayment.load.modal.delete': 'Удалить',
+  'loanPayment.load.success': 'План успешно загружен',
+  'loanPayment.load.error': 'Не удалось загрузить план',
+  'loanPayment.load.delete.success': 'План успешно удален',
+  'loanPayment.load.delete.error': 'Не удалось удалить план'
 };
