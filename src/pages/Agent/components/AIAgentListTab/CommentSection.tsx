@@ -363,7 +363,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId, visible = true
 
   useEffect(() => {
     if (visible && agentId) {
-      fetchComments();
+    fetchComments();
     }
   }, [agentId, orderType, visible]);
 
@@ -531,7 +531,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ agentId, visible = true
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             description={
               <FormattedMessage 
-                id="aiAgent.comments.empty"
+                id="aiAgent.comments.empty" 
               />
             }
           />

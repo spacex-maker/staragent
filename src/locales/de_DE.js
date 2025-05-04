@@ -540,4 +540,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': '{count} mal rekrutiert',
   'aiAgent.market.recruitCount.tooltip': 'Gesamtzahl der Rekrutierungen dieses KI-Assistenten durch Benutzer',
+
+  // Toolkit Related
+  'toolkit.page.title': 'Toolkit - AIMateX',
+  'toolkit.page.description': 'Multifunktionales Toolkit mit verschiedenen nützlichen Tools',
+  'toolkit.title': 'Toolkit',
+  'toolkit.menu.loanPayment': 'Darlehensrückzahlungsplan',
+  'toolkit.menu.codeFormatter': 'Code-Formatierer',
+  'toolkit.menu.textTranslator': 'Text-Übersetzer',
+  'toolkit.menu.dateCalculator': 'Datumsrechner',
+  'toolkit.menu.otherTools': 'Andere Tools',
+  'toolkit.menu.settings': 'Tool-Einstellungen',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'Darlehensrückzahlungsplan - AIMateX',
+  'loanPayment.page.description': 'Online-Tool zur Berechnung von Darlehensrückzahlungsplänen, um Ihnen bei der rationellen Verwendung von Mitteln zu helfen',
+  'loanPayment.title': 'Darlehensrückzahlungsplan',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'Gesamtkreditbetrag',
+  'loanPayment.form.loanAmount.required': 'Bitte geben Sie den Kreditbetrag ein',
+  'loanPayment.form.loanAmount.min': 'Der Kreditbetrag muss größer als 0 sein',
+  'loanPayment.form.loanAmount.placeholder': 'Bitte geben Sie den Kreditbetrag ein',
+  
+  'loanPayment.form.firstPayDate': 'Erstes Einkommensdatum',
+  'loanPayment.form.firstPayDate.required': 'Bitte wählen Sie das erste Einkommensdatum',
+  'loanPayment.form.firstPayDate.placeholder': 'Bitte wählen Sie das erste Einkommensdatum',
+  
+  'loanPayment.form.incomeFrequency': 'Einkommenszyklus',
+  'loanPayment.form.incomeFrequency.required': 'Bitte wählen Sie den Einkommenszyklus',
+  'loanPayment.form.incomeFrequency.placeholder': 'Bitte wählen Sie den Einkommenszyklus',
+  
+  'loanPayment.frequency.monthly': 'Monatlich',
+  'loanPayment.frequency.biweekly': 'Alle zwei Wochen',
+  'loanPayment.frequency.weekly': 'Wöchentlich',
+  'loanPayment.frequency.yearly': 'Jährlich',
+  'loanPayment.frequency.once': 'Einmalig',
+  'loanPayment.frequency.once.tooltip': 'Geeignet für Boni, unerwartete Einnahmen und andere einmalige Einkünfte',
+  
+  'loanPayment.form.incomeAmount': 'Einkommensbetrag pro Periode',
+  'loanPayment.form.incomeAmount.required': 'Bitte geben Sie den Einkommensbetrag ein',
+  'loanPayment.form.incomeAmount.min': 'Der Einkommensbetrag muss größer als 0 sein',
+  'loanPayment.form.incomeAmount.placeholder': 'Bitte geben Sie den Einkommensbetrag pro Periode ein',
+  
+  'loanPayment.form.paymentPercentage': 'Rückzahlungsquote',
+  'loanPayment.form.paymentPercentage.required': 'Bitte geben Sie die Rückzahlungsquote ein',
+  'loanPayment.form.paymentPercentage.range': 'Die Rückzahlungsquote muss zwischen 1% und 100% liegen',
+  'loanPayment.form.paymentPercentage.tooltip': 'Prozentsatz des Einkommens, der pro Periode für die Kreditrückzahlung verwendet wird, Standard ist 50%',
+  
+  'loanPayment.form.submit': 'Rückzahlungsplan berechnen',
+  
+  // Income Items
+  'loanPayment.income.name': 'Einkommensname',
+  'loanPayment.income.name.placeholder': 'Bitte geben Sie den Einkommensnamen ein',
+  'loanPayment.income.default': 'Haupteinkommen',
+  'loanPayment.income.new': 'Einkommensposten',
+  'loanPayment.incomeItems.title': 'Einkommensposten',
+  'loanPayment.incomeItems.add': 'Einkommensposten hinzufügen',
+  'loanPayment.table.incomeSource': 'Einkommensquelle',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'Voraussichtliches Tilgungsdatum',
+  'loanPayment.result.totalPeriods': 'Gesamtzahl der Rückzahlungsperioden',
+  'loanPayment.result.totalPaid': 'Gesamtrückzahlungsbetrag',
+  'loanPayment.result.monthsToPayoff': 'Voraussichtliche Rückzahlungsmonate',
+  'loanPayment.result.months': 'Monate',
+  
+  // Table
+  'loanPayment.table.summary': 'Summe',
+  'loanPayment.table.period': 'Periode',
+  'loanPayment.table.date': 'Datum',
+  'loanPayment.table.income': 'Einkommensbetrag',
+  'loanPayment.table.payment': 'Zahlungsbetrag',
+  'loanPayment.table.remainingLoan': 'Verbleibender Kredit'
 };

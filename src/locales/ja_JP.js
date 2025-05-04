@@ -529,4 +529,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': '採用回数: {count}回',
   'aiAgent.market.recruitCount.tooltip': 'このAIアシスタントがユーザーに採用された合計回数',
+
+  // Toolkit Related
+  'toolkit.page.title': 'ツールキット - AIMateX',
+  'toolkit.page.description': '様々な便利なツールを提供する多機能ツールキット',
+  'toolkit.title': 'ツールキット',
+  'toolkit.menu.loanPayment': 'ローン返済計画表',
+  'toolkit.menu.codeFormatter': 'コードフォーマッター',
+  'toolkit.menu.textTranslator': 'テキスト翻訳',
+  'toolkit.menu.dateCalculator': '日付計算機',
+  'toolkit.menu.otherTools': 'その他のツール',
+  'toolkit.menu.settings': 'ツール設定',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'ローン返済計画表 - AIMateX',
+  'loanPayment.page.description': '資金の合理的な使用を計画するのに役立つローン返済計画計算オンラインツール',
+  'loanPayment.title': 'ローン返済計画表',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'ローン総額',
+  'loanPayment.form.loanAmount.required': 'ローン金額を入力してください',
+  'loanPayment.form.loanAmount.min': 'ローン金額は0より大きくなければなりません',
+  'loanPayment.form.loanAmount.placeholder': 'ローン金額を入力してください',
+  
+  'loanPayment.form.firstPayDate': '最初の収入日',
+  'loanPayment.form.firstPayDate.required': '最初の収入日を選択してください',
+  'loanPayment.form.firstPayDate.placeholder': '最初の収入日を選択してください',
+  
+  'loanPayment.form.incomeFrequency': '収入周期',
+  'loanPayment.form.incomeFrequency.required': '収入周期を選択してください',
+  'loanPayment.form.incomeFrequency.placeholder': '収入周期を選択してください',
+  
+  'loanPayment.frequency.monthly': '毎月',
+  'loanPayment.frequency.biweekly': '隔週',
+  'loanPayment.frequency.weekly': '毎週',
+  'loanPayment.frequency.yearly': '毎年',
+  'loanPayment.frequency.once': '一回限り',
+  'loanPayment.frequency.once.tooltip': 'ボーナス、臨時収入などの一回限りの収入に適用',
+  
+  'loanPayment.form.incomeAmount': '各期の収入額',
+  'loanPayment.form.incomeAmount.required': '収入額を入力してください',
+  'loanPayment.form.incomeAmount.min': '収入額は0より大きくなければなりません',
+  'loanPayment.form.incomeAmount.placeholder': '各期の収入額を入力してください',
+  
+  'loanPayment.form.paymentPercentage': '返済比率',
+  'loanPayment.form.paymentPercentage.required': '返済比率を入力してください',
+  'loanPayment.form.paymentPercentage.range': '返済比率は1%から100%の間でなければなりません',
+  'loanPayment.form.paymentPercentage.tooltip': '各期の収入から返済に使用する割合、デフォルトは50%',
+  
+  'loanPayment.form.submit': '返済計画を計算',
+  
+  // Income Items
+  'loanPayment.income.name': '収入名',
+  'loanPayment.income.name.placeholder': '収入名を入力してください',
+  'loanPayment.income.default': '主な収入',
+  'loanPayment.income.new': '収入項目',
+  'loanPayment.incomeItems.title': '収入項目',
+  'loanPayment.incomeItems.add': '収入項目を追加',
+  'loanPayment.table.incomeSource': '収入源',
+  
+  // Results
+  'loanPayment.result.payoffDate': '予想完済日',
+  'loanPayment.result.totalPeriods': '総返済期数',
+  'loanPayment.result.totalPaid': '総返済額',
+  'loanPayment.result.monthsToPayoff': '予想返済月数',
+  'loanPayment.result.months': 'ヶ月',
+  
+  // Table
+  'loanPayment.table.summary': '合計',
+  'loanPayment.table.period': '期数',
+  'loanPayment.table.date': '日付',
+  'loanPayment.table.income': '収入額',
+  'loanPayment.table.payment': '返済額',
+  'loanPayment.table.remainingLoan': '残りのローン'
 };

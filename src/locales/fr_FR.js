@@ -539,4 +539,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': 'Recruté {count} fois',
   'aiAgent.market.recruitCount.tooltip': 'Nombre total de fois où cet assistant IA a été recruté par les utilisateurs',
+
+  // Toolkit Related
+  'toolkit.page.title': 'Boîte à Outils - AIMateX',
+  'toolkit.page.description': 'Boîte à outils multifonctionnelle fournissant divers outils utiles',
+  'toolkit.title': 'Boîte à Outils',
+  'toolkit.menu.loanPayment': 'Plan de Remboursement de Prêt',
+  'toolkit.menu.codeFormatter': 'Formateur de Code',
+  'toolkit.menu.textTranslator': 'Traducteur de Texte',
+  'toolkit.menu.dateCalculator': 'Calculateur de Dates',
+  'toolkit.menu.otherTools': 'Autres Outils',
+  'toolkit.menu.settings': 'Paramètres des Outils',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'Plan de Remboursement de Prêt - AIMateX',
+  'loanPayment.page.description': 'Outil en ligne pour calculer les plans de remboursement de prêts, pour vous aider à planifier l\'utilisation rationnelle des fonds',
+  'loanPayment.title': 'Plan de Remboursement de Prêt',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'Montant Total du Prêt',
+  'loanPayment.form.loanAmount.required': 'Veuillez saisir le montant du prêt',
+  'loanPayment.form.loanAmount.min': 'Le montant du prêt doit être supérieur à 0',
+  'loanPayment.form.loanAmount.placeholder': 'Veuillez saisir le montant du prêt',
+  
+  'loanPayment.form.firstPayDate': 'Date du Premier Revenu',
+  'loanPayment.form.firstPayDate.required': 'Veuillez sélectionner la date du premier revenu',
+  'loanPayment.form.firstPayDate.placeholder': 'Veuillez sélectionner la date du premier revenu',
+  
+  'loanPayment.form.incomeFrequency': 'Fréquence des Revenus',
+  'loanPayment.form.incomeFrequency.required': 'Veuillez sélectionner la fréquence des revenus',
+  'loanPayment.form.incomeFrequency.placeholder': 'Veuillez sélectionner la fréquence des revenus',
+  
+  'loanPayment.frequency.monthly': 'Mensuel',
+  'loanPayment.frequency.biweekly': 'Bimensuel',
+  'loanPayment.frequency.weekly': 'Hebdomadaire',
+  'loanPayment.frequency.yearly': 'Annuel',
+  'loanPayment.frequency.once': 'Une fois',
+  'loanPayment.frequency.once.tooltip': 'Applicable pour les primes, les revenus inattendus et autres revenus ponctuels',
+  
+  'loanPayment.form.incomeAmount': 'Montant des Revenus par Période',
+  'loanPayment.form.incomeAmount.required': 'Veuillez saisir le montant des revenus',
+  'loanPayment.form.incomeAmount.min': 'Le montant des revenus doit être supérieur à 0',
+  'loanPayment.form.incomeAmount.placeholder': 'Veuillez saisir le montant des revenus par période',
+  
+  'loanPayment.form.paymentPercentage': 'Pourcentage de Remboursement',
+  'loanPayment.form.paymentPercentage.required': 'Veuillez saisir le pourcentage de remboursement',
+  'loanPayment.form.paymentPercentage.range': 'Le pourcentage de remboursement doit être entre 1% et 100%',
+  'loanPayment.form.paymentPercentage.tooltip': 'Pourcentage des revenus utilisé pour le remboursement du prêt par période, la valeur par défaut est 50%',
+  
+  'loanPayment.form.submit': 'Calculer le Plan de Remboursement',
+  
+  // Income Items
+  'loanPayment.income.name': 'Nom du Revenu',
+  'loanPayment.income.name.placeholder': 'Veuillez saisir le nom du revenu',
+  'loanPayment.income.default': 'Revenu Principal',
+  'loanPayment.income.new': 'Élément de Revenu',
+  'loanPayment.incomeItems.title': 'Éléments de Revenu',
+  'loanPayment.incomeItems.add': 'Ajouter un Élément de Revenu',
+  'loanPayment.table.incomeSource': 'Source de Revenu',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'Date Estimée de Remboursement',
+  'loanPayment.result.totalPeriods': 'Nombre Total de Périodes de Remboursement',
+  'loanPayment.result.totalPaid': 'Montant Total Remboursé',
+  'loanPayment.result.monthsToPayoff': 'Mois Estimés pour le Remboursement',
+  'loanPayment.result.months': 'mois',
+  
+  // Table
+  'loanPayment.table.summary': 'Total',
+  'loanPayment.table.period': 'Période',
+  'loanPayment.table.date': 'Date',
+  'loanPayment.table.income': 'Montant du Revenu',
+  'loanPayment.table.payment': 'Montant du Remboursement',
+  'loanPayment.table.remainingLoan': 'Prêt Restant'
 };

@@ -569,4 +569,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': '채용 횟수: {count}회',
   'aiAgent.market.recruitCount.tooltip': '이 AI 어시스턴트가 사용자들에 의해 채용된 총 횟수',
+
+  // Toolkit Related
+  'toolkit.page.title': '툴킷 - AIMateX',
+  'toolkit.page.description': '다양한 유용한 도구를 제공하는 다기능 툴킷',
+  'toolkit.title': '툴킷',
+  'toolkit.menu.loanPayment': '대출 상환 계획표',
+  'toolkit.menu.codeFormatter': '코드 포맷터',
+  'toolkit.menu.textTranslator': '텍스트 번역기',
+  'toolkit.menu.dateCalculator': '날짜 계산기',
+  'toolkit.menu.otherTools': '기타 도구',
+  'toolkit.menu.settings': '도구 설정',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': '대출 상환 계획표 - AIMateX',
+  'loanPayment.page.description': '자금의 합리적인 사용을 계획하는 데 도움이 되는 온라인 대출 상환 계획 계산 도구',
+  'loanPayment.title': '대출 상환 계획표',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': '대출 총액',
+  'loanPayment.form.loanAmount.required': '대출 금액을 입력해주세요',
+  'loanPayment.form.loanAmount.min': '대출 금액은 0보다 커야 합니다',
+  'loanPayment.form.loanAmount.placeholder': '대출 금액을 입력해주세요',
+  
+  'loanPayment.form.firstPayDate': '첫 수입 날짜',
+  'loanPayment.form.firstPayDate.required': '첫 수입 날짜를 선택해주세요',
+  'loanPayment.form.firstPayDate.placeholder': '첫 수입 날짜를 선택해주세요',
+  
+  'loanPayment.form.incomeFrequency': '수입 주기',
+  'loanPayment.form.incomeFrequency.required': '수입 주기를 선택해주세요',
+  'loanPayment.form.incomeFrequency.placeholder': '수입 주기를 선택해주세요',
+  
+  'loanPayment.frequency.monthly': '매월',
+  'loanPayment.frequency.biweekly': '격주',
+  'loanPayment.frequency.weekly': '매주',
+  'loanPayment.frequency.yearly': '매년',
+  'loanPayment.frequency.once': '한 번',
+  'loanPayment.frequency.once.tooltip': '보너스, 예상치 못한 수입 등 일회성 수입에 적용',
+  
+  'loanPayment.form.incomeAmount': '기간당 수입 금액',
+  'loanPayment.form.incomeAmount.required': '수입 금액을 입력해주세요',
+  'loanPayment.form.incomeAmount.min': '수입 금액은 0보다 커야 합니다',
+  'loanPayment.form.incomeAmount.placeholder': '기간당 수입 금액을 입력해주세요',
+  
+  'loanPayment.form.paymentPercentage': '상환 비율',
+  'loanPayment.form.paymentPercentage.required': '상환 비율을 입력해주세요',
+  'loanPayment.form.paymentPercentage.range': '상환 비율은 1%에서 100% 사이여야 합니다',
+  'loanPayment.form.paymentPercentage.tooltip': '기간당 대출 상환에 사용되는 수입 비율, 기본값은 50%입니다',
+  
+  'loanPayment.form.submit': '상환 계획 계산',
+  
+  // Income Items
+  'loanPayment.income.name': '수입 이름',
+  'loanPayment.income.name.placeholder': '수입 이름을 입력해주세요',
+  'loanPayment.income.default': '주 수입',
+  'loanPayment.income.new': '수입 항목',
+  'loanPayment.incomeItems.title': '수입 항목',
+  'loanPayment.incomeItems.add': '수입 항목 추가',
+  'loanPayment.table.incomeSource': '수입 출처',
+  
+  // Results
+  'loanPayment.result.payoffDate': '예상 상환 완료일',
+  'loanPayment.result.totalPeriods': '총 상환 기간 수',
+  'loanPayment.result.totalPaid': '총 상환 금액',
+  'loanPayment.result.monthsToPayoff': '예상 상환 개월 수',
+  'loanPayment.result.months': '개월',
+  
+  // Table
+  'loanPayment.table.summary': '합계',
+  'loanPayment.table.period': '기간',
+  'loanPayment.table.date': '날짜',
+  'loanPayment.table.income': '수입 금액',
+  'loanPayment.table.payment': '상환 금액',
+  'loanPayment.table.remainingLoan': '남은 대출'
 };

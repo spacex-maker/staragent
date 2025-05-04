@@ -418,6 +418,20 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           isDark={isDark}
           onClick={() => {
             setShowUserMenu(false);
+            navigate('/toolkit');
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-tools icon" />
+              {intl.formatMessage({ id: 'userMenu.toolkit', defaultMessage: '工具箱' })}
+            </div>
+          </MenuItemContent>
+        </UserMenuItem>
+        <UserMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
             setShowNetworkModal(true);
           }}
         >

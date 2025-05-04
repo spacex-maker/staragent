@@ -13,6 +13,9 @@ import WorldMap from './pages/WorldMap';
 import LandingPage from './pages/LandingPage';
 import CareersPage from './pages/Careers';
 import UserGuide from './pages/UserGuide';
+import LoanPaymentSchedule from "./pages/LoanPayment";
+import Toolkit from "./pages/Toolkit";
+import ToolkitLoanPayment from "./pages/Toolkit/LoanPayment";
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
@@ -266,6 +269,11 @@ export default function App() {
                   <AgentPage />
                 </PrivateRoute>
               } />
+              <Route path="/loan-payment" element={<LoanPaymentSchedule />} />
+              <Route path="/toolkit" element={<Toolkit />}>
+                <Route index element={<Navigate to="/toolkit/loan-payment" replace />} />
+                <Route path="loan-payment" element={<ToolkitLoanPayment />} />
+              </Route>
               <Route path="/oauth/callback" element={<OAuthCallback />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />

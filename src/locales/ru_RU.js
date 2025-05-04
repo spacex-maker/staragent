@@ -526,4 +526,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': 'Нанят {count} раз',
   'aiAgent.market.recruitCount.tooltip': 'Общее количество раз, которое этот ИИ-ассистент был нанят пользователями',
+
+  // Toolkit Related
+  'toolkit.page.title': 'Инструменты - AIMateX',
+  'toolkit.page.description': 'Многофункциональный набор инструментов, предоставляющий различные полезные утилиты',
+  'toolkit.title': 'Инструменты',
+  'toolkit.menu.loanPayment': 'График погашения кредита',
+  'toolkit.menu.codeFormatter': 'Форматирование кода',
+  'toolkit.menu.textTranslator': 'Перевод текста',
+  'toolkit.menu.dateCalculator': 'Калькулятор дат',
+  'toolkit.menu.otherTools': 'Другие инструменты',
+  'toolkit.menu.settings': 'Настройки инструментов',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'График погашения кредита - AIMateX',
+  'loanPayment.page.description': 'Онлайн-инструмент для расчета графика погашения кредита, помогающий планировать рациональное использование средств',
+  'loanPayment.title': 'График погашения кредита',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'Общая сумма кредита',
+  'loanPayment.form.loanAmount.required': 'Пожалуйста, введите сумму кредита',
+  'loanPayment.form.loanAmount.min': 'Сумма кредита должна быть больше 0',
+  'loanPayment.form.loanAmount.placeholder': 'Пожалуйста, введите сумму кредита',
+  
+  'loanPayment.form.firstPayDate': 'Дата первого дохода',
+  'loanPayment.form.firstPayDate.required': 'Пожалуйста, выберите дату первого дохода',
+  'loanPayment.form.firstPayDate.placeholder': 'Пожалуйста, выберите дату первого дохода',
+  
+  'loanPayment.form.incomeFrequency': 'Периодичность дохода',
+  'loanPayment.form.incomeFrequency.required': 'Пожалуйста, выберите периодичность дохода',
+  'loanPayment.form.incomeFrequency.placeholder': 'Пожалуйста, выберите периодичность дохода',
+  
+  'loanPayment.frequency.monthly': 'Ежемесячно',
+  'loanPayment.frequency.biweekly': 'Раз в две недели',
+  'loanPayment.frequency.weekly': 'Еженедельно',
+  'loanPayment.frequency.yearly': 'Ежегодно',
+  'loanPayment.frequency.once': 'Однократно',
+  'loanPayment.frequency.once.tooltip': 'Применимо для бонусов, непредвиденных доходов и других разовых поступлений',
+  
+  'loanPayment.form.incomeAmount': 'Сумма дохода за период',
+  'loanPayment.form.incomeAmount.required': 'Пожалуйста, введите сумму дохода',
+  'loanPayment.form.incomeAmount.min': 'Сумма дохода должна быть больше 0',
+  'loanPayment.form.incomeAmount.placeholder': 'Пожалуйста, введите сумму дохода за период',
+  
+  'loanPayment.form.paymentPercentage': 'Процент выплаты',
+  'loanPayment.form.paymentPercentage.required': 'Пожалуйста, введите процент выплаты',
+  'loanPayment.form.paymentPercentage.range': 'Процент выплаты должен быть от 1% до 100%',
+  'loanPayment.form.paymentPercentage.tooltip': 'Процент дохода, используемый для погашения кредита за период, по умолчанию 50%',
+  
+  'loanPayment.form.submit': 'Рассчитать график погашения',
+  
+  // Income Items
+  'loanPayment.income.name': 'Название дохода',
+  'loanPayment.income.name.placeholder': 'Пожалуйста, введите название дохода',
+  'loanPayment.income.default': 'Основной доход',
+  'loanPayment.income.new': 'Статья дохода',
+  'loanPayment.incomeItems.title': 'Статьи дохода',
+  'loanPayment.incomeItems.add': 'Добавить статью дохода',
+  'loanPayment.table.incomeSource': 'Источник дохода',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'Ожидаемая дата погашения',
+  'loanPayment.result.totalPeriods': 'Общее количество периодов выплат',
+  'loanPayment.result.totalPaid': 'Общая выплаченная сумма',
+  'loanPayment.result.monthsToPayoff': 'Ожидаемое количество месяцев до погашения',
+  'loanPayment.result.months': 'месяцев',
+  
+  // Table
+  'loanPayment.table.summary': 'Итого',
+  'loanPayment.table.period': 'Период',
+  'loanPayment.table.date': 'Дата',
+  'loanPayment.table.income': 'Сумма дохода',
+  'loanPayment.table.payment': 'Сумма платежа',
+  'loanPayment.table.remainingLoan': 'Остаток кредита'
 };

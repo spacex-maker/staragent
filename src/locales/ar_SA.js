@@ -550,4 +550,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': 'تم التوظيف {count} مرة',
   'aiAgent.market.recruitCount.tooltip': 'إجمالي عدد المرات التي تم فيها توظيف مساعد الذكاء الاصطناعي هذا من قبل المستخدمين',
+
+  // Toolkit Related
+  'toolkit.page.title': 'مجموعة الأدوات - AIMateX',
+  'toolkit.page.description': 'مجموعة أدوات متعددة الوظائف توفر أدوات مفيدة متنوعة',
+  'toolkit.title': 'مجموعة الأدوات',
+  'toolkit.menu.loanPayment': 'جدول سداد القرض',
+  'toolkit.menu.codeFormatter': 'منسق الكود',
+  'toolkit.menu.textTranslator': 'مترجم النصوص',
+  'toolkit.menu.dateCalculator': 'حاسبة التواريخ',
+  'toolkit.menu.otherTools': 'أدوات أخرى',
+  'toolkit.menu.settings': 'إعدادات الأدوات',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'جدول سداد القرض - AIMateX',
+  'loanPayment.page.description': 'أداة حساب جدول سداد القروض عبر الإنترنت لمساعدتك على التخطيط للاستخدام الرشيد للأموال',
+  'loanPayment.title': 'جدول سداد القرض',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'إجمالي مبلغ القرض',
+  'loanPayment.form.loanAmount.required': 'الرجاء إدخال مبلغ القرض',
+  'loanPayment.form.loanAmount.min': 'يجب أن يكون مبلغ القرض أكبر من 0',
+  'loanPayment.form.loanAmount.placeholder': 'الرجاء إدخال مبلغ القرض',
+  
+  'loanPayment.form.firstPayDate': 'تاريخ أول دخل',
+  'loanPayment.form.firstPayDate.required': 'الرجاء اختيار تاريخ أول دخل',
+  'loanPayment.form.firstPayDate.placeholder': 'الرجاء اختيار تاريخ أول دخل',
+  
+  'loanPayment.form.incomeFrequency': 'دورة الدخل',
+  'loanPayment.form.incomeFrequency.required': 'الرجاء اختيار دورة الدخل',
+  'loanPayment.form.incomeFrequency.placeholder': 'الرجاء اختيار دورة الدخل',
+  
+  'loanPayment.frequency.monthly': 'شهرياً',
+  'loanPayment.frequency.biweekly': 'كل أسبوعين',
+  'loanPayment.frequency.weekly': 'أسبوعياً',
+  'loanPayment.frequency.yearly': 'سنوياً',
+  'loanPayment.frequency.once': 'مرة واحدة',
+  'loanPayment.frequency.once.tooltip': 'مناسب للمكافآت والدخل غير المتوقع وغيرها من المداخيل لمرة واحدة',
+  
+  'loanPayment.form.incomeAmount': 'مبلغ الدخل لكل فترة',
+  'loanPayment.form.incomeAmount.required': 'الرجاء إدخال مبلغ الدخل',
+  'loanPayment.form.incomeAmount.min': 'يجب أن يكون مبلغ الدخل أكبر من 0',
+  'loanPayment.form.incomeAmount.placeholder': 'الرجاء إدخال مبلغ الدخل لكل فترة',
+  
+  'loanPayment.form.paymentPercentage': 'نسبة السداد',
+  'loanPayment.form.paymentPercentage.required': 'الرجاء إدخال نسبة السداد',
+  'loanPayment.form.paymentPercentage.range': 'يجب أن تكون نسبة السداد بين 1% و 100%',
+  'loanPayment.form.paymentPercentage.tooltip': 'نسبة الدخل المستخدمة لسداد القرض لكل فترة، القيمة الافتراضية هي 50%',
+  
+  'loanPayment.form.submit': 'حساب جدول السداد',
+  
+  // Income Items
+  'loanPayment.income.name': 'اسم الدخل',
+  'loanPayment.income.name.placeholder': 'الرجاء إدخال اسم الدخل',
+  'loanPayment.income.default': 'الدخل الرئيسي',
+  'loanPayment.income.new': 'عنصر دخل',
+  'loanPayment.incomeItems.title': 'عناصر الدخل',
+  'loanPayment.incomeItems.add': 'إضافة عنصر دخل',
+  'loanPayment.table.incomeSource': 'مصدر الدخل',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'تاريخ السداد المتوقع',
+  'loanPayment.result.totalPeriods': 'إجمالي فترات السداد',
+  'loanPayment.result.totalPaid': 'إجمالي المبلغ المدفوع',
+  'loanPayment.result.monthsToPayoff': 'عدد الأشهر المتوقعة للسداد',
+  'loanPayment.result.months': 'شهر',
+  
+  // Table
+  'loanPayment.table.summary': 'الإجمالي',
+  'loanPayment.table.period': 'الفترة',
+  'loanPayment.table.date': 'التاريخ',
+  'loanPayment.table.income': 'مبلغ الدخل',
+  'loanPayment.table.payment': 'مبلغ السداد',
+  'loanPayment.table.remainingLoan': 'القرض المتبقي'
 };

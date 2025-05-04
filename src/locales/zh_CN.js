@@ -503,6 +503,7 @@ export default {
   'userMenu.regions': '地区支持',
   'userMenu.homepage': '官网首页',
   'userMenu.logout': '退出登录',
+  'userMenu.toolkit': '工具箱',
   'userMenu.network.china': '中国节点',
   'userMenu.network.usa': '美国节点',
   'userMenu.network.japan': '日本节点',
@@ -527,4 +528,75 @@ export default {
   'aiAgent.comments.replyTo': '回复',
   'aiAgent.comments.replyPlaceholder': '写下你的回复...',
   'aiAgent.comments.replySuccess': '回复成功',
+  // 工具箱相关
+  'toolkit.page.title': '工具箱 - AIMateX',
+  'toolkit.page.description': '多功能工具箱，提供各种实用工具',
+  'toolkit.title': '工具箱',
+  'toolkit.menu.loanPayment': '贷款还款计划表',
+  'toolkit.menu.codeFormatter': '代码格式化',
+  'toolkit.menu.textTranslator': '文本翻译',
+  'toolkit.menu.dateCalculator': '日期计算器',
+  'toolkit.menu.otherTools': '其他工具',
+  'toolkit.menu.settings': '工具设置',
+  // 贷款还款计划表
+  'loanPayment.page.title': '贷款还款计划表 - AIMateX',
+  'loanPayment.page.description': '贷款还款计划在线计算工具，帮助您规划资金合理使用',
+  'loanPayment.title': '贷款还款计划表',
+
+  // 表单字段
+  'loanPayment.form.loanAmount': '贷款总额',
+  'loanPayment.form.loanAmount.required': '请输入贷款总额',
+  'loanPayment.form.loanAmount.min': '贷款总额必须大于0',
+  'loanPayment.form.loanAmount.placeholder': '请输入贷款总额',
+
+  'loanPayment.form.firstPayDate': '首次收入日期',
+  'loanPayment.form.firstPayDate.required': '请选择首次收入日期',
+  'loanPayment.form.firstPayDate.placeholder': '请选择首次收入日期',
+
+  'loanPayment.form.incomeFrequency': '收入周期',
+  'loanPayment.form.incomeFrequency.required': '请选择收入周期',
+  'loanPayment.form.incomeFrequency.placeholder': '请选择收入周期',
+
+  'loanPayment.frequency.monthly': '每月',
+  'loanPayment.frequency.biweekly': '每两周',
+  'loanPayment.frequency.weekly': '每周',
+  'loanPayment.frequency.yearly': '每年',
+  'loanPayment.frequency.once': '单次',
+  'loanPayment.frequency.once.tooltip': '适用于奖金、意外收入等一次性收入',
+
+  'loanPayment.form.incomeAmount': '每期收入金额',
+  'loanPayment.form.incomeAmount.required': '请输入每期收入金额',
+  'loanPayment.form.incomeAmount.min': '收入金额必须大于0',
+  'loanPayment.form.incomeAmount.placeholder': '请输入每期收入金额',
+
+  'loanPayment.form.paymentPercentage': '还款比例',
+  'loanPayment.form.paymentPercentage.required': '请输入还款比例',
+  'loanPayment.form.paymentPercentage.range': '还款比例必须在1%至100%之间',
+  'loanPayment.form.paymentPercentage.tooltip': '每期用于还款的收入比例，默认为50%',
+
+  'loanPayment.form.submit': '计算还款计划',
+
+  // 收入项相关
+  'loanPayment.income.name': '收入名称',
+  'loanPayment.income.name.placeholder': '请输入收入名称',
+  'loanPayment.income.default': '主要收入',
+  'loanPayment.income.new': '收入项',
+  'loanPayment.incomeItems.title': '收入项目',
+  'loanPayment.incomeItems.add': '添加收入项目',
+  'loanPayment.table.incomeSource': '收入来源',
+
+  // 结果展示
+  'loanPayment.result.payoffDate': '预计还清日期',
+  'loanPayment.result.totalPeriods': '总还款期数',
+  'loanPayment.result.totalPaid': '总还款金额',
+  'loanPayment.result.monthsToPayoff': '预计还款月数',
+  'loanPayment.result.months': '个月',
+
+  // 表格
+  'loanPayment.table.summary': '总计',
+  'loanPayment.table.period': '期数',
+  'loanPayment.table.date': '日期',
+  'loanPayment.table.income': '收入金额',
+  'loanPayment.table.payment': '还款金额',
+  'loanPayment.table.remainingLoan': '剩余贷款',
 }; 

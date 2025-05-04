@@ -531,6 +531,7 @@ export default {
   'userMenu.regions': 'Regional Support',
   'userMenu.homepage': 'Official Website',
   'userMenu.logout': 'Log Out',
+  'userMenu.toolkit': 'Toolkit',
   'userMenu.network.china': 'China Node',
   'userMenu.network.usa': 'USA Node',
   'userMenu.network.japan': 'Japan Node',
@@ -556,4 +557,77 @@ export default {
   'aiAgent.comments.replyTo': 'Reply to',
   'aiAgent.comments.replyPlaceholder': 'Write your reply...',
   'aiAgent.comments.replySuccess': 'Reply sent successfully',
+
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'Loan Payment Schedule - AIMateX',
+  'loanPayment.page.description': 'Online tool for calculating loan payment schedules to help you plan the rational use of funds',
+  'loanPayment.title': 'Loan Payment Schedule',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'Total Loan Amount',
+  'loanPayment.form.loanAmount.required': 'Please enter the loan amount',
+  'loanPayment.form.loanAmount.min': 'Loan amount must be greater than 0',
+  'loanPayment.form.loanAmount.placeholder': 'Please enter the loan amount',
+  
+  'loanPayment.form.firstPayDate': 'First Income Date',
+  'loanPayment.form.firstPayDate.required': 'Please select the first income date',
+  'loanPayment.form.firstPayDate.placeholder': 'Please select the first income date',
+  
+  'loanPayment.form.incomeFrequency': 'Income Frequency',
+  'loanPayment.form.incomeFrequency.required': 'Please select the income frequency',
+  'loanPayment.form.incomeFrequency.placeholder': 'Please select the income frequency',
+  
+  'loanPayment.frequency.monthly': 'Monthly',
+  'loanPayment.frequency.biweekly': 'Biweekly',
+  'loanPayment.frequency.weekly': 'Weekly',
+  'loanPayment.frequency.yearly': 'Yearly',
+  'loanPayment.frequency.once': 'Once',
+  'loanPayment.frequency.once.tooltip': 'For one-time income such as bonuses or windfalls',
+  
+  'loanPayment.form.incomeAmount': 'Income Amount Per Period',
+  'loanPayment.form.incomeAmount.required': 'Please enter the income amount',
+  'loanPayment.form.incomeAmount.min': 'Income amount must be greater than 0',
+  'loanPayment.form.incomeAmount.placeholder': 'Please enter the income amount per period',
+  
+  'loanPayment.form.paymentPercentage': 'Payment Percentage',
+  'loanPayment.form.paymentPercentage.required': 'Please enter the payment percentage',
+  'loanPayment.form.paymentPercentage.range': 'Payment percentage must be between a 1% and 100%',
+  'loanPayment.form.paymentPercentage.tooltip': 'Percentage of income used for loan payment each period, default is 50%',
+  
+  'loanPayment.form.submit': 'Calculate Payment Schedule',
+  
+  // Income Items
+  'loanPayment.income.name': 'Income Name',
+  'loanPayment.income.name.placeholder': 'Enter income name',
+  'loanPayment.income.default': 'Main Income',
+  'loanPayment.income.new': 'Income Item',
+  'loanPayment.incomeItems.title': 'Income Items',
+  'loanPayment.incomeItems.add': 'Add Income Item',
+  'loanPayment.table.incomeSource': 'Income Source',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'Estimated Payoff Date',
+  'loanPayment.result.totalPeriods': 'Total Payment Periods',
+  'loanPayment.result.totalPaid': 'Total Amount Paid',
+  'loanPayment.result.monthsToPayoff': 'Estimated Months to Payoff',
+  'loanPayment.result.months': 'months',
+  
+  // Table
+  'loanPayment.table.summary': 'Total',
+  'loanPayment.table.period': 'Period',
+  'loanPayment.table.date': 'Date',
+  'loanPayment.table.income': 'Income Amount',
+  'loanPayment.table.payment': 'Payment Amount',
+  'loanPayment.table.remainingLoan': 'Remaining Loan',
+
+  // Toolkit Related
+  'toolkit.page.title': 'Toolkit - AIMateX',
+  'toolkit.page.description': 'Multifunctional toolkit providing various useful tools',
+  'toolkit.title': 'Toolkit',
+  'toolkit.menu.loanPayment': 'Loan Payment Schedule',
+  'toolkit.menu.codeFormatter': 'Code Formatter',
+  'toolkit.menu.textTranslator': 'Text Translator',
+  'toolkit.menu.dateCalculator': 'Date Calculator',
+  'toolkit.menu.otherTools': 'Other Tools',
+  'toolkit.menu.settings': 'Tool Settings',
 };

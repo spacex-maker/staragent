@@ -497,4 +497,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': 'Recrutado {count} vezes',
   'aiAgent.market.recruitCount.tooltip': 'Número total de vezes que este assistente IA foi recrutado pelos usuários',
+
+  // Toolkit Related
+  'toolkit.page.title': 'Ferramentas - AIMateX',
+  'toolkit.page.description': 'Kit de ferramentas multifuncionais que fornece várias ferramentas úteis',
+  'toolkit.title': 'Ferramentas',
+  'toolkit.menu.loanPayment': 'Plano de Pagamento de Empréstimo',
+  'toolkit.menu.codeFormatter': 'Formatador de Código',
+  'toolkit.menu.textTranslator': 'Tradutor de Texto',
+  'toolkit.menu.dateCalculator': 'Calculadora de Datas',
+  'toolkit.menu.otherTools': 'Outras Ferramentas',
+  'toolkit.menu.settings': 'Configurações de Ferramentas',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'Plano de Pagamento de Empréstimo - AIMateX',
+  'loanPayment.page.description': 'Ferramenta online para calcular planos de pagamento de empréstimos, auxiliando no planejamento do uso racional de fundos',
+  'loanPayment.title': 'Plano de Pagamento de Empréstimo',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'Valor Total do Empréstimo',
+  'loanPayment.form.loanAmount.required': 'Por favor, insira o valor do empréstimo',
+  'loanPayment.form.loanAmount.min': 'O valor do empréstimo deve ser maior que 0',
+  'loanPayment.form.loanAmount.placeholder': 'Por favor, insira o valor do empréstimo',
+  
+  'loanPayment.form.firstPayDate': 'Data da Primeira Receita',
+  'loanPayment.form.firstPayDate.required': 'Por favor, selecione a data da primeira receita',
+  'loanPayment.form.firstPayDate.placeholder': 'Por favor, selecione a data da primeira receita',
+  
+  'loanPayment.form.incomeFrequency': 'Frequência de Receita',
+  'loanPayment.form.incomeFrequency.required': 'Por favor, selecione a frequência de receita',
+  'loanPayment.form.incomeFrequency.placeholder': 'Por favor, selecione a frequência de receita',
+  
+  'loanPayment.frequency.monthly': 'Mensal',
+  'loanPayment.frequency.biweekly': 'Quinzenal',
+  'loanPayment.frequency.weekly': 'Semanal',
+  'loanPayment.frequency.yearly': 'Anual',
+  'loanPayment.frequency.once': 'Uma vez',
+  'loanPayment.frequency.once.tooltip': 'Aplicável para bônus, renda inesperada e outras receitas únicas',
+  
+  'loanPayment.form.incomeAmount': 'Valor da Receita por Período',
+  'loanPayment.form.incomeAmount.required': 'Por favor, insira o valor da receita',
+  'loanPayment.form.incomeAmount.min': 'O valor da receita deve ser maior que 0',
+  'loanPayment.form.incomeAmount.placeholder': 'Por favor, insira o valor da receita por período',
+  
+  'loanPayment.form.paymentPercentage': 'Percentual de Pagamento',
+  'loanPayment.form.paymentPercentage.required': 'Por favor, insira o percentual de pagamento',
+  'loanPayment.form.paymentPercentage.range': 'O percentual de pagamento deve estar entre 1% e 100%',
+  'loanPayment.form.paymentPercentage.tooltip': 'Percentual da receita usado para pagamento do empréstimo por período, o padrão é 50%',
+  
+  'loanPayment.form.submit': 'Calcular Plano de Pagamento',
+  
+  // Income Items
+  'loanPayment.income.name': 'Nome da Receita',
+  'loanPayment.income.name.placeholder': 'Por favor, insira o nome da receita',
+  'loanPayment.income.default': 'Receita Principal',
+  'loanPayment.income.new': 'Item de Receita',
+  'loanPayment.incomeItems.title': 'Itens de Receita',
+  'loanPayment.incomeItems.add': 'Adicionar Item de Receita',
+  'loanPayment.table.incomeSource': 'Fonte de Receita',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'Data Estimada de Quitação',
+  'loanPayment.result.totalPeriods': 'Total de Períodos de Pagamento',
+  'loanPayment.result.totalPaid': 'Valor Total Pago',
+  'loanPayment.result.monthsToPayoff': 'Meses Estimados para Quitação',
+  'loanPayment.result.months': 'meses',
+  
+  // Table
+  'loanPayment.table.summary': 'Total',
+  'loanPayment.table.period': 'Período',
+  'loanPayment.table.date': 'Data',
+  'loanPayment.table.income': 'Valor da Receita',
+  'loanPayment.table.payment': 'Valor do Pagamento',
+  'loanPayment.table.remainingLoan': 'Empréstimo Restante'
 };

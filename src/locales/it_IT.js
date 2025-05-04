@@ -539,4 +539,77 @@ export default {
   // AI Agent Market
   'aiAgent.market.recruitCount': 'Reclutato {count} volte',
   'aiAgent.market.recruitCount.tooltip': 'Numero totale di volte in cui questo assistente IA è stato reclutato dagli utenti',
+
+  // Toolkit Related
+  'toolkit.page.title': 'Strumenti - AIMateX',
+  'toolkit.page.description': 'Kit di strumenti multifunzionale che fornisce vari strumenti utili',
+  'toolkit.title': 'Strumenti',
+  'toolkit.menu.loanPayment': 'Piano di Rimborso del Prestito',
+  'toolkit.menu.codeFormatter': 'Formattatore di Codice',
+  'toolkit.menu.textTranslator': 'Traduttore di Testo',
+  'toolkit.menu.dateCalculator': 'Calcolatore di Date',
+  'toolkit.menu.otherTools': 'Altri Strumenti',
+  'toolkit.menu.settings': 'Impostazioni Strumenti',
+  
+  // Loan Payment Schedule
+  'loanPayment.page.title': 'Piano di Rimborso del Prestito - AIMateX',
+  'loanPayment.page.description': 'Strumento online per calcolare i piani di rimborso dei prestiti, per aiutarti a pianificare l\'uso razionale dei fondi',
+  'loanPayment.title': 'Piano di Rimborso del Prestito',
+  
+  // Form Fields
+  'loanPayment.form.loanAmount': 'Importo Totale del Prestito',
+  'loanPayment.form.loanAmount.required': 'Inserisci l\'importo del prestito',
+  'loanPayment.form.loanAmount.min': 'L\'importo del prestito deve essere maggiore di 0',
+  'loanPayment.form.loanAmount.placeholder': 'Inserisci l\'importo del prestito',
+  
+  'loanPayment.form.firstPayDate': 'Data del Primo Reddito',
+  'loanPayment.form.firstPayDate.required': 'Seleziona la data del primo reddito',
+  'loanPayment.form.firstPayDate.placeholder': 'Seleziona la data del primo reddito',
+  
+  'loanPayment.form.incomeFrequency': 'Frequenza di Reddito',
+  'loanPayment.form.incomeFrequency.required': 'Seleziona la frequenza di reddito',
+  'loanPayment.form.incomeFrequency.placeholder': 'Seleziona la frequenza di reddito',
+  
+  'loanPayment.frequency.monthly': 'Mensile',
+  'loanPayment.frequency.biweekly': 'Bisettimanale',
+  'loanPayment.frequency.weekly': 'Settimanale',
+  'loanPayment.frequency.yearly': 'Annuale',
+  'loanPayment.frequency.once': 'Una volta',
+  'loanPayment.frequency.once.tooltip': 'Applicabile per bonus, redditi inaspettati e altri redditi una tantum',
+  
+  'loanPayment.form.incomeAmount': 'Importo del Reddito per Periodo',
+  'loanPayment.form.incomeAmount.required': 'Inserisci l\'importo del reddito',
+  'loanPayment.form.incomeAmount.min': 'L\'importo del reddito deve essere maggiore di 0',
+  'loanPayment.form.incomeAmount.placeholder': 'Inserisci l\'importo del reddito per periodo',
+  
+  'loanPayment.form.paymentPercentage': 'Percentuale di Rimborso',
+  'loanPayment.form.paymentPercentage.required': 'Inserisci la percentuale di rimborso',
+  'loanPayment.form.paymentPercentage.range': 'La percentuale di rimborso deve essere tra 1% e 100%',
+  'loanPayment.form.paymentPercentage.tooltip': 'Percentuale di reddito utilizzata per il rimborso del prestito per periodo, il valore predefinito è 50%',
+  
+  'loanPayment.form.submit': 'Calcola il Piano di Rimborso',
+  
+  // Income Items
+  'loanPayment.income.name': 'Nome del Reddito',
+  'loanPayment.income.name.placeholder': 'Inserisci il nome del reddito',
+  'loanPayment.income.default': 'Reddito Principale',
+  'loanPayment.income.new': 'Elemento di Reddito',
+  'loanPayment.incomeItems.title': 'Elementi di Reddito',
+  'loanPayment.incomeItems.add': 'Aggiungi Elemento di Reddito',
+  'loanPayment.table.incomeSource': 'Fonte di Reddito',
+  
+  // Results
+  'loanPayment.result.payoffDate': 'Data Stimata di Estinzione',
+  'loanPayment.result.totalPeriods': 'Numero Totale di Periodi di Rimborso',
+  'loanPayment.result.totalPaid': 'Importo Totale Pagato',
+  'loanPayment.result.monthsToPayoff': 'Mesi Stimati per l\'Estinzione',
+  'loanPayment.result.months': 'mesi',
+  
+  // Table
+  'loanPayment.table.summary': 'Totale',
+  'loanPayment.table.period': 'Periodo',
+  'loanPayment.table.date': 'Data',
+  'loanPayment.table.income': 'Importo del Reddito',
+  'loanPayment.table.payment': 'Importo del Rimborso',
+  'loanPayment.table.remainingLoan': 'Prestito Restante'
 };
