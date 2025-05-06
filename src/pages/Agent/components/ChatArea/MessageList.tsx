@@ -211,7 +211,7 @@ const estimateTokens = (text: string): number => {
   const codeBlocks = trimmedText.match(/```[\s\S]*?```/g) || [];
   let codeTokens = 0;
   
-  codeBlocks.forEach(block => {
+  codeBlocks.forEach((block: string) => {
     // 对于代码块，使用更高的token估计
     const codeChars = block.length - 6; // 减去```的长度
     codeTokens += codeChars / 2;
