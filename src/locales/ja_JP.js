@@ -625,5 +625,97 @@ export default {
   'loanPayment.load.success': '計画が正常に読み込まれました',
   'loanPayment.load.error': '計画の読み込みに失敗しました',
   'loanPayment.load.delete.success': '計画が正常に削除されました',
-  'loanPayment.load.delete.error': '計画の削除に失敗しました'
+  'loanPayment.load.delete.error': '計画の削除に失敗しました',
+
+  // Chat related
+  'chat.user': 'ユーザー',
+  'chat.aiAssistant': 'AIアシスタント',
+  'chat.sending': '送信中...',
+  'chat.sendFailed': '送信失敗',
+  'chat.loadingHistory': '履歴を読み込み中...',
+  'chat.tokenConsumption': '推定：{count}トークン',
+
+  // Session list related
+  'sessionList.title': 'セッション',
+  'sessionList.newSession': '新規セッション',
+  'sessionList.loading': '読み込み中...',
+  'sessionList.loadMore': 'もっと読み込む',
+  'sessionList.noMore': '全てのセッションを読み込みました',
+  'sessionList.empty': 'セッションがありません。新規セッションをクリックして開始してください',
+  'sessionList.selectProject': '最初にプロジェクトを選択してください',
+  'sessionList.error': 'セッションリストの取得に失敗しました。後でやり直してください',
+  'sessionList.createFailed': '新規セッションの作成に失敗しました。後でやり直してください',
+  
+  // Session card related
+  'sessionCard.noMessage': 'メッセージはまだありません',
+  'sessionCard.image': '[画像]',
+  'sessionCard.formula': '[数式]',
+  
+  // Project list related
+  'project.create': 'プロジェクト作成',
+  'project.import': 'プロジェクト導入',
+  'project.edit': 'プロジェクト編集',
+  'project.delete': 'プロジェクト削除',
+  'project.confirmDelete': 'このプロジェクトを削除してもよろしいですか？',
+  'project.empty': 'プロジェクトがまだありません。上のボタンをクリックして作成してください',
+  'project.loading': '読み込み中...',
+  'project.visibility.private': '非公開',
+  'project.visibility.public': '公開',
+  
+  // Add agent related
+  'project.addAgent': 'エージェントをプロジェクトに追加',
+  'project.addAgent.select': 'プロジェクトに追加するエージェントを選択してください',
+  'project.addAgent.search': 'エージェント名、役割、またはモデルを検索',
+  'project.addAgent.info': 'エージェント情報',
+  'project.addAgent.status': 'ステータス',
+  'project.addAgent.enabled': '有効',
+  'project.addAgent.disabled': '無効',
+  'project.addAgent.selectAtLeast': '少なくとも1つのエージェントを選択してください',
+  'project.addAgent.addSelected': '選択したエージェントを追加',
+  'project.addAgent.success': '{count}エージェントを正常に追加しました',
+  'project.addAgent.failed': 'エージェントの追加に失敗しました',
+  'project.addAgent.cancel': 'キャンセル',
+  
+  // 项目表单字段
+  'project.name': 'プロジェクト名',
+  'project.name.required': 'プロジェクト名を入力してください',
+  'project.name.placeholder': 'プロジェクト名を入力してください',
+  'project.description': 'プロジェクト説明',
+  'project.description.placeholder': 'プロジェクト説明を入力してください',
+  'project.industry': '業界',
+  'project.industry.required': '業界を選択してください',
+  'project.industry.placeholder': '業界を選択してください',
+  'project.status': 'プロジェクトステータス',
+  'project.status.required': 'プロジェクトステータスを選択してください',
+  'project.status.active': '有効',
+  'project.status.inactive': '無効',
+  'project.status.archived': 'アーカイブ済み',
+  'project.visibility': '可視性',
+  'project.visibility.required': '可視性を選択してください',
+  
+  // 项目编辑标签页
+  'project.basicInfo': '基本情報',
+  'project.agentManagement': '従業員管理',
+  
+  // 项目操作消息
+  'project.create.success': 'プロジェクト作成成功',
+  'project.create.error': 'プロジェクト作成失敗',
+  'project.update.success': 'プロジェクト更新成功',
+  'project.update.error': 'プロジェクト更新失敗',
+  'project.getAgents.error': 'プロジェクト従業員の取得に失敗しました',
+  
+  // 员工表格相关
+  'agent.priority': '優先度',
+  'agent.default': 'デフォルト',
+  'agent.memory': 'メモリ',
+  'agent.knowledgeBase': 'ナレッジベース',
+  'agent.externalTools': '外部ツール',
+  'project.agent.confirmRemove': 'この従業員を削除してもよろしいですか？',
+  'project.agent.empty': '従業員がいません。プロジェクトに従業員を追加してください',
+  
+  // 通用术语
+  'common.actions': 'アクション',
+  'common.confirm': '確認',
+  'common.cancel': 'キャンセル',
+  'common.remove': '削除',
 };

@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { List, Spin, Empty } from 'antd';
 import { ChatSession } from '../../../../types';
 import SessionCard from './SessionCard';
+import { FormattedMessage } from 'react-intl';
 import {
   SessionListContentContainer,
   LoadingContainer,
@@ -41,12 +42,16 @@ const SessionListContent = forwardRef<HTMLDivElement, SessionListContentProps>((
     <SessionListContentContainer ref={ref}>
       {loading ? (
         <LoadingContainer>
-          <Spin tip="加载中..." />
+          <Spin tip={<FormattedMessage id="sessionList.loading" defaultMessage="加载中..." />} />
         </LoadingContainer>
       ) : sessions.length === 0 ? (
         <Empty 
           image={Empty.PRESENTED_IMAGE_SIMPLE} 
-          description={projectId ? "暂无会话，点击新会话按钮开始" : "请先选择一个项目"}
+          description={
+            projectId 
+              ? <FormattedMessage id="sessionList.empty" defaultMessage="暂无会话，点击新会话按钮开始" />
+              : <FormattedMessage id="sessionList.selectProject" defaultMessage="请先选择一个项目" />
+          }
           style={{ margin: '40px 0' }}
         />
       ) : (
@@ -68,12 +73,12 @@ const SessionListContent = forwardRef<HTMLDivElement, SessionListContentProps>((
           )}
           {!loadingMore && hasMore && sessions.length > 0 && (
             <LoadMoreText onClick={onLoadMore}>
-              加载更多
+              <FormattedMessage id="sessionList.loadMore" defaultMessage="加载更多" />
             </LoadMoreText>
           )}
           {!loadingMore && !hasMore && sessions.length > 0 && (
             <NoMoreText>
-              已加载全部会话
+              <FormattedMessage id="sessionList.noMore" defaultMessage="已加载全部会话" />
             </NoMoreText>
           )}
         </>

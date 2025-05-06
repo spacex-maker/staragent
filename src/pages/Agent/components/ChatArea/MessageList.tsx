@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Message, FrontendMessage, ProjectAgent } from '../../types';
 import MessageContent from './MessageContent';
 import EmptyChat from './EmptyChat';
+import { useIntl } from 'react-intl';
 
 // 定义样式组件的属性接口
 interface StyledProps {
@@ -157,6 +158,15 @@ const MessageStatus = styled.div<{ $error?: boolean }>`
   text-align: right;
 `;
 
+// Token计数器样式
+const TokenCounter = styled.div<{ $isUser: boolean }>`
+  font-size: 11px;
+  color: var(--ant-color-text-quaternary);
+  margin-top: 2px;
+  text-align: ${props => props.$isUser ? 'right' : 'left'};
+  padding: 0 4px;
+`;
+
 // 组件属性接口定义
 interface MessageListProps {
   messages: (Message | FrontendMessage)[];  // 消息列表
@@ -169,6 +179,55 @@ interface MessageListProps {
   messageListRef?: React.RefObject<HTMLDivElement>; // 消息列表的引用，实际上是父容器的引用
   activeSessionId?: string | null;         // 当前活动会话ID
 }
+
+// 估算文本中的token数量
+const estimateTokens = (text: string): number => {
+  // 针对中文：一个中文字符约为1.5个tokens
+  // 针对英文：平均每4个字符约为1个token
+  // 针对代码：保守估计每2个字符约为1个token
+  
+  if (!text) return 0;
+  
+  // 去除空白字符进行计算以提高准确性
+  const trimmedText = text.trim();
+  
+  // 计算中文字符数量
+  const chineseChars = trimmedText.match(/[\u4e00-\u9fa5]/g) || [];
+  const chineseTokens = chineseChars.length * 1.5;
+  
+  // 计算英文和数字
+  const englishChars = trimmedText.match(/[a-zA-Z0-9]/g) || [];
+  const englishTokens = englishChars.length / 4;
+  
+  // 计算特殊字符和标点
+  const specialChars = trimmedText.match(/[^\u4e00-\u9fa5a-zA-Z0-9\s]/g) || [];
+  const specialTokens = specialChars.length * 1; // 明确乘以1，确保是数字类型
+  
+  // 计算空格
+  const spaces = trimmedText.match(/\s/g) || [];
+  const spaceTokens = spaces.length / 4;
+  
+  // 如果文本包含多行代码（通过检测是否包含连续3个`符号来判断）
+  const codeBlocks = trimmedText.match(/```[\s\S]*?```/g) || [];
+  let codeTokens = 0;
+  
+  codeBlocks.forEach(block => {
+    // 对于代码块，使用更高的token估计
+    const codeChars = block.length - 6; // 减去```的长度
+    codeTokens += codeChars / 2;
+  });
+  
+  // 结合所有结果并四舍五入
+  const totalTokens = Number(
+    chineseTokens + 
+    englishTokens + 
+    specialTokens + 
+    spaceTokens + 
+    codeTokens
+  );
+  
+  return Math.max(1, Math.round(totalTokens));
+};
 
 // 消息列表组件
 const MessageList: React.FC<MessageListProps> = ({ 
@@ -184,6 +243,7 @@ const MessageList: React.FC<MessageListProps> = ({
 }) => {
   const [userInfo, setUserInfo] = useState<{ username: string; avatar?: string } | null>(null);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const intl = useIntl(); // 使用react-intl的useIntl钩子获取国际化功能
   
   // 从父容器获取滚动事件
   useEffect(() => {
@@ -262,7 +322,7 @@ const MessageList: React.FC<MessageListProps> = ({
       {/* 加载更多时显示的顶部加载提示 */}
       {loadingMore && (
         <LoadingContainer style={{ padding: '8px 0' }}>
-          <Spin size="small" tip="加载历史消息中..." />
+          <Spin size="small" tip={intl.formatMessage({ id: 'chat.loadingHistory' })} />
         </LoadingContainer>
       )}
     
@@ -274,6 +334,7 @@ const MessageList: React.FC<MessageListProps> = ({
           const isSending = 'sending' in msg && msg.sending === true;
           const hasError = 'error' in msg && msg.error === true;
           const avatarUrl = isUser ? userInfo?.avatar : getAgentAvatar(msg.agentId);
+          const tokenCount = estimateTokens(msg.content);
           
           return (
             <MessageItem key={msg.id} $isUser={isUser}>
@@ -305,7 +366,7 @@ const MessageList: React.FC<MessageListProps> = ({
                   {/* 消息信息（用户名、标签等） */}
                   <MessageInfo $isUser={isUser}>
                     <UserName $isUser={isUser}>
-                      {isUser ? userInfo?.username || '用户' : msg.agentName || 'AI 助手'}
+                      {isUser ? userInfo?.username || intl.formatMessage({ id: 'chat.user' }) : msg.agentName || intl.formatMessage({ id: 'chat.aiAssistant' })}
                     </UserName>
                     {!isUser && (
                       <>
@@ -324,10 +385,20 @@ const MessageList: React.FC<MessageListProps> = ({
                     <MessageContent content={msg.content} />
                   </MessageBubble>
 
+                  {/* Token计数 */}
+                  <TokenCounter $isUser={isUser}>
+                    {intl.formatMessage(
+                      { id: 'chat.tokenConsumption' },
+                      { count: tokenCount }
+                    )}
+                  </TokenCounter>
+
                   {/* 消息状态 */}
                   {(isSending || hasError) && (
                     <MessageStatus $error={hasError}>
-                      {isSending ? '发送中...' : '发送失败'}
+                      {isSending 
+                        ? intl.formatMessage({ id: 'chat.sending' }) 
+                        : intl.formatMessage({ id: 'chat.sendFailed' })}
                     </MessageStatus>
                   )}
                 </MessageContentWrapper>

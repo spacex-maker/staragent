@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Space } from 'antd';
 import { PlusOutlined, ImportOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -30,14 +31,14 @@ const ProjectListHeader: React.FC<ProjectListHeaderProps> = ({
           icon={<PlusOutlined />}
           onClick={onCreateProject}
         >
-          创建项目
+          <FormattedMessage id="project.create" defaultMessage="创建项目" />
         </Button>
         {onImportProject && (
           <Button
             icon={<ImportOutlined />}
             onClick={onImportProject}
           >
-            导入项目
+            <FormattedMessage id="project.import" defaultMessage="导入项目" />
           </Button>
         )}
       </Space>

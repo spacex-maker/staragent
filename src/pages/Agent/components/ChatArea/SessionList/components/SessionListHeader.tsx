@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Typography } from 'antd';
 import { PlusOutlined, ReloadOutlined } from '@ant-design/icons';
 import { SessionListHeaderContainer, SessionListTitle, TitleText, NewSessionButton } from '../styles';
+import { FormattedMessage } from 'react-intl';
 
 const { Text } = Typography;
 
@@ -23,7 +24,9 @@ const SessionListHeader: React.FC<SessionListHeaderProps> = ({
   return (
     <SessionListHeaderContainer>
       <SessionListTitle>
-        <TitleText>会话列表</TitleText>
+        <TitleText>
+          <FormattedMessage id="sessionList.title" defaultMessage="会话列表" />
+        </TitleText>
         <Button
           icon={<ReloadOutlined />}
           onClick={onRefresh}
@@ -38,7 +41,7 @@ const SessionListHeader: React.FC<SessionListHeaderProps> = ({
         disabled={!projectId || newSessionLoading}
         loading={newSessionLoading}
       >
-        新会话
+        <FormattedMessage id="sessionList.newSession" defaultMessage="新会话" />
       </NewSessionButton>
     </SessionListHeaderContainer>
   );

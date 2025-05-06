@@ -646,5 +646,97 @@ export default {
   'loanPayment.load.success': 'تم تحميل الخطة بنجاح',
   'loanPayment.load.error': 'فشل في تحميل الخطة',
   'loanPayment.load.delete.success': 'تم حذف الخطة بنجاح',
-  'loanPayment.load.delete.error': 'فشل في حذف الخطة'
+  'loanPayment.load.delete.error': 'فشل في حذف الخطة',
+
+  // Chat related
+  'chat.user': 'المستخدم',
+  'chat.aiAssistant': 'مساعد الذكاء الاصطناعي',
+  'chat.sending': 'جاري الإرسال...',
+  'chat.sendFailed': 'فشل الإرسال',
+  'chat.loadingHistory': 'جاري تحميل السجل...',
+  'chat.tokenConsumption': 'تقدير: {count} رمز',
+
+  // Session list related
+  'sessionList.title': 'الجلسات',
+  'sessionList.newSession': 'جلسة جديدة',
+  'sessionList.loading': 'جاري التحميل...',
+  'sessionList.loadMore': 'تحميل المزيد',
+  'sessionList.noMore': 'تم تحميل جميع الجلسات',
+  'sessionList.empty': 'لا توجد جلسات حتى الآن، انقر على زر جلسة جديدة للبدء',
+  'sessionList.selectProject': 'الرجاء اختيار مشروع أولاً',
+  'sessionList.error': 'فشل في الحصول على قائمة الجلسات، يرجى المحاولة مرة أخرى لاحقًا',
+  'sessionList.createFailed': 'فشل في إنشاء جلسة جديدة، يرجى المحاولة مرة أخرى لاحقًا',
+  
+  // Session card related
+  'sessionCard.noMessage': 'لا توجد رسائل حتى الآن',
+  'sessionCard.image': '[صورة]',
+  'sessionCard.formula': '[معادلة]',
+  
+  // Project list related
+  'project.create': 'إنشاء مشروع',
+  'project.import': 'استيراد مشروع',
+  'project.edit': 'تعديل المشروع',
+  'project.delete': 'حذف المشروع',
+  'project.confirmDelete': 'هل أنت متأكد من رغبتك في حذف هذا المشروع؟',
+  'project.empty': 'لا توجد مشاريع حتى الآن، انقر على الزر أعلاه لإنشاء مشروع',
+  'project.loading': 'جاري التحميل...',
+  'project.visibility.private': 'خاص',
+  'project.visibility.public': 'عام',
+  
+  // Add agent related
+  'project.addAgent': 'إضافة عميل إلى المشروع',
+  'project.addAgent.select': 'الرجاء اختيار العملاء لإضافتهم إلى المشروع',
+  'project.addAgent.search': 'البحث عن اسم عميل أو دوره أو نموذجه',
+  'project.addAgent.info': 'معلومات العميل',
+  'project.addAgent.status': 'الحالة',
+  'project.addAgent.enabled': 'مفعّل',
+  'project.addAgent.disabled': 'معطّل',
+  'project.addAgent.selectAtLeast': 'الرجاء اختيار عميل واحد على الأقل',
+  'project.addAgent.addSelected': 'إضافة العملاء المحددين',
+  'project.addAgent.success': 'تمت إضافة {count} من العملاء بنجاح',
+  'project.addAgent.failed': 'فشل في إضافة العميل',
+  'project.addAgent.cancel': 'إلغاء',
+
+  // 项目表单字段
+  'project.name': 'اسم المشروع',
+  'project.name.required': 'الرجاء إدخال اسم المشروع',
+  'project.name.placeholder': 'الرجاء إدخال اسم المشروع',
+  'project.description': 'وصف المشروع',
+  'project.description.placeholder': 'الرجاء إدخال وصف المشروع',
+  'project.industry': 'الصناعة',
+  'project.industry.required': 'الرجاء اختيار الصناعة',
+  'project.industry.placeholder': 'الرجاء اختيار الصناعة',
+  'project.status': 'حالة المشروع',
+  'project.status.required': 'الرجاء اختيار حالة المشروع',
+  'project.status.active': 'نشط',
+  'project.status.inactive': 'غير نشط',
+  'project.status.archived': 'مؤرشف',
+  'project.visibility': 'الرؤية',
+  'project.visibility.required': 'الرجاء اختيار الرؤية',
+  
+  // 项目编辑标签页
+  'project.basicInfo': 'المعلومات الأساسية',
+  'project.agentManagement': 'إدارة الموظفين',
+  
+  // 项目操作消息
+  'project.create.success': 'تم إنشاء المشروع بنجاح',
+  'project.create.error': 'فشل إنشاء المشروع',
+  'project.update.success': 'تم تحديث المشروع بنجاح',
+  'project.update.error': 'فشل تحديث المشروع',
+  'project.getAgents.error': 'فشل الحصول على موظفي المشروع',
+  
+  // 员工表格相关
+  'agent.priority': 'الأولوية',
+  'agent.default': 'افتراضي',
+  'agent.memory': 'الذاكرة',
+  'agent.knowledgeBase': 'قاعدة المعرفة',
+  'agent.externalTools': 'أدوات خارجية',
+  'project.agent.confirmRemove': 'هل أنت متأكد من إزالة هذا الموظف؟',
+  'project.agent.empty': 'لا يوجد موظفين، الرجاء إضافة موظفين إلى المشروع',
+  
+  // 通用术语
+  'common.actions': 'إجراءات',
+  'common.confirm': 'تأكيد',
+  'common.cancel': 'إلغاء',
+  'common.remove': 'إزالة',
 };

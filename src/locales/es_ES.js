@@ -656,5 +656,98 @@ export default {
   'loanPayment.load.success': 'Plan cargado exitosamente',
   'loanPayment.load.error': 'Error al cargar el plan',
   'loanPayment.load.delete.success': 'Plan eliminado exitosamente',
-  'loanPayment.load.delete.error': 'Error al eliminar el plan'
+  'loanPayment.load.delete.error': 'Error al eliminar el plan',
+
+  // Chat related
+  'chat.user': 'Usuario',
+  'chat.aiAssistant': 'Asistente IA',
+  'chat.sending': 'Enviando...',
+  'chat.sendFailed': 'Error al enviar',
+  'chat.loadingHistory': 'Cargando historial...',
+  'chat.tokenConsumption': 'Est. {count} tokens',
+
+  // Session list related
+  'sessionList.title': 'Sesiones',
+  'sessionList.newSession': 'Nueva Sesión',
+  'sessionList.loading': 'Cargando...',
+  'sessionList.loadMore': 'Cargar Más',
+  'sessionList.noMore': 'Todas las sesiones cargadas',
+  'sessionList.empty': 'No hay sesiones aún, haz clic en Nueva Sesión para comenzar',
+  'sessionList.selectProject': 'Por favor selecciona un proyecto primero',
+  'sessionList.error': 'Error al obtener la lista de sesiones, por favor intenta nuevamente',
+  'sessionList.createFailed': 'Error al crear nueva sesión, por favor intenta nuevamente',
+  
+  // Session card related
+  'sessionCard.noMessage': 'Sin mensajes aún',
+  'sessionCard.image': '[Imagen]',
+  'sessionCard.formula': '[Fórmula]',
+  
+  // Project list related
+  'project.create': 'Crear Proyecto',
+  'project.import': 'Importar Proyecto',
+  'project.edit': 'Editar Proyecto',
+  'project.delete': 'Eliminar Proyecto',
+  'project.confirmDelete': '¿Está seguro de que desea eliminar este proyecto?',
+  'project.empty': 'No hay proyectos aún, haga clic en el botón de arriba para crear uno',
+  'project.loading': 'Cargando...',
+  'project.visibility.private': 'Privado',
+  'project.visibility.public': 'Público',
+  
+  // Add agent related
+  'project.addAgent': 'Añadir Agente al Proyecto',
+  'project.addAgent.select': 'Por favor seleccione agentes para añadir al proyecto',
+  'project.addAgent.search': 'Buscar nombre, rol o modelo de agente',
+  'project.addAgent.info': 'Información del Agente',
+  'project.addAgent.status': 'Estado',
+  'project.addAgent.enabled': 'Habilitado',
+  'project.addAgent.disabled': 'Deshabilitado',
+  'project.addAgent.selectAtLeast': 'Por favor seleccione al menos un agente',
+  'project.addAgent.addSelected': 'Añadir Agentes Seleccionados',
+  'project.addAgent.success': 'Se añadieron con éxito {count} agentes',
+  'project.addAgent.failed': 'No se pudo añadir el agente',
+  'project.addAgent.cancel': 'Cancelar',
+  'project.addAgent.tooltip': 'Añadir agentes al proyecto y configurar su prioridad y capacidades',
+  
+  // Project form fields
+  'project.name': 'Nombre del proyecto',
+  'project.name.required': 'Por favor, introduce el nombre del proyecto',
+  'project.name.placeholder': 'Por favor, introduce el nombre del proyecto',
+  'project.description': 'Descripción del proyecto',
+  'project.description.placeholder': 'Por favor, introduce la descripción del proyecto',
+  'project.industry': 'Industria',
+  'project.industry.required': 'Por favor, selecciona la industria',
+  'project.industry.placeholder': 'Por favor, selecciona la industria',
+  'project.status': 'Estado del proyecto',
+  'project.status.required': 'Por favor, selecciona el estado del proyecto',
+  'project.status.active': 'Activo',
+  'project.status.inactive': 'Inactivo',
+  'project.status.archived': 'Archivado',
+  'project.visibility': 'Visibilidad',
+  'project.visibility.required': 'Por favor, selecciona la visibilidad',
+  
+  // Project edit tabs
+  'project.basicInfo': 'Información básica',
+  'project.agentManagement': 'Gestión de agentes',
+  
+  // Project operation messages
+  'project.create.success': 'Proyecto creado con éxito',
+  'project.create.error': 'Error al crear el proyecto',
+  'project.update.success': 'Proyecto actualizado con éxito',
+  'project.update.error': 'Error al actualizar el proyecto',
+  'project.getAgents.error': 'Error al obtener los agentes del proyecto',
+  
+  // Agent table related
+  'agent.priority': 'Prioridad',
+  'agent.default': 'Predeterminado',
+  'agent.memory': 'Memoria',
+  'agent.knowledgeBase': 'Base de conocimiento',
+  'agent.externalTools': 'Herramientas externas',
+  'project.agent.confirmRemove': '¿Estás seguro de que quieres eliminar este agente?',
+  'project.agent.empty': 'No hay agentes todavía, por favor añade agentes al proyecto',
+  
+  // Common terms
+  'common.actions': 'Acciones',
+  'common.confirm': 'Confirmar',
+  'common.cancel': 'Cancelar',
+  'common.remove': 'Eliminar',
 };

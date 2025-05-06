@@ -6,6 +6,7 @@ import ProjectListHeader from './ProjectListHeader';
 import ProjectItem from './ProjectItem';
 import CreateProjectModal from './CreateProjectModal';
 import EditProjectModal from './EditProjectModal';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const ListContainer = styled.div`
   height: 100%;
@@ -80,6 +81,7 @@ const ProjectListTab: React.FC<ProjectListTabProps> = ({
   onProjectDelete,
   loading = false,
 }) => {
+  const intl = useIntl();
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -123,7 +125,9 @@ const ProjectListTab: React.FC<ProjectListTabProps> = ({
             />
           )}
           locale={{ 
-            emptyText: loading ? '加载中...' : '暂无项目，点击上方按钮创建',
+            emptyText: loading 
+              ? intl.formatMessage({ id: 'project.loading', defaultMessage: '加载中...' }) 
+              : intl.formatMessage({ id: 'project.empty', defaultMessage: '暂无项目，点击上方按钮创建' }),
           }}
         />
       </ListContent>

@@ -623,4 +623,97 @@ export default {
   'loanPayment.load.error': '计划加载失败',
   'loanPayment.load.delete.success': '计划删除成功',
   'loanPayment.load.delete.error': '计划删除失败',
+
+  // 聊天相关
+  'chat.user': '用户',
+  'chat.aiAssistant': 'AI 助手',
+  'chat.sending': '发送中...',
+  'chat.sendFailed': '发送失败',
+  'chat.loadingHistory': '加载历史消息中...',
+  'chat.tokenConsumption': '估计消耗 {count} tokens',
+
+  // 会话列表相关
+  'sessionList.title': '会话列表',
+  'sessionList.newSession': '新会话',
+  'sessionList.loading': '加载中...',
+  'sessionList.loadMore': '加载更多',
+  'sessionList.noMore': '已加载全部会话',
+  'sessionList.empty': '暂无会话，点击新会话按钮开始',
+  'sessionList.selectProject': '请先选择一个项目',
+  'sessionList.error': '获取会话列表失败，请稍后重试',
+  'sessionList.createFailed': '创建新会话失败，请稍后重试',
+  
+  // 会话卡片相关
+  'sessionCard.noMessage': '暂无消息',
+  'sessionCard.image': '[图片]',
+  'sessionCard.formula': '[数学公式]',
+  
+  // 项目列表相关
+  'project.create': '创建项目',
+  'project.import': '导入项目',
+  'project.edit': '编辑项目',
+  'project.delete': '删除项目',
+  'project.confirmDelete': '确定要删除此项目吗？',
+  'project.empty': '暂无项目，点击上方按钮创建',
+  'project.loading': '加载中...',
+  'project.visibility.private': '私有',
+  'project.visibility.public': '公开',
+  
+  // 添加员工相关
+  'project.addAgent': '添加员工到项目',
+  'project.addAgent.select': '请选择要添加到项目的员工',
+  'project.addAgent.search': '搜索员工名称、角色或模型',
+  'project.addAgent.info': '员工信息',
+  'project.addAgent.status': '状态',
+  'project.addAgent.enabled': '启用',
+  'project.addAgent.disabled': '禁用',
+  'project.addAgent.selectAtLeast': '请至少选择一名员工',
+  'project.addAgent.addSelected': '添加所选员工',
+  'project.addAgent.success': '成功添加 {count} 名员工',
+  'project.addAgent.failed': '添加员工失败',
+  'project.addAgent.cancel': '取消',
+  'project.addAgent.tooltip': '添加员工到项目中，并设置其优先级和能力',
+  
+  // 项目表单字段
+  'project.name': '项目名称',
+  'project.name.required': '请输入项目名称',
+  'project.name.placeholder': '请输入项目名称',
+  'project.description': '项目描述',
+  'project.description.placeholder': '请输入项目描述',
+  'project.industry': '所属行业',
+  'project.industry.required': '请选择所属行业',
+  'project.industry.placeholder': '请选择所属行业',
+  'project.status': '项目状态',
+  'project.status.required': '请选择项目状态',
+  'project.status.active': '启用',
+  'project.status.inactive': '禁用',
+  'project.status.archived': '归档',
+  'project.visibility': '可见性',
+  'project.visibility.required': '请选择可见性',
+  
+  // 项目编辑标签页
+  'project.basicInfo': '基本信息',
+  'project.agentManagement': '员工管理',
+  
+  // 项目操作消息
+  'project.create.success': '创建项目成功',
+  'project.create.error': '创建项目失败',
+  'project.update.success': '更新项目成功',
+  'project.update.error': '更新项目失败',
+  'project.getAgents.error': '获取项目员工失败',
+  
+  // 员工表格相关
+  'agent.priority': '优先级',
+  'agent.default': '默认',
+  'agent.memory': '记忆',
+  'agent.knowledgeBase': '知识库',
+  'agent.externalTools': '外部工具',
+  'project.agent.confirmRemove': '确定要移除此员工吗？',
+  'project.agent.empty': '暂无员工，请添加员工到项目中',
+  
+  // 通用术语
+  'common.actions': '操作',
+  'common.confirm': '确定',
+  'common.cancel': '取消',
+  'common.remove': '移除',
 }; 

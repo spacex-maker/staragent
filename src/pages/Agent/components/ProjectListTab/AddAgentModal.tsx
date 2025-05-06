@@ -4,6 +4,7 @@ import { SearchOutlined, RobotOutlined, InfoCircleOutlined } from '@ant-design/i
 import styled from 'styled-components';
 import { AIAgent } from '../../types';
 import instance from '../../../../api/axios';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const { Search } = Input;
 
@@ -70,6 +71,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
   onCancel,
   onSuccess,
 }) => {
+  const intl = useIntl();
   const [agents, setAgents] = useState<AIAgent[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -92,11 +94,11 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
       if (response.data.success) {
         setAgents(response.data.data);
       } else {
-        message.error(response.data.message || '获取员工列表失败');
+        message.error(response.data.message || intl.formatMessage({ id: 'project.addAgent.failed', defaultMessage: '获取员工列表失败' }));
       }
     } catch (error) {
       console.error('获取员工列表错误:', error);
-      message.error('获取员工列表失败，请稍后重试');
+      message.error(intl.formatMessage({ id: 'project.addAgent.failed', defaultMessage: '获取员工列表失败，请稍后重试' }));
     } finally {
       setLoading(false);
     }
@@ -114,7 +116,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
 
   const handleAddAgents = async () => {
     if (selectedAgentIds.length === 0) {
-      message.warning('请至少选择一名员工');
+      message.warning(intl.formatMessage({ id: 'project.addAgent.selectAtLeast', defaultMessage: '请至少选择一名员工' }));
       return;
     }
 
@@ -141,21 +143,24 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
           successCount++;
         } else {
           failCount++;
-          message.error(response.data.message || '添加员工失败');
+          message.error(response.data.message || intl.formatMessage({ id: 'project.addAgent.failed', defaultMessage: '添加员工失败' }));
         }
       } catch (error: any) {
         failCount++;
         if (error.response && error.response.data) {
-          message.error(error.response.data.message || '添加员工失败，请稍后重试');
+          message.error(error.response.data.message || intl.formatMessage({ id: 'project.addAgent.failed', defaultMessage: '添加员工失败，请稍后重试' }));
         } else {
-          message.error('添加员工失败，请稍后重试');
+          message.error(intl.formatMessage({ id: 'project.addAgent.failed', defaultMessage: '添加员工失败，请稍后重试' }));
         }
         console.error('添加员工到项目错误:', error);
       }
     }
     
     if (successCount > 0) {
-      message.success(`成功添加 ${successCount} 名员工`);
+      message.success(intl.formatMessage(
+        { id: 'project.addAgent.success', defaultMessage: '成功添加 {count} 名员工' },
+        { count: successCount }
+      ));
     }
     
     if (successCount > 0 && failCount === 0) {
@@ -167,7 +172,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
 
   const columns = [
     {
-      title: '员工信息',
+      title: intl.formatMessage({ id: 'project.addAgent.info', defaultMessage: '员工信息' }),
       dataIndex: 'name',
       key: 'name',
       render: (text: string, record: AIAgent) => (
@@ -190,13 +195,16 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
       width: 250,
     },
     {
-      title: '状态',
+      title: intl.formatMessage({ id: 'project.addAgent.status', defaultMessage: '状态' }),
       dataIndex: 'status',
       key: 'status',
       width: 100,
       render: (status: string) => (
         <Tag color={status === 'active' ? 'success' : 'default'}>
-          {status === 'active' ? '启用' : '禁用'}
+          {status === 'active' 
+            ? intl.formatMessage({ id: 'project.addAgent.enabled', defaultMessage: '启用' })
+            : intl.formatMessage({ id: 'project.addAgent.disabled', defaultMessage: '禁用' })
+          }
         </Tag>
       ),
     },
@@ -204,13 +212,13 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
 
   return (
     <Modal
-      title="添加员工到项目"
+      title={intl.formatMessage({ id: 'project.addAgent', defaultMessage: '添加员工到项目' })}
       open={visible}
       onCancel={onCancel}
       width={600}
       footer={[
         <Button key="cancel" onClick={onCancel}>
-          取消
+          <FormattedMessage id="project.addAgent.cancel" defaultMessage="取消" />
         </Button>,
         <Button
           key="add"
@@ -219,18 +227,20 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
           onClick={handleAddAgents}
           disabled={selectedAgentIds.length === 0}
         >
-          添加所选员工
+          <FormattedMessage id="project.addAgent.addSelected" defaultMessage="添加所选员工" />
         </Button>,
       ]}
     >
-      <Tooltip title="选择要添加到项目的员工，可以通过搜索快速找到员工">
+      <Tooltip title={intl.formatMessage({ id: 'project.addAgent.select', defaultMessage: '选择要添加到项目的员工，可以通过搜索快速找到员工' })}>
         <InfoCircleOutlined style={{ marginRight: 8 }} />
-        <span>请选择要添加到项目的员工</span>
+        <span>
+          <FormattedMessage id="project.addAgent.select" defaultMessage="请选择要添加到项目的员工" />
+        </span>
       </Tooltip>
 
       <SearchContainer>
         <Search
-          placeholder="搜索员工名称、角色或模型"
+          placeholder={intl.formatMessage({ id: 'project.addAgent.search', defaultMessage: '搜索员工名称、角色或模型' })}
           allowClear
           enterButton={<SearchOutlined />}
           onSearch={handleSearch}

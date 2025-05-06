@@ -622,5 +622,98 @@ export default {
   'loanPayment.load.success': 'План успешно загружен',
   'loanPayment.load.error': 'Не удалось загрузить план',
   'loanPayment.load.delete.success': 'План успешно удален',
-  'loanPayment.load.delete.error': 'Не удалось удалить план'
+  'loanPayment.load.delete.error': 'Не удалось удалить план',
+  
+  // Chat related
+  'chat.user': 'Пользователь',
+  'chat.aiAssistant': 'ИИ-ассистент',
+  'chat.sending': 'Отправка...',
+  'chat.sendFailed': 'Ошибка отправки',
+  'chat.loadingHistory': 'Загрузка истории...',
+  'chat.tokenConsumption': 'Примерно {count} токенов',
+
+  // Session list related
+  'sessionList.title': 'Сессии',
+  'sessionList.newSession': 'Новая сессия',
+  'sessionList.loading': 'Загрузка...',
+  'sessionList.loadMore': 'Загрузить еще',
+  'sessionList.noMore': 'Все сессии загружены',
+  'sessionList.empty': 'Пока нет сессий, нажмите кнопку Новая сессия, чтобы начать',
+  'sessionList.selectProject': 'Пожалуйста, сначала выберите проект',
+  'sessionList.error': 'Не удалось получить список сессий, пожалуйста, повторите попытку позже',
+  'sessionList.createFailed': 'Не удалось создать новую сессию, пожалуйста, повторите попытку позже',
+  
+  // Session card related
+  'sessionCard.noMessage': 'Пока нет сообщений',
+  'sessionCard.image': '[Изображение]',
+  'sessionCard.formula': '[Формула]',
+  
+  // Project list related
+  'project.create': 'Создать проект',
+  'project.import': 'Импортировать проект',
+  'project.edit': 'Редактировать проект',
+  'project.delete': 'Удалить проект',
+  'project.confirmDelete': 'Вы уверены, что хотите удалить этот проект?',
+  'project.empty': 'Нет проектов, нажмите кнопку выше для создания',
+  'project.loading': 'Загрузка...',
+  'project.visibility.private': 'Частный',
+  'project.visibility.public': 'Публичный',
+  
+  // Add agent related
+  'project.addAgent': 'Добавить сотрудника в проект',
+  'project.addAgent.select': 'Пожалуйста, выберите сотрудников для добавления в проект',
+  'project.addAgent.search': 'Поиск по имени, роли или модели сотрудника',
+  'project.addAgent.info': 'Информация о сотруднике',
+  'project.addAgent.status': 'Статус',
+  'project.addAgent.enabled': 'Включен',
+  'project.addAgent.disabled': 'Отключен',
+  'project.addAgent.selectAtLeast': 'Пожалуйста, выберите хотя бы одного сотрудника',
+  'project.addAgent.addSelected': 'Добавить выбранных сотрудников',
+  'project.addAgent.success': 'Успешно добавлено {count} сотрудников',
+  'project.addAgent.failed': 'Не удалось добавить сотрудника',
+  'project.addAgent.cancel': 'Отмена',
+  'project.addAgent.tooltip': 'Добавить сотрудника в проект и настроить его приоритет и возможности',
+  
+  // Project form fields
+  'project.name': 'Название проекта',
+  'project.name.required': 'Пожалуйста, введите название проекта',
+  'project.name.placeholder': 'Пожалуйста, введите название проекта',
+  'project.description': 'Описание проекта',
+  'project.description.placeholder': 'Пожалуйста, введите описание проекта',
+  'project.industry': 'Отрасль',
+  'project.industry.required': 'Пожалуйста, выберите отрасль',
+  'project.industry.placeholder': 'Пожалуйста, выберите отрасль',
+  'project.status': 'Статус проекта',
+  'project.status.required': 'Пожалуйста, выберите статус проекта',
+  'project.status.active': 'Активный',
+  'project.status.inactive': 'Неактивный',
+  'project.status.archived': 'Архивирован',
+  'project.visibility': 'Видимость',
+  'project.visibility.required': 'Пожалуйста, выберите видимость',
+  
+  // Project edit tabs
+  'project.basicInfo': 'Основная информация',
+  'project.agentManagement': 'Управление сотрудниками',
+  
+  // Project operation messages
+  'project.create.success': 'Проект успешно создан',
+  'project.create.error': 'Не удалось создать проект',
+  'project.update.success': 'Проект успешно обновлен',
+  'project.update.error': 'Не удалось обновить проект',
+  'project.getAgents.error': 'Не удалось получить список сотрудников',
+  
+  // Agent table related
+  'agent.priority': 'Приоритет',
+  'agent.default': 'По умолчанию',
+  'agent.memory': 'Память',
+  'agent.knowledgeBase': 'База знаний',
+  'agent.externalTools': 'Внешние инструменты',
+  'project.agent.confirmRemove': 'Вы уверены, что хотите удалить этого сотрудника?',
+  'project.agent.empty': 'Нет сотрудников, пожалуйста, добавьте сотрудников в проект',
+  
+  // Common terms
+  'common.actions': 'Действия',
+  'common.confirm': 'Подтвердить',
+  'common.cancel': 'Отмена',
+  'common.remove': 'Удалить',
 };

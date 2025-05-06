@@ -3,6 +3,7 @@ import { Button, Popconfirm, Space, Tag, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined, LockOutlined, GlobalOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Project } from '../../types';
+import { FormattedMessage } from 'react-intl';
 
 interface ProjectItemContainerProps {
   $isActive: boolean;
@@ -179,13 +180,17 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
               <ProjectName>
                 {project.name}
                 {project.visibility === 'private' ? (
-                  <LockOutlined style={{ color: 'var(--ant-color-warning)' }} />
+                  <Tooltip title={<FormattedMessage id="project.visibility.private" defaultMessage="私有" />}>
+                    <LockOutlined style={{ color: 'var(--ant-color-warning)' }} />
+                  </Tooltip>
                 ) : (
-                  <GlobalOutlined style={{ color: 'var(--ant-color-info)' }} />
+                  <Tooltip title={<FormattedMessage id="project.visibility.public" defaultMessage="公开" />}>
+                    <GlobalOutlined style={{ color: 'var(--ant-color-info)' }} />
+                  </Tooltip>
                 )}
               </ProjectName>
               <ActionButtons onClick={e => e.stopPropagation()}>
-                <Tooltip title="编辑项目">
+                <Tooltip title={<FormattedMessage id="project.edit" defaultMessage="编辑项目" />}>
                   <Button
                     type="text"
                     size="small"
@@ -194,12 +199,12 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                   />
                 </Tooltip>
                 <Popconfirm
-                  title="确定要删除此项目吗？"
+                  title={<FormattedMessage id="project.confirmDelete" defaultMessage="确定要删除此项目吗？" />}
                   onConfirm={handleDelete}
-                  okText="确定"
-                  cancelText="取消"
+                  okText={<FormattedMessage id="common.ok" defaultMessage="确定" />}
+                  cancelText={<FormattedMessage id="common.cancel" defaultMessage="取消" />}
                 >
-                  <Tooltip title="删除项目">
+                  <Tooltip title={<FormattedMessage id="project.delete" defaultMessage="删除项目" />}>
                     <Button
                       type="text"
                       size="small"

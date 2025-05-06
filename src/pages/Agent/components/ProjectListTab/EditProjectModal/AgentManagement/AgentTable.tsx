@@ -3,6 +3,7 @@ import { Table, Input, Switch, Button, Popconfirm, Space, Tag, Avatar } from 'an
 import { RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { ProjectAgent } from '../../../../types';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface AgentTableProps {
   projectAgents: ProjectAgent[];
@@ -63,9 +64,11 @@ const AgentTable: React.FC<AgentTableProps> = ({
   onUpdateAgentSettings,
   onRemoveAgent,
 }) => {
+  const intl = useIntl();
+  
   const columns = [
     {
-      title: '员工信息',
+      title: intl.formatMessage({ id: 'project.addAgent.info', defaultMessage: '员工信息' }),
       dataIndex: 'agentName',
       key: 'agentName',
       render: (text: string, record: ProjectAgent) => (
@@ -86,7 +89,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
       width: 280,
     },
     {
-      title: '优先级',
+      title: intl.formatMessage({ id: 'agent.priority', defaultMessage: '优先级' }),
       dataIndex: 'priority',
       key: 'priority',
       width: 80,
@@ -102,7 +105,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
       ),
     },
     {
-      title: '温度',
+      title: intl.formatMessage({ id: 'agent.detail.temperature', defaultMessage: '温度' }),
       dataIndex: 'temperature',
       key: 'temperature',
       width: 80,
@@ -112,7 +115,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
           min={0}
           max={1}
           step={0.1}
-          placeholder="默认"
+          placeholder={intl.formatMessage({ id: 'agent.default', defaultMessage: '默认' })}
           defaultValue={temperature || ''}
           onChange={(e) => {
             const value = e.target.value ? parseFloat(e.target.value) : null;
@@ -123,7 +126,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
       ),
     },
     {
-      title: '最大Token',
+      title: intl.formatMessage({ id: 'agent.detail.maxTokens', defaultMessage: '最大Token' }),
       dataIndex: 'maxTokens',
       key: 'maxTokens',
       width: 100,
@@ -131,7 +134,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
         <Input
           type="number"
           min={1}
-          placeholder="默认"
+          placeholder={intl.formatMessage({ id: 'agent.default', defaultMessage: '默认' })}
           defaultValue={maxTokens || ''}
           onChange={(e) => {
             const value = e.target.value ? parseInt(e.target.value) : null;
@@ -142,7 +145,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
       ),
     },
     {
-      title: '记忆',
+      title: intl.formatMessage({ id: 'agent.memory', defaultMessage: '记忆' }),
       dataIndex: 'enableMemory',
       key: 'enableMemory',
       width: 80,
@@ -154,7 +157,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
       ),
     },
     {
-      title: '知识库',
+      title: intl.formatMessage({ id: 'agent.knowledgeBase', defaultMessage: '知识库' }),
       dataIndex: 'enableRag',
       key: 'enableRag',
       width: 80,
@@ -166,7 +169,7 @@ const AgentTable: React.FC<AgentTableProps> = ({
       ),
     },
     {
-      title: '外部工具',
+      title: intl.formatMessage({ id: 'agent.externalTools', defaultMessage: '外部工具' }),
       dataIndex: 'enableExternal',
       key: 'enableExternal',
       width: 80,
@@ -178,21 +181,21 @@ const AgentTable: React.FC<AgentTableProps> = ({
       ),
     },
     {
-      title: '操作',
+      title: intl.formatMessage({ id: 'common.actions', defaultMessage: '操作' }),
       key: 'action',
       width: 80,
       render: (_: any, record: any) => (
         <Popconfirm
-          title="确定要移除此员工吗？"
+          title={intl.formatMessage({ id: 'project.agent.confirmRemove', defaultMessage: '确定要移除此员工吗？' })}
           onConfirm={() => onRemoveAgent(record.id)}
-          okText="确定"
-          cancelText="取消"
+          okText={intl.formatMessage({ id: 'common.confirm', defaultMessage: '确定' })}
+          cancelText={intl.formatMessage({ id: 'common.cancel', defaultMessage: '取消' })}
         >
           <Button
             type="text"
             danger
           >
-            移除
+            <FormattedMessage id="common.remove" defaultMessage="移除" />
           </Button>
         </Popconfirm>
       ),
@@ -208,7 +211,9 @@ const AgentTable: React.FC<AgentTableProps> = ({
       pagination={false}
       size="middle"
       scroll={{ x: 'max-content', y: 400 }}
-      locale={{ emptyText: '暂无员工，请添加员工到项目中' }}
+      locale={{ 
+        emptyText: intl.formatMessage({ id: 'project.agent.empty', defaultMessage: '暂无员工，请添加员工到项目中' }) 
+      }}
     />
   );
 };

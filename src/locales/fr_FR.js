@@ -635,5 +635,98 @@ export default {
   'loanPayment.load.success': 'Plan chargé avec succès',
   'loanPayment.load.error': 'Échec du chargement du plan',
   'loanPayment.load.delete.success': 'Plan supprimé avec succès',
-  'loanPayment.load.delete.error': 'Échec de la suppression du plan'
+  'loanPayment.load.delete.error': 'Échec de la suppression du plan',
+
+  // Chat related
+  'chat.user': 'Utilisateur',
+  'chat.aiAssistant': 'Assistant IA',
+  'chat.sending': 'Envoi en cours...',
+  'chat.sendFailed': 'Échec de l\'envoi',
+  'chat.loadingHistory': 'Chargement de l\'historique...',
+  'chat.tokenConsumption': 'Est. {count} tokens',
+
+  // Session list related
+  'sessionList.title': 'Sessions',
+  'sessionList.newSession': 'Nouvelle Session',
+  'sessionList.loading': 'Chargement...',
+  'sessionList.loadMore': 'Charger Plus',
+  'sessionList.noMore': 'Toutes les sessions sont chargées',
+  'sessionList.empty': 'Pas encore de sessions, cliquez sur Nouvelle Session pour commencer',
+  'sessionList.selectProject': 'Veuillez d\'abord sélectionner un projet',
+  'sessionList.error': 'Échec de l\'obtention de la liste des sessions, veuillez réessayer',
+  'sessionList.createFailed': 'Échec de la création d\'une nouvelle session, veuillez réessayer',
+  
+  // Session card related
+  'sessionCard.noMessage': 'Pas encore de messages',
+  'sessionCard.image': '[Image]',
+  'sessionCard.formula': '[Formule]',
+  
+  // Project list related
+  'project.create': 'Créer un Projet',
+  'project.import': 'Importer un Projet',
+  'project.edit': 'Modifier le Projet',
+  'project.delete': 'Supprimer le Projet',
+  'project.confirmDelete': 'Êtes-vous sûr de vouloir supprimer ce projet ?',
+  'project.empty': 'Pas encore de projets, cliquez sur le bouton ci-dessus pour en créer un',
+  'project.loading': 'Chargement...',
+  'project.visibility.private': 'Privé',
+  'project.visibility.public': 'Public',
+  
+  // Add agent related
+  'project.addAgent': 'Ajouter un Agent au Projet',
+  'project.addAgent.select': 'Veuillez sélectionner des agents à ajouter au projet',
+  'project.addAgent.search': 'Rechercher un nom, un rôle ou un modèle d\'agent',
+  'project.addAgent.info': 'Informations sur l\'Agent',
+  'project.addAgent.status': 'Statut',
+  'project.addAgent.enabled': 'Activé',
+  'project.addAgent.disabled': 'Désactivé',
+  'project.addAgent.selectAtLeast': 'Veuillez sélectionner au moins un agent',
+  'project.addAgent.addSelected': 'Ajouter les Agents Sélectionnés',
+  'project.addAgent.success': '{count} agents ajoutés avec succès',
+  'project.addAgent.failed': 'Échec de l\'ajout de l\'agent',
+  'project.addAgent.cancel': 'Annuler',
+  'project.addAgent.tooltip': 'Ajouter des agents au projet et configurer leur priorité et leurs capacités',
+  
+  // Project form fields
+  'project.name': 'Nom du projet',
+  'project.name.required': 'Veuillez entrer le nom du projet',
+  'project.name.placeholder': 'Veuillez entrer le nom du projet',
+  'project.description': 'Description du projet',
+  'project.description.placeholder': 'Veuillez entrer la description du projet',
+  'project.industry': 'Industrie',
+  'project.industry.required': 'Veuillez sélectionner l\'industrie',
+  'project.industry.placeholder': 'Veuillez sélectionner l\'industrie',
+  'project.status': 'Statut du projet',
+  'project.status.required': 'Veuillez sélectionner le statut du projet',
+  'project.status.active': 'Actif',
+  'project.status.inactive': 'Inactif',
+  'project.status.archived': 'Archivé',
+  'project.visibility': 'Visibilité',
+  'project.visibility.required': 'Veuillez sélectionner la visibilité',
+  
+  // Project edit tabs
+  'project.basicInfo': 'Informations de base',
+  'project.agentManagement': 'Gestion des agents',
+  
+  // Project operation messages
+  'project.create.success': 'Projet créé avec succès',
+  'project.create.error': 'Échec de la création du projet',
+  'project.update.success': 'Projet mis à jour avec succès',
+  'project.update.error': 'Échec de la mise à jour du projet',
+  'project.getAgents.error': 'Échec de la récupération des agents du projet',
+  
+  // Agent table related
+  'agent.priority': 'Priorité',
+  'agent.default': 'Par défaut',
+  'agent.memory': 'Mémoire',
+  'agent.knowledgeBase': 'Base de connaissances',
+  'agent.externalTools': 'Outils externes',
+  'project.agent.confirmRemove': 'Êtes-vous sûr de vouloir supprimer cet agent?',
+  'project.agent.empty': 'Pas encore d\'agents, veuillez ajouter des agents au projet',
+  
+  // Common terms
+  'common.actions': 'Actions',
+  'common.confirm': 'Confirmer',
+  'common.cancel': 'Annuler',
+  'common.remove': 'Supprimer',
 };

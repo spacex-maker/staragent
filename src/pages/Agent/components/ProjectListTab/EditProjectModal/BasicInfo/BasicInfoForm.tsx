@@ -10,6 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { BasicInfoFormProps } from './types';
 import { useIndustries } from '../../../../contexts/IndustryContext';
 import { StyledCascader } from './styles';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 // 添加所有 solid 图标到库中
 library.add(fas);
@@ -18,6 +19,7 @@ const { Option } = Select;
 
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) => {
   const { industries, loading } = useIndustries();
+  const intl = useIntl();
 
   // 处理初始行业数据
   useEffect(() => {
@@ -74,17 +76,21 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
     >
       <Form.Item
         name="name"
-        label="项目名称"
-        rules={[{ required: true, message: '请输入项目名称' }]}
+        label={<FormattedMessage id="project.name" defaultMessage="项目名称" />}
+        rules={[{ required: true, message: intl.formatMessage({ id: 'project.name.required', defaultMessage: '请输入项目名称' }) }]}
       >
-        <Input placeholder="请输入项目名称" maxLength={50} showCount />
+        <Input 
+          placeholder={intl.formatMessage({ id: 'project.name.placeholder', defaultMessage: '请输入项目名称' })} 
+          maxLength={50} 
+          showCount 
+        />
       </Form.Item>
       <Form.Item
         name="description"
-        label="项目描述"
+        label={<FormattedMessage id="project.description" defaultMessage="项目描述" />}
       >
         <Input.TextArea 
-          placeholder="请输入项目描述" 
+          placeholder={intl.formatMessage({ id: 'project.description.placeholder', defaultMessage: '请输入项目描述' })} 
           maxLength={200} 
           showCount 
           autoSize={{ minRows: 3, maxRows: 6 }}
@@ -92,12 +98,12 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
       </Form.Item>
       <Form.Item
         name="industryIds"
-        label="所属行业"
-        rules={[{ required: true, message: '请选择所属行业' }]}
+        label={<FormattedMessage id="project.industry" defaultMessage="所属行业" />}
+        rules={[{ required: true, message: intl.formatMessage({ id: 'project.industry.required', defaultMessage: '请选择所属行业' }) }]}
       >
         <StyledCascader
           options={industries}
-          placeholder="请选择所属行业"
+          placeholder={intl.formatMessage({ id: 'project.industry.placeholder', defaultMessage: '请选择所属行业' })}
           loading={loading}
           multiple
           maxTagCount="responsive"
@@ -163,32 +169,32 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
       </Form.Item>
       <Form.Item
         name="status"
-        label="项目状态"
-        rules={[{ required: true, message: '请选择项目状态' }]}
+        label={<FormattedMessage id="project.status" defaultMessage="项目状态" />}
+        rules={[{ required: true, message: intl.formatMessage({ id: 'project.status.required', defaultMessage: '请选择项目状态' }) }]}
         initialValue="active"
       >
         <Select>
-          <Option value="active">启用</Option>
-          <Option value="inactive">禁用</Option>
-          <Option value="archived">归档</Option>
+          <Option value="active">{intl.formatMessage({ id: 'project.status.active', defaultMessage: '启用' })}</Option>
+          <Option value="inactive">{intl.formatMessage({ id: 'project.status.inactive', defaultMessage: '禁用' })}</Option>
+          <Option value="archived">{intl.formatMessage({ id: 'project.status.archived', defaultMessage: '归档' })}</Option>
         </Select>
       </Form.Item>
       <Form.Item
         name="visibility"
-        label="可见性"
-        rules={[{ required: true, message: '请选择可见性' }]}
+        label={<FormattedMessage id="project.visibility" defaultMessage="可见性" />}
+        rules={[{ required: true, message: intl.formatMessage({ id: 'project.visibility.required', defaultMessage: '请选择可见性' }) }]}
       >
         <Radio.Group>
           <Radio value="private">
             <Space>
               <LockOutlined />
-              私有
+              <FormattedMessage id="project.visibility.private" defaultMessage="私有" />
             </Space>
           </Radio>
           <Radio value="public">
             <Space>
               <GlobalOutlined />
-              公开
+              <FormattedMessage id="project.visibility.public" defaultMessage="公开" />
             </Space>
           </Radio>
         </Radio.Group>

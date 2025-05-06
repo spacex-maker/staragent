@@ -2,6 +2,7 @@ import React, { useState, useEffect, useImperativeHandle, forwardRef, useRef, us
 import { message } from 'antd';
 import { ChatSession, PaginationParams } from '../../../types';
 import axios from '../../../../../api/axios';
+import { useIntl } from 'react-intl';
 import { SessionListContainer, SessionListResizer } from './styles';
 import SessionListHeader from './components/SessionListHeader';
 import SessionListContent from './components/SessionListContent';
@@ -24,6 +25,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
   onSessionSelect,
   onNewSession
 }, ref) => {
+  const intl = useIntl();
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -88,11 +90,11 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         const currentSessionCount = sessionsLengthRef.current;
         setHasMore(currentSessionCount < totalCount);
       } else {
-        message.error(response.data.message || '获取会话列表失败');
+        message.error(response.data.message || intl.formatMessage({ id: 'sessionList.error' }));
       }
     } catch (error) {
       console.error('获取会话列表错误:', error);
-      message.error('获取会话列表失败，请稍后重试');
+      message.error(intl.formatMessage({ id: 'sessionList.error' }));
       throw error;
     } finally {
       if (isFirstPage) {
@@ -101,7 +103,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
         setLoadingMore(false);
       }
     }
-  }, [pagination.pageSize]); // 只依赖 pageSize
+  }, [pagination.pageSize, intl]); // 只依赖 pageSize 和 intl
 
   // 重置状态并刷新
   const resetAndRefresh = useCallback(async () => {
@@ -156,7 +158,7 @@ const SessionList = forwardRef<SessionListRef, SessionListProps>(({
       await resetAndRefresh();
     } catch (error) {
       console.error('创建新会话失败:', error);
-      message.error('创建新会话失败，请稍后重试');
+      message.error(intl.formatMessage({ id: 'sessionList.createFailed' }));
     } finally {
       setNewSessionLoading(false);
     }

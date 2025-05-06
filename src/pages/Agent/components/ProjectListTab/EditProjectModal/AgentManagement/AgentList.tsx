@@ -7,6 +7,7 @@ import { fetchProjectAgents, updateProjectAgentSettings, removeProjectAgent } fr
 import AgentTable from './AgentTable';
 import AddAgentModal from '../../AddAgentModal';
 import { AgentListProps } from '../types';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const TabContainer = styled.div`
   margin-top: 8px;
@@ -24,6 +25,7 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
   const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
   const [loading, setLoading] = useState(false);
   const [addAgentModalVisible, setAddAgentModalVisible] = useState(false);
+  const intl = useIntl();
 
   const fetchAgents = async () => {
     if (!projectId) return;
@@ -35,7 +37,7 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
       onAgentsChange?.();
     } catch (error) {
       console.error('获取项目员工错误:', error);
-      message.error('获取项目员工失败');
+      message.error(intl.formatMessage({ id: 'project.getAgents.error', defaultMessage: '获取项目员工失败' }));
     } finally {
       setLoading(false);
     }
@@ -85,9 +87,9 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
             icon={<PlusOutlined />}
             onClick={handleAddAgent}
           >
-            添加员工
+            <FormattedMessage id="project.addAgent" defaultMessage="添加员工" />
           </Button>
-          <Tooltip title="添加员工到项目中，并设置其优先级和能力">
+          <Tooltip title={intl.formatMessage({ id: 'project.addAgent.tooltip', defaultMessage: '添加员工到项目中，并设置其优先级和能力' })}>
             <InfoCircleOutlined style={{ color: 'var(--ant-color-primary)' }} />
           </Tooltip>
         </Space>

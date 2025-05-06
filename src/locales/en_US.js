@@ -654,4 +654,97 @@ export default {
   'toolkit.menu.dateCalculator': 'Date Calculator',
   'toolkit.menu.otherTools': 'Other Tools',
   'toolkit.menu.settings': 'Tool Settings',
+
+  // Chat related
+  'chat.user': 'User',
+  'chat.aiAssistant': 'AI Assistant',
+  'chat.sending': 'Sending...',
+  'chat.sendFailed': 'Send failed',
+  'chat.loadingHistory': 'Loading history...',
+  'chat.tokenConsumption': 'Est. {count} tokens',
+
+  // Session list related
+  'sessionList.title': 'Sessions',
+  'sessionList.newSession': 'New Session',
+  'sessionList.loading': 'Loading...',
+  'sessionList.loadMore': 'Load More',
+  'sessionList.noMore': 'All sessions loaded',
+  'sessionList.empty': 'No sessions yet, click New Session to start',
+  'sessionList.selectProject': 'Please select a project first',
+  'sessionList.error': 'Failed to get session list, please try again later',
+  'sessionList.createFailed': 'Failed to create new session, please try again later',
+  
+  // Session card related
+  'sessionCard.noMessage': 'No messages yet',
+  'sessionCard.image': '[Image]',
+  'sessionCard.formula': '[Formula]',
+  
+  // Project list related
+  'project.create': 'Create Project',
+  'project.import': 'Import Project',
+  'project.edit': 'Edit Project',
+  'project.delete': 'Delete Project',
+  'project.confirmDelete': 'Are you sure you want to delete this project?',
+  'project.empty': 'No projects yet, click the button above to create one',
+  'project.loading': 'Loading...',
+  'project.visibility.private': 'Private',
+  'project.visibility.public': 'Public',
+  
+  // Add agent related
+  'project.addAgent': 'Add Agent to Project',
+  'project.addAgent.select': 'Please select agents to add to the project',
+  'project.addAgent.search': 'Search agent name, role or model',
+  'project.addAgent.info': 'Agent Information',
+  'project.addAgent.status': 'Status',
+  'project.addAgent.enabled': 'Enabled',
+  'project.addAgent.disabled': 'Disabled',
+  'project.addAgent.selectAtLeast': 'Please select at least one agent',
+  'project.addAgent.addSelected': 'Add Selected Agents',
+  'project.addAgent.success': 'Successfully added {count} agents',
+  'project.addAgent.failed': 'Failed to add agent',
+  'project.addAgent.cancel': 'Cancel',
+  'project.addAgent.tooltip': 'Add agents to the project and configure their priority and capabilities',
+  
+  // Project form fields
+  'project.name': 'Project Name',
+  'project.name.required': 'Please enter project name',
+  'project.name.placeholder': 'Please enter project name',
+  'project.description': 'Project Description',
+  'project.description.placeholder': 'Please enter project description',
+  'project.industry': 'Industry',
+  'project.industry.required': 'Please select industry',
+  'project.industry.placeholder': 'Please select industry',
+  'project.status': 'Project Status',
+  'project.status.required': 'Please select project status',
+  'project.status.active': 'Active',
+  'project.status.inactive': 'Inactive',
+  'project.status.archived': 'Archived',
+  'project.visibility': 'Visibility',
+  'project.visibility.required': 'Please select visibility',
+  
+  // Project edit tabs
+  'project.basicInfo': 'Basic Information',
+  'project.agentManagement': 'Agent Management',
+  
+  // Project operation messages
+  'project.create.success': 'Project created successfully',
+  'project.create.error': 'Failed to create project',
+  'project.update.success': 'Project updated successfully',
+  'project.update.error': 'Failed to update project',
+  'project.getAgents.error': 'Failed to get project agents',
+  
+  // Agent table related
+  'agent.priority': 'Priority',
+  'agent.default': 'Default',
+  'agent.memory': 'Memory',
+  'agent.knowledgeBase': 'Knowledge Base',
+  'agent.externalTools': 'External Tools',
+  'project.agent.confirmRemove': 'Are you sure you want to remove this agent?',
+  'project.agent.empty': 'No agents yet, please add agents to the project',
+  
+  // Common terms
+  'common.actions': 'Actions',
+  'common.confirm': 'Confirm',
+  'common.cancel': 'Cancel',
+  'common.remove': 'Remove',
 };

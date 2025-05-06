@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { List } from 'antd';
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const { Text, Paragraph } = Typography;
 
@@ -94,18 +95,20 @@ const TimeText = styled(Text)`
 `;
 
 const SessionCard: React.FC<SessionCardProps> = ({ session, active, onClick }) => {
+  const intl = useIntl();
+  
   // 格式化最后一条消息
   const formatLastMessage = (message: string | null) => {
-    if (!message) return '暂无消息';
+    if (!message) return intl.formatMessage({ id: 'sessionCard.noMessage' });
     
     // 如果消息包含图片链接，替换为[图片]
     if (message.includes('![') && message.includes('](')) {
-      return '[图片]';
+      return intl.formatMessage({ id: 'sessionCard.image' });
     }
     
     // 如果消息包含LaTeX公式，替换为[数学公式]
     if (message.includes('\\[') || message.includes('\\]') || message.includes('$')) {
-      return '[数学公式]';
+      return intl.formatMessage({ id: 'sessionCard.formula' });
     }
     
     return message;

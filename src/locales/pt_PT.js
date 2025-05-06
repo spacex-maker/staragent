@@ -593,5 +593,97 @@ export default {
   'loanPayment.load.success': 'Plano carregado com sucesso',
   'loanPayment.load.error': 'Falha ao carregar o plano',
   'loanPayment.load.delete.success': 'Plano excluído com sucesso',
-  'loanPayment.load.delete.error': 'Falha ao excluir o plano'
+  'loanPayment.load.delete.error': 'Falha ao excluir o plano',
+
+  // Chat related
+  'chat.user': 'Utilizador',
+  'chat.aiAssistant': 'Assistente IA',
+  'chat.sending': 'A enviar...',
+  'chat.sendFailed': 'Falha no envio',
+  'chat.loadingHistory': 'A carregar histórico...',
+  'chat.tokenConsumption': 'Est. {count} tokens',
+
+  // Session list related
+  'sessionList.title': 'Sessões',
+  'sessionList.newSession': 'Nova Sessão',
+  'sessionList.loading': 'A carregar...',
+  'sessionList.loadMore': 'Carregar Mais',
+  'sessionList.noMore': 'Todas as sessões carregadas',
+  'sessionList.empty': 'Ainda não há sessões, clique em Nova Sessão para começar',
+  'sessionList.selectProject': 'Por favor selecione um projeto primeiro',
+  'sessionList.error': 'Falha ao obter a lista de sessões, por favor tente novamente mais tarde',
+  'sessionList.createFailed': 'Falha ao criar nova sessão, por favor tente novamente mais tarde',
+  
+  // Session card related
+  'sessionCard.noMessage': 'Ainda sem mensagens',
+  'sessionCard.image': '[Imagem]',
+  'sessionCard.formula': '[Fórmula]',
+  
+  // Project list related
+  'project.create': 'Criar Projeto',
+  'project.import': 'Importar Projeto',
+  'project.edit': 'Editar Projeto',
+  'project.delete': 'Eliminar Projeto',
+  'project.confirmDelete': 'Tem certeza que deseja eliminar este projeto?',
+  'project.empty': 'Ainda sem projetos, clique no botão acima para criar um',
+  'project.loading': 'A carregar...',
+  'project.visibility.private': 'Privado',
+  'project.visibility.public': 'Público',
+  
+  // Add agent related
+  'project.addAgent': 'Adicionar Agente ao Projeto',
+  'project.addAgent.select': 'Por favor selecione agentes para adicionar ao projeto',
+  'project.addAgent.search': 'Pesquisar nome, função ou modelo de agente',
+  'project.addAgent.info': 'Informação do Agente',
+  'project.addAgent.status': 'Estado',
+  'project.addAgent.enabled': 'Ativado',
+  'project.addAgent.disabled': 'Desativado',
+  'project.addAgent.selectAtLeast': 'Por favor selecione pelo menos um agente',
+  'project.addAgent.addSelected': 'Adicionar Agentes Selecionados',
+  'project.addAgent.success': '{count} agentes adicionados com sucesso',
+  'project.addAgent.failed': 'Falha ao adicionar agente',
+  'project.addAgent.cancel': 'Cancelar',
+
+  // 项目表单字段
+  'project.name': 'Nome do Projeto',
+  'project.name.required': 'Por favor, insira o nome do projeto',
+  'project.name.placeholder': 'Por favor, insira o nome do projeto',
+  'project.description': 'Descrição do Projeto',
+  'project.description.placeholder': 'Por favor, insira a descrição do projeto',
+  'project.industry': 'Indústria',
+  'project.industry.required': 'Por favor, selecione a indústria',
+  'project.industry.placeholder': 'Por favor, selecione a indústria',
+  'project.status': 'Status do Projeto',
+  'project.status.required': 'Por favor, selecione o status do projeto',
+  'project.status.active': 'Ativo',
+  'project.status.inactive': 'Inativo',
+  'project.status.archived': 'Arquivado',
+  'project.visibility': 'Visibilidade',
+  'project.visibility.required': 'Por favor, selecione a visibilidade',
+  
+  // 项目编辑标签页
+  'project.basicInfo': 'Informações Básicas',
+  'project.agentManagement': 'Gestão de Funcionários',
+  
+  // 项目操作消息
+  'project.create.success': 'Projeto criado com sucesso',
+  'project.create.error': 'Falha ao criar projeto',
+  'project.update.success': 'Projeto atualizado com sucesso',
+  'project.update.error': 'Falha ao atualizar projeto',
+  'project.getAgents.error': 'Falha ao obter funcionários do projeto',
+  
+  // 员工表格相关
+  'agent.priority': 'Prioridade',
+  'agent.default': 'Padrão',
+  'agent.memory': 'Memória',
+  'agent.knowledgeBase': 'Base de Conhecimento',
+  'agent.externalTools': 'Ferramentas Externas',
+  'project.agent.confirmRemove': 'Tem certeza que deseja remover este funcionário?',
+  'project.agent.empty': 'Nenhum funcionário, por favor adicione funcionários ao projeto',
+  
+  // 通用术语
+  'common.actions': 'Ações',
+  'common.confirm': 'Confirmar',
+  'common.cancel': 'Cancelar',
+  'common.remove': 'Remover',
 };

@@ -635,5 +635,97 @@ export default {
   'loanPayment.load.success': 'Piano caricato con successo',
   'loanPayment.load.error': 'Impossibile caricare il piano',
   'loanPayment.load.delete.success': 'Piano eliminato con successo',
-  'loanPayment.load.delete.error': 'Impossibile eliminare il piano'
+  'loanPayment.load.delete.error': 'Impossibile eliminare il piano',
+
+  // Chat related
+  'chat.user': 'Utente',
+  'chat.aiAssistant': 'Assistente IA',
+  'chat.sending': 'Invio in corso...',
+  'chat.sendFailed': 'Invio fallito',
+  'chat.loadingHistory': 'Caricamento della cronologia...',
+  'chat.tokenConsumption': 'Stima: {count} token',
+
+  // Session list related
+  'sessionList.title': 'Sessioni',
+  'sessionList.newSession': 'Nuova Sessione',
+  'sessionList.loading': 'Caricamento...',
+  'sessionList.loadMore': 'Carica altro',
+  'sessionList.noMore': 'Tutte le sessioni caricate',
+  'sessionList.empty': 'Nessuna sessione ancora, clicca su Nuova Sessione per iniziare',
+  'sessionList.selectProject': 'Per favore seleziona prima un progetto',
+  'sessionList.error': 'Impossibile ottenere la lista delle sessioni, riprova più tardi',
+  'sessionList.createFailed': 'Creazione nuova sessione fallita, riprova più tardi',
+  
+  // Session card related
+  'sessionCard.noMessage': 'Nessun messaggio ancora',
+  'sessionCard.image': '[Immagine]',
+  'sessionCard.formula': '[Formula]',
+  
+  // Project list related
+  'project.create': 'Crea Progetto',
+  'project.import': 'Importa Progetto',
+  'project.edit': 'Modifica Progetto',
+  'project.delete': 'Elimina Progetto',
+  'project.confirmDelete': 'Sei sicuro di voler eliminare questo progetto?',
+  'project.empty': 'Nessun progetto ancora, clicca sul pulsante sopra per crearne uno',
+  'project.loading': 'Caricamento...',
+  'project.visibility.private': 'Privato',
+  'project.visibility.public': 'Pubblico',
+  
+  // Add agent related
+  'project.addAgent': 'Aggiungi Agente al Progetto',
+  'project.addAgent.select': 'Seleziona gli agenti da aggiungere al progetto',
+  'project.addAgent.search': 'Cerca nome, ruolo o modello agente',
+  'project.addAgent.info': 'Informazioni Agente',
+  'project.addAgent.status': 'Stato',
+  'project.addAgent.enabled': 'Abilitato',
+  'project.addAgent.disabled': 'Disabilitato',
+  'project.addAgent.selectAtLeast': 'Seleziona almeno un agente',
+  'project.addAgent.addSelected': 'Aggiungi Agenti Selezionati',
+  'project.addAgent.success': 'Aggiunti con successo {count} agenti',
+  'project.addAgent.failed': 'Impossibile aggiungere l\'agente',
+  'project.addAgent.cancel': 'Annulla',
+
+  // 项目表单字段
+  'project.name': 'Nome del Progetto',
+  'project.name.required': 'Per favore inserisci il nome del progetto',
+  'project.name.placeholder': 'Per favore inserisci il nome del progetto',
+  'project.description': 'Descrizione del Progetto',
+  'project.description.placeholder': 'Per favore inserisci la descrizione del progetto',
+  'project.industry': 'Settore',
+  'project.industry.required': 'Per favore seleziona il settore',
+  'project.industry.placeholder': 'Per favore seleziona il settore',
+  'project.status': 'Stato del Progetto',
+  'project.status.required': 'Per favore seleziona lo stato del progetto',
+  'project.status.active': 'Attivo',
+  'project.status.inactive': 'Inattivo',
+  'project.status.archived': 'Archiviato',
+  'project.visibility': 'Visibilità',
+  'project.visibility.required': 'Per favore seleziona la visibilità',
+  
+  // 项目编辑标签页
+  'project.basicInfo': 'Informazioni di Base',
+  'project.agentManagement': 'Gestione Dipendenti',
+  
+  // 项目操作消息
+  'project.create.success': 'Progetto creato con successo',
+  'project.create.error': 'Creazione del progetto fallita',
+  'project.update.success': 'Progetto aggiornato con successo',
+  'project.update.error': 'Aggiornamento del progetto fallito',
+  'project.getAgents.error': 'Recupero dei dipendenti del progetto fallito',
+  
+  // 员工表格相关
+  'agent.priority': 'Priorità',
+  'agent.default': 'Predefinito',
+  'agent.memory': 'Memoria',
+  'agent.knowledgeBase': 'Base di Conoscenza',
+  'agent.externalTools': 'Strumenti Esterni',
+  'project.agent.confirmRemove': 'Sei sicuro di voler rimuovere questo dipendente?',
+  'project.agent.empty': 'Nessun dipendente, per favore aggiungi dipendenti al progetto',
+  
+  // 通用术语
+  'common.actions': 'Azioni',
+  'common.confirm': 'Conferma',
+  'common.cancel': 'Annulla',
+  'common.remove': 'Rimuovi',
 };

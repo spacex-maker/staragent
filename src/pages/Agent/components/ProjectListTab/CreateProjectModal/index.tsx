@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Form, message } from 'antd';
 import styled from 'styled-components';
 import BasicInfoForm from '../EditProjectModal/BasicInfo/BasicInfoForm';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface CreateProjectModalProps {
   visible: boolean;
@@ -18,6 +19,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
+  const intl = useIntl();
 
   const handleOk = async () => {
     try {
@@ -39,12 +41,12 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
         };
 
         await onProjectCreate(createData);
-        message.success('创建项目成功');
+        message.success(intl.formatMessage({ id: 'project.create.success', defaultMessage: '创建项目成功' }));
         form.resetFields();
         onSuccess();
       } catch (error) {
         console.error('创建项目错误:', error);
-        message.error('创建项目失败');
+        message.error(intl.formatMessage({ id: 'project.create.error', defaultMessage: '创建项目失败' }));
       }
     } catch (error) {
       console.error('表单验证失败:', error);
@@ -55,7 +57,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
 
   return (
     <Modal
-      title="创建项目"
+      title={<FormattedMessage id="project.create" defaultMessage="创建项目" />}
       open={visible}
       onOk={handleOk}
       onCancel={onCancel}

@@ -3,6 +3,7 @@ import { Modal, Form, Tabs, message } from 'antd';
 import { Project } from '../../../types';
 import BasicInfoForm from './BasicInfo/BasicInfoForm';
 import AgentList from './AgentManagement/AgentList';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface EditProjectModalProps {
   visible: boolean;
@@ -24,6 +25,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('basic');
+  const intl = useIntl();
 
   React.useEffect(() => {
     if (visible && project) {
@@ -62,11 +64,11 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         };
         
         await onProjectUpdate(project.id, updateData);
-        message.success('更新项目成功');
+        message.success(intl.formatMessage({ id: 'project.update.success', defaultMessage: '更新项目成功' }));
         onSuccess();
       } catch (error) {
         console.error('更新项目错误:', error);
-        message.error('更新项目失败');
+        message.error(intl.formatMessage({ id: 'project.update.error', defaultMessage: '更新项目失败' }));
       }
     } catch (error) {
       console.error('表单验证失败:', error);
@@ -77,7 +79,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
 
   return (
     <Modal
-      title="编辑项目"
+      title={<FormattedMessage id="project.edit" defaultMessage="编辑项目" />}
       open={visible}
       onOk={handleOk}
       onCancel={onCancel}
@@ -89,7 +91,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
       <Tabs activeKey={activeTab} onChange={handleTabChange} items={[
         {
           key: 'basic',
-          label: '基本信息',
+          label: intl.formatMessage({ id: 'project.basicInfo', defaultMessage: '基本信息' }),
           children: (
             <BasicInfoForm
               form={form}
@@ -99,7 +101,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         },
         {
           key: 'agents',
-          label: '员工管理',
+          label: intl.formatMessage({ id: 'project.agentManagement', defaultMessage: '员工管理' }),
           children: (
             <AgentList
               projectId={project.id}

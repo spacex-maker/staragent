@@ -665,5 +665,97 @@ export default {
   'loanPayment.load.success': '계획이 성공적으로 불러와졌습니다',
   'loanPayment.load.error': '계획 불러오기에 실패했습니다',
   'loanPayment.load.delete.success': '계획이 성공적으로 삭제되었습니다',
-  'loanPayment.load.delete.error': '계획 삭제에 실패했습니다'
+  'loanPayment.load.delete.error': '계획 삭제에 실패했습니다',
+
+  // Chat related
+  'chat.user': '사용자',
+  'chat.aiAssistant': 'AI 어시스턴트',
+  'chat.sending': '전송 중...',
+  'chat.sendFailed': '전송 실패',
+  'chat.loadingHistory': '기록 로딩 중...',
+  'chat.tokenConsumption': '예상: {count} 토큰',
+
+  // Session list related
+  'sessionList.title': '세션',
+  'sessionList.newSession': '새 세션',
+  'sessionList.loading': '로딩 중...',
+  'sessionList.loadMore': '더 로드',
+  'sessionList.noMore': '모든 세션이 로드됨',
+  'sessionList.empty': '세션이 없습니다. 새 세션 버튼을 클릭하여 시작하세요',
+  'sessionList.selectProject': '먼저 프로젝트를 선택해 주세요',
+  'sessionList.error': '세션 목록을 가져오는 데 실패했습니다. 나중에 다시 시도해 주세요',
+  'sessionList.createFailed': '새 세션 생성에 실패했습니다. 나중에 다시 시도해 주세요',
+  
+  // Session card related
+  'sessionCard.noMessage': '아직 메시지 없음',
+  'sessionCard.image': '[이미지]',
+  'sessionCard.formula': '[수식]',
+  
+  // Project list related
+  'project.create': '프로젝트 생성',
+  'project.import': '프로젝트 가져오기',
+  'project.edit': '프로젝트 편집',
+  'project.delete': '프로젝트 삭제',
+  'project.confirmDelete': '이 프로젝트를 삭제하시겠습니까?',
+  'project.empty': '아직 프로젝트가 없습니다. 위 버튼을 클릭하여 생성하세요',
+  'project.loading': '로딩 중...',
+  'project.visibility.private': '비공개',
+  'project.visibility.public': '공개',
+  
+  // Add agent related
+  'project.addAgent': '프로젝트에 에이전트 추가',
+  'project.addAgent.select': '프로젝트에 추가할 에이전트를 선택하세요',
+  'project.addAgent.search': '에이전트 이름, 역할 또는 모델 검색',
+  'project.addAgent.info': '에이전트 정보',
+  'project.addAgent.status': '상태',
+  'project.addAgent.enabled': '활성화됨',
+  'project.addAgent.disabled': '비활성화됨',
+  'project.addAgent.selectAtLeast': '적어도 하나의 에이전트를 선택하세요',
+  'project.addAgent.addSelected': '선택한 에이전트 추가',
+  'project.addAgent.success': '{count}개 에이전트가 성공적으로 추가되었습니다',
+  'project.addAgent.failed': '에이전트 추가 실패',
+  'project.addAgent.cancel': '취소',
+
+  // 项目表单字段
+  'project.name': '프로젝트 이름',
+  'project.name.required': '프로젝트 이름을 입력하세요',
+  'project.name.placeholder': '프로젝트 이름을 입력하세요',
+  'project.description': '프로젝트 설명',
+  'project.description.placeholder': '프로젝트 설명을 입력하세요',
+  'project.industry': '산업 분야',
+  'project.industry.required': '산업 분야를 선택하세요',
+  'project.industry.placeholder': '산업 분야를 선택하세요',
+  'project.status': '프로젝트 상태',
+  'project.status.required': '프로젝트 상태를 선택하세요',
+  'project.status.active': '활성화',
+  'project.status.inactive': '비활성화',
+  'project.status.archived': '보관됨',
+  'project.visibility': '가시성',
+  'project.visibility.required': '가시성을 선택하세요',
+  
+  // 项目编辑标签页
+  'project.basicInfo': '기본 정보',
+  'project.agentManagement': '직원 관리',
+  
+  // 项目操作消息
+  'project.create.success': '프로젝트 생성 성공',
+  'project.create.error': '프로젝트 생성 실패',
+  'project.update.success': '프로젝트 업데이트 성공',
+  'project.update.error': '프로젝트 업데이트 실패',
+  'project.getAgents.error': '프로젝트 직원 가져오기 실패',
+  
+  // 员工表格相关
+  'agent.priority': '우선순위',
+  'agent.default': '기본값',
+  'agent.memory': '메모리',
+  'agent.knowledgeBase': '지식 베이스',
+  'agent.externalTools': '외부 도구',
+  'project.agent.confirmRemove': '이 직원을 제거하시겠습니까?',
+  'project.agent.empty': '직원이 없습니다. 프로젝트에 직원을 추가하세요',
+  
+  // 通用术语
+  'common.actions': '작업',
+  'common.confirm': '확인',
+  'common.cancel': '취소',
+  'common.remove': '제거',
 };
