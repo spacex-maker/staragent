@@ -41,6 +41,9 @@ export interface Message {
   updateTime: string;
   contextTokens?: number;
   contentTokens?: number;
+  promptCost?: number;
+  completionCost?: number;
+  unit?: string;
 }
 
 // 前端消息类型，扩展基础消息接口
@@ -55,6 +58,9 @@ export interface FrontendMessage extends Partial<Message> {
   error?: boolean;
   contextTokens?: number;
   contentTokens?: number;
+  promptCost?: number;
+  completionCost?: number;
+  unit?: string;
 }
 
 // 聊天会话接口

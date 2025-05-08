@@ -654,9 +654,11 @@ export default {
   'chat.sending': 'جاري الإرسال...',
   'chat.sendFailed': 'فشل الإرسال',
   'chat.loadingHistory': 'جاري تحميل السجل...',
-  'chat.tokenConsumption': 'تم استهلاك {count} رمز',
-  'chat.contextTokens': 'السياق: {count} رمز',
-  'chat.contentTokens': 'الرد: {count} رمز',
+  'chat.tokenConsumption': 'الرموز: {count}',
+  'chat.contextTokens': 'رموز السياق: {count}',
+  'chat.contentTokens': 'رموز الرد: {count}',
+  'chat.promptCost': 'تكلفة السياق: {cost}{unit}',
+  'chat.completionCost': 'تكلفة الرد: {cost}{unit}',
 
   // Session list related
   'sessionList.title': 'الجلسات',

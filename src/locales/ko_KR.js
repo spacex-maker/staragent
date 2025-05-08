@@ -674,8 +674,10 @@ export default {
   'chat.sendFailed': '전송 실패',
   'chat.loadingHistory': '기록 로딩 중...',
   'chat.tokenConsumption': '{count} 토큰 소비',
-  'chat.contextTokens': '컨텍스트: {count} 토큰',
-  'chat.contentTokens': '응답: {count} 토큰',
+  'chat.contextTokens': '컨텍스트 토큰: {count}',
+  'chat.contentTokens': '응답 토큰: {count}',
+  'chat.promptCost': '컨텍스트 비용: {cost}{unit}',
+  'chat.completionCost': '응답 비용: {cost}{unit}',
 
   // Session list related
   'sessionList.title': '세션',

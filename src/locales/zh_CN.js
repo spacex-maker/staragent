@@ -630,9 +630,11 @@ export default {
   'chat.sending': '发送中...',
   'chat.sendFailed': '发送失败',
   'chat.loadingHistory': '加载历史消息中...',
-  'chat.tokenConsumption': '消耗 {count} tokens',
-  'chat.contextTokens': '上下文: {count} tokens',
-  'chat.contentTokens': '回复: {count} tokens',
+  'chat.tokenConsumption': '消耗: {count} tokens',
+  'chat.contextTokens': '上下文消耗: {count} tokens',
+  'chat.contentTokens': '回复消耗: {count} tokens',
+  'chat.promptCost': '上下文花费: {cost}{unit}',
+  'chat.completionCost': '回复花费: {cost}{unit}',
 
   // 会话列表相关
   'sessionList.title': '会话列表',

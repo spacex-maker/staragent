@@ -385,25 +385,50 @@ const MessageList: React.FC<MessageListProps> = ({
                     <MessageContent content={msg.content} />
                   </MessageBubble>
 
-                  {/* Token计数 */}
+                  {/* Token计数和花费信息 */}
                   <TokenCounter $isUser={isUser}>
                     {!isUser && msg.contextTokens && msg.contentTokens ? (
                       <>
-                        {intl.formatMessage(
-                          { id: 'chat.contextTokens' },
-                          { count: msg.contextTokens }
-                        )}
-                        {' | '}
-                        {intl.formatMessage(
-                          { id: 'chat.contentTokens' },
-                          { count: msg.contentTokens }
+                        <div>
+                          {intl.formatMessage(
+                            { id: 'chat.contextTokens' },
+                            { count: msg.contextTokens }
+                          )}
+                          {' | '}
+                          {intl.formatMessage(
+                            { id: 'chat.contentTokens' },
+                            { count: msg.contentTokens }
+                          )}
+                        </div>
+                        {(msg.promptCost !== null || msg.completionCost !== null) && (
+                          <div style={{ color: 'var(--ant-color-primary)', marginTop: '2px' }}>
+                            {msg.promptCost !== null && (
+                              <span>
+                                {intl.formatMessage(
+                                  { id: 'chat.promptCost' },
+                                  { cost: msg.promptCost, unit: msg.unit || '$' }
+                                )}
+                              </span>
+                            )}
+                            {msg.promptCost !== null && msg.completionCost !== null && ' | '}
+                            {msg.completionCost !== null && (
+                              <span>
+                                {intl.formatMessage(
+                                  { id: 'chat.completionCost' },
+                                  { cost: msg.completionCost, unit: msg.unit || '$' }
+                                )}
+                              </span>
+                            )}
+                          </div>
                         )}
                       </>
                     ) : (
-                      intl.formatMessage(
-                        { id: 'chat.tokenConsumption' },
-                        { count: estimateTokens(msg.content) }
-                      )
+                      <div>
+                        {intl.formatMessage(
+                          { id: 'chat.tokenConsumption' },
+                          { count: estimateTokens(msg.content) }
+                        )}
+                      </div>
                     )}
                   </TokenCounter>
 
