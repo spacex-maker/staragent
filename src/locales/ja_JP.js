@@ -722,4 +722,27 @@ export default {
   'common.confirm': '確認',
   'common.cancel': 'キャンセル',
   'common.remove': '削除',
+
+  // SupportedModelsModalの国際化設定
+  'modal.supportedModels.title': 'サポートされているモデル',
+  'userMenu.supportedModels': 'サポートモデル',
+  'supportedModels.empty': '利用可能なモデルがありません',
+  'supportedModels.input': '入力',
+  'supportedModels.output': '出力',
+  'supportedModels.contextLength': 'コンテキスト長',
+  'supportedModels.thoughtChainLength': '思考チェーン長',
+  'supportedModels.outputLength': '出力長',
+  'supportedModels.recommendLevel': '推奨レベル',
+  'supportedModels.hot': '人気',
+  'supportedModels.perMillion': '/百万トークン',
+  'common.unlimited': '無制限',
+
+  // モデル価格フォーマット
+  'modelPrice.inputFormat': '入力: {price}/百万トークン',
+  'modelPrice.outputFormat': '出力: {price}/百万トークン',
+
+  // トークン説明
+  'token.explanation.title': 'トークンの説明：',
+  'token.explanation.input': '入力トークン：通常、会話履歴、アシスタントのメモリ、コンテキスト情報、短期記憶、長期記憶、キーメモリなどの情報で構成されています。',
+  'token.explanation.output': '出力トークン：通常、アシスタントの応答データです。',
 };

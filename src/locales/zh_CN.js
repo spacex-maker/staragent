@@ -720,4 +720,27 @@ export default {
   'common.confirm': '确定',
   'common.cancel': '取消',
   'common.remove': '移除',
+
+  // 为SupportedModelsModal添加国际化配置
+  'modal.supportedModels.title': '支持的模型',
+  'userMenu.supportedModels': '支持模型',
+  'supportedModels.empty': '暂无模型',
+  'supportedModels.input': '输入',
+  'supportedModels.output': '输出',
+  'supportedModels.contextLength': '上下文长度',
+  'supportedModels.thoughtChainLength': '思维链长度',
+  'supportedModels.outputLength': '输出长度',
+  'supportedModels.recommendLevel': '推荐等级',
+  'supportedModels.hot': '热门',
+  'supportedModels.perMillion': '/百万token',
+  'common.unlimited': '不限',
+
+  // 模型价格格式
+  'modelPrice.inputFormat': '输入: {price}/百万token',
+  'modelPrice.outputFormat': '输出: {price}/百万token',
+
+  // Token解释
+  'token.explanation.title': 'Token解释：',
+  'token.explanation.input': 'Token输入：一般由对话记录、助手记忆、上下文信息、短期记忆、长期记忆、关键记忆等信息组成。',
+  'token.explanation.output': 'Token输出：一般是助手的回复数据。',
 }; 

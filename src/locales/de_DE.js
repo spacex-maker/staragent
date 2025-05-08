@@ -734,4 +734,27 @@ export default {
   'common.confirm': 'Bestätigen',
   'common.cancel': 'Abbrechen',
   'common.remove': 'Entfernen',
+
+  // Für SupportedModelsModal hinzugefügte Internationalisierungskonfiguration
+  'modal.supportedModels.title': 'Unterstützte Modelle',
+  'userMenu.supportedModels': 'Unterstützte Modelle',
+  'supportedModels.empty': 'Keine Modelle verfügbar',
+  'supportedModels.input': 'Eingabe',
+  'supportedModels.output': 'Ausgabe',
+  'supportedModels.contextLength': 'Kontextlänge',
+  'supportedModels.thoughtChainLength': 'Gedankenkettenlänge',
+  'supportedModels.outputLength': 'Ausgabelänge',
+  'supportedModels.recommendLevel': 'Empfehlungsstufe',
+  'supportedModels.hot': 'Beliebt',
+  'supportedModels.perMillion': '/Millionen Token',
+  'common.unlimited': 'Unbegrenzt',
+
+  // Modellpreisformat
+  'modelPrice.inputFormat': 'Eingabe: {price}/Millionen Token',
+  'modelPrice.outputFormat': 'Ausgabe: {price}/Millionen Token',
+
+  // Token-Erklärung
+  'token.explanation.title': 'Token-Erklärung:',
+  'token.explanation.input': 'Eingabe-Tokens: In der Regel zusammengesetzt aus Konversationsverlauf, Assistentengedächtnis, Kontextinformationen, Kurzzeitgedächtnis, Langzeitgedächtnis, Schlüsselgedächtnis und anderen Informationen.',
+  'token.explanation.output': 'Ausgabe-Tokens: In der Regel die Antwortdaten des Assistenten.',
 };

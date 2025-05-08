@@ -7,6 +7,7 @@ import UserProfileModalEntry from '../../modals/UserProfileModalEntry';
 import instance from '../../../api/axios';
 import { message } from 'antd';
 import NetworkSwitchModal from '../../modals/NetworkSwitchModal';
+import SupportedModelsModal from '../../modals/SupportedModelsModal';
 import { useIntl } from 'react-intl';
 
 const UserMenuContainer = styled.div`
@@ -277,6 +278,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const [localUserInfo, setLocalUserInfo] = useState(userInfo);
   const { showUserProfileModal, UserProfileModalComponent } = UserProfileModalEntry();
   const [showNetworkModal, setShowNetworkModal] = useState(false);
+  const [showModelsModal, setShowModelsModal] = useState(false);
   const [currentNetwork, setCurrentNetwork] = useState(() => 
     localStorage.getItem('network') || 'china'
   );
@@ -404,6 +406,20 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
           isDark={isDark}
           onClick={() => {
             setShowUserMenu(false);
+            setShowModelsModal(true);
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-robot icon" />
+              {intl.formatMessage({ id: 'userMenu.supportedModels', defaultMessage: '支持模型' })}
+            </div>
+          </MenuItemContent>
+        </UserMenuItem>
+        <UserMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
             navigate('/user-guide');
           }}
         >
@@ -496,6 +512,11 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
         onClose={() => setShowNetworkModal(false)}
         currentNetwork={currentNetwork}
         onNetworkChange={handleNetworkChange}
+      />
+      
+      <SupportedModelsModal
+        open={showModelsModal}
+        onClose={() => setShowModelsModal(false)}
       />
       
       {UserProfileModalComponent}

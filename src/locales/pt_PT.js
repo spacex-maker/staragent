@@ -690,4 +690,27 @@ export default {
   'common.confirm': 'Confirmar',
   'common.cancel': 'Cancelar',
   'common.remove': 'Remover',
+
+  // Configuração de internacionalização para SupportedModelsModal
+  'modal.supportedModels.title': 'Modelos suportados',
+  'userMenu.supportedModels': 'Modelos suportados',
+  'supportedModels.empty': 'Nenhum modelo disponível',
+  'supportedModels.input': 'Entrada',
+  'supportedModels.output': 'Saída',
+  'supportedModels.contextLength': 'Comprimento do contexto',
+  'supportedModels.thoughtChainLength': 'Comprimento da cadeia de pensamento',
+  'supportedModels.outputLength': 'Comprimento da saída',
+  'supportedModels.recommendLevel': 'Nível de recomendação',
+  'supportedModels.hot': 'Popular',
+  'supportedModels.perMillion': '/milhão de tokens',
+  'common.unlimited': 'Ilimitado',
+
+  // Formato de preço do modelo
+  'modelPrice.inputFormat': 'Entrada: {price}/milhão de tokens',
+  'modelPrice.outputFormat': 'Saída: {price}/milhão de tokens',
+
+  // Explicação de tokens
+  'token.explanation.title': 'Explicação de Tokens:',
+  'token.explanation.input': 'Tokens de entrada: Geralmente compostos pelo histórico de conversas, memória do assistente, informações de contexto, memória de curto prazo, memória de longo prazo, memória chave e outras informações.',
+  'token.explanation.output': 'Tokens de saída: Geralmente os dados de resposta do assistente.',
 };

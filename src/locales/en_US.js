@@ -751,4 +751,29 @@ export default {
   'common.confirm': 'Confirm',
   'common.cancel': 'Cancel',
   'common.remove': 'Remove',
+
+  // 为SupportedModelsModal添加国际化配置
+  'modal.supportedModels.title': 'Supported Models',
+  'userMenu.supportedModels': 'Supported Models',
+  'supportedModels.empty': 'No models available',
+  'supportedModels.input': 'Input',
+  'supportedModels.output': 'Output',
+  'supportedModels.contextLength': 'Context Length',
+  'supportedModels.thoughtChainLength': 'Thought Chain Length',
+  'supportedModels.outputLength': 'Output Length',
+  'supportedModels.recommendLevel': 'Recommendation Level',
+  'supportedModels.hot': 'Hot',
+  'supportedModels.perMillion': '/million tokens',
+
+  // 共用
+  'common.unlimited': 'Unlimited',
+
+  // Model price format
+  'modelPrice.inputFormat': 'Input: {price}/million tokens',
+  'modelPrice.outputFormat': 'Output: {price}/million tokens',
+
+  // Token explanation
+  'token.explanation.title': 'Token Explanation:',
+  'token.explanation.input': 'Input Tokens: Generally composed of conversation history, assistant memory, context information, short-term memory, long-term memory, key memory and other information.',
+  'token.explanation.output': 'Output Tokens: Generally the response data from the assistant.',
 };

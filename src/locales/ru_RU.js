@@ -720,4 +720,27 @@ export default {
   'common.confirm': 'Подтвердить',
   'common.cancel': 'Отмена',
   'common.remove': 'Удалить',
+
+  // Конфигурация интернационализации для SupportedModelsModal
+  'modal.supportedModels.title': 'Поддерживаемые модели',
+  'userMenu.supportedModels': 'Поддерживаемые модели',
+  'supportedModels.empty': 'Нет доступных моделей',
+  'supportedModels.input': 'Ввод',
+  'supportedModels.output': 'Вывод',
+  'supportedModels.contextLength': 'Длина контекста',
+  'supportedModels.thoughtChainLength': 'Длина цепи мысли',
+  'supportedModels.outputLength': 'Длина вывода',
+  'supportedModels.recommendLevel': 'Уровень рекомендации',
+  'supportedModels.hot': 'Популярный',
+  'supportedModels.perMillion': '/миллион токенов',
+  'common.unlimited': 'Неограниченно',
+
+  // Формат цены модели
+  'modelPrice.inputFormat': 'Ввод: {price}/миллион токенов',
+  'modelPrice.outputFormat': 'Вывод: {price}/миллион токенов',
+
+  // Объяснение токенов
+  'token.explanation.title': 'Объяснение токенов:',
+  'token.explanation.input': 'Входные токены: Обычно состоят из истории разговоров, памяти ассистента, контекстной информации, краткосрочной памяти, долгосрочной памяти, ключевой памяти и другой информации.',
+  'token.explanation.output': 'Выходные токены: Обычно это данные ответа ассистента.',
 };

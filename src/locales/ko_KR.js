@@ -762,4 +762,27 @@ export default {
   'common.confirm': '확인',
   'common.cancel': '취소',
   'common.remove': '제거',
+
+  // SupportedModelsModal 국제화 설정
+  'modal.supportedModels.title': '지원되는 모델',
+  'userMenu.supportedModels': '지원 모델',
+  'supportedModels.empty': '사용 가능한 모델이 없습니다',
+  'supportedModels.input': '입력',
+  'supportedModels.output': '출력',
+  'supportedModels.contextLength': '컨텍스트 길이',
+  'supportedModels.thoughtChainLength': '사고 체인 길이',
+  'supportedModels.outputLength': '출력 길이',
+  'supportedModels.recommendLevel': '추천 레벨',
+  'supportedModels.hot': '인기',
+  'supportedModels.perMillion': '/백만 토큰',
+  'common.unlimited': '무제한',
+
+  // 모델 가격 형식
+  'modelPrice.inputFormat': '입력: {price}/백만 토큰',
+  'modelPrice.outputFormat': '출력: {price}/백만 토큰',
+
+  // 토큰 설명
+  'token.explanation.title': '토큰 설명:',
+  'token.explanation.input': '입력 토큰: 일반적으로 대화 기록, 어시스턴트 메모리, 컨텍스트 정보, 단기 기억, 장기 기억, 핵심 기억 등의 정보로 구성됩니다.',
+  'token.explanation.output': '출력 토큰: 일반적으로 어시스턴트의 응답 데이터입니다.',
 };

@@ -743,4 +743,27 @@ export default {
   'common.confirm': 'تأكيد',
   'common.cancel': 'إلغاء',
   'common.remove': 'إزالة',
+
+  // إعدادات الترجمة لـ SupportedModelsModal
+  'modal.supportedModels.title': 'النماذج المدعومة',
+  'userMenu.supportedModels': 'النماذج المدعومة',
+  'supportedModels.empty': 'لا توجد نماذج متاحة',
+  'supportedModels.input': 'إدخال',
+  'supportedModels.output': 'إخراج',
+  'supportedModels.contextLength': 'طول السياق',
+  'supportedModels.thoughtChainLength': 'طول سلسلة التفكير',
+  'supportedModels.outputLength': 'طول الإخراج',
+  'supportedModels.recommendLevel': 'مستوى التوصية',
+  'supportedModels.hot': 'شائع',
+  'supportedModels.perMillion': '/مليون رمز',
+  'common.unlimited': 'غير محدود',
+
+  // صيغة سعر النموذج
+  'modelPrice.inputFormat': 'إدخال: {price}/مليون رمز',
+  'modelPrice.outputFormat': 'إخراج: {price}/مليون رمز',
+
+  // شرح الرموز
+  'token.explanation.title': 'شرح الرموز:',
+  'token.explanation.input': 'رموز الإدخال: تتكون عادة من سجل المحادثات، وذاكرة المساعد، ومعلومات السياق، والذاكرة قصيرة المدى، والذاكرة طويلة المدى، والذاكرة الرئيسية وغيرها من المعلومات.',
+  'token.explanation.output': 'رموز الإخراج: تتكون عادة من بيانات رد المساعد.',
 };
