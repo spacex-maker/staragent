@@ -756,4 +756,21 @@ export default {
   'token.explanation.title': 'Explication des tokens :',
   'token.explanation.input': 'Tokens d\'entrée : Généralement composés de l\'historique des conversations, de la mémoire de l\'assistant, des informations contextuelles, de la mémoire à court terme, de la mémoire à long terme, de la mémoire clé et d\'autres informations.',
   'token.explanation.output': 'Tokens de sortie : Généralement les données de réponse de l\'assistant.',
+
+  // Paramètres du projet
+  'project.settings': 'Paramètres du Projet',
+  'project.settings.title': 'Paramètres du Projet',
+  'project.agent.info': 'Informations sur l\'Assistant',
+  'project.chatSettings': 'Paramètres de Discussion',
+  'project.chatSettings.tokenDisplay': 'Afficher la Consommation de Tokens',
+  'project.chatSettings.costDisplay': 'Afficher la Consommation de Coûts',
+  'project.chatSettings.enableContext': 'Activer le Contexte',
+  'project.chatSettings.enableContext.tooltip': 'Généralement utilisé pour économiser des tokens',
+  'project.chatSettings.enableMemory': 'Activer la Mémoire',
+  'common.show': 'Afficher',
+  'common.hide': 'Masquer',
+  'common.on': 'Activé',
+  'common.off': 'Désactivé',
+  'common.save': 'Enregistrer',
+  'agent.management': 'Gestion des Assistants',
 };

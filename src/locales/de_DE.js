@@ -755,6 +755,23 @@ export default {
 
   // Token-Erklärung
   'token.explanation.title': 'Token-Erklärung:',
-  'token.explanation.input': 'Eingabe-Tokens: In der Regel zusammengesetzt aus Konversationsverlauf, Assistentengedächtnis, Kontextinformationen, Kurzzeitgedächtnis, Langzeitgedächtnis, Schlüsselgedächtnis und anderen Informationen.',
+  'token.explanation.input': 'Eingabe-Tokens: Bestehen in der Regel aus Gesprächsverlauf, Assistenten-Speicher, Kontextinformationen, Kurzzeitgedächtnis, Langzeitgedächtnis, Schlüsselspeicher und anderen Informationen.',
   'token.explanation.output': 'Ausgabe-Tokens: In der Regel die Antwortdaten des Assistenten.',
+
+  // Projekteinstellungen
+  'project.settings': 'Projekteinstellungen',
+  'project.settings.title': 'Projekteinstellungen',
+  'project.agent.info': 'Assistenten-Informationen',
+  'project.chatSettings': 'Chat-Einstellungen',
+  'project.chatSettings.tokenDisplay': 'Token-Verbrauch anzeigen',
+  'project.chatSettings.costDisplay': 'Kostenverbrauch anzeigen',
+  'project.chatSettings.enableContext': 'Kontext aktivieren',
+  'project.chatSettings.enableContext.tooltip': 'Wird in der Regel verwendet, um Token zu sparen',
+  'project.chatSettings.enableMemory': 'Gedächtnis aktivieren',
+  'common.show': 'Anzeigen',
+  'common.hide': 'Ausblenden',
+  'common.on': 'Ein',
+  'common.off': 'Aus',
+  'common.save': 'Speichern',
+  'agent.management': 'Assistenten-Verwaltung',
 };

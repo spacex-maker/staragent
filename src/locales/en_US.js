@@ -695,19 +695,19 @@ export default {
   'project.visibility.public': 'Public',
   
   // Add agent related
-  'project.addAgent': 'Add Agent to Project',
-  'project.addAgent.select': 'Please select agents to add to the project',
-  'project.addAgent.search': 'Search agent name, role or model',
-  'project.addAgent.info': 'Agent Information',
+  'project.addAgent': 'Add Assistant to Project',
+  'project.addAgent.select': 'Please select assistants to add to the project',
+  'project.addAgent.search': 'Search assistant name, role or model',
+  'project.addAgent.info': 'Assistant Information',
   'project.addAgent.status': 'Status',
   'project.addAgent.enabled': 'Enabled',
   'project.addAgent.disabled': 'Disabled',
-  'project.addAgent.selectAtLeast': 'Please select at least one agent',
-  'project.addAgent.addSelected': 'Add Selected Agents',
-  'project.addAgent.success': 'Successfully added {count} agents',
-  'project.addAgent.failed': 'Failed to add agent',
+  'project.addAgent.selectAtLeast': 'Please select at least one assistant',
+  'project.addAgent.addSelected': 'Add Selected Assistants',
+  'project.addAgent.success': 'Successfully added {count} assistants',
+  'project.addAgent.failed': 'Failed to add assistant',
   'project.addAgent.cancel': 'Cancel',
-  'project.addAgent.tooltip': 'Add agents to the project and configure their priority and capabilities',
+  'project.addAgent.tooltip': 'Add assistants to the project and configure their priority and capabilities',
   
   // Project form fields
   'project.name': 'Project Name',
@@ -728,23 +728,23 @@ export default {
   
   // Project edit tabs
   'project.basicInfo': 'Basic Information',
-  'project.agentManagement': 'Agent Management',
+  'project.agentManagement': 'Assistant Management',
   
   // Project operation messages
   'project.create.success': 'Project created successfully',
   'project.create.error': 'Failed to create project',
   'project.update.success': 'Project updated successfully',
   'project.update.error': 'Failed to update project',
-  'project.getAgents.error': 'Failed to get project agents',
+  'project.getAgents.error': 'Failed to get project assistants',
   
-  // Agent table related
+  // Assistant related
   'agent.priority': 'Priority',
   'agent.default': 'Default',
   'agent.memory': 'Memory',
   'agent.knowledgeBase': 'Knowledge Base',
   'agent.externalTools': 'External Tools',
-  'project.agent.confirmRemove': 'Are you sure you want to remove this agent?',
-  'project.agent.empty': 'No agents yet, please add agents to the project',
+  'project.agent.confirmRemove': 'Are you sure you want to remove this assistant?',
+  'project.agent.empty': 'No assistants yet, please add assistants to the project',
   
   // Common terms
   'common.actions': 'Actions',
@@ -774,6 +774,23 @@ export default {
 
   // Token explanation
   'token.explanation.title': 'Token Explanation:',
-  'token.explanation.input': 'Input Tokens: Generally composed of conversation history, assistant memory, context information, short-term memory, long-term memory, key memory and other information.',
-  'token.explanation.output': 'Output Tokens: Generally the response data from the assistant.',
+  'token.explanation.input': 'Input tokens: Generally composed of conversation history, assistant memory, context information, short-term memory, long-term memory, key memory, and other information.',
+  'token.explanation.output': 'Output tokens: Generally the assistant\'s response data.',
+
+  // Project settings related
+  'project.settings': 'Project Settings',
+  'project.settings.title': 'Project Settings',
+  'project.agent.info': 'Assistant Info',
+  'project.chatSettings': 'Chat Settings',
+  'project.chatSettings.tokenDisplay': 'Display Token Consumption',
+  'project.chatSettings.costDisplay': 'Display Cost Consumption',
+  'project.chatSettings.enableContext': 'Enable Context',
+  'project.chatSettings.enableContext.tooltip': 'Generally used to save tokens',
+  'project.chatSettings.enableMemory': 'Enable Memory',
+  'common.show': 'Show',
+  'common.hide': 'Hide',
+  'common.on': 'On',
+  'common.off': 'Off',
+  'common.save': 'Save',
+  'agent.management': 'Assistant Management',
 };

@@ -667,14 +667,14 @@ export default {
   
   // 项目编辑标签页
   'project.basicInfo': 'Informações Básicas',
-  'project.agentManagement': 'Gestão de Funcionários',
+  'project.agentManagement': 'Gestão de Assistentes',
   
   // 项目操作消息
   'project.create.success': 'Projeto criado com sucesso',
   'project.create.error': 'Falha ao criar projeto',
   'project.update.success': 'Projeto atualizado com sucesso',
   'project.update.error': 'Falha ao atualizar projeto',
-  'project.getAgents.error': 'Falha ao obter funcionários do projeto',
+  'project.getAgents.error': 'Falha ao obter assistentes do projeto',
   
   // 员工表格相关
   'agent.priority': 'Prioridade',
@@ -682,8 +682,8 @@ export default {
   'agent.memory': 'Memória',
   'agent.knowledgeBase': 'Base de Conhecimento',
   'agent.externalTools': 'Ferramentas Externas',
-  'project.agent.confirmRemove': 'Tem certeza que deseja remover este funcionário?',
-  'project.agent.empty': 'Nenhum funcionário, por favor adicione funcionários ao projeto',
+  'project.agent.confirmRemove': 'Tem certeza que deseja remover este assistente?',
+  'project.agent.empty': 'Nenhum assistente, por favor adicione assistentes ao projeto',
   
   // 通用术语
   'common.actions': 'Ações',
@@ -713,4 +713,21 @@ export default {
   'token.explanation.title': 'Explicação de Tokens:',
   'token.explanation.input': 'Tokens de entrada: Geralmente compostos pelo histórico de conversas, memória do assistente, informações de contexto, memória de curto prazo, memória de longo prazo, memória chave e outras informações.',
   'token.explanation.output': 'Tokens de saída: Geralmente os dados de resposta do assistente.',
+
+  // Configurações de projeto
+  'project.settings': 'Configurações do Projeto',
+  'project.settings.title': 'Configurações do Projeto',
+  'project.agent.info': 'Informações do Assistente',
+  'project.chatSettings': 'Configurações de Chat',
+  'project.chatSettings.tokenDisplay': 'Mostrar Consumo de Tokens',
+  'project.chatSettings.costDisplay': 'Mostrar Consumo de Custos',
+  'project.chatSettings.enableContext': 'Ativar Contexto',
+  'project.chatSettings.enableContext.tooltip': 'Geralmente usado para economizar tokens',
+  'project.chatSettings.enableMemory': 'Ativar Memória',
+  'common.show': 'Mostrar',
+  'common.hide': 'Ocultar',
+  'common.on': 'Ativado',
+  'common.off': 'Desativado',
+  'common.save': 'Salvar',
+  'agent.management': 'Gestão de Assistentes',
 };

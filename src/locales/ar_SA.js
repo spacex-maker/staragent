@@ -719,15 +719,15 @@ export default {
   'project.visibility.required': 'الرجاء اختيار الرؤية',
   
   // 项目编辑标签页
-  'project.basicInfo': 'المعلومات الأساسية',
-  'project.agentManagement': 'إدارة الموظفين',
+  'project.basicInfo': 'معلومات أساسية',
+  'project.agentManagement': 'إدارة المساعدين',
   
   // 项目操作消息
   'project.create.success': 'تم إنشاء المشروع بنجاح',
-  'project.create.error': 'فشل إنشاء المشروع',
+  'project.create.error': 'فشل في إنشاء المشروع',
   'project.update.success': 'تم تحديث المشروع بنجاح',
-  'project.update.error': 'فشل تحديث المشروع',
-  'project.getAgents.error': 'فشل الحصول على موظفي المشروع',
+  'project.update.error': 'فشل في تحديث المشروع',
+  'project.getAgents.error': 'فشل الحصول على مساعدي المشروع',
   
   // 员工表格相关
   'agent.priority': 'الأولوية',
@@ -735,8 +735,8 @@ export default {
   'agent.memory': 'الذاكرة',
   'agent.knowledgeBase': 'قاعدة المعرفة',
   'agent.externalTools': 'أدوات خارجية',
-  'project.agent.confirmRemove': 'هل أنت متأكد من إزالة هذا الموظف؟',
-  'project.agent.empty': 'لا يوجد موظفين، الرجاء إضافة موظفين إلى المشروع',
+  'project.agent.confirmRemove': 'هل أنت متأكد من إزالة هذا المساعد؟',
+  'project.agent.empty': 'لا يوجد مساعدين، الرجاء إضافة مساعدين إلى المشروع',
   
   // 通用术语
   'common.actions': 'إجراءات',
@@ -766,4 +766,21 @@ export default {
   'token.explanation.title': 'شرح الرموز:',
   'token.explanation.input': 'رموز الإدخال: تتكون عادة من سجل المحادثات، وذاكرة المساعد، ومعلومات السياق، والذاكرة قصيرة المدى، والذاكرة طويلة المدى، والذاكرة الرئيسية وغيرها من المعلومات.',
   'token.explanation.output': 'رموز الإخراج: تتكون عادة من بيانات رد المساعد.',
+
+  // إعدادات المشروع
+  'project.settings': 'إعدادات المشروع',
+  'project.settings.title': 'إعدادات المشروع',
+  'project.agent.info': 'معلومات المساعد',
+  'project.chatSettings': 'إعدادات المحادثة',
+  'project.chatSettings.tokenDisplay': 'عرض استهلاك الرموز',
+  'project.chatSettings.costDisplay': 'عرض استهلاك التكلفة',
+  'project.chatSettings.enableContext': 'تفعيل السياق',
+  'project.chatSettings.enableContext.tooltip': 'يستخدم عادة لتوفير الرموز',
+  'project.chatSettings.enableMemory': 'تفعيل الذاكرة',
+  'common.show': 'عرض',
+  'common.hide': 'إخفاء',
+  'common.on': 'تشغيل',
+  'common.off': 'إيقاف',
+  'common.save': 'حفظ',
+  'agent.management': 'إدارة المساعدين',
 };

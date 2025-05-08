@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Input, List, Empty, Spin, Typography, Tag, Button, Space } from 'antd';
-import { SearchOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { Modal, Input, List, Empty, Spin, Typography, Tag, Button, Space, Avatar } from 'antd';
+import { SearchOutlined, ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import instance from 'api/axios';
 
@@ -83,6 +83,16 @@ const RelevanceTag = styled(Tag)<{ $importance: number }>`
   }};
 `;
 
+const AgentHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const AgentAvatar = styled(Avatar)`
+  flex-shrink: 0;
+`;
+
 interface Memory {
   id: string;
   agentId: number;
@@ -104,6 +114,7 @@ interface AgentMemoryModalProps {
   agent: {
     agentId: number;
     agentName: string;
+    avatarUrl?: string;
   };
 }
 
@@ -167,7 +178,16 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
 
   return (
     <Modal
-      title={`${agent.agentName}的记忆库`}
+      title={
+        <AgentHeader>
+          {agent.avatarUrl ? (
+            <AgentAvatar src={agent.avatarUrl} size={32} />
+          ) : (
+            <AgentAvatar icon={<UserOutlined />} size={32} />
+          )}
+          <span>{`${agent.agentName}的记忆库`}</span>
+        </AgentHeader>
+      }
       open={open}
       onCancel={onClose}
       footer={null}

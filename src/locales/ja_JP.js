@@ -699,14 +699,14 @@ export default {
   
   // 项目编辑标签页
   'project.basicInfo': '基本情報',
-  'project.agentManagement': '従業員管理',
+  'project.agentManagement': 'アシスタント管理',
   
   // 项目操作消息
   'project.create.success': 'プロジェクト作成成功',
   'project.create.error': 'プロジェクト作成失敗',
   'project.update.success': 'プロジェクト更新成功',
   'project.update.error': 'プロジェクト更新失敗',
-  'project.getAgents.error': 'プロジェクト従業員の取得に失敗しました',
+  'project.getAgents.error': 'プロジェクトアシスタントの取得に失敗しました',
   
   // 员工表格相关
   'agent.priority': '優先度',
@@ -714,8 +714,8 @@ export default {
   'agent.memory': 'メモリ',
   'agent.knowledgeBase': 'ナレッジベース',
   'agent.externalTools': '外部ツール',
-  'project.agent.confirmRemove': 'この従業員を削除してもよろしいですか？',
-  'project.agent.empty': '従業員がいません。プロジェクトに従業員を追加してください',
+  'project.agent.confirmRemove': 'このアシスタントを削除してもよろしいですか？',
+  'project.agent.empty': 'アシスタントがいません。プロジェクトにアシスタントを追加してください',
   
   // 通用术语
   'common.actions': 'アクション',
@@ -742,7 +742,24 @@ export default {
   'modelPrice.outputFormat': '出力: {price}/百万トークン',
 
   // トークン説明
-  'token.explanation.title': 'トークンの説明：',
-  'token.explanation.input': '入力トークン：通常、会話履歴、アシスタントのメモリ、コンテキスト情報、短期記憶、長期記憶、キーメモリなどの情報で構成されています。',
-  'token.explanation.output': '出力トークン：通常、アシスタントの応答データです。',
+  'token.explanation.title': 'トークンの説明:',
+  'token.explanation.input': '入力トークン：一般的に会話履歴、アシスタントのメモリ、コンテキスト情報、短期記憶、長期記憶、キーメモリなどの情報で構成されています。',
+  'token.explanation.output': '出力トークン：一般的にアシスタントの応答データです。',
+
+  // プロジェクト設定関連
+  'project.settings': 'プロジェクト設定',
+  'project.settings.title': 'プロジェクト設定',
+  'project.agent.info': 'アシスタント情報',
+  'project.chatSettings': 'チャット設定',
+  'project.chatSettings.tokenDisplay': 'トークン消費を表示',
+  'project.chatSettings.costDisplay': '費用消費を表示',
+  'project.chatSettings.enableContext': 'コンテキストを有効化',
+  'project.chatSettings.enableContext.tooltip': '一般的にトークンを節約するために使用されます',
+  'project.chatSettings.enableMemory': 'メモリを有効化',
+  'common.show': '表示',
+  'common.hide': '非表示',
+  'common.on': 'オン',
+  'common.off': 'オフ',
+  'common.save': '保存',
+  'agent.management': 'アシスタント管理',
 };

@@ -663,20 +663,20 @@ export default {
   'project.visibility.private': '私有',
   'project.visibility.public': '公开',
   
-  // 添加员工相关
-  'project.addAgent': '添加员工到项目',
-  'project.addAgent.select': '请选择要添加到项目的员工',
-  'project.addAgent.search': '搜索员工名称、角色或模型',
-  'project.addAgent.info': '员工信息',
+  // 添加助手相关
+  'project.addAgent': '添加助手到项目',
+  'project.addAgent.select': '请选择要添加到项目的助手',
+  'project.addAgent.search': '搜索助手名称、角色或模型',
+  'project.addAgent.info': '助手信息',
   'project.addAgent.status': '状态',
   'project.addAgent.enabled': '启用',
   'project.addAgent.disabled': '禁用',
-  'project.addAgent.selectAtLeast': '请至少选择一名员工',
-  'project.addAgent.addSelected': '添加所选员工',
-  'project.addAgent.success': '成功添加 {count} 名员工',
-  'project.addAgent.failed': '添加员工失败',
+  'project.addAgent.selectAtLeast': '请至少选择一名助手',
+  'project.addAgent.addSelected': '添加所选助手',
+  'project.addAgent.success': '成功添加 {count} 名助手',
+  'project.addAgent.failed': '添加助手失败',
   'project.addAgent.cancel': '取消',
-  'project.addAgent.tooltip': '添加员工到项目中，并设置其优先级和能力',
+  'project.addAgent.tooltip': '添加助手到项目中，并设置其优先级和能力',
   
   // 项目表单字段
   'project.name': '项目名称',
@@ -697,23 +697,23 @@ export default {
   
   // 项目编辑标签页
   'project.basicInfo': '基本信息',
-  'project.agentManagement': '员工管理',
+  'project.agentManagement': '助手管理',
   
   // 项目操作消息
   'project.create.success': '创建项目成功',
   'project.create.error': '创建项目失败',
   'project.update.success': '更新项目成功',
   'project.update.error': '更新项目失败',
-  'project.getAgents.error': '获取项目员工失败',
+  'project.getAgents.error': '获取项目助手失败',
   
-  // 员工表格相关
+  // 助手表格相关
   'agent.priority': '优先级',
   'agent.default': '默认',
   'agent.memory': '记忆',
   'agent.knowledgeBase': '知识库',
   'agent.externalTools': '外部工具',
-  'project.agent.confirmRemove': '确定要移除此员工吗？',
-  'project.agent.empty': '暂无员工，请添加员工到项目中',
+  'project.agent.confirmRemove': '确定要移除此助手吗？',
+  'project.agent.empty': '暂无助手，请添加助手到项目中',
   
   // 通用术语
   'common.actions': '操作',
@@ -743,4 +743,21 @@ export default {
   'token.explanation.title': 'Token解释：',
   'token.explanation.input': 'Token输入：一般由对话记录、助手记忆、上下文信息、短期记忆、长期记忆、关键记忆等信息组成。',
   'token.explanation.output': 'Token输出：一般是助手的回复数据。',
+
+  // 项目设置相关
+  'project.settings': '项目设置',
+  'project.settings.title': '项目设置',
+  'project.agent.info': '助手信息',
+  'project.chatSettings': '聊天设置',
+  'project.chatSettings.tokenDisplay': '显示token消耗',
+  'project.chatSettings.costDisplay': '显示费用消耗',
+  'project.chatSettings.enableContext': '开启上下文',
+  'project.chatSettings.enableContext.tooltip': '一般用于节省token的情况',
+  'project.chatSettings.enableMemory': '开启记忆',
+  'common.show': '显示',
+  'common.hide': '隐藏',
+  'common.on': '开启',
+  'common.off': '关闭',
+  'common.save': '保存',
+  'agent.management': '助手管理',
 }; 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Typography, Dropdown, Button, Space, Table } from 'antd';
-import { ProjectOutlined, EllipsisOutlined, RobotOutlined, CloudSyncOutlined } from '@ant-design/icons';
+import { Typography, Dropdown, Button, Space, Table, Avatar } from 'antd';
+import { ProjectOutlined, EllipsisOutlined, RobotOutlined, CloudSyncOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Project, ProjectAgent } from '../../types';
 import { useProjectAgents } from 'hooks/useProjectAgents';
 import AgentMemoryModal from './AgentMemoryModal';
+import ProjectSettingsModal from './ProjectSettingsModal';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const { Title, Text } = Typography;
 
@@ -81,6 +83,10 @@ const AgentActionButton = styled(Button)`
   }
 `;
 
+const AgentAvatar = styled(Avatar)`
+  margin-right: 8px;
+`;
+
 interface ProjectHeaderProps {
   project: Project;
 }
@@ -89,24 +95,35 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
   const { projectAgents, loading, fetchAgents } = useProjectAgents(project.id);
   const [selectedAgent, setSelectedAgent] = useState<ProjectAgent | null>(null);
   const [memoryModalVisible, setMemoryModalVisible] = useState(false);
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
+  const intl = useIntl();
 
   const handleViewMemory = (agent: ProjectAgent) => {
     setSelectedAgent(agent);
     setMemoryModalVisible(true);
   };
 
+  const handleOpenSettings = () => {
+    setSettingsModalVisible(true);
+    fetchAgents();
+  };
+
   const columns = [
     {
-      title: '员工信息',
+      title: intl.formatMessage({ id: 'project.agent.info', defaultMessage: '助手信息' }),
       dataIndex: 'agentName',
       key: 'agentName',
       render: (text: string, record: ProjectAgent) => (
         <Space direction="vertical" size={2}>
           <Space>
-            <RobotOutlined style={{ color: 'var(--ant-color-primary)' }} />
+            {record.avatarUrl ? (
+              <AgentAvatar src={record.avatarUrl} />
+            ) : (
+              <AgentAvatar icon={<UserOutlined />} />
+            )}
             <span>{text}</span>
           </Space>
-          <Space size={4} style={{ marginLeft: 22 }}>
+          <Space size={4} style={{ marginLeft: 38 }}>
             <AgentTag>{record.role}</AgentTag>
             <AgentTag>{record.modelType}</AgentTag>
           </Space>
@@ -114,14 +131,14 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
       ),
     },
     {
-      title: '优先级',
+      title: intl.formatMessage({ id: 'agent.priority', defaultMessage: '优先级' }),
       dataIndex: 'priority',
       key: 'priority',
       width: 80,
       align: 'center' as const,
     },
     {
-      title: '操作',
+      title: intl.formatMessage({ id: 'common.actions', defaultMessage: '操作' }),
       key: 'action',
       width: 100,
       align: 'center' as const,
@@ -134,10 +151,22 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
             handleViewMemory(record);
           }}
         >
-          记忆
+          {intl.formatMessage({ id: 'agent.memory', defaultMessage: '记忆' })}
         </AgentActionButton>
       ),
     }
+  ];
+
+  const dropdownItems = [
+    {
+      key: 'settings',
+      label: (
+        <span>
+          <SettingOutlined /> {intl.formatMessage({ id: 'project.settings', defaultMessage: '项目设置' })}
+        </span>
+      ),
+      onClick: handleOpenSettings,
+    },
   ];
 
   const dropdownContent = (
@@ -149,7 +178,7 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
         loading={loading}
         pagination={false}
         size="small"
-        locale={{ emptyText: '暂无员工' }}
+        locale={{ emptyText: intl.formatMessage({ id: 'project.agent.empty', defaultMessage: '暂无助手' }) }}
       />
     </AgentListContainer>
   );
@@ -168,17 +197,11 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
             </ProjectDescription>
           )}
         </div>
-        <Dropdown 
-          trigger={['click']} 
-          dropdownRender={() => dropdownContent}
-          onOpenChange={(visible) => {
-            if (visible) {
-              fetchAgents();
-            }
-          }}
-        >
-          <MoreButton type="text" icon={<EllipsisOutlined />} />
-        </Dropdown>
+        <MoreButton 
+          type="text" 
+          icon={<EllipsisOutlined />} 
+          onClick={handleOpenSettings}
+        />
       </ProjectTitleBar>
 
       {selectedAgent && (
@@ -187,10 +210,19 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
           onClose={() => setMemoryModalVisible(false)}
           agent={{
             agentId: selectedAgent.agentId,
-            agentName: selectedAgent.agentName
+            agentName: selectedAgent.agentName,
+            avatarUrl: selectedAgent.avatarUrl
           }}
         />
       )}
+
+      <ProjectSettingsModal
+        open={settingsModalVisible}
+        onClose={() => setSettingsModalVisible(false)}
+        projectAgents={projectAgents}
+        loading={loading}
+        onViewMemory={handleViewMemory}
+      />
     </>
   );
 };

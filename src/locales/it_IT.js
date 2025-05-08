@@ -709,14 +709,14 @@ export default {
   
   // 项目编辑标签页
   'project.basicInfo': 'Informazioni di Base',
-  'project.agentManagement': 'Gestione Dipendenti',
+  'project.agentManagement': 'Gestione Assistenti',
   
   // 项目操作消息
   'project.create.success': 'Progetto creato con successo',
   'project.create.error': 'Creazione del progetto fallita',
   'project.update.success': 'Progetto aggiornato con successo',
   'project.update.error': 'Aggiornamento del progetto fallito',
-  'project.getAgents.error': 'Recupero dei dipendenti del progetto fallito',
+  'project.getAgents.error': 'Recupero degli assistenti del progetto fallito',
   
   // 员工表格相关
   'agent.priority': 'Priorità',
@@ -724,8 +724,8 @@ export default {
   'agent.memory': 'Memoria',
   'agent.knowledgeBase': 'Base di Conoscenza',
   'agent.externalTools': 'Strumenti Esterni',
-  'project.agent.confirmRemove': 'Sei sicuro di voler rimuovere questo dipendente?',
-  'project.agent.empty': 'Nessun dipendente, per favore aggiungi dipendenti al progetto',
+  'project.agent.confirmRemove': 'Sei sicuro di voler rimuovere questo assistente?',
+  'project.agent.empty': 'Nessun assistente, per favore aggiungi assistenti al progetto',
   
   // 通用术语
   'common.actions': 'Azioni',
@@ -752,7 +752,24 @@ export default {
   'modelPrice.outputFormat': 'Output: {price}/milione di token',
 
   // Spiegazione dei token
-  'token.explanation.title': 'Spiegazione dei token:',
+  'token.explanation.title': 'Spiegazione dei Token:',
   'token.explanation.input': 'Token di input: Generalmente composti da cronologia delle conversazioni, memoria dell\'assistente, informazioni contestuali, memoria a breve termine, memoria a lungo termine, memoria chiave e altre informazioni.',
   'token.explanation.output': 'Token di output: Generalmente i dati di risposta dell\'assistente.',
+
+  // Impostazioni del progetto
+  'project.settings': 'Impostazioni Progetto',
+  'project.settings.title': 'Impostazioni Progetto',
+  'project.agent.info': 'Informazioni Assistente',
+  'project.chatSettings': 'Impostazioni Chat',
+  'project.chatSettings.tokenDisplay': 'Mostra Consumo Token',
+  'project.chatSettings.costDisplay': 'Mostra Consumo Costi',
+  'project.chatSettings.enableContext': 'Abilita Contesto',
+  'project.chatSettings.enableContext.tooltip': 'Generalmente utilizzato per risparmiare token',
+  'project.chatSettings.enableMemory': 'Abilita Memoria',
+  'common.show': 'Mostra',
+  'common.hide': 'Nascondi',
+  'common.on': 'Attiva',
+  'common.off': 'Disattiva',
+  'common.save': 'Salva',
+  'agent.management': 'Gestione Assistenti',
 };

@@ -739,14 +739,14 @@ export default {
   
   // 项目编辑标签页
   'project.basicInfo': '기본 정보',
-  'project.agentManagement': '직원 관리',
+  'project.agentManagement': '어시스턴트 관리',
   
   // 项目操作消息
   'project.create.success': '프로젝트 생성 성공',
   'project.create.error': '프로젝트 생성 실패',
   'project.update.success': '프로젝트 업데이트 성공',
   'project.update.error': '프로젝트 업데이트 실패',
-  'project.getAgents.error': '프로젝트 직원 가져오기 실패',
+  'project.getAgents.error': '프로젝트 어시스턴트 가져오기 실패',
   
   // 员工表格相关
   'agent.priority': '우선순위',
@@ -754,8 +754,8 @@ export default {
   'agent.memory': '메모리',
   'agent.knowledgeBase': '지식 베이스',
   'agent.externalTools': '외부 도구',
-  'project.agent.confirmRemove': '이 직원을 제거하시겠습니까?',
-  'project.agent.empty': '직원이 없습니다. 프로젝트에 직원을 추가하세요',
+  'project.agent.confirmRemove': '이 어시스턴트를 제거하시겠습니까?',
+  'project.agent.empty': '어시스턴트가 없습니다. 프로젝트에 어시스턴트를 추가하세요',
   
   // 通用术语
   'common.actions': '작업',
@@ -783,6 +783,23 @@ export default {
 
   // 토큰 설명
   'token.explanation.title': '토큰 설명:',
-  'token.explanation.input': '입력 토큰: 일반적으로 대화 기록, 어시스턴트 메모리, 컨텍스트 정보, 단기 기억, 장기 기억, 핵심 기억 등의 정보로 구성됩니다.',
+  'token.explanation.input': '입력 토큰: 일반적으로 대화 기록, 어시스턴트 메모리, 컨텍스트 정보, 단기 메모리, 장기 메모리, 키 메모리 및 기타 정보로 구성됩니다.',
   'token.explanation.output': '출력 토큰: 일반적으로 어시스턴트의 응답 데이터입니다.',
+
+  // 프로젝트 설정 관련
+  'project.settings': '프로젝트 설정',
+  'project.settings.title': '프로젝트 설정',
+  'project.agent.info': '어시스턴트 정보',
+  'project.chatSettings': '채팅 설정',
+  'project.chatSettings.tokenDisplay': '토큰 소비 표시',
+  'project.chatSettings.costDisplay': '비용 소비 표시',
+  'project.chatSettings.enableContext': '컨텍스트 활성화',
+  'project.chatSettings.enableContext.tooltip': '일반적으로 토큰을 절약하기 위해 사용됩니다',
+  'project.chatSettings.enableMemory': '메모리 활성화',
+  'common.show': '표시',
+  'common.hide': '숨기기',
+  'common.on': '켜기',
+  'common.off': '끄기',
+  'common.save': '저장',
+  'agent.management': '어시스턴트 관리',
 };

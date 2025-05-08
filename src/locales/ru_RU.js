@@ -697,14 +697,14 @@ export default {
   
   // Project edit tabs
   'project.basicInfo': 'Основная информация',
-  'project.agentManagement': 'Управление сотрудниками',
+  'project.agentManagement': 'Управление ассистентами',
   
   // Project operation messages
   'project.create.success': 'Проект успешно создан',
   'project.create.error': 'Не удалось создать проект',
   'project.update.success': 'Проект успешно обновлен',
   'project.update.error': 'Не удалось обновить проект',
-  'project.getAgents.error': 'Не удалось получить список сотрудников',
+  'project.getAgents.error': 'Не удалось получить ассистентов проекта',
   
   // Agent table related
   'agent.priority': 'Приоритет',
@@ -742,5 +742,22 @@ export default {
   // Объяснение токенов
   'token.explanation.title': 'Объяснение токенов:',
   'token.explanation.input': 'Входные токены: Обычно состоят из истории разговоров, памяти ассистента, контекстной информации, краткосрочной памяти, долгосрочной памяти, ключевой памяти и другой информации.',
-  'token.explanation.output': 'Выходные токены: Обычно это данные ответа ассистента.',
+  'token.explanation.output': 'Выходные токены: Обычно данные ответа ассистента.',
+
+  // Настройки проекта
+  'project.settings': 'Настройки проекта',
+  'project.settings.title': 'Настройки проекта',
+  'project.agent.info': 'Информация об ассистенте',
+  'project.chatSettings': 'Настройки чата',
+  'project.chatSettings.tokenDisplay': 'Отображать расход токенов',
+  'project.chatSettings.costDisplay': 'Отображать расход средств',
+  'project.chatSettings.enableContext': 'Включить контекст',
+  'project.chatSettings.enableContext.tooltip': 'Обычно используется для экономии токенов',
+  'project.chatSettings.enableMemory': 'Включить память',
+  'common.show': 'Показать',
+  'common.hide': 'Скрыть',
+  'common.on': 'Вкл',
+  'common.off': 'Выкл',
+  'common.save': 'Сохранить',
+  'agent.management': 'Управление ассистентами',
 };
