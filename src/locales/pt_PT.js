@@ -601,7 +601,9 @@ export default {
   'chat.sending': 'A enviar...',
   'chat.sendFailed': 'Falha no envio',
   'chat.loadingHistory': 'A carregar histórico...',
-  'chat.tokenConsumption': 'Est. {count} tokens',
+  'chat.tokenConsumption': '{count} tokens consumidos',
+  'chat.contextTokens': 'Contexto: {count} tokens',
+  'chat.contentTokens': 'Resposta: {count} tokens',
 
   // Session list related
   'sessionList.title': 'Sessões',

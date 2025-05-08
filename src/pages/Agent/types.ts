@@ -39,6 +39,8 @@ export interface Message {
   avatarUrl?: string | null;
   createTime: string;
   updateTime: string;
+  contextTokens?: number;
+  contentTokens?: number;
 }
 
 // 前端消息类型，扩展基础消息接口
@@ -51,6 +53,8 @@ export interface FrontendMessage extends Partial<Message> {
   updateTime: string;
   sending?: boolean;
   error?: boolean;
+  contextTokens?: number;
+  contentTokens?: number;
 }
 
 // 聊天会话接口
@@ -125,6 +129,9 @@ export interface AIModel {
   contextLength: number | null;
   thoughtChainLength: number | null;
   outputLength: number | null;
+  inputPrice: number | null;  // 每百万token输入价格
+  outputPrice: number | null; // 每百万token输出价格
+  unit: string | null;        // 价格单位 $或¥
   createTime: string;
   updateTime: string | null;
 }

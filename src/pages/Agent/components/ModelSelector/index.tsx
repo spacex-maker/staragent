@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Select, Space, Typography, Tooltip, Spin } from 'antd';
+import { 
+  DollarOutlined, 
+  FileTextOutlined,
+  RetweetOutlined,
+  ExportOutlined
+} from '@ant-design/icons';
 import styled from 'styled-components';
 import axios from '../../../../api/axios';
 import { AICompany, AIModel } from '../../types';
@@ -97,6 +103,44 @@ const InfoItem = styled.span`
   color: var(--ant-color-text-secondary);
   font-size: 12px;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  .anticon {
+    font-size: 14px;
+  }
+`;
+
+const PriceInfo = styled.div`
+  color: var(--ant-color-success);
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+const PriceItem = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background-color: var(--ant-color-success-bg);
+  white-space: nowrap;
+  
+  .anticon {
+    font-size: 14px;
+    color: var(--ant-color-success);
+  }
+`;
+
+const ModelHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
 `;
 
 const LoadingContainer = styled.div`
@@ -112,6 +156,10 @@ interface ModelSelectorProps {
   onChange?: (value: string) => void;
   dropdownMatchSelectWidth?: boolean;
 }
+
+const CurrencyIcon = ({ unit }: { unit: string }) => {
+  return unit === '$' ? <DollarOutlined /> : <span style={{ fontFamily: '-apple-system' }}>¥</span>;
+};
 
 const ModelSelector: React.FC<ModelSelectorProps> = ({ 
   value, 
@@ -168,6 +216,9 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
     return num.toLocaleString();
   };
 
+  const formatPrice = (price: number, unit: string) => {
+    return `${unit}${price.toFixed(2)}`;
+  };
 
   if (loading) {
     return (
@@ -219,23 +270,62 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
           <Select.Option 
             key={model.id} 
             value={model.modelCode}
-            label={model.modelName}
+            label={
+              <ModelHeader>
+                <span>{model.modelName}</span>
+                {model.inputPrice && model.outputPrice && model.unit && (
+                  <PriceInfo>
+                    <PriceItem>
+                      <CurrencyIcon unit={model.unit} />
+                      输入: {formatPrice(model.inputPrice, model.unit)}
+                    </PriceItem>
+                    <PriceItem>
+                      <CurrencyIcon unit={model.unit} />
+                      输出: {formatPrice(model.outputPrice, model.unit)}
+                    </PriceItem>
+                  </PriceInfo>
+                )}
+              </ModelHeader>
+            }
           >
             <ModelOption>
-              <ModelName>{model.modelName}</ModelName>
+              <ModelHeader>
+                <ModelName>{model.modelName}</ModelName>
+                {model.inputPrice && model.outputPrice && model.unit && (
+                  <PriceInfo>
+                    <PriceItem>
+                      <CurrencyIcon unit={model.unit} />
+                      输入: {formatPrice(model.inputPrice, model.unit)}/百万token
+                    </PriceItem>
+                    <PriceItem>
+                      <CurrencyIcon unit={model.unit} />
+                      输出: {formatPrice(model.outputPrice, model.unit)}/百万token
+                    </PriceItem>
+                  </PriceInfo>
+                )}
+              </ModelHeader>
               <ModelDescription>{model.description}</ModelDescription>
               <ModelInfo>
                 <Tooltip title="上下文长度">
-                  <InfoItem>📝 {formatNumber(model.contextLength)}</InfoItem>
+                  <InfoItem>
+                    <FileTextOutlined />
+                    {formatNumber(model.contextLength)}
+                  </InfoItem>
                 </Tooltip>
                 {model.thoughtChainLength && (
                   <Tooltip title="思维链长度">
-                    <InfoItem>🔄 {formatNumber(model.thoughtChainLength)}</InfoItem>
+                    <InfoItem>
+                      <RetweetOutlined />
+                      {formatNumber(model.thoughtChainLength)}
+                    </InfoItem>
                   </Tooltip>
                 )}
                 {model.outputLength && (
                   <Tooltip title="输出长度">
-                    <InfoItem>📤 {formatNumber(model.outputLength)}</InfoItem>
+                    <InfoItem>
+                      <ExportOutlined />
+                      {formatNumber(model.outputLength)}
+                    </InfoItem>
                   </Tooltip>
                 )}
               </ModelInfo>

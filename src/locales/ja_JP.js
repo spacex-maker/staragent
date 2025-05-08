@@ -633,7 +633,9 @@ export default {
   'chat.sending': '送信中...',
   'chat.sendFailed': '送信失敗',
   'chat.loadingHistory': '履歴を読み込み中...',
-  'chat.tokenConsumption': '推定：{count}トークン',
+  'chat.tokenConsumption': '{count} トークンを消費',
+  'chat.contextTokens': 'コンテキスト: {count} トークン',
+  'chat.contentTokens': '応答: {count} トークン',
 
   // Session list related
   'sessionList.title': 'セッション',

@@ -643,7 +643,9 @@ export default {
   'chat.sending': 'Invio in corso...',
   'chat.sendFailed': 'Invio fallito',
   'chat.loadingHistory': 'Caricamento della cronologia...',
-  'chat.tokenConsumption': 'Stima: {count} token',
+  'chat.tokenConsumption': '{count} token consumati',
+  'chat.contextTokens': 'Contesto: {count} token',
+  'chat.contentTokens': 'Risposta: {count} token',
 
   // Session list related
   'sessionList.title': 'Sessioni',

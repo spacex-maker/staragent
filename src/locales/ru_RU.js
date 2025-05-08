@@ -630,7 +630,9 @@ export default {
   'chat.sending': 'Отправка...',
   'chat.sendFailed': 'Ошибка отправки',
   'chat.loadingHistory': 'Загрузка истории...',
-  'chat.tokenConsumption': 'Примерно {count} токенов',
+  'chat.tokenConsumption': 'Использовано {count} токенов',
+  'chat.contextTokens': 'Контекст: {count} токенов',
+  'chat.contentTokens': 'Ответ: {count} токенов',
 
   // Session list related
   'sessionList.title': 'Сессии',

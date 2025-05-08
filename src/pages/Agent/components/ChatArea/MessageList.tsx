@@ -387,9 +387,23 @@ const MessageList: React.FC<MessageListProps> = ({
 
                   {/* Token计数 */}
                   <TokenCounter $isUser={isUser}>
-                    {intl.formatMessage(
-                      { id: 'chat.tokenConsumption' },
-                      { count: tokenCount }
+                    {!isUser && msg.contextTokens && msg.contentTokens ? (
+                      <>
+                        {intl.formatMessage(
+                          { id: 'chat.contextTokens' },
+                          { count: msg.contextTokens }
+                        )}
+                        {' | '}
+                        {intl.formatMessage(
+                          { id: 'chat.contentTokens' },
+                          { count: msg.contentTokens }
+                        )}
+                      </>
+                    ) : (
+                      intl.formatMessage(
+                        { id: 'chat.tokenConsumption' },
+                        { count: estimateTokens(msg.content) }
+                      )
                     )}
                   </TokenCounter>
 
