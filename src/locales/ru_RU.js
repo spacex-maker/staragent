@@ -760,4 +760,17 @@ export default {
   'common.off': 'Выкл',
   'common.save': 'Сохранить',
   'agent.management': 'Управление ассистентами',
+  
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': 'Введите ваш вопрос...',
+  'chatArea.inputPlaceholder.noProject': 'Пожалуйста, сначала выберите проект',
+  'chatArea.inputPlaceholder.noSession': 'Пожалуйста, сначала создайте новую сессию',
+  'chatArea.inputPlaceholder.noAgents': 'Пожалуйста, сначала добавьте ИИ-сотрудников в проект',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': 'Начать новый разговор',
+  'emptyChat.withAgents.description': 'Введите ваш вопрос в поле ниже, и ИИ-сотрудники предоставят вам профессиональные ответы!',
+  'emptyChat.noAgents.title': 'В проект ещё не добавлены ИИ-сотрудники',
+  'emptyChat.noAgents.description': 'Пожалуйста, сначала добавьте ИИ-сотрудников в проект. Вы можете создать новых сотрудников или выбрать из существующих',
+  'emptyChat.noAgents.action': 'Перейти к добавлению ИИ-сотрудников'
 };

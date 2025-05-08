@@ -774,4 +774,17 @@ export default {
   'common.off': 'Aus',
   'common.save': 'Speichern',
   'agent.management': 'Assistenten-Verwaltung',
+  
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': 'Geben Sie Ihre Frage ein...',
+  'chatArea.inputPlaceholder.noProject': 'Bitte wählen Sie zuerst ein Projekt aus',
+  'chatArea.inputPlaceholder.noSession': 'Bitte erstellen Sie zuerst eine neue Sitzung',
+  'chatArea.inputPlaceholder.noAgents': 'Bitte fügen Sie dem Projekt zuerst KI-Mitarbeiter hinzu',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': 'Neues Gespräch starten',
+  'emptyChat.withAgents.description': 'Geben Sie Ihre Frage in das Eingabefeld unten ein, und die KI-Mitarbeiter werden Ihnen professionelle Antworten liefern!',
+  'emptyChat.noAgents.title': 'Dem Projekt wurden noch keine KI-Mitarbeiter hinzugefügt',
+  'emptyChat.noAgents.description': 'Bitte fügen Sie dem Projekt zuerst KI-Mitarbeiter hinzu. Sie können neue Mitarbeiter erstellen oder aus bestehenden auswählen',
+  'emptyChat.noAgents.action': 'KI-Mitarbeiter hinzufügen'
 };

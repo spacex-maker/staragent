@@ -762,4 +762,17 @@ export default {
   'common.off': 'オフ',
   'common.save': '保存',
   'agent.management': 'アシスタント管理',
+  
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': '質問を入力してください...',
+  'chatArea.inputPlaceholder.noProject': 'まずプロジェクトを選択してください',
+  'chatArea.inputPlaceholder.noSession': '新しいセッションを作成してください',
+  'chatArea.inputPlaceholder.noAgents': 'まずAIスタッフをプロジェクトに追加してください',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': '新しい会話を始める',
+  'emptyChat.withAgents.description': '下の入力ボックスに質問を入力すると、AIスタッフが専門的な回答を提供します！',
+  'emptyChat.noAgents.title': 'プロジェクトにはまだAIスタッフが追加されていません',
+  'emptyChat.noAgents.description': 'まずプロジェクトにAIスタッフを追加してください。新しいスタッフを作成するか、既存のスタッフから選択できます',
+  'emptyChat.noAgents.action': 'AIスタッフを追加する'
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Button } from 'antd';
 import styled from 'styled-components';
 import { ProjectAgent } from '../../types';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const { Text } = Typography;
 
@@ -49,25 +50,42 @@ const EmptyChat: React.FC<EmptyChatProps> = ({
   projectAgents = [],
   onNavigateToAgents
 }) => {
+  const intl = useIntl();
+  
   return (
     <EmptyContainer>
       <EmptyTitle>
         {projectAgents && projectAgents.length > 0 ? (
-          '开始一个新的对话'
+          <FormattedMessage 
+            id="emptyChat.withAgents.title" 
+            defaultMessage="开始一个新的对话" 
+          />
         ) : (
-          '项目尚未添加AI员工‘'
+          <FormattedMessage 
+            id="emptyChat.noAgents.title" 
+            defaultMessage="项目尚未添加AI员工" 
+          />
         )}
       </EmptyTitle>
       <EmptyDescription>
         {projectAgents && projectAgents.length > 0 ? (
-          '在下方输入框中输入您的问题，AI员工将为您提供专业解答！'
+          <FormattedMessage 
+            id="emptyChat.withAgents.description" 
+            defaultMessage="在下方输入框中输入您的问题，AI员工将为您提供专业解答！" 
+          />
         ) : (
-          '请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择'
+          <FormattedMessage 
+            id="emptyChat.noAgents.description" 
+            defaultMessage="请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择" 
+          />
         )}
       </EmptyDescription>
       {(!projectAgents || projectAgents.length === 0) && onNavigateToAgents && (
         <EmptyAction type="primary" onClick={onNavigateToAgents}>
-          前往添加AI员工
+          <FormattedMessage 
+            id="emptyChat.noAgents.action" 
+            defaultMessage="前往添加AI员工" 
+          />
         </EmptyAction>
       )}
     </EmptyContainer>

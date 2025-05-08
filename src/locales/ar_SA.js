@@ -783,4 +783,17 @@ export default {
   'common.off': 'إيقاف',
   'common.save': 'حفظ',
   'agent.management': 'إدارة المساعدين',
+  
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': 'أدخل سؤالك...',
+  'chatArea.inputPlaceholder.noProject': 'الرجاء اختيار مشروع أولاً',
+  'chatArea.inputPlaceholder.noSession': 'الرجاء إنشاء جلسة جديدة أولاً',
+  'chatArea.inputPlaceholder.noAgents': 'الرجاء إضافة موظفي الذكاء الاصطناعي إلى المشروع أولاً',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': 'بدء محادثة جديدة',
+  'emptyChat.withAgents.description': 'أدخل سؤالك في مربع الإدخال أدناه، وسيقدم موظفو الذكاء الاصطناعي إجابات احترافية!',
+  'emptyChat.noAgents.title': 'لم تتم إضافة موظفي الذكاء الاصطناعي إلى المشروع بعد',
+  'emptyChat.noAgents.description': 'الرجاء إضافة موظفي الذكاء الاصطناعي إلى المشروع أولاً. يمكنك إنشاء موظفين جدد أو الاختيار من الموجودين',
+  'emptyChat.noAgents.action': 'الانتقال لإضافة موظفي الذكاء الاصطناعي'
 };

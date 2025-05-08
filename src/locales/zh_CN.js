@@ -760,4 +760,17 @@ export default {
   'common.off': '关闭',
   'common.save': '保存',
   'agent.management': '助手管理',
+
+  // ChatArea组件
+  'chatArea.inputPlaceholder.default': '输入您的问题...',
+  'chatArea.inputPlaceholder.noProject': '请先选择一个项目',
+  'chatArea.inputPlaceholder.noSession': '请先创建一个新的会话',
+  'chatArea.inputPlaceholder.noAgents': '请先添加AI员工到项目中',
+
+  // EmptyChat组件
+  'emptyChat.withAgents.title': '开始一个新的对话',
+  'emptyChat.withAgents.description': '在下方输入框中输入您的问题，AI员工将为您提供专业解答！',
+  'emptyChat.noAgents.title': '项目尚未添加AI员工',
+  'emptyChat.noAgents.description': '请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择',
+  'emptyChat.noAgents.action': '前往添加AI员工'
 }; 

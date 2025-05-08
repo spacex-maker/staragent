@@ -10,6 +10,7 @@ import { useSessionManager } from './hooks/useSessionManager';
 import { useMessageManager } from './hooks/useMessageManager';
 import { useProjectAgents } from './hooks/useProjectAgents';
 import EmptyChat from './EmptyChat';
+import { useIntl } from 'react-intl';
 
 const { Content } = Layout;
 
@@ -148,6 +149,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const contentRef = useRef<HTMLDivElement>(null);
   const sessionListRef = useRef<SessionListRef>(null);
   const [hasMore, setHasMore] = useState(true);
+  const intl = useIntl();
 
   // 使用自定义 hooks 管理状态和逻辑
   const {
@@ -239,11 +241,11 @@ const ChatArea: React.FC<ChatAreaProps> = ({
 
   // 获取输入框占位符
   const inputPlaceholder = useMemo(() => {
-    if (!activeProject) return "请先选择一个项目";
-    if (!activeSessionId) return noSessionsMessage || "请先创建一个新的会话";
-    if (projectAgents.length === 0) return "请先添加AI员工到项目中";
-    return "输入您的问题...";
-  }, [activeProject, activeSessionId, noSessionsMessage, projectAgents.length]);
+    if (!activeProject) return intl.formatMessage({ id: 'chatArea.inputPlaceholder.noProject', defaultMessage: "请先选择一个项目" });
+    if (!activeSessionId) return noSessionsMessage || intl.formatMessage({ id: 'chatArea.inputPlaceholder.noSession', defaultMessage: "请先创建一个新的会话" });
+    if (projectAgents.length === 0) return intl.formatMessage({ id: 'chatArea.inputPlaceholder.noAgents', defaultMessage: "请先添加AI员工到项目中" });
+    return intl.formatMessage({ id: 'chatArea.inputPlaceholder.default', defaultMessage: "输入您的问题..." });
+  }, [activeProject, activeSessionId, noSessionsMessage, projectAgents.length, intl]);
 
   return (
     <StyledComponents.ChatContainer>

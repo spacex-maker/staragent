@@ -793,4 +793,17 @@ export default {
   'common.off': 'Off',
   'common.save': 'Save',
   'agent.management': 'Assistant Management',
+
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': 'Enter your question...',
+  'chatArea.inputPlaceholder.noProject': 'Please select a project first',
+  'chatArea.inputPlaceholder.noSession': 'Please create a new session first',
+  'chatArea.inputPlaceholder.noAgents': 'Please add AI staff to the project first',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': 'Start a new conversation',
+  'emptyChat.withAgents.description': 'Enter your question in the input box below, and the AI staff will provide professional answers!',
+  'emptyChat.noAgents.title': 'No AI staff added to the project yet',
+  'emptyChat.noAgents.description': 'Please add AI staff to the project first. You can create new staff or select from existing ones',
+  'emptyChat.noAgents.action': 'Go to add AI staff'
 };

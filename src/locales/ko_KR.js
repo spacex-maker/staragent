@@ -802,4 +802,17 @@ export default {
   'common.off': '끄기',
   'common.save': '저장',
   'agent.management': '어시스턴트 관리',
+  
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': '질문을 입력하세요...',
+  'chatArea.inputPlaceholder.noProject': '먼저 프로젝트를 선택하세요',
+  'chatArea.inputPlaceholder.noSession': '먼저 새 세션을 만드세요',
+  'chatArea.inputPlaceholder.noAgents': '먼저 AI 직원을 프로젝트에 추가하세요',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': '새 대화 시작하기',
+  'emptyChat.withAgents.description': '아래 입력창에 질문을 입력하면 AI 직원이 전문적인 답변을 제공합니다!',
+  'emptyChat.noAgents.title': '프로젝트에 아직 AI 직원이 추가되지 않았습니다',
+  'emptyChat.noAgents.description': '먼저, 프로젝트에 AI 직원을 추가하세요. 새 직원을 만들거나 기존 직원 중에서 선택할 수 있습니다',
+  'emptyChat.noAgents.action': 'AI 직원 추가하기'
 };

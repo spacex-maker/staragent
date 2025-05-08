@@ -773,4 +773,17 @@ export default {
   'common.off': 'Désactivé',
   'common.save': 'Enregistrer',
   'agent.management': 'Gestion des Assistants',
+  
+  // ChatArea component
+  'chatArea.inputPlaceholder.default': 'Saisissez votre question...',
+  'chatArea.inputPlaceholder.noProject': 'Veuillez d\'abord sélectionner un projet',
+  'chatArea.inputPlaceholder.noSession': 'Veuillez d\'abord créer une nouvelle session',
+  'chatArea.inputPlaceholder.noAgents': 'Veuillez d\'abord ajouter du personnel IA au projet',
+
+  // EmptyChat component
+  'emptyChat.withAgents.title': 'Commencer une nouvelle conversation',
+  'emptyChat.withAgents.description': 'Saisissez votre question dans le champ ci-dessous, et le personnel IA vous fournira des réponses professionnelles !',
+  'emptyChat.noAgents.title': 'Aucun personnel IA n\'a encore été ajouté au projet',
+  'emptyChat.noAgents.description': 'Veuillez d\'abord ajouter du personnel IA au projet. Vous pouvez créer un nouveau personnel ou en sélectionner parmi les existants',
+  'emptyChat.noAgents.action': 'Ajouter du personnel IA'
 };
