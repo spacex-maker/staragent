@@ -21,6 +21,12 @@ const AgentListHeader = styled.div`
   margin-bottom: 16px;
 `;
 
+// 创建自定义事件，在助手列表变更时通知其他组件
+const triggerAgentsChangedEvent = () => {
+  const event = new CustomEvent('projectAgentsChanged');
+  window.dispatchEvent(event);
+};
+
 const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsChange }) => {
   const [projectAgents, setProjectAgents] = useState<ProjectAgent[]>([]);
   const [loading, setLoading] = useState(false);
@@ -55,11 +61,15 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
     setAddAgentModalVisible(false);
     fetchAgents();
     onAddAgent();
+    // 触发助手列表变更事件
+    triggerAgentsChangedEvent();
   };
 
   const handleRemoveAgent = async (recordId: number) => {
       await removeProjectAgent(recordId);
       await fetchAgents();
+      // 触发助手列表变更事件
+      triggerAgentsChangedEvent();
   };
 
   const handleUpdateAgentSettings = async (record: ProjectAgent, field: string, value: any) => {
@@ -72,6 +82,8 @@ const AgentList: React.FC<AgentListProps> = ({ projectId, onAddAgent, onAgentsCh
           )
         );
         onAgentsChange?.();
+        // 触发助手列表变更事件
+        triggerAgentsChangedEvent();
       }
     } catch (error) {
       console.error('更新项目员工设置错误:', error);

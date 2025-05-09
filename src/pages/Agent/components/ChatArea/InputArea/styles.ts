@@ -119,11 +119,9 @@ export const MentionOption = styled.div`
   padding: 6px 10px;
   
   .agent-icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    background-color: var(--ant-color-primary-bg);
-    color: var(--ant-color-primary);
     display: flex;
     align-items: center;
     justify-content: center;

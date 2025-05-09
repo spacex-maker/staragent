@@ -114,6 +114,12 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
     agent.modelType.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  // 创建自定义事件，在助手列表变更时通知其他组件
+  const triggerAgentsChangedEvent = () => {
+    const event = new CustomEvent('projectAgentsChanged');
+    window.dispatchEvent(event);
+  };
+
   const handleAddAgents = async () => {
     if (selectedAgentIds.length === 0) {
       message.warning(intl.formatMessage({ id: 'project.addAgent.selectAtLeast', defaultMessage: '请至少选择一名员工' }));
@@ -164,6 +170,8 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({
     }
     
     if (successCount > 0 && failCount === 0) {
+      // 触发助手列表变更事件
+      triggerAgentsChangedEvent();
       onSuccess();
     }
     

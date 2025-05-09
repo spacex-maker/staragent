@@ -1,7 +1,22 @@
 import React from 'react';
-import { UserOutlined } from '@ant-design/icons';
+import { RobotOutlined } from '@ant-design/icons';
 import { MentionDropdown as StyledMentionDropdown, MentionItem, MentionOption } from './styles';
 import { ProjectAgent } from '../../../types';
+import { Avatar } from 'antd';
+import styled from 'styled-components';
+
+const AgentAvatar = styled(Avatar)`
+  border: 2px solid var(--ant-color-primary);
+  background: var(--ant-color-bg-container);
+  color: var(--ant-color-primary);
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  
+  .anticon {
+    font-size: 12px;
+  }
+`;
 
 interface MentionDropdownProps {
   filteredAgents: ProjectAgent[];
@@ -20,7 +35,11 @@ const MentionDropdown: React.FC<MentionDropdownProps> = ({ filteredAgents, onSel
         >
           <MentionOption>
             <div className="agent-icon">
-              <UserOutlined />
+              <AgentAvatar
+                src={agent.avatarUrl}
+                icon={!agent.avatarUrl && <RobotOutlined />}
+                size="small"
+              />
             </div>
             <span className="agent-name">{agent.agentName}</span>
             <span className="agent-role">{agent.role}</span>
