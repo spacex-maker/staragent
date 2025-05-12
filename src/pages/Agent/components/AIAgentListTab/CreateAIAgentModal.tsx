@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, InputNumber, message, Button, Space, Tooltip, Typography, Tag, Statistic, Row, Col } from 'antd';
+import { Modal, Form, Input, InputNumber, message, Button, Space, Tooltip, Typography, Tag, Statistic, Row, Col, Select } from 'antd';
 import { RobotOutlined, InfoCircleOutlined, DatabaseOutlined, ThunderboltOutlined, DollarOutlined } from '@ant-design/icons';
 import axios from '../../../../api/axios';
 import ModelSelector from '../ModelSelector';
@@ -376,39 +376,57 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
             </div>
           </StyledFormItem>
 
-          <Form.Item
-            name="temperature"
-            label={intl.formatMessage({ id: 'aiAgentModal.form.temperature', defaultMessage: '随机性' })}
-            rules={[
-              { required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.temperature.required', defaultMessage: '请输入随机性参数' }) },
-              { type: 'number', min: 0, max: 1, message: intl.formatMessage({ id: 'aiAgentModal.form.temperature.range', defaultMessage: '随机性参数必须在0-1之间' }) }
-            ]}
-            tooltip={intl.formatMessage({ id: 'aiAgentModal.form.temperature.tooltip', defaultMessage: '值越大，回答越具有创造性；值越小，回答越确定性' })}
-          >
-            <InputNumber
-              placeholder={intl.formatMessage({ id: 'aiAgentModal.form.temperature.placeholder', defaultMessage: '请输入随机性参数' })}
-              step={0.1}
-              min={0}
-              max={1}
-              style={{ width: '100%' }}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="maxTokens"
-            label={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens', defaultMessage: '最大Token数' })}
-            rules={[
-              { required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.required', defaultMessage: '请输入最大Token数' }) },
-              { type: 'number', min: 1, message: intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.min', defaultMessage: '最大Token数必须大于0' }) }
-            ]}
-            tooltip={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.tooltip', defaultMessage: '限制每次回答的最大长度，1个汉字约等于2个token' })}
-          >
-            <InputNumber
-              placeholder={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.placeholder', defaultMessage: '请输入最大Token数' })}
-              min={1}
-              style={{ width: '100%' }}
-            />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item
+                name="temperature"
+                label={intl.formatMessage({ id: 'aiAgentModal.form.temperature', defaultMessage: '随机性' })}
+                rules={[
+                  { required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.temperature.required', defaultMessage: '请输入随机性参数' }) },
+                  { type: 'number', min: 0, max: 1, message: intl.formatMessage({ id: 'aiAgentModal.form.temperature.range', defaultMessage: '随机性参数必须在0-1之间' }) }
+                ]}
+                tooltip={intl.formatMessage({ id: 'aiAgentModal.form.temperature.tooltip', defaultMessage: '值越大，回答越具有创造性；值越小，回答越确定性' })}
+              >
+                <InputNumber
+                  placeholder={intl.formatMessage({ id: 'aiAgentModal.form.temperature.placeholder', defaultMessage: '请输入随机性参数' })}
+                  step={0.1}
+                  min={0}
+                  max={1}
+                  style={{ width: '100%' }}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="maxTokens"
+                label={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens', defaultMessage: '最大Token数' })}
+                rules={[
+                  { required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.required', defaultMessage: '请输入最大Token数' }) },
+                  { type: 'number', min: 1, message: intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.min', defaultMessage: '最大Token数必须大于0' }) }
+                ]}
+                tooltip={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.tooltip', defaultMessage: '限制每次回答的最大长度，1个汉字约等于2个token' })}
+              >
+                <InputNumber
+                  placeholder={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens.placeholder', defaultMessage: '请输入最大Token数' })}
+                  min={1}
+                  style={{ width: '100%' }}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="status"
+                label={intl.formatMessage({ id: 'aiAgentModal.form.status', defaultMessage: '状态' })}
+                rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.status.required', defaultMessage: '请选择状态' }) }]}
+                initialValue="active"
+              >
+                <Select>
+                  <Select.Option value="active">{intl.formatMessage({ id: 'aiAgentModal.form.status.active', defaultMessage: '启用' })}</Select.Option>
+                  <Select.Option value="inactive">{intl.formatMessage({ id: 'aiAgentModal.form.status.inactive', defaultMessage: '禁用' })}</Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </Modal>
       
