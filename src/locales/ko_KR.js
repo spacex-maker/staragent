@@ -811,8 +811,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': '새 대화 시작하기',
-  'emptyChat.withAgents.description': '아래 입력창에 질문을 입력하면 AI 직원이 전문적인 답변을 제공합니다!',
-  'emptyChat.noAgents.title': '프로젝트에 아직 AI 직원이 추가되지 않았습니다',
-  'emptyChat.noAgents.description': '먼저, 프로젝트에 AI 직원을 추가하세요. 새 직원을 만들거나 기존 직원 중에서 선택할 수 있습니다',
-  'emptyChat.noAgents.action': 'AI 직원 추가하기'
+  'emptyChat.withAgents.description': '아래 입력창에 질문을 입력하면 AI 어시스턴트가 전문적인 답변을 제공합니다!',
+  'emptyChat.noAgents.title': '프로젝트에 아직 AI 어시스턴트가 추가되지 않았습니다',
+  'emptyChat.noAgents.description': '먼저 프로젝트에 AI 어시스턴트를 추가해 주세요. 새 어시스턴트를 만들거나 기존 어시스턴트 중에서 선택할 수 있습니다',
+  'emptyChat.noAgents.action': 'AI 어시스턴트 추가하기',
+
+  // AI 프롬프트 최적화 기능
+  'aiAgentModal.optimize.title': 'AI 프롬프트 최적화',
+  'aiAgentModal.optimize.button': 'AI 최적화',
+  'aiAgentModal.optimize.emptyPrompt': '최적화 전에 프롬프트 텍스트를 입력해 주세요',
+  'aiAgentModal.optimize.description': 'AI 기술을 사용하여 프롬프트를 최적화하고 더 전문적이고 포괄적인 AI 어시스턴트 설명을 만드는 데 도움을 줍니다.',
+  'aiAgentModal.optimize.confirm': '최적화된 프롬프트가 생성되었습니다. 적용하시겠습니까?',
+  'aiAgentModal.optimize.apply': '적용',
+  'aiAgentModal.optimize.cancel': '취소',
+  'aiAgentModal.optimize.updated': '프롬프트가 업데이트되었습니다',
+  'aiAgentModal.optimize.failed': '프롬프트 최적화 실패',
+  'aiAgentModal.optimize.error': '프롬프트 최적화 중 오류가 발생했습니다',
+  'aiAgentModal.optimize.inputTokens': '입력 토큰',
+  'aiAgentModal.optimize.outputTokens': '출력 토큰',
+  'aiAgentModal.optimize.cost': '비용',
+  'aiAgentModal.optimize.unknown': '알 수 없음',
+  'aiAgentModal.optimize.statsTitle': '최적화 통계'
 };

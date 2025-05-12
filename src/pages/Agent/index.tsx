@@ -90,7 +90,7 @@ const AgentPage: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 监听导航到AI员工标签的事件
+  // 监听导航到AI助理标签的事件
   useEffect(() => {
     const handleNavigateToAgents = () => {
       setProjectListKey('agents');

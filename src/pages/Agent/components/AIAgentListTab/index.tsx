@@ -108,12 +108,13 @@ const AIAgentListTab = forwardRef<AIAgentListRef, AIAgentListProps>(({ onNavigat
     }
   }));
 
-  // 获取AI员工列表
+  // 获取AI助手列表
   const fetchAgents = async () => {
     try {
       setLoading(true);
       const response = await axios.get('/productx/sa-ai-agent/list');
       if (response.data.success) {
+        console.log('API返回的AI助手列表数据:', response.data.data);
         setAgents(response.data.data);
       } else {
         message.error(response.data.message || intl.formatMessage({ id: 'aiAgentList.getListError' }));

@@ -771,8 +771,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': '新しい会話を始める',
-  'emptyChat.withAgents.description': '下の入力ボックスに質問を入力すると、AIスタッフが専門的な回答を提供します！',
-  'emptyChat.noAgents.title': 'プロジェクトにはまだAIスタッフが追加されていません',
-  'emptyChat.noAgents.description': 'まずプロジェクトにAIスタッフを追加してください。新しいスタッフを作成するか、既存のスタッフから選択できます',
-  'emptyChat.noAgents.action': 'AIスタッフを追加する'
+  'emptyChat.withAgents.description': '下の入力欄に質問を入力すると、AIアシスタントが専門的な回答を提供します！',
+  'emptyChat.noAgents.title': 'プロジェクトにはまだAIアシスタントが追加されていません',
+  'emptyChat.noAgents.description': '最初にAIアシスタントをプロジェクトに追加してください。新しいアシスタントを作成するか、既存のアシスタントから選択できます',
+  'emptyChat.noAgents.action': 'AIアシスタントを追加する',
+
+  // AIプロンプト最適化機能
+  'aiAgentModal.optimize.title': 'AIプロンプト最適化',
+  'aiAgentModal.optimize.button': 'AI最適化',
+  'aiAgentModal.optimize.emptyPrompt': '最適化する前にプロンプトテキストを入力してください',
+  'aiAgentModal.optimize.description': 'AI技術によりプロンプトを最適化し、より専門的で包括的なAIアシスタントの説明を作成するのに役立ちます。',
+  'aiAgentModal.optimize.confirm': '最適化されたプロンプトが生成されました。適用しますか？',
+  'aiAgentModal.optimize.apply': '適用',
+  'aiAgentModal.optimize.cancel': 'キャンセル',
+  'aiAgentModal.optimize.updated': 'プロンプトが更新されました',
+  'aiAgentModal.optimize.failed': 'プロンプトの最適化に失敗しました',
+  'aiAgentModal.optimize.error': 'プロンプトの最適化中にエラーが発生しました',
+  'aiAgentModal.optimize.inputTokens': '入力トークン',
+  'aiAgentModal.optimize.outputTokens': '出力トークン',
+  'aiAgentModal.optimize.cost': 'コスト',
+  'aiAgentModal.optimize.unknown': '不明',
+  'aiAgentModal.optimize.statsTitle': '最適化統計情報'
 };

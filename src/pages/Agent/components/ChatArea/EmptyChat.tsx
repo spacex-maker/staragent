@@ -63,7 +63,7 @@ const EmptyChat: React.FC<EmptyChatProps> = ({
         ) : (
           <FormattedMessage 
             id="emptyChat.noAgents.title" 
-            defaultMessage="项目尚未添加AI员工" 
+            defaultMessage="项目尚未添加AI助手" 
           />
         )}
       </EmptyTitle>
@@ -71,12 +71,12 @@ const EmptyChat: React.FC<EmptyChatProps> = ({
         {projectAgents && projectAgents.length > 0 ? (
           <FormattedMessage 
             id="emptyChat.withAgents.description" 
-            defaultMessage="在下方输入框中输入您的问题，AI员工将为您提供专业解答！" 
+            defaultMessage="在下方输入框中输入您的问题，AI助手将为您提供专业解答！" 
           />
         ) : (
           <FormattedMessage 
             id="emptyChat.noAgents.description" 
-            defaultMessage="请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择" 
+            defaultMessage="请先添加AI助手到项目中，您可以选择创建新助手或从现有助手中选择" 
           />
         )}
       </EmptyDescription>
@@ -84,7 +84,7 @@ const EmptyChat: React.FC<EmptyChatProps> = ({
         <EmptyAction type="primary" onClick={onNavigateToAgents}>
           <FormattedMessage 
             id="emptyChat.noAgents.action" 
-            defaultMessage="前往添加AI员工" 
+            defaultMessage="前往添加AI助手" 
           />
         </EmptyAction>
       )}

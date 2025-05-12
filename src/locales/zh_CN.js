@@ -765,12 +765,29 @@ export default {
   'chatArea.inputPlaceholder.default': '输入您的问题...',
   'chatArea.inputPlaceholder.noProject': '请先选择一个项目',
   'chatArea.inputPlaceholder.noSession': '请先创建一个新的会话',
-  'chatArea.inputPlaceholder.noAgents': '请先添加AI员工到项目中',
+  'chatArea.inputPlaceholder.noAgents': '请先添加AI助理到项目中',
 
   // EmptyChat组件
   'emptyChat.withAgents.title': '开始一个新的对话',
-  'emptyChat.withAgents.description': '在下方输入框中输入您的问题，AI员工将为您提供专业解答！',
-  'emptyChat.noAgents.title': '项目尚未添加AI员工',
-  'emptyChat.noAgents.description': '请先添加AI员工到项目中，您可以选择创建新员工或从现有员工中选择',
-  'emptyChat.noAgents.action': '前往添加AI员工'
+  'emptyChat.withAgents.description': '在下方输入框中输入您的问题，AI助理将为您提供专业解答！',
+  'emptyChat.noAgents.title': '项目尚未添加AI助理',
+  'emptyChat.noAgents.description': '请先添加AI助理到项目中，您可以选择创建新助理或从现有助理中选择',
+  'emptyChat.noAgents.action': '前往添加AI助理',
+
+  // AI优化提示词功能
+  'aiAgentModal.optimize.title': 'AI优化提示词',
+  'aiAgentModal.optimize.button': 'AI优化',
+  'aiAgentModal.optimize.emptyPrompt': '请先输入一些提示词再进行优化',
+  'aiAgentModal.optimize.description': '将使用AI技术优化您输入的提示词，帮助您创建更专业、更全面的AI助手描述。',
+  'aiAgentModal.optimize.confirm': '已为您生成优化后的提示词，是否应用？',
+  'aiAgentModal.optimize.apply': '应用',
+  'aiAgentModal.optimize.cancel': '取消',
+  'aiAgentModal.optimize.updated': '已更新提示词',
+  'aiAgentModal.optimize.failed': '优化提示词失败',
+  'aiAgentModal.optimize.error': '优化提示词时发生错误',
+  'aiAgentModal.optimize.inputTokens': '输入tokens',
+  'aiAgentModal.optimize.outputTokens': '输出tokens',
+  'aiAgentModal.optimize.cost': '花费',
+  'aiAgentModal.optimize.unknown': '未知',
+  'aiAgentModal.optimize.statsTitle': '优化统计信息'
 }; 

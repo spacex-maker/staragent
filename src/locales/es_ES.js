@@ -803,8 +803,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': 'Iniciar una nueva conversación',
-  'emptyChat.withAgents.description': '¡Introduce tu pregunta en el cuadro de texto a continuación, y el personal IA te proporcionará respuestas profesionales!',
-  'emptyChat.noAgents.title': 'Aún no se ha añadido personal IA al proyecto',
-  'emptyChat.noAgents.description': 'Por favor, añade primero personal IA al proyecto. Puedes crear nuevo personal o seleccionar entre los existentes',
-  'emptyChat.noAgents.action': 'Ir a añadir personal IA'
+  'emptyChat.withAgents.description': '¡Ingrese su pregunta en el cuadro de texto a continuación, y el asistente de IA le proporcionará respuestas profesionales!',
+  'emptyChat.noAgents.title': 'Aún no se han añadido asistentes de IA al proyecto',
+  'emptyChat.noAgents.description': 'Por favor, añada primero asistentes de IA al proyecto. Puede crear nuevos asistentes o seleccionar entre los existentes',
+  'emptyChat.noAgents.action': 'Ir a añadir asistentes de IA',
+
+  // Optimización de indicaciones con IA
+  'aiAgentModal.optimize.title': 'Optimización de indicaciones con IA',
+  'aiAgentModal.optimize.button': 'Optimizar con IA',
+  'aiAgentModal.optimize.emptyPrompt': 'Por favor, introduzca algún texto antes de realizar la optimización',
+  'aiAgentModal.optimize.description': 'La tecnología de IA optimizará su indicación para ayudarle a crear una descripción de asistente de IA más profesional y completa.',
+  'aiAgentModal.optimize.confirm': 'Indicación optimizada generada. ¿Desea aplicarla?',
+  'aiAgentModal.optimize.apply': 'Aplicar',
+  'aiAgentModal.optimize.cancel': 'Cancelar',
+  'aiAgentModal.optimize.updated': 'Indicación actualizada',
+  'aiAgentModal.optimize.failed': 'Falló la optimización de la indicación',
+  'aiAgentModal.optimize.error': 'Ocurrió un error al optimizar la indicación',
+  'aiAgentModal.optimize.inputTokens': 'Tokens de entrada',
+  'aiAgentModal.optimize.outputTokens': 'Tokens de salida',
+  'aiAgentModal.optimize.cost': 'Costo',
+  'aiAgentModal.optimize.unknown': 'Desconocido',
+  'aiAgentModal.optimize.statsTitle': 'Estadísticas de optimización'
 };

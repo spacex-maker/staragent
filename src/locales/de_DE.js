@@ -782,9 +782,26 @@ export default {
   'chatArea.inputPlaceholder.noAgents': 'Bitte fügen Sie dem Projekt zuerst KI-Mitarbeiter hinzu',
 
   // EmptyChat component
-  'emptyChat.withAgents.title': 'Neues Gespräch starten',
-  'emptyChat.withAgents.description': 'Geben Sie Ihre Frage in das Eingabefeld unten ein, und die KI-Mitarbeiter werden Ihnen professionelle Antworten liefern!',
-  'emptyChat.noAgents.title': 'Dem Projekt wurden noch keine KI-Mitarbeiter hinzugefügt',
-  'emptyChat.noAgents.description': 'Bitte fügen Sie dem Projekt zuerst KI-Mitarbeiter hinzu. Sie können neue Mitarbeiter erstellen oder aus bestehenden auswählen',
-  'emptyChat.noAgents.action': 'KI-Mitarbeiter hinzufügen'
+  'emptyChat.withAgents.title': 'Starten Sie ein neues Gespräch',
+  'emptyChat.withAgents.description': 'Geben Sie Ihre Frage in das Eingabefeld unten ein, und der KI-Assistent wird Ihnen professionelle Antworten geben!',
+  'emptyChat.noAgents.title': 'Dem Projekt wurden noch keine KI-Assistenten hinzugefügt',
+  'emptyChat.noAgents.description': 'Bitte fügen Sie zuerst KI-Assistenten zum Projekt hinzu. Sie können neue Assistenten erstellen oder aus vorhandenen auswählen',
+  'emptyChat.noAgents.action': 'KI-Assistenten hinzufügen',
+
+  // KI-Optimierung der Eingabeaufforderung
+  'aiAgentModal.optimize.title': 'KI-Optimierung der Eingabeaufforderung',
+  'aiAgentModal.optimize.button': 'KI-Optimierung',
+  'aiAgentModal.optimize.emptyPrompt': 'Bitte geben Sie einen Text ein, bevor Sie die Optimierung durchführen',
+  'aiAgentModal.optimize.description': 'KI-Technologie wird Ihre Eingabeaufforderung optimieren, um Ihnen zu helfen, eine professionellere und umfassendere KI-Assistentenbeschreibung zu erstellen.',
+  'aiAgentModal.optimize.confirm': 'Optimierte Eingabeaufforderung generiert. Möchten Sie sie anwenden?',
+  'aiAgentModal.optimize.apply': 'Anwenden',
+  'aiAgentModal.optimize.cancel': 'Abbrechen',
+  'aiAgentModal.optimize.updated': 'Eingabeaufforderung aktualisiert',
+  'aiAgentModal.optimize.failed': 'Eingabeaufforderungsoptimierung fehlgeschlagen',
+  'aiAgentModal.optimize.error': 'Bei der Optimierung der Eingabeaufforderung ist ein Fehler aufgetreten',
+  'aiAgentModal.optimize.inputTokens': 'Eingabe-Tokens',
+  'aiAgentModal.optimize.outputTokens': 'Ausgabe-Tokens',
+  'aiAgentModal.optimize.cost': 'Kosten',
+  'aiAgentModal.optimize.unknown': 'Unbekannt',
+  'aiAgentModal.optimize.statsTitle': 'Optimierungsstatistiken'
 };

@@ -769,8 +769,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': 'Начать новый разговор',
-  'emptyChat.withAgents.description': 'Введите ваш вопрос в поле ниже, и ИИ-сотрудники предоставят вам профессиональные ответы!',
-  'emptyChat.noAgents.title': 'В проект ещё не добавлены ИИ-сотрудники',
-  'emptyChat.noAgents.description': 'Пожалуйста, сначала добавьте ИИ-сотрудников в проект. Вы можете создать новых сотрудников или выбрать из существующих',
-  'emptyChat.noAgents.action': 'Перейти к добавлению ИИ-сотрудников'
+  'emptyChat.withAgents.description': 'Введите ваш вопрос в поле ниже, и ИИ-ассистент предоставит вам профессиональный ответ!',
+  'emptyChat.noAgents.title': 'В проект еще не добавлены ИИ-ассистенты',
+  'emptyChat.noAgents.description': 'Пожалуйста, сначала добавьте ИИ-ассистентов в проект. Вы можете создать новых ассистентов или выбрать из существующих',
+  'emptyChat.noAgents.action': 'Добавить ИИ-ассистентов',
+
+  // Функция оптимизации промптов с помощью ИИ
+  'aiAgentModal.optimize.title': 'ИИ-оптимизация промпта',
+  'aiAgentModal.optimize.button': 'ИИ-оптимизация',
+  'aiAgentModal.optimize.emptyPrompt': 'Пожалуйста, введите текст промпта перед оптимизацией',
+  'aiAgentModal.optimize.description': 'Технология ИИ оптимизирует ваш промпт, чтобы помочь вам создать более профессиональное и полное описание ИИ-ассистента.',
+  'aiAgentModal.optimize.confirm': 'Оптимизированный промпт сгенерирован. Хотите применить его?',
+  'aiAgentModal.optimize.apply': 'Применить',
+  'aiAgentModal.optimize.cancel': 'Отмена',
+  'aiAgentModal.optimize.updated': 'Промпт обновлен',
+  'aiAgentModal.optimize.failed': 'Не удалось оптимизировать промпт',
+  'aiAgentModal.optimize.error': 'Произошла ошибка при оптимизации промпта',
+  'aiAgentModal.optimize.inputTokens': 'Входные токены',
+  'aiAgentModal.optimize.outputTokens': 'Выходные токены',
+  'aiAgentModal.optimize.cost': 'Стоимость',
+  'aiAgentModal.optimize.unknown': 'Неизвестно',
+  'aiAgentModal.optimize.statsTitle': 'Статистика оптимизации'
 };

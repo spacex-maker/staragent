@@ -802,8 +802,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': 'Start a new conversation',
-  'emptyChat.withAgents.description': 'Enter your question in the input box below, and the AI staff will provide professional answers!',
-  'emptyChat.noAgents.title': 'No AI staff added to the project yet',
-  'emptyChat.noAgents.description': 'Please add AI staff to the project first. You can create new staff or select from existing ones',
-  'emptyChat.noAgents.action': 'Go to add AI staff'
+  'emptyChat.withAgents.description': 'Enter your question in the input box below, and the AI assistant will provide professional answers!',
+  'emptyChat.noAgents.title': 'No AI assistants added to the project yet',
+  'emptyChat.noAgents.description': 'Please add AI assistants to the project first. You can create new assistants or select from existing ones',
+  'emptyChat.noAgents.action': 'Go to add AI assistants',
+  
+  // AI Prompt Optimization
+  'aiAgentModal.optimize.title': 'AI Optimize Prompt',
+  'aiAgentModal.optimize.button': 'AI Optimize',
+  'aiAgentModal.optimize.emptyPrompt': 'Please enter some prompt text before optimization',
+  'aiAgentModal.optimize.description': 'AI technology will optimize your prompt to help you create a more professional and comprehensive AI assistant description.',
+  'aiAgentModal.optimize.confirm': 'Optimized prompt generated. Would you like to apply it?',
+  'aiAgentModal.optimize.apply': 'Apply',
+  'aiAgentModal.optimize.cancel': 'Cancel',
+  'aiAgentModal.optimize.updated': 'Prompt updated',
+  'aiAgentModal.optimize.failed': 'Failed to optimize prompt',
+  'aiAgentModal.optimize.error': 'Error occurred while optimizing prompt',
+  'aiAgentModal.optimize.inputTokens': 'Input tokens',
+  'aiAgentModal.optimize.outputTokens': 'Output tokens',
+  'aiAgentModal.optimize.cost': 'Cost',
+  'aiAgentModal.optimize.unknown': 'Unknown',
+  'aiAgentModal.optimize.statsTitle': 'Optimization Statistics'
 };

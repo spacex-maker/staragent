@@ -165,7 +165,7 @@ const AIAgentItem: React.FC<AIAgentItemProps> = ({ agent, onEdit, onDelete }) =>
             message.error(response.data.message || '删除失败');
           }
         } catch (error) {
-          console.error('删除AI员工失败:', error);
+          console.error('删除AI助手失败:', error);
           message.error('删除失败，请稍后重试');
         }
       },

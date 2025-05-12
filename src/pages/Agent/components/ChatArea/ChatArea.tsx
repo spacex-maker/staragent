@@ -209,7 +209,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     fetchAgents
   } = useProjectAgents(activeProject?.id);
 
-  // 监听项目变化时获取员工列表
+  // 监听项目变化时获取助手列表
   useEffect(() => {
     if (activeProject?.id) {
       fetchAgents();
@@ -243,7 +243,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const inputPlaceholder = useMemo(() => {
     if (!activeProject) return intl.formatMessage({ id: 'chatArea.inputPlaceholder.noProject', defaultMessage: "请先选择一个项目" });
     if (!activeSessionId) return noSessionsMessage || intl.formatMessage({ id: 'chatArea.inputPlaceholder.noSession', defaultMessage: "请先创建一个新的会话" });
-    if (projectAgents.length === 0) return intl.formatMessage({ id: 'chatArea.inputPlaceholder.noAgents', defaultMessage: "请先添加AI员工到项目中" });
+    if (projectAgents.length === 0) return intl.formatMessage({ id: 'chatArea.inputPlaceholder.noAgents', defaultMessage: "请先添加AI助手到项目中" });
     return intl.formatMessage({ id: 'chatArea.inputPlaceholder.default', defaultMessage: "输入您的问题..." });
   }, [activeProject, activeSessionId, noSessionsMessage, projectAgents.length, intl]);
 

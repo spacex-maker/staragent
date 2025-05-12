@@ -782,8 +782,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': 'Commencer une nouvelle conversation',
-  'emptyChat.withAgents.description': 'Saisissez votre question dans le champ ci-dessous, et le personnel IA vous fournira des réponses professionnelles !',
-  'emptyChat.noAgents.title': 'Aucun personnel IA n\'a encore été ajouté au projet',
-  'emptyChat.noAgents.description': 'Veuillez d\'abord ajouter du personnel IA au projet. Vous pouvez créer un nouveau personnel ou en sélectionner parmi les existants',
-  'emptyChat.noAgents.action': 'Ajouter du personnel IA'
+  'emptyChat.withAgents.description': 'Saisissez votre question dans la zone de texte ci-dessous, et l\'assistant IA vous fournira des réponses professionnelles !',
+  'emptyChat.noAgents.title': 'Aucun assistant IA n\'a encore été ajouté au projet',
+  'emptyChat.noAgents.description': 'Veuillez d\'abord ajouter des assistants IA au projet. Vous pouvez créer de nouveaux assistants ou sélectionner parmi ceux existants',
+  'emptyChat.noAgents.action': 'Ajouter des assistants IA',
+
+  // Optimisation de l'invite par IA
+  'aiAgentModal.optimize.title': 'Optimisation de l\'invite par IA',
+  'aiAgentModal.optimize.button': 'Optimisation IA',
+  'aiAgentModal.optimize.emptyPrompt': 'Veuillez saisir du texte avant de procéder à l\'optimisation',
+  'aiAgentModal.optimize.description': 'La technologie IA optimisera votre invite pour vous aider à créer une description d\'assistant IA plus professionnelle et complète.',
+  'aiAgentModal.optimize.confirm': 'Invite optimisée générée. Souhaitez-vous l\'appliquer ?',
+  'aiAgentModal.optimize.apply': 'Appliquer',
+  'aiAgentModal.optimize.cancel': 'Annuler',
+  'aiAgentModal.optimize.updated': 'Invite mise à jour',
+  'aiAgentModal.optimize.failed': 'Échec de l\'optimisation de l\'invite',
+  'aiAgentModal.optimize.error': 'Une erreur s\'est produite lors de l\'optimisation de l\'invite',
+  'aiAgentModal.optimize.inputTokens': 'Tokens d\'entrée',
+  'aiAgentModal.optimize.outputTokens': 'Tokens de sortie',
+  'aiAgentModal.optimize.cost': 'Coût',
+  'aiAgentModal.optimize.unknown': 'Inconnu',
+  'aiAgentModal.optimize.statsTitle': 'Statistiques d\'optimisation'
 };

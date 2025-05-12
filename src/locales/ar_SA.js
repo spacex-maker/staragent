@@ -792,8 +792,25 @@ export default {
 
   // EmptyChat component
   'emptyChat.withAgents.title': 'بدء محادثة جديدة',
-  'emptyChat.withAgents.description': 'أدخل سؤالك في مربع الإدخال أدناه، وسيقدم موظفو الذكاء الاصطناعي إجابات احترافية!',
-  'emptyChat.noAgents.title': 'لم تتم إضافة موظفي الذكاء الاصطناعي إلى المشروع بعد',
-  'emptyChat.noAgents.description': 'الرجاء إضافة موظفي الذكاء الاصطناعي إلى المشروع أولاً. يمكنك إنشاء موظفين جدد أو الاختيار من الموجودين',
-  'emptyChat.noAgents.action': 'الانتقال لإضافة موظفي الذكاء الاصطناعي'
+  'emptyChat.withAgents.description': 'أدخل سؤالك في مربع النص أدناه، وسيقدم مساعد الذكاء الاصطناعي إجابات احترافية!',
+  'emptyChat.noAgents.title': 'لم تتم إضافة مساعدي الذكاء الاصطناعي إلى المشروع بعد',
+  'emptyChat.noAgents.description': 'يرجى إضافة مساعدي الذكاء الاصطناعي إلى المشروع أولاً. يمكنك إنشاء مساعدين جدد أو الاختيار من المساعدين الموجودين',
+  'emptyChat.noAgents.action': 'الانتقال لإضافة مساعدي الذكاء الاصطناعي',
+
+  // ميزة تحسين الإرشادات بالذكاء الاصطناعي
+  'aiAgentModal.optimize.title': 'تحسين الإرشادات بالذكاء الاصطناعي',
+  'aiAgentModal.optimize.button': 'تحسين بالذكاء الاصطناعي',
+  'aiAgentModal.optimize.emptyPrompt': 'يرجى إدخال بعض النص قبل إجراء التحسين',
+  'aiAgentModal.optimize.description': 'ستقوم تقنية الذكاء الاصطناعي بتحسين إرشاداتك لمساعدتك في إنشاء وصف أكثر احترافية وشمولية لمساعد الذكاء الاصطناعي.',
+  'aiAgentModal.optimize.confirm': 'تم إنشاء إرشادات محسنة. هل ترغب في تطبيقها؟',
+  'aiAgentModal.optimize.apply': 'تطبيق',
+  'aiAgentModal.optimize.cancel': 'إلغاء',
+  'aiAgentModal.optimize.updated': 'تم تحديث الإرشادات',
+  'aiAgentModal.optimize.failed': 'فشل في تحسين الإرشادات',
+  'aiAgentModal.optimize.error': 'حدث خطأ أثناء تحسين الإرشادات',
+  'aiAgentModal.optimize.inputTokens': 'رموز الإدخال',
+  'aiAgentModal.optimize.outputTokens': 'رموز الإخراج',
+  'aiAgentModal.optimize.cost': 'التكلفة',
+  'aiAgentModal.optimize.unknown': 'غير معروف',
+  'aiAgentModal.optimize.statsTitle': 'إحصائيات التحسين'
 };
