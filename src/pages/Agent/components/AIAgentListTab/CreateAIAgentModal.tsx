@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, InputNumber, message, Button, Space, Tooltip, Typography, Tag, Statistic, Row, Col, Select } from 'antd';
-import { RobotOutlined, InfoCircleOutlined, DatabaseOutlined, ThunderboltOutlined, DollarOutlined } from '@ant-design/icons';
+import { Modal, Form, Input, InputNumber, message, Button, Space, Tooltip, Typography, Tag, Statistic, Row, Col, Select, Radio } from 'antd';
+import { RobotOutlined, InfoCircleOutlined, DatabaseOutlined, ThunderboltOutlined, DollarOutlined, ManOutlined, WomanOutlined, QuestionOutlined } from '@ant-design/icons';
 import axios from '../../../../api/axios';
 import ModelSelector from '../ModelSelector';
 import MBTISelector from '../MBTISelector';
@@ -306,17 +306,48 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
             maxTokens: 2000
           }}
         >
-          <Form.Item
-            name="name"
-            label={intl.formatMessage({ id: 'aiAgentModal.form.name', defaultMessage: '名称' })}
-            rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.name.required', defaultMessage: '请输入AI助手名称' }) }]}
-          >
-            <Input 
-              placeholder={intl.formatMessage({ id: 'aiAgentModal.form.name.placeholder', defaultMessage: '请输入AI助手名称' })} 
-              maxLength={50} 
-              showCount 
-            />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col span={16}>
+              <Form.Item
+                name="name"
+                label={intl.formatMessage({ id: 'aiAgentModal.form.name', defaultMessage: '名称' })}
+                rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.name.required', defaultMessage: '请输入AI助手名称' }) }]}
+              >
+                <Input 
+                  placeholder={intl.formatMessage({ id: 'aiAgentModal.form.name.placeholder', defaultMessage: '请输入AI助手名称' })} 
+                  maxLength={50} 
+                  showCount 
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="gender"
+                label={intl.formatMessage({ id: 'aiAgentModal.form.gender', defaultMessage: '性别' })}
+              >
+                <Radio.Group buttonStyle="solid">
+                  <Radio.Button value={true} style={{ borderRadius: '20px 0 0 20px' }}>
+                    <Space>
+                      <ManOutlined style={{ color: '#4096ff' }} />
+                      {intl.formatMessage({ id: 'aiAgentModal.form.gender.male', defaultMessage: '男' })}
+                    </Space>
+                  </Radio.Button>
+                  <Radio.Button value={false} style={{ borderRadius: '0' }}>
+                    <Space>
+                      <WomanOutlined style={{ color: '#ff7875' }} />
+                      {intl.formatMessage({ id: 'aiAgentModal.form.gender.female', defaultMessage: '女' })}
+                    </Space>
+                  </Radio.Button>
+                  <Radio.Button value={null} style={{ borderRadius: '0 20px 20px 0' }}>
+                    <Space>
+                      <QuestionOutlined style={{ color: '#bfbfbf' }} />
+                      {intl.formatMessage({ id: 'aiAgentModal.form.gender.unknown', defaultMessage: '未知' })}
+                    </Space>
+                  </Radio.Button>
+                </Radio.Group>
+              </Form.Item>
+            </Col>
+          </Row>
 
           <Form.Item
             name="modelType"

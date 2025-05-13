@@ -44,6 +44,7 @@ export interface Message {
   promptCost?: number;
   completionCost?: number;
   unit?: string;
+  isFreeReq?: boolean;
 }
 
 // 前端消息类型，扩展基础消息接口
@@ -61,6 +62,7 @@ export interface FrontendMessage extends Partial<Message> {
   promptCost?: number;
   completionCost?: number;
   unit?: string;
+  isFreeReq?: boolean;
 }
 
 // 聊天会话接口
@@ -101,6 +103,7 @@ export interface AIAgent {
   status: 'active' | 'inactive';
   avatarUrl?: string;
   bgImg?: string;
+  gender?: boolean | null; // true：男，false：女，null：未知
   createTime: string;
   copyTimes?: number; // 被招募次数
 }

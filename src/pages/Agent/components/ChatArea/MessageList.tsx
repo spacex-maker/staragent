@@ -1,5 +1,5 @@
 import React, { useEffect, useState,  useRef } from 'react';
-import { Avatar, Spin, Tag } from 'antd';
+import { Avatar, Spin, Tag, Tooltip } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Message, FrontendMessage, ProjectAgent } from '../../types';
@@ -164,6 +164,18 @@ const TokenCounter = styled.div<{ $isUser: boolean }>`
   color: var(--ant-color-text-quaternary);
   margin-top: 2px;
   text-align: ${props => props.$isUser ? 'right' : 'left'};
+  padding: 0 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
+  align-items: center;
+`;
+
+// 免费模型标签样式
+const FreeModelTag = styled(Tag)`
+  margin-left: 6px;
+  font-size: 10px;
+  line-height: 16px;
   padding: 0 4px;
 `;
 
@@ -371,7 +383,15 @@ const MessageList: React.FC<MessageListProps> = ({
                     {!isUser && (
                       <>
                         <AgentTag color="blue">{msg.role || 'AI'}</AgentTag>
-                        {msg.model && <AgentTag color="purple">{msg.model}</AgentTag>}
+                        {msg.isFreeReq ? (
+                          <AgentTag color="purple">
+                            <Tooltip title={intl.formatMessage({ id: 'chat.freeModel.tooltip' })}>
+                              {intl.formatMessage({ id: 'chat.freeModel' })}
+                            </Tooltip>
+                          </AgentTag>
+                        ) : (
+                          msg.model && <AgentTag color="purple">{msg.model}</AgentTag>
+                        )}
                       </>
                     )}
                   </MessageInfo>
@@ -388,18 +408,16 @@ const MessageList: React.FC<MessageListProps> = ({
                   {/* Token计数和花费信息 */}
                   <TokenCounter $isUser={isUser}>
                     {!isUser && msg.contextTokens && msg.contentTokens ? (
-                      <>
-                        <div>
-                          {intl.formatMessage(
-                            { id: 'chat.contextTokens' },
-                            { count: msg.contextTokens }
-                          )}
-                          {' | '}
-                          {intl.formatMessage(
-                            { id: 'chat.contentTokens' },
-                            { count: msg.contentTokens }
-                          )}
-                        </div>
+                      <div>
+                        {intl.formatMessage(
+                          { id: 'chat.contextTokens' },
+                          { count: msg.contextTokens }
+                        )}
+                        {' | '}
+                        {intl.formatMessage(
+                          { id: 'chat.contentTokens' },
+                          { count: msg.contentTokens }
+                        )}
                         {(msg.promptCost !== null || msg.completionCost !== null) && (
                           <div style={{ color: 'var(--ant-color-primary)', marginTop: '2px' }}>
                             {msg.promptCost !== null && (
@@ -421,7 +439,7 @@ const MessageList: React.FC<MessageListProps> = ({
                             )}
                           </div>
                         )}
-                      </>
+                      </div>
                     ) : (
                       <div>
                         {intl.formatMessage(

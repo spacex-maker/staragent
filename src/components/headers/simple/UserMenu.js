@@ -8,6 +8,7 @@ import instance from '../../../api/axios';
 import { message } from 'antd';
 import NetworkSwitchModal from '../../modals/NetworkSwitchModal';
 import SupportedModelsModal from '../../modals/SupportedModelsModal';
+import RechargeModal from '../../modals/RechargeModal';
 import { useIntl } from 'react-intl';
 
 const UserMenuContainer = styled.div`
@@ -270,6 +271,27 @@ const MenuItemContent = styled.div`
   }
 `;
 
+const RechargeMenuItem = styled(UserMenuItem)`
+  background: linear-gradient(to right, var(--ant-color-primary-bg) 0%, rgba(59, 130, 246, 0.05) 100%);
+  margin: 8px 0;
+  border-left: 3px solid var(--ant-color-primary);
+  
+  &:hover {
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+    color: ${props => props.isDark ? '#61dafb' : '#3b82f6'};
+  }
+  
+  .icon {
+    color: ${props => props.isDark ? '#61dafb' : '#3b82f6'};
+  }
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background-color: ${props => props.isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+  margin: 8px 0;
+`;
+
 const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const navigate = useNavigate();
   const intl = useIntl();
@@ -279,6 +301,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const { showUserProfileModal, UserProfileModalComponent } = UserProfileModalEntry();
   const [showNetworkModal, setShowNetworkModal] = useState(false);
   const [showModelsModal, setShowModelsModal] = useState(false);
+  const [showRechargeModal, setShowRechargeModal] = useState(false);
   const [currentNetwork, setCurrentNetwork] = useState(() => 
     localStorage.getItem('network') || 'china'
   );
@@ -489,6 +512,24 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
             </div>
           </MenuItemContent>
         </UserMenuItem>
+        
+        <Divider isDark={isDark} />
+        
+        <RechargeMenuItem 
+          isDark={isDark}
+          onClick={() => {
+            setShowUserMenu(false);
+            setShowRechargeModal(true);
+          }}
+        >
+          <MenuItemContent>
+            <div>
+              <i className="bi bi-wallet2 icon" />
+              {intl.formatMessage({ id: 'userMenu.recharge', defaultMessage: '账户充值' })}
+            </div>
+          </MenuItemContent>
+        </RechargeMenuItem>
+        
         <LogoutMenuItem 
           isDark={isDark}
           onClick={() => {
@@ -517,6 +558,11 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
       <SupportedModelsModal
         open={showModelsModal}
         onClose={() => setShowModelsModal(false)}
+      />
+
+      <RechargeModal
+        open={showRechargeModal}
+        onClose={() => setShowRechargeModal(false)}
       />
       
       {UserProfileModalComponent}

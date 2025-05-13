@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { List, Typography, Tag, Button, Avatar, Space, Tooltip } from 'antd';
-import { RobotOutlined, UserAddOutlined, EyeOutlined, TeamOutlined } from '@ant-design/icons';
+import { RobotOutlined, UserAddOutlined, EyeOutlined, TeamOutlined, ManOutlined, WomanOutlined, QuestionOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AIAgent } from '../../types';
@@ -73,6 +73,8 @@ const LeftSection = styled.div`
   gap: 16px;
   flex: 1;
   align-items: center;
+  min-width: 0;
+  max-width: 65%;
 `;
 
 const AgentIcon = styled.div`
@@ -113,9 +115,37 @@ const AgentInfo = styled.div`
 
 const AgentName = styled(Text)`
   font-size: 18px;
-  display: block;
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
   font-weight: 500;
+  width: 100%;
+  overflow: hidden;
+`;
+
+const NameText = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+`;
+
+const GenderTag = styled.div<{ gender: boolean | null | undefined }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  border-radius: 20px;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  color: white;
+  flex-shrink: 0;
+  background-color: ${props => 
+    props.gender === true ? '#4096ff' : 
+    props.gender === false ? '#ff7875' : 
+    '#bfbfbf'
+  };
 `;
 
 const AgentDetails = styled.div`
@@ -133,6 +163,7 @@ const RightSection = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   padding: 0 8px;
+  min-width: 35%;
 `;
 
 const ButtonGroup = styled(Space)`
@@ -154,6 +185,22 @@ const ActionButton = styled(Button)`
   &:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease;
+  }
+`;
+
+const FemaleRecruitButton = styled(ActionButton)`
+  background-color: #ff7875;
+  border-color: #ff7875;
+  
+  &:hover,
+  &:focus {
+    background-color: #ff9c99;
+    border-color: #ff9c99;
+  }
+  
+  &:active {
+    background-color: #f5222d;
+    border-color: #f5222d;
   }
 `;
 
@@ -201,6 +248,21 @@ interface MarketAIAgentItemProps {
 const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit, loading = false }) => {
   const [isDetailModalVisible, setIsDetailModalVisible] = useState(false);
   const intl = useIntl();
+  
+  // 判断是否为女性AI助手
+  const isFemale = agent.gender === false;
+
+  const getGenderIcon = (gender: boolean | null | undefined) => {
+    if (gender === true) return <ManOutlined />;
+    if (gender === false) return <WomanOutlined />;
+    return <QuestionOutlined />;
+  };
+
+  const getGenderTooltip = (gender: boolean | null | undefined) => {
+    if (gender === true) return intl.formatMessage({ id: 'aiAgentModal.form.gender.male', defaultMessage: '男' });
+    if (gender === false) return intl.formatMessage({ id: 'aiAgentModal.form.gender.female', defaultMessage: '女' });
+    return intl.formatMessage({ id: 'aiAgentModal.form.gender.unknown', defaultMessage: '未知' });
+  };
 
   return (
     <>
@@ -214,7 +276,17 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit,
               />
             </AgentIcon>
             <AgentInfo>
-              <AgentName strong>{agent.name}</AgentName>
+              <AgentName strong>
+                <NameText>{agent.name}</NameText>
+                {agent.gender !== null && (
+                  <GenderTag 
+                    gender={agent.gender}
+                    title={getGenderTooltip(agent.gender)}
+                  >
+                    {getGenderIcon(agent.gender)}
+                  </GenderTag>
+                )}
+              </AgentName>
               <AgentDetails>
                 <div>温度: {agent.temperature}</div>
                 <div>最大Token: {agent.maxTokens}</div>
@@ -244,14 +316,25 @@ const MarketAIAgentItem: React.FC<MarketAIAgentItemProps> = ({ agent, onRecruit,
               >
                 <FormattedMessage id="aiAgent.market.button.details" />
               </ActionButton>
-              <ActionButton
-                type="primary"
-                icon={<UserAddOutlined />}
-                onClick={() => onRecruit(agent)}
-                loading={loading}
-              >
-                <FormattedMessage id="aiAgent.market.button.recruit" />
-              </ActionButton>
+              {isFemale ? (
+                <FemaleRecruitButton
+                  type="primary"
+                  icon={<UserAddOutlined />}
+                  onClick={() => onRecruit(agent)}
+                  loading={loading}
+                >
+                  <FormattedMessage id="aiAgent.market.button.recruit" />
+                </FemaleRecruitButton>
+              ) : (
+                <ActionButton
+                  type="primary"
+                  icon={<UserAddOutlined />}
+                  onClick={() => onRecruit(agent)}
+                  loading={loading}
+                >
+                  <FormattedMessage id="aiAgent.market.button.recruit" />
+                </ActionButton>
+              )}
             </ButtonGroup>
             <TagsWrapper>
               {agent.roles.map((role, index) => (

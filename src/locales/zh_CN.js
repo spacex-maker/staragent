@@ -494,6 +494,12 @@ export default {
   'aiAgentModal.form.status.active': '启用',
   'aiAgentModal.form.status.inactive': '禁用',
   
+  // 性别相关
+  'aiAgentModal.form.gender': '性别',
+  'aiAgentModal.form.gender.unknown': '未知',
+  'aiAgentModal.form.gender.male': '男',
+  'aiAgentModal.form.gender.female': '女',
+  
   // UserMenu
   'userMenu.header': '账号',
   'userMenu.profile': '个人中心',
@@ -789,5 +795,48 @@ export default {
   'aiAgentModal.optimize.outputTokens': '输出tokens',
   'aiAgentModal.optimize.cost': '花费',
   'aiAgentModal.optimize.unknown': '未知',
-  'aiAgentModal.optimize.statsTitle': '优化统计信息'
+  'aiAgentModal.optimize.statsTitle': '优化统计信息',
+
+  // 充值模态框
+  'rechargeModal.title': '账户充值',
+  'rechargeModal.tab.recharge': '充值',
+  'rechargeModal.tab.history': '账变记录',
+  'rechargeModal.packages.title': '选择充值套餐',
+  'rechargeModal.package.monthly': '月卡套餐',
+  'rechargeModal.package.quarterly': '季度卡套餐',
+  'rechargeModal.package.yearly': '年卡套餐',
+  'rechargeModal.dailyLimit': '每日配额',
+  'rechargeModal.period': '有效期',
+  'rechargeModal.feature.dailyTokens': '每日{tokens}Tokens',
+  'rechargeModal.feature.validPeriod': '有效期{days}天',
+  'rechargeModal.feature.priority': '优先响应请求',
+  'rechargeModal.feature.support': '标准客户支持',
+  'rechargeModal.feature.exclusive': '专属功能体验',
+  'rechargeModal.customAmount.title': '自定义充值金额',
+  'rechargeModal.customAmount.description': '根据您的需求自定义充值金额，充值金额越多，赠送比例越高',
+  'rechargeModal.customAmount.placeholder': '请输入充值金额',
+  'rechargeModal.button.pay': '立即支付',
+  'rechargeModal.message.packageSelected': '您已选择{package}，即将跳转支付...',
+  'rechargeModal.message.customAmount': '您将充值{amount}元，即将跳转支付...',
+  'rechargeModal.message.selectRequired': '请选择套餐或输入充值金额',
+  'rechargeModal.customAmount.switchToCustom': '切换到自定义金额',
+  'rechargeModal.table.time': '时间',
+  'rechargeModal.table.type': '类型',
+  'rechargeModal.table.amount': '金额',
+  'rechargeModal.table.currency': '币种',
+  'rechargeModal.table.balance': '变更后余额',
+  'rechargeModal.table.remark': '备注',
+  'rechargeModal.table.transactionInfo': '交易信息',
+  'rechargeModal.filter.allTypes': '全部类型',
+  'rechargeModal.filter.allCurrencies': '全部币种',
+  'rechargeModal.changeType.aiModelFee': '模型调用费用',
+  'rechargeModal.error.fetchFailed': '获取账变记录失败',
+  'rechargeModal.changeType.recharge': '充值',
+  'rechargeModal.table.total': '条记录',
+  'rechargeModal.table.empty': '暂无数据',
+  'userMenu.recharge': '账户充值',
+
+  // 免费模型相关文案
+  'chat.freeModel': '免费模型',
+  'chat.freeModel.tooltip': '余额不足！当前使用的是免费模型。若需使用配置的高级模型，请充值后使用。免费模型可能在功能和性能上有所限制。'
 }; 

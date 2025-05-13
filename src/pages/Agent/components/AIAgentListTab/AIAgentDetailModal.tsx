@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Typography, Tag, Avatar, Row, Col, Space, Divider } from 'antd';
-import { RobotOutlined } from '@ant-design/icons';
+import { RobotOutlined, ManOutlined, WomanOutlined, QuestionOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useIntl } from 'react-intl';
 import { AIAgent } from '../../types';
@@ -408,16 +408,40 @@ const InfoHeader = styled.div`
 `;
 
 const NameSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 14px;
+  flex: 1;
 `;
 
-const AgentName = styled(Title)`
+const NameText = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 32px); /* 为性别图标留出空间 */
+`;
+
+const AgentName = styled(Typography.Title)`
+  display: flex !important;
+  align-items: center;
   margin: 0 0 2px 0 !important;
   text-align: left;
   font-size: 20px;
+  width: 100%;
+`;
+
+const GenderTag = styled.div<{ gender: boolean | null | undefined }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  border-radius: 20px;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  color: white;
+  background-color: ${props => 
+    props.gender === true ? '#4096ff' : 
+    props.gender === false ? '#ff7875' : 
+    '#bfbfbf'
+  };
 `;
 
 const TagsContainer = styled.div`
@@ -516,6 +540,23 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
 }) => {
   const intl = useIntl();
 
+  const getGenderIcon = (gender: boolean | null | undefined) => {
+    if (gender === true) return <ManOutlined />;
+    if (gender === false) return <WomanOutlined />;
+    return <QuestionOutlined />;
+  };
+
+  const getGenderTooltip = (gender: boolean | null | undefined) => {
+    if (gender === true) return intl.formatMessage({ id: 'aiAgentModal.form.gender.male', defaultMessage: '男' });
+    if (gender === false) return intl.formatMessage({ id: 'aiAgentModal.form.gender.female', defaultMessage: '女' });
+    return intl.formatMessage({ id: 'aiAgentModal.form.gender.unknown', defaultMessage: '未知' });
+  };
+
+  // 判断是否为女性AI助手
+  const isFemale = agent.gender === false;
+  // 根据性别设置主题色
+  const genderThemeColor = isFemale ? '#ff7875' : '#3b82f6';
+
   return (
     <Modal
       title={null}
@@ -552,7 +593,17 @@ const AIAgentDetailModal: React.FC<AIAgentDetailModalProps> = ({
         <ContentSection>
           <InfoHeader>
             <NameSection>
-              <AgentName level={4}>{agent.name}</AgentName>
+              <AgentName level={4}>
+                <NameText>{agent.name}</NameText>
+                {agent.gender !== null && (
+                  <GenderTag 
+                    gender={agent.gender}
+                    title={getGenderTooltip(agent.gender)}
+                  >
+                    {getGenderIcon(agent.gender)}
+                  </GenderTag>
+                )}
+              </AgentName>
               <TagsContainer>
                 <ModelTag>{agent.modelType}</ModelTag>
                 {agent.roles.map((role, index) => (
