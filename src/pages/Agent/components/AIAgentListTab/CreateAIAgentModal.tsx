@@ -408,7 +408,7 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
           </StyledFormItem>
 
           <Row gutter={16}>
-            <Col span={8}>
+            <Col span={12}>
               <Form.Item
                 name="temperature"
                 label={intl.formatMessage({ id: 'aiAgentModal.form.temperature', defaultMessage: '随机性' })}
@@ -427,7 +427,7 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
                 />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={12}>
               <Form.Item
                 name="maxTokens"
                 label={intl.formatMessage({ id: 'aiAgentModal.form.maxTokens', defaultMessage: '最大Token数' })}
@@ -442,19 +442,6 @@ const CreateAIAgentModal: React.FC<CreateAIAgentModalProps> = ({
                   min={1}
                   style={{ width: '100%' }}
                 />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item
-                name="status"
-                label={intl.formatMessage({ id: 'aiAgentModal.form.status', defaultMessage: '状态' })}
-                rules={[{ required: true, message: intl.formatMessage({ id: 'aiAgentModal.form.status.required', defaultMessage: '请选择状态' }) }]}
-                initialValue="active"
-              >
-                <Select>
-                  <Select.Option value="active">{intl.formatMessage({ id: 'aiAgentModal.form.status.active', defaultMessage: '启用' })}</Select.Option>
-                  <Select.Option value="inactive">{intl.formatMessage({ id: 'aiAgentModal.form.status.inactive', defaultMessage: '禁用' })}</Select.Option>
-                </Select>
               </Form.Item>
             </Col>
           </Row>
