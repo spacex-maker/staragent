@@ -176,21 +176,21 @@ export default {
   
   'terms.intellectual.title': 'الملكية الفكرية',
   'terms.intellectual.content': '1. محتوى المنصة\n- خدماتنا ومحتوى الموقع والملكية الفكرية المرتبطة بها ملك لنا\n- لا يجوز نسخ أو توزيع محتوى المنصة دون إذن\n- معرفات وعلامات المنصة محمية قانونياً\n\n2. محتوى المستخدم\n- تحتفظ بملكية المحتوى الذي تنشئه\n- تمنحنا حقوق الاستخدام والنسخ والتوزيع\n- تأكد من امتلاكك للحقوق على المحتوى المشارك\n\n3. المحتوى المنشأ بواسطة الذكاء الاصطناعي\n- المحتوى المنشأ بواسطة وكلاء الذكاء الاصطناعي يخضع لشروط محددة\n- قيود واضحة على الاستخدام التجاري\n- تحديد نطاق استخدام المحتوى المنشأ بواسطة الذكاء الاصطناعي\n\n4. نطاق الترخيص\n- نطاق واضح لترخيص استخدام المنصة\n- شروط الترخيص من الباطن\n- حماية الملكية الفكرية للأطراف الثالثة\n\n5. معالجة الانتهاكات\n- معالجة سريعة لشكاوى الانتهاك\n- حماية المصالح القانونية لأصحاب الحقوق\n- التعاون في التحقيقات',
-  
+
   'terms.liability.title': 'حدود المسؤولية',
   'terms.liability.content': '1. ضمان الخدمة\n- يتم تقديم الخدمات "كما هي" دون ضمانات صريحة أو ضمنية\n- لا ضمان لخدمة غير منقطعة أو خالية من الأخطاء\n- لا ضمانات للخدمات من طرف ثالث\n\n2. نطاق المسؤولية\n- لسنا مسؤولين عن الأضرار المباشرة أو غير المباشرة أو العرضية أو العقابية\n- لا ضمان لدقة أو ملاءمة مخرجات وكلاء الذكاء الاصطناعي\n- أنت تقبل مخاطر استخدام الخدمات\n\n3. حدود التعويض\n- تقييد مسؤوليتنا إلى أقصى حد يسمح به القانون\n- مبالغ تعويض قصوى واضحة\n- ظروف الإعفاء المحددة\n\n4. القوة القاهرة\n- انقطاع الخدمة بسبب القوة القاهرة\n- عدم إمكانية الوصول المؤقت بسبب الصيانة أو ترقيات النظام\n- مشاكل الخدمة الناجمة عن أطراف ثالثة',
-  
+
   'terms.termination.title': 'الإنهاء',
   'terms.termination.content': '1. ظروف الإنهاء\n- يمكنك التوقف عن استخدام خدماتنا في أي وقت\n- نحتفظ بحق إنهاء أو تعليق الوصول للانتهاكات\n- قد يتم إنهاء الحسابات غير المستخدمة لفترة طويلة\n\n2. عواقب الإنهاء\n- تظل بعض الشروط سارية بعد الإنهاء\n- ستتم معالجة بياناتك وفقاً لسياسة الاحتفاظ لدينا\n- قد لا يتم رد الرسوم المدفوعة\n\n3. معالجة البيانات\n- فترة الاحتفاظ بالبيانات بعد الإنهاء\n- إجراءات وطرق حذف البيانات\n- خيارات تصدير البيانات\n\n4. استعادة الخدمة\n- شروط استئناف الخدمة بعد الإنهاء\n- عملية إعادة تنشيط الحساب\n- إمكانيات استعادة البيانات التاريخية',
-  
+
   'terms.changes.title': 'تغييرات الشروط',
   'terms.changes.content': '1. قواعد التغيير\n- نحتفظ بحق تغيير هذه الشروط في أي وقت\n- سيتم الإخطار بالتغييرات الرئيسية عبر البريد الإلكتروني أو الموقع\n- طرق ومواعيد الإخطار بالتغييرات\n\n2. خيارات المستخدم\n- استمرار الاستخدام يشير إلى قبول الشروط المعدلة\n- توقف عن استخدام الخدمات إذا كنت لا توافق على التغييرات\n- فترة الاختيار قبل سريان التغييرات\n\n3. طرق الإخطار\n- إعلانات على المنصة\n- إخطارات عبر البريد الإلكتروني\n- إخطارات في التطبيق\n\n4. إدارة النزاعات\n- قبول تعليقات المستخدمين على التغييرات\n- معالجة النزاعات المتعلقة بالتغييرات\n- توفير فترات انتقالية ضرورية',
-  
+
   'terms.contact.title': 'الاتصال',
   'terms.contact.content': 'إذا كان لديك أي أسئلة أو اقتراحات بخصوص شروط الخدمة هذه، يرجى الاتصال بنا عبر:\n\n1. طرق الاتصال\n- البريد الإلكتروني: aimatex2024@gmail.com\n- الدعم عبر الإنترنت: أيام العمل 9:00-18:00\n- اتصال الطوارئ: support@aimatex.com\n\n2. التزام الرد\n- الأسئلة العامة: الرد خلال 1-2 يوم عمل\n- الأسئلة العاجلة: الرد خلال 24 ساعة\n- الأسئلة الرئيسية: متابعة مخصصة\n\n3. التغذية الراجعة\n- نرحب باقتراحات التحسين\n- نقدر تعليقات المستخدمين\n- تحسين مستمر للخدمة\n\nنلتزم بالرد خلال 15 يوم عمل من استلام طلبك. للأسئلة الرئيسية، سنتخذ الإجراءات المناسبة في غضون فترة زمنية معقولة وضرورية.',
-  
+
   'terms.lastUpdated': 'آخر تحديث: {date}',
-  
+
   'terms.related.title': 'روابط ذات صلة',
   'terms.related.privacy': 'سياسة الخصوصية',
   'worldmap.page.title': 'البلدان والمناطق المدعومة - AIMateX',
@@ -202,7 +202,7 @@ export default {
   'landing.hero.subtitle': 'قم ببناء وتدريب وتبادل وكلاء الذكاء الاصطناعي المخصصين - دع خبراء الذكاء الاصطناعي من مختلف الصناعات يعززون عملك وإبداعك',
   'landing.hero.getStarted': 'ابدأ مجاناً',
   'landing.hero.exploreFeatures': 'استكشف الميزات',
-  
+
   // الإحصائيات
   'landing.hero.stats.experts': 'خبراء الذكاء الاصطناعي',
   'landing.hero.stats.users': 'المستخدمين النشطين',
@@ -215,21 +215,21 @@ export default {
   'landing.hero.agent.finance.skill1': 'التحليل المالي',
   'landing.hero.agent.finance.skill2': 'استراتيجية الاستثمار',
   'landing.hero.agent.finance.skill3': 'تخطيط الميزانية',
-  
+
   'landing.hero.agent.creative.name': 'المساعد الإبداعي',
   'landing.hero.agent.creative.role': 'خبير الإبداع والتصميم',
   'landing.hero.agent.creative.description': 'أتفوق في الكتابة الإبداعية وإنشاء المحتوى ومفاهيم التصميم لتحفيز إلهامك الإبداعي',
   'landing.hero.agent.creative.skill1': 'إنشاء المحتوى',
   'landing.hero.agent.creative.skill2': 'الكتابة الإبداعية',
   'landing.hero.agent.creative.skill3': 'التفكير التصميمي',
-  
+
   'landing.hero.agent.tech.name': 'الخبير التقني',
   'landing.hero.agent.tech.role': 'خبير البرمجة والتطوير',
   'landing.hero.agent.tech.description': 'يمكنني تقديم المساعدة في البرمجة وحل المشكلات التقنية وتقديم المشورة في تطوير البرمجيات',
   'landing.hero.agent.tech.skill1': 'البرمجة',
   'landing.hero.agent.tech.skill2': 'الدعم التقني',
   'landing.hero.agent.tech.skill3': 'تصميم النظم',
-  
+
   'landing.hero.agent.research.name': 'مساعد البحث',
   'landing.hero.agent.research.role': 'خبير البيانات والتحليل',
   'landing.hero.agent.research.description': 'أتخصص في جمع وتحليل البيانات وتقديم تقارير البحث وتحليل اتجاهات السوق',
@@ -253,32 +253,32 @@ export default {
 
   'landing.features.title': 'ميزات قوية، إمكانيات لا حدود لها',
   'landing.features.subtitle': 'يوفر AI MateX ميزات شاملة لمساعدتك في بناء فريق الذكاء الاصطناعي الخاص بك بسهولة وتحسين كفاءة عملك',
-  
+
   // الميزات
   'landing.features.customization.title': 'تخصيص شخصيات الذكاء الاصطناعي',
   'landing.features.customization.description': 'يدعم تخصيص نوع شخصية MBTI، ويتيح تعيين الخصائص البشرية مثل العمر والجنس لإنشاء مساعدين ذكاء اصطناعي فريدين للتفاعلات الأكثر طبيعية',
-  
+
   'landing.features.marketplace.title': 'سوق شخصيات الذكاء الاصطناعي',
   'landing.features.marketplace.description': 'شارك أو اشتر أو بع شخصيات الذكاء الاصطناعي المدربة في السوق العالمي، مما يتيح للخبرة عبور الحدود',
-  
+
   'landing.features.integration.title': 'تكامل الذكاء الاصطناعي متعدد المنصات',
   'landing.features.integration.description': 'تكامل سلس مع منصات الذكاء الاصطناعي الرائدة مثل ChatGPT وDeepseek وGrok، والوصول إلى قدرات ذكاء اصطناعي متعددة في واجهة واحدة',
-  
+
   'landing.features.communication.title': 'تعاون شخصيات الذكاء الاصطناعي',
   'landing.features.communication.description': 'إنشاء مجموعات شخصيات الذكاء الاصطناعي لتمكين التعاون بين المجالات المهنية المختلفة، وحل المشكلات المعقدة أثناء مشاركة السياق',
-  
+
   'landing.features.privacy.title': 'الخصوصية وأمن البيانات',
   'landing.features.privacy.description': 'محادثاتك وبياناتك محمية بشكل صارم بواسطة التشفير من طرف إلى طرف وعزل البيانات لضمان خصوصيتك',
-  
+
   'landing.features.training.title': 'التعلم والتحسين المستمر',
   'landing.features.training.description': 'تتعلم شخصيات الذكاء الاصطناعي وتتحسن من خلال التفاعلات معك، وتفهم احتياجاتك وتفضيلاتك بشكل أفضل مع مرور الوقت',
-  
+
   'landing.features.vectordb.title': 'قاعدة بيانات المتجهات + تقنية RAG',
   'landing.features.vectordb.description': 'يستخدم قاعدة بيانات المتجهات وتقنية RAG لتحسين استرجاع المعرفة، مما يتيح ذاكرة طويلة المدى موثوقة وأسئلة وأجوبة دقيقة مع التعلم في الوقت الفعلي للمستندات والمحادثات والمعرفة',
-  
+
   'landing.features.industry.title': 'دعم القوالب لجميع الصناعات',
   'landing.features.industry.description': 'يوفر قوالب محترفة للتلميحات للتمويل والرعاية الصحية والقانون والتعليم والمزيد، مع قواعد معرفة مدمجة وأفضل الممارسات',
-  
+
   'landing.features.function.title': 'قدرة استدعاء الوظائف',
   'landing.features.function.description': 'يدعم قدرات قوية لاستدعاء الوظائف، مما يتيح للذكاء الاصطناعي تشغيل الملفات مباشرة وإرسال رسائل البريد الإلكتروني والتحكم في الأجهزة والوصول إلى قواعد البيانات واستدعاء واجهات برمجة التطبيقات',
 
@@ -292,7 +292,7 @@ export default {
   'landing.customization.step3.title': 'التدريب والتحسين',
   'landing.customization.step3.description': 'درّب شخصيات الذكاء الاصطناعي من خلال حوارات وتعليقات نموذجية، مع تحسين أدائهم وجودة استجاباتهم باستمرار',
   'landing.customization.createButton': 'إنشاء شخصية الذكاء الاصطناعي',
-  
+
   // ملفات تعريف الذكاء الاصطناعي
   'landing.customization.profiles.analyst': 'محلل الأعمال',
   'landing.customization.profiles.analyst.description': 'يركز على أبحاث السوق والتحليل التنافسي واستراتيجية الأعمال لمساعدتك في اتخاذ قرارات مستنيرة.',
@@ -311,13 +311,13 @@ export default {
   // صفحة مجتمع الذكاء الاصطناعي
   'landing.community.title': 'السوق العالمي لشخصيات الذكاء الاصطناعي',
   'landing.community.subtitle': 'انضم إلى مجتمع نابض بالحياة من مبتكري الذكاء الاصطناعي لمشاركة وتداول واكتشاف شخصيات الذكاء الاصطناعي المهنية عبر مختلف الصناعات',
-  
+
   // الإحصائيات
   'landing.community.stats.aiRoles': 'شخصيات الذكاء الاصطناعي',
   'landing.community.stats.creators': 'المبتكرون',
   'landing.community.stats.countries': 'البلدان',
   'landing.community.stats.users': 'المستخدمون النشطون',
-  
+
   // المميزات
   'landing.community.features.monetize.title': 'حقق الربح من إبداعات الذكاء الاصطناعي',
   'landing.community.features.monetize.description': 'بيع شخصيات الذكاء الاصطناعي المدربة بعناية في السوق العالمي واكسب من خبرتك وإبداعك',
@@ -325,31 +325,31 @@ export default {
   'landing.community.features.collaborate.description': 'تعاون مع المبتكرين الآخرين لتطوير شخصيات ذكاء اصطناعي معقدة، وشارك الموارد والمعرفة لتجارب ذكاء اصطناعي أكثر قوة',
   'landing.community.features.discover.title': 'اكتشف شخصيات الذكاء الاصطناعي المهنية',
   'landing.community.features.discover.description': 'استكشف شخصيات الذكاء الاصطناعي المهنية عبر جميع الصناعات للعثور على المساعد الشخصي المثالي لاحتياجاتك المحددة',
-  
+
   // الزر
   'landing.community.exploreButton': 'استكشف سوق شخصيات الذكاء الاصطناعي',
 
   // قسم تكامل المنصات
   'landing.integration.title': 'تكامل منصات الذكاء الاصطناعي المتعددة',
   'landing.integration.subtitle': 'دمج سلس للعديد من منصات الذكاء الاصطناعي الرائدة، والاستفادة من مزاياها الفريدة في واجهة موحدة للتعاون الذكي',
-  
+
   // فرق الذكاء الاصطناعي
   'landing.integration.aiTeams.title': 'إنشاء فرق ذكاء اصطناعي متعددة النماذج، مشاركة السياق',
   'landing.integration.aiTeams.description1': 'يتجاوز AI MateX حدود النماذج الفردية، مما يتيح لك استخدام',
   'landing.integration.aiTeams.description2': 'ونماذج ذكاء اصطناعي أخرى في وقت واحد لإنشاء فرق ذكاء اصطناعي متخصصة تحل المشكلات المعقدة معًا.',
   'landing.integration.aiTeams.description3': 'يمكن لكل شخصية ذكاء اصطناعي الوصول إلى سياق المحادثة المشترك، مما يتيح تعاونًا حقيقيًا متعدد النماذج ويعظم المزايا الفريدة لكل منصة ذكاء اصطناعي.',
-  
+
   // واجهة الدردشة
   'landing.integration.chat.teamName': 'فريق الذكاء الاصطناعي:',
   'landing.integration.chat.teamType': 'فريق استراتيجية الأعمال',
   'landing.integration.chat.input': 'اكتب رسالتك...',
-  
+
   // أدوار الوكلاء
   'landing.integration.agent.user': 'المستخدم',
   'landing.integration.agent.analyst': 'محلل البيانات',
   'landing.integration.agent.strategist': 'المستشار الاستراتيجي',
   'landing.integration.agent.creative': 'المدير الإبداعي',
-  
+
   // الرسائل
   'landing.integration.message.user': 'أحتاج إلى تحليل تقرير بحث السوق هذا وتقديم توصيات استراتيجية وإنشاء عرض تقديمي جذاب.',
   'landing.integration.message.analyst': 'سأقوم بتحليل متعمق لاتجاهات البيانات ورؤى السوق، وتزويدك بتحليلات مفصلة ونماذج تنبؤية.',
@@ -392,13 +392,13 @@ export default {
   'userGuide.step3.subtitle': 'بناء فريق الذكاء الاصطناعي',
   'userGuide.step4.title': 'إنشاء محادثة وبدء التواصل',
   'userGuide.step4.subtitle': 'التواصل الذكي',
-  
+
   'userGuide.step1.description': 'أولاً، تحتاج إلى إنشاء مشروع كمساحة عمل للتعاون مع مساعدي الذكاء الاصطناعي. عند إنشاء مشروع، يمكنك تعيين اسم المشروع واختيار الصناعة ذات الصلة وإضافة وصف للمشروع. ستساعد هذه المعلومات مساعدي الذكاء الاصطناعي على فهم احتياجاتك بشكل أفضل.',
   'userGuide.step.clickProjectsTab': 'انقر على علامة تبويب "المشاريع"',
   'userGuide.step.clickNewProjectButton': 'انقر على زر "مشروع جديد"',
   'userGuide.step.fillProjectInfo': 'املأ معلومات المشروع (الاسم، الصناعة، الوصف)',
   'userGuide.step.clickCreate': 'انقر على "إنشاء" للإكمال',
-  
+
   'userGuide.step2.description': 'يمكنك اختيار إنشاء مساعد ذكاء اصطناعي مخصص أو توظيف مساعد موجود من سوق الذكاء الاصطناعي. عند تخصيص مساعد، يمكنك تعيين الاسم وسمات الشخصية والمجال المهني وتعليمات مفصلة. عند التوظيف من السوق، يمكنك اختيار مساعد معد مسبقًا يناسب احتياجاتك مباشرة.',
   'userGuide.customAgent.title': 'مساعد ذكاء اصطناعي مخصص',
   'userGuide.customAgent.step1': 'انقر على علامة تبويب "مساعدو الذكاء الاصطناعي"',
@@ -408,19 +408,19 @@ export default {
   'userGuide.marketAgent.step1': 'انقر على علامة تبويب "مساعدو الذكاء الاصطناعي"',
   'userGuide.marketAgent.step2': 'انقر على زر "توظيف مساعد"',
   'userGuide.marketAgent.step3': 'اختر مساعد ذكاء اصطناعي مناسب في السوق',
-  
+
   'userGuide.step3.description': 'بعد إنشاء أو توظيف مساعدي الذكاء الاصطناعي، تحتاج إلى إضافتهم إلى مشروعك. يمكن أن يتضمن المشروع مساعدين ذكاء اصطناعي متعددين، حيث يكون كل مساعد مسؤولاً عن مجالات مهنية مختلفة، ويعملون معًا لتلبية احتياجاتك.',
   'userGuide.step3.action1': 'ادخل إلى صفحة تفاصيل المشروع',
   'userGuide.step3.action2': 'انقر على زر "إضافة مساعد ذكاء اصطناعي"',
   'userGuide.step3.action3': 'اختر مساعد الذكاء الاصطناعي الذي تريد إضافته',
   'userGuide.step3.action4': 'انقر على "تأكيد الإضافة"',
-  
+
   'userGuide.step4.description': 'بمجرد أن يكون كل شيء جاهزًا، يمكنك إنشاء محادثة جديدة في المشروع وبدء التواصل مع مساعدي الذكاء الاصطناعي. يمكنك استخدام الرمز @ في مربع الإدخال لتحديد مساعد ذكاء اصطناعي معين للإجابة على سؤالك، أو السماح للنظام باختيار المساعد الأنسب تلقائيًا.',
   'userGuide.step4.action1': 'ادخل إلى المشروع',
   'userGuide.step4.action2': 'انقر على زر "محادثة جديدة"',
   'userGuide.step4.action3': 'اكتب سؤالك في مربع الإدخال',
   'userGuide.step4.action4': 'استخدم @ للإشارة إلى مساعد ذكاء اصطناعي محدد (اختياري)',
-  
+
   'userGuide.processOverview.title': 'نظرة عامة على العملية',
   'userGuide.flow.step1.title': 'إنشاء مساحة عمل مخصصة',
   'userGuide.flow.step1.description': 'إنشاء مشروع، وتوضيح الأهداف وخلفية الصناعة',
@@ -432,7 +432,7 @@ export default {
   'userGuide.flow.step4.description': 'بدء التواصل التعاوني الذكي الفعال',
   'userGuide.flow.step5.title': 'التحسين المستمر والتعلم',
   'userGuide.flow.step5.description': 'مساعدو الذكاء الاصطناعي يتعلمون ويتحسنون باستمرار',
-  
+
   'userGuide.getStarted.button': 'ابدأ الاستخدام الآن',
 
   // قسم المشاريع
@@ -468,7 +468,7 @@ export default {
   'userGuide.chat.tip.context.desc': 'قدم معلومات خلفية وسياق كافيين عند طرح الأسئلة لمساعدة مساعدي الذكاء الاصطناعي على فهم احتياجاتك بشكل أفضل وتقديم إجابات دقيقة.',
   'userGuide.chat.tip.step': 'طرح الأسئلة المعقدة على مراحل',
   'userGuide.chat.tip.step.desc': 'بالنسبة للمشكلات المعقدة، قم بتقسيمها إلى عدة أسئلة بسيطة لطرحها تدريجيًا، وبناء حل مع مساعد الذكاء الاصطناعي.',
-  
+
   // صفحة قائمة مساعدي الذكاء الاصطناعي
   'aiAgentList.recruitAgent': 'توظيف مساعد',
   'aiAgentList.addNewAgent': 'إضافة مساعد',
@@ -482,7 +482,7 @@ export default {
   'sidebar.agents': 'مساعدي الذكاء الاصطناعي',
   'sidebar.expand': 'توسيع الشريط الجانبي',
   'sidebar.collapse': 'طي الشريط الجانبي',
-  
+
   // EditAIAgentModal
   'aiAgentModal.edit.title': 'تعديل مساعد الذكاء الاصطناعي',
   'aiAgentModal.edit.success': 'تم تحديث مساعد الذكاء الاصطناعي بنجاح',
@@ -535,7 +535,7 @@ export default {
   'agent.detail.prompt': 'النص التلقائي',
   'agent.detail.status.active': 'نشط',
   'agent.detail.status.inactive': 'غير نشط',
-  
+
   // قسم التعليقات
   'aiAgent.comments.title': 'تعليقات المستخدمين',
   'aiAgent.comments.latest': 'الأحدث',
@@ -546,7 +546,7 @@ export default {
   'aiAgent.comments.placeholder': 'اكتب تعليقك...',
   'aiAgent.comments.submit': 'إرسال',
   'aiAgent.comments.replySuccess': 'تم إرسال الرد بنجاح',
-  
+
   // AI Agent Market
   'aiAgent.market.recruitCount': 'تم التوظيف {count} مرة',
   'aiAgent.market.recruitCount.tooltip': 'إجمالي عدد المرات التي تم فيها توظيف مساعد الذكاء الاصطناعي هذا من قبل المستخدمين',
@@ -561,45 +561,45 @@ export default {
   'toolkit.menu.dateCalculator': 'حاسبة التواريخ',
   'toolkit.menu.otherTools': 'أدوات أخرى',
   'toolkit.menu.settings': 'إعدادات الأدوات',
-  
+
   // Loan Payment Schedule
   'loanPayment.page.title': 'جدول سداد القرض - AIMateX',
   'loanPayment.page.description': 'أداة حساب جدول سداد القروض عبر الإنترنت لمساعدتك على التخطيط للاستخدام الرشيد للأموال',
   'loanPayment.title': 'جدول سداد القرض',
-  
+
   // Form Fields
   'loanPayment.form.loanAmount': 'إجمالي مبلغ القرض',
   'loanPayment.form.loanAmount.required': 'الرجاء إدخال مبلغ القرض',
   'loanPayment.form.loanAmount.min': 'يجب أن يكون مبلغ القرض أكبر من 0',
   'loanPayment.form.loanAmount.placeholder': 'الرجاء إدخال مبلغ القرض',
-  
+
   'loanPayment.form.firstPayDate': 'تاريخ أول دخل',
   'loanPayment.form.firstPayDate.required': 'الرجاء اختيار تاريخ أول دخل',
   'loanPayment.form.firstPayDate.placeholder': 'الرجاء اختيار تاريخ أول دخل',
-  
+
   'loanPayment.form.incomeFrequency': 'دورة الدخل',
   'loanPayment.form.incomeFrequency.required': 'الرجاء اختيار دورة الدخل',
   'loanPayment.form.incomeFrequency.placeholder': 'الرجاء اختيار دورة الدخل',
-  
+
   'loanPayment.frequency.monthly': 'شهرياً',
   'loanPayment.frequency.biweekly': 'كل أسبوعين',
   'loanPayment.frequency.weekly': 'أسبوعياً',
   'loanPayment.frequency.yearly': 'سنوياً',
   'loanPayment.frequency.once': 'مرة واحدة',
   'loanPayment.frequency.once.tooltip': 'مناسب للمكافآت والدخل غير المتوقع وغيرها من المداخيل لمرة واحدة',
-  
+
   'loanPayment.form.incomeAmount': 'مبلغ الدخل لكل فترة',
   'loanPayment.form.incomeAmount.required': 'الرجاء إدخال مبلغ الدخل',
   'loanPayment.form.incomeAmount.min': 'يجب أن يكون مبلغ الدخل أكبر من 0',
   'loanPayment.form.incomeAmount.placeholder': 'الرجاء إدخال مبلغ الدخل لكل فترة',
-  
+
   'loanPayment.form.paymentPercentage': 'نسبة السداد',
   'loanPayment.form.paymentPercentage.required': 'الرجاء إدخال نسبة السداد',
   'loanPayment.form.paymentPercentage.range': 'يجب أن تكون نسبة السداد بين 1% و 100%',
   'loanPayment.form.paymentPercentage.tooltip': 'نسبة الدخل المستخدمة لسداد القرض لكل فترة، القيمة الافتراضية هي 50%',
-  
+
   'loanPayment.form.submit': 'حساب جدول السداد',
-  
+
   // Income Items
   'loanPayment.income.name': 'اسم الدخل',
   'loanPayment.income.name.placeholder': 'الرجاء إدخال اسم الدخل',
@@ -608,14 +608,14 @@ export default {
   'loanPayment.incomeItems.title': 'عناصر الدخل',
   'loanPayment.incomeItems.add': 'إضافة عنصر دخل',
   'loanPayment.table.incomeSource': 'مصدر الدخل',
-  
+
   // Results
   'loanPayment.result.payoffDate': 'تاريخ السداد المتوقع',
   'loanPayment.result.totalPeriods': 'إجمالي فترات السداد',
   'loanPayment.result.totalPaid': 'إجمالي المبلغ المدفوع',
   'loanPayment.result.monthsToPayoff': 'عدد الأشهر المتوقعة للسداد',
   'loanPayment.result.months': 'شهر',
-  
+
   // Table
   'loanPayment.table.summary': 'الإجمالي',
   'loanPayment.table.period': 'الفترة',
@@ -636,7 +636,7 @@ export default {
   'loanPayment.save.modal.cancel': 'إلغاء',
   'loanPayment.save.success': 'تم حفظ الخطة بنجاح',
   'loanPayment.save.error': 'فشل في حفظ الخطة',
-  
+
   'loanPayment.load.button': 'تحميل الخطة',
   'loanPayment.load.modal.title': 'تحميل خطة محفوظة',
   'loanPayment.load.modal.empty': 'لا توجد خطط محفوظة',
@@ -670,12 +670,12 @@ export default {
   'sessionList.selectProject': 'الرجاء اختيار مشروع أولاً',
   'sessionList.error': 'فشل في الحصول على قائمة الجلسات، يرجى المحاولة مرة أخرى لاحقًا',
   'sessionList.createFailed': 'فشل في إنشاء جلسة جديدة، يرجى المحاولة مرة أخرى لاحقًا',
-  
+
   // Session card related
   'sessionCard.noMessage': 'لا توجد رسائل حتى الآن',
   'sessionCard.image': '[صورة]',
   'sessionCard.formula': '[معادلة]',
-  
+
   // Project list related
   'project.create': 'إنشاء مشروع',
   'project.import': 'استيراد مشروع',
@@ -686,7 +686,7 @@ export default {
   'project.loading': 'جاري التحميل...',
   'project.visibility.private': 'خاص',
   'project.visibility.public': 'عام',
-  
+
   // Add agent related
   'project.addAgent': 'إضافة عميل إلى المشروع',
   'project.addAgent.select': 'الرجاء اختيار العملاء لإضافتهم إلى المشروع',
@@ -717,18 +717,18 @@ export default {
   'project.status.archived': 'مؤرشف',
   'project.visibility': 'الرؤية',
   'project.visibility.required': 'الرجاء اختيار الرؤية',
-  
+
   // 项目编辑标签页
   'project.basicInfo': 'معلومات أساسية',
   'project.agentManagement': 'إدارة المساعدين',
-  
+
   // 项目操作消息
   'project.create.success': 'تم إنشاء المشروع بنجاح',
   'project.create.error': 'فشل في إنشاء المشروع',
   'project.update.success': 'تم تحديث المشروع بنجاح',
   'project.update.error': 'فشل في تحديث المشروع',
   'project.getAgents.error': 'فشل الحصول على مساعدي المشروع',
-  
+
   // 员工表格相关
   'agent.priority': 'الأولوية',
   'agent.default': 'افتراضي',
@@ -737,7 +737,7 @@ export default {
   'agent.externalTools': 'أدوات خارجية',
   'project.agent.confirmRemove': 'هل أنت متأكد من إزالة هذا المساعد؟',
   'project.agent.empty': 'لا يوجد مساعدين، الرجاء إضافة مساعدين إلى المشروع',
-  
+
   // 通用术语
   'common.actions': 'إجراءات',
   'common.confirm': 'تأكيد',
@@ -768,8 +768,6 @@ export default {
   'token.explanation.output': 'رموز الإخراج: تتكون عادة من بيانات رد المساعد.',
 
   // إعدادات المشروع
-  'project.settings': 'إعدادات المشروع',
-  'project.settings.title': 'إعدادات المشروع',
   'project.agent.info': 'معلومات المساعد',
   'project.chatSettings': 'إعدادات المحادثة',
   'project.chatSettings.tokenDisplay': 'عرض استهلاك الرموز',
@@ -783,7 +781,7 @@ export default {
   'common.off': 'إيقاف',
   'common.save': 'حفظ',
   'agent.management': 'إدارة المساعدين',
-  
+
   // ChatArea component
   'chatArea.inputPlaceholder.default': 'أدخل سؤالك...',
   'chatArea.inputPlaceholder.noProject': 'الرجاء اختيار مشروع أولاً',
@@ -872,7 +870,7 @@ export default {
   'replyMode.getCurrentFailed': 'فشل في الحصول على وضع الرد الحالي',
   'replyMode.unknown.label': 'وضع غير معروف',
   'replyMode.unknown.description': 'لا يوجد وصف متاح',
-  
+
   // 回复模式选项标签
   'replyMode.ALL.label': 'الكل يرد',
   'replyMode.PRIORITY.label': 'رد حسب الأولوية',
@@ -880,7 +878,7 @@ export default {
   'replyMode.AI_SELECT.label': 'اختيار ذكي',
   'replyMode.LAST_AT.label': 'آخر من تمت الإشارة إليه',
   'replyMode.LAST_REPLY.label': 'آخر من رد',
-  
+
   // 回复模式选项描述
   'replyMode.ALL.description': 'جميع المساعدين يستجيبون في وقت واحد لرسائل المستخدم. مناسب للسيناريوهات التي تتطلب وجهات نظر متعددة، ولكن قد يؤدي إلى تكرار المعلومات واستهلاك عالٍ للرموز.',
   'replyMode.PRIORITY.description': 'يرد المساعد ذو الأولوية الأعلى. مناسب لأنظمة المساعدين ذات التقسيمات الواضحة للأدوار.',
@@ -888,7 +886,7 @@ export default {
   'replyMode.AI_SELECT.description': 'يحدد نظام الذكاء الاصطناعي بذكاء المساعد الأنسب بناءً على السياق. مناسب للسيناريوهات المعقدة التي تتطلب توزيعًا ذكيًا.',
   'replyMode.LAST_AT.description': 'يرد آخر مساعد تمت الإشارة إليه (@). مناسب عندما يرغب المستخدمون في مواصلة التفاعل مع مساعد معين.',
   'replyMode.LAST_REPLY.description': 'يستمر المساعد الذي رد آخر مرة على المستخدم في الرد. مناسب للحفاظ على تماسك المحادثة.',
-  
+
   // 回复模式设置
   'project.chatSettings.replyMode': 'إعدادات وضع الرد',
   'project.chatSettings.replyMode.description': 'تعيين كيفية رد مساعدي الذكاء الاصطناعي المتعددين على رسائل المستخدم',
