@@ -856,4 +856,41 @@ export default {
   // Free model related
   'chat.freeModel': 'نموذج مجاني',
   'chat.freeModel.tooltip': 'الرصيد غير كافٍ! تستخدم حاليًا النموذج المجاني. لاستخدام النموذج المتقدم، يرجى إعادة الشحن. قد تكون النماذج المجانية محدودة في الوظائف والأداء.',
+
+  // 项目设置相关
+  'project.settings': 'إعدادات المشروع',
+  'project.settings.title': 'إعدادات المشروع',
+  'project.settings.save.success': 'تم حفظ الإعدادات بنجاح',
+  'project.settings.save.failed': 'فشل حفظ الإعدادات',
+  'project.settings.save.error': 'حدث خطأ أثناء حفظ الإعدادات',
+
+  // 回复模式相关文案
+  'replyMode.tab.label': 'وضع الرد',
+  'replyMode.loading': 'جاري تحميل إعدادات وضع الرد...',
+  'replyMode.fetchFailed': 'فشل في الحصول على أوضاع الرد',
+  'replyMode.fetchError': 'خطأ في جلب أوضاع الرد',
+  'replyMode.getCurrentFailed': 'فشل في الحصول على وضع الرد الحالي',
+  'replyMode.unknown.label': 'وضع غير معروف',
+  'replyMode.unknown.description': 'لا يوجد وصف متاح',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': 'الكل يرد',
+  'replyMode.PRIORITY.label': 'رد حسب الأولوية',
+  'replyMode.RANDOM.label': 'رد عشوائي',
+  'replyMode.AI_SELECT.label': 'اختيار ذكي',
+  'replyMode.LAST_AT.label': 'آخر من تمت الإشارة إليه',
+  'replyMode.LAST_REPLY.label': 'آخر من رد',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': 'جميع المساعدين يستجيبون في وقت واحد لرسائل المستخدم. مناسب للسيناريوهات التي تتطلب وجهات نظر متعددة، ولكن قد يؤدي إلى تكرار المعلومات واستهلاك عالٍ للرموز.',
+  'replyMode.PRIORITY.description': 'يرد المساعد ذو الأولوية الأعلى. مناسب لأنظمة المساعدين ذات التقسيمات الواضحة للأدوار.',
+  'replyMode.RANDOM.description': 'يختار مساعدًا عشوائيًا للرد. مناسب للحفاظ على تنوع التفاعل.',
+  'replyMode.AI_SELECT.description': 'يحدد نظام الذكاء الاصطناعي بذكاء المساعد الأنسب بناءً على السياق. مناسب للسيناريوهات المعقدة التي تتطلب توزيعًا ذكيًا.',
+  'replyMode.LAST_AT.description': 'يرد آخر مساعد تمت الإشارة إليه (@). مناسب عندما يرغب المستخدمون في مواصلة التفاعل مع مساعد معين.',
+  'replyMode.LAST_REPLY.description': 'يستمر المساعد الذي رد آخر مرة على المستخدم في الرد. مناسب للحفاظ على تماسك المحادثة.',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': 'إعدادات وضع الرد',
+  'project.chatSettings.replyMode.description': 'تعيين كيفية رد مساعدي الذكاء الاصطناعي المتعددين على رسائل المستخدم',
+  'project.chatSettings.replyMode.tooltip': 'اختر كيفية رد مساعدي الذكاء الاصطناعي على رسائل المستخدم',
 };

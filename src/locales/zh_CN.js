@@ -753,6 +753,9 @@ export default {
   // 项目设置相关
   'project.settings': '项目设置',
   'project.settings.title': '项目设置',
+  'project.settings.save.success': '设置保存成功',
+  'project.settings.save.failed': '设置保存失败',
+  'project.settings.save.error': '保存设置时发生错误',
   'project.agent.info': '助手信息',
   'project.chatSettings': '聊天设置',
   'project.chatSettings.tokenDisplay': '显示token消耗',
@@ -838,5 +841,35 @@ export default {
 
   // 免费模型相关文案
   'chat.freeModel': '免费模型',
-  'chat.freeModel.tooltip': '余额不足！当前使用的是免费模型。若需使用配置的高级模型，请充值后使用。免费模型可能在功能和性能上有所限制。'
+  'chat.freeModel.tooltip': '余额不足！当前使用的是免费模型。若需使用配置的高级模型，请充值后使用。免费模型可能在功能和性能上有所限制。',
+  
+  // 回复模式相关文案
+  'replyMode.tab.label': '回复模式',
+  'replyMode.loading': '加载回复模式设置...',
+  'replyMode.fetchFailed': '获取回复模式失败',
+  'replyMode.fetchError': '获取回复模式接口错误',
+  'replyMode.getCurrentFailed': '获取当前回复模式失败',
+  'replyMode.unknown.label': '未知模式',
+  'replyMode.unknown.description': '暂无描述',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': '全部回复',
+  'replyMode.PRIORITY.label': '优先级回复',
+  'replyMode.RANDOM.label': '随机回复',
+  'replyMode.AI_SELECT.label': '智能选择',
+  'replyMode.LAST_AT.label': '上次@回复',
+  'replyMode.LAST_REPLY.label': '上次回复者',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': '所有助手同时响应用户消息，适用于需要多角度解答的场景，但可能导致信息冗余和大量token消耗。',
+  'replyMode.PRIORITY.description': '由优先级最高的助手进行回复，适用于有明确职责分工的助手系统。',
+  'replyMode.RANDOM.description': '随机选择一个助手进行回复，适用于希望保持互动多样性的场景。',
+  'replyMode.AI_SELECT.description': '由AI系统根据上下文智能判断最合适的助手进行回复，适用于需要智能分发的复杂场景。',
+  'replyMode.LAST_AT.description': '由上一次被@的助手进行回复，适用于用户希望继续与特定助手互动的场景。',
+  'replyMode.LAST_REPLY.description': '由上一次回复用户的助手继续进行回复，适用于保持对话连贯性的场景。',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': '回复模式设置',
+  'project.chatSettings.replyMode.description': '设置多个AI助手如何响应用户的消息',
+  'project.chatSettings.replyMode.tooltip': '选择AI助手回复用户消息的方式'
 }; 

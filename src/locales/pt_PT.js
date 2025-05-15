@@ -715,8 +715,11 @@ export default {
   'token.explanation.output': 'Tokens de saída: Geralmente os dados de resposta do assistente.',
 
   // Configurações de projeto
-  'project.settings': 'Configurações do Projeto',
-  'project.settings.title': 'Configurações do Projeto',
+  'project.settings': 'Configurações do projeto',
+  'project.settings.title': 'Configurações do projeto',
+  'project.settings.save.success': 'Configurações salvas com sucesso',
+  'project.settings.save.failed': 'Falha ao salvar configurações',
+  'project.settings.save.error': 'Ocorreu um erro ao salvar as configurações',
   'project.agent.info': 'Informações do Assistente',
   'project.chatSettings': 'Configurações de Chat',
   'project.chatSettings.tokenDisplay': 'Mostrar Consumo de Tokens',
@@ -803,4 +806,34 @@ export default {
   // Free model related
   'chat.freeModel': 'Modelo Gratuito',
   'chat.freeModel.tooltip': 'Saldo insuficiente! Atualmente usando o modelo gratuito. Para usar o modelo avançado configurado, recarregue sua conta. Modelos gratuitos podem ter limitações em funcionalidade e desempenho.',
+
+  // 回复模式相关文案
+  'replyMode.tab.label': 'Modo de resposta',
+  'replyMode.loading': 'Carregando configurações do modo de resposta...',
+  'replyMode.fetchFailed': 'Falha ao obter modos de resposta',
+  'replyMode.fetchError': 'Erro ao buscar modos de resposta',
+  'replyMode.getCurrentFailed': 'Falha ao obter o modo de resposta atual',
+  'replyMode.unknown.label': 'Modo desconhecido',
+  'replyMode.unknown.description': 'Nenhuma descrição disponível',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': 'Todos respondem',
+  'replyMode.PRIORITY.label': 'Resposta prioritária',
+  'replyMode.RANDOM.label': 'Resposta aleatória',
+  'replyMode.AI_SELECT.label': 'Seleção inteligente',
+  'replyMode.LAST_AT.label': 'Último mencionado',
+  'replyMode.LAST_REPLY.label': 'Último a responder',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': 'Todos os assistentes respondem simultaneamente às mensagens do usuário. Adequado para cenários que requerem múltiplas perspectivas, mas pode levar à redundância de informações e alto consumo de tokens.',
+  'replyMode.PRIORITY.description': 'O assistente com a prioridade mais alta responde. Adequado para sistemas de assistentes com divisões claras de papéis.',
+  'replyMode.RANDOM.description': 'Seleciona aleatoriamente um assistente para responder. Adequado para manter a diversidade de interação.',
+  'replyMode.AI_SELECT.description': 'O sistema de IA determina inteligentemente o assistente mais apropriado com base no contexto. Adequado para cenários complexos que requerem distribuição inteligente.',
+  'replyMode.LAST_AT.description': 'O último assistente mencionado (@) responde. Adequado quando os usuários desejam continuar interagindo com um assistente específico.',
+  'replyMode.LAST_REPLY.description': 'O assistente que respondeu por último ao usuário continua a responder. Adequado para manter a coerência da conversa.',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': 'Configurações do modo de resposta',
+  'project.chatSettings.replyMode.description': 'Definir como múltiplos assistentes de IA respondem às mensagens do usuário',
+  'project.chatSettings.replyMode.tooltip': 'Escolha como os assistentes de IA respondem às mensagens do usuário',
 };

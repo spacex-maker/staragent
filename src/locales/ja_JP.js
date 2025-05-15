@@ -835,4 +835,41 @@ export default {
   // Free model related
   'chat.freeModel': '無料モデル',
   'chat.freeModel.tooltip': '残高不足！現在、無料モデルを使用しています。設定された高度なモデルを使用するには、チャージしてください。無料モデルは機能とパフォーマンスに制限がある場合があります。',
+
+  // 项目设置相关
+  'project.settings': 'プロジェクト設定',
+  'project.settings.title': 'プロジェクト設定',
+  'project.settings.save.success': '設定が保存されました',
+  'project.settings.save.failed': '設定の保存に失敗しました',
+  'project.settings.save.error': '設定の保存中にエラーが発生しました',
+
+  // 回复模式相关文案
+  'replyMode.tab.label': '返信モード',
+  'replyMode.loading': '返信モード設定をロード中...',
+  'replyMode.fetchFailed': '返信モードの取得に失敗しました',
+  'replyMode.fetchError': '返信モードの取得中にエラーが発生しました',
+  'replyMode.getCurrentFailed': '現在の返信モードの取得に失敗しました',
+  'replyMode.unknown.label': '不明なモード',
+  'replyMode.unknown.description': '説明がありません',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': '全員返信',
+  'replyMode.PRIORITY.label': '優先順位返信',
+  'replyMode.RANDOM.label': 'ランダム返信',
+  'replyMode.AI_SELECT.label': 'スマート選択',
+  'replyMode.LAST_AT.label': '最後に@された',
+  'replyMode.LAST_REPLY.label': '最後の返信者',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': 'すべてのアシスタントがユーザーメッセージに同時に応答します。複数の視点からの解決が必要なシナリオに適していますが、情報の冗長性と大量のトークン消費につながる可能性があります。',
+  'replyMode.PRIORITY.description': '最も優先度の高いアシスタントが返信します。明確な役割分担があるアシスタントシステムに適しています。',
+  'replyMode.RANDOM.description': 'ランダムにアシスタントを選んで返信します。インタラクションの多様性を維持したいシナリオに適しています。',
+  'replyMode.AI_SELECT.description': 'AIシステムがコンテキストに基づいて最も適切なアシスタントを判断します。インテリジェントな配信が必要な複雑なシナリオに適しています。',
+  'replyMode.LAST_AT.description': '最後に@されたアシスタントが返信します。ユーザーが特定のアシスタントとの対話を続けたい場合に適しています。',
+  'replyMode.LAST_REPLY.description': '最後にユーザーに返信したアシスタントが引き続き返信します。会話の一貫性を維持するのに適しています。',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': '返信モード設定',
+  'project.chatSettings.replyMode.description': '複数のAIアシスタントがユーザーメッセージにどのように応答するかを設定します',
+  'project.chatSettings.replyMode.tooltip': 'AIアシスタントがユーザーメッセージに返信する方法を選択します',
 };

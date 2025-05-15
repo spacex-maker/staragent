@@ -845,4 +845,41 @@ export default {
   // Free model related
   'chat.freeModel': 'Modello Gratuito',
   'chat.freeModel.tooltip': 'Saldo insufficiente! Attualmente stai utilizzando il modello gratuito. Per utilizzare il modello avanzato configurato, effettua una ricarica. I modelli gratuiti potrebbero avere limitazioni in termini di funzionalità e prestazioni.',
+
+  // 项目设置相关
+  'project.settings': 'Impostazioni del progetto',
+  'project.settings.title': 'Impostazioni del progetto',
+  'project.settings.save.success': 'Impostazioni salvate con successo',
+  'project.settings.save.failed': 'Salvataggio delle impostazioni fallito',
+  'project.settings.save.error': 'Si è verificato un errore durante il salvataggio delle impostazioni',
+
+  // 回复模式相关文案
+  'replyMode.tab.label': 'Modalità di risposta',
+  'replyMode.loading': 'Caricamento impostazioni della modalità di risposta...',
+  'replyMode.fetchFailed': 'Recupero delle modalità di risposta fallito',
+  'replyMode.fetchError': 'Errore durante il recupero delle modalità di risposta',
+  'replyMode.getCurrentFailed': 'Recupero della modalità di risposta attuale fallito',
+  'replyMode.unknown.label': 'Modalità sconosciuta',
+  'replyMode.unknown.description': 'Nessuna descrizione disponibile',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': 'Tutti rispondono',
+  'replyMode.PRIORITY.label': 'Risposta prioritaria',
+  'replyMode.RANDOM.label': 'Risposta casuale',
+  'replyMode.AI_SELECT.label': 'Selezione intelligente',
+  'replyMode.LAST_AT.label': 'Ultimo menzionato',
+  'replyMode.LAST_REPLY.label': 'Ultimo a rispondere',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': 'Tutti gli assistenti rispondono simultaneamente ai messaggi dell\'utente. Adatto a scenari che richiedono prospettive multiple, ma può portare a ridondanza di informazioni e alto consumo di token.',
+  'replyMode.PRIORITY.description': 'L\'assistente con la priorità più alta risponde. Adatto a sistemi di assistenti con divisioni di ruoli chiare.',
+  'replyMode.RANDOM.description': 'Seleziona casualmente un assistente per rispondere. Adatto a mantenere la diversità di interazione.',
+  'replyMode.AI_SELECT.description': 'Il sistema AI determina intelligentemente l\'assistente più appropriato in base al contesto. Adatto a scenari complessi che richiedono una distribuzione intelligente.',
+  'replyMode.LAST_AT.description': 'L\'ultimo assistente menzionato (@) risponde. Adatto quando gli utenti desiderano continuare a interagire con un assistente specifico.',
+  'replyMode.LAST_REPLY.description': 'L\'assistente che ha risposto per ultimo all\'utente continua a rispondere. Adatto a mantenere la coerenza della conversazione.',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': 'Impostazioni della modalità di risposta',
+  'project.chatSettings.replyMode.description': 'Imposta come più assistenti AI rispondono ai messaggi dell\'utente',
+  'project.chatSettings.replyMode.tooltip': 'Scegli come gli assistenti AI rispondono ai messaggi dell\'utente',
 };

@@ -761,6 +761,9 @@ export default {
   // Projekteinstellungen
   'project.settings': 'Projekteinstellungen',
   'project.settings.title': 'Projekteinstellungen',
+  'project.settings.save.success': 'Einstellungen erfolgreich gespeichert',
+  'project.settings.save.failed': 'Speichern der Einstellungen fehlgeschlagen',
+  'project.settings.save.error': 'Beim Speichern der Einstellungen ist ein Fehler aufgetreten',
   'project.agent.info': 'Assistenten-Informationen',
   'project.chatSettings': 'Chat-Einstellungen',
   'project.chatSettings.tokenDisplay': 'Token-Verbrauch anzeigen',
@@ -847,4 +850,34 @@ export default {
   // Free model related
   'chat.freeModel': 'Kostenloses Modell',
   'chat.freeModel.tooltip': 'Unzureichendes Guthaben! Es wird derzeit ein kostenloses Modell verwendet. Um das konfigurierte fortgeschrittene Modell zu nutzen, bitte aufladen. Kostenlose Modelle können Einschränkungen in Funktionalität und Leistung haben.',
+
+  // 回复模式相关文案
+  'replyMode.tab.label': 'Antwortmodus',
+  'replyMode.loading': 'Lade Antwortmodus-Einstellungen...',
+  'replyMode.fetchFailed': 'Abrufen der Antwortmodi fehlgeschlagen',
+  'replyMode.fetchError': 'Fehler beim Abrufen der Antwortmodi',
+  'replyMode.getCurrentFailed': 'Abrufen des aktuellen Antwortmodus fehlgeschlagen',
+  'replyMode.unknown.label': 'Unbekannter Modus',
+  'replyMode.unknown.description': 'Keine Beschreibung verfügbar',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': 'Alle antworten',
+  'replyMode.PRIORITY.label': 'Prioritätsantwort',
+  'replyMode.RANDOM.label': 'Zufällige Antwort',
+  'replyMode.AI_SELECT.label': 'Intelligente Auswahl',
+  'replyMode.LAST_AT.label': 'Zuletzt erwähnt',
+  'replyMode.LAST_REPLY.label': 'Letzter Antwortender',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': 'Alle Assistenten antworten gleichzeitig auf Benutzernachrichten. Geeignet für Szenarien, die mehrere Perspektiven erfordern, kann aber zu Informationsredundanz und hohem Token-Verbrauch führen.',
+  'replyMode.PRIORITY.description': 'Der Assistent mit der höchsten Priorität antwortet. Geeignet für Assistentensysteme mit klaren Rollenverteilungen.',
+  'replyMode.RANDOM.description': 'Wählt zufällig einen Assistenten für die Antwort aus. Geeignet für die Aufrechterhaltung der Interaktionsvielfalt.',
+  'replyMode.AI_SELECT.description': 'Das KI-System bestimmt intelligent den am besten geeigneten Assistenten basierend auf dem Kontext. Geeignet für komplexe Szenarien, die eine intelligente Verteilung erfordern.',
+  'replyMode.LAST_AT.description': 'Der zuletzt erwähnte (@) Assistent antwortet. Geeignet, wenn Benutzer weiterhin mit einem bestimmten Assistenten interagieren möchten.',
+  'replyMode.LAST_REPLY.description': 'Der Assistent, der dem Benutzer zuletzt geantwortet hat, antwortet weiterhin. Geeignet für die Aufrechterhaltung der Gesprächskohärenz.',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': 'Antwortmodus-Einstellungen',
+  'project.chatSettings.replyMode.description': 'Legen Sie fest, wie mehrere KI-Assistenten auf Benutzernachrichten reagieren',
+  'project.chatSettings.replyMode.tooltip': 'Wählen Sie, wie KI-Assistenten auf Benutzernachrichten antworten',
 };

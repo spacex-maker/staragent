@@ -783,9 +783,12 @@ export default {
   'token.explanation.input': 'Input tokens: Generally composed of conversation history, assistant memory, context information, short-term memory, long-term memory, key memory, and other information.',
   'token.explanation.output': 'Output tokens: Generally the assistant\'s response data.',
 
-  // Project settings related
+  // Project settings
   'project.settings': 'Project Settings',
   'project.settings.title': 'Project Settings',
+  'project.settings.save.success': 'Settings saved successfully',
+  'project.settings.save.failed': 'Failed to save settings',
+  'project.settings.save.error': 'Error occurred while saving settings',
   'project.agent.info': 'Assistant Info',
   'project.chatSettings': 'Chat Settings',
   'project.chatSettings.tokenDisplay': 'Display Token Consumption',
@@ -871,5 +874,35 @@ export default {
 
   // Free model related
   'chat.freeModel': 'Free Model',
-  'chat.freeModel.tooltip': 'Insufficient balance! Currently using free model. To use the configured advanced model, please recharge. Free models may have limitations in functionality and performance.',
+  'chat.freeModel.tooltip': 'Insufficient balance! Currently using a free model. To use the configured advanced model, please recharge. Free models may have limitations in functionality and performance.',
+  
+  // Reply mode related text
+  'replyMode.tab.label': 'Reply Mode',
+  'replyMode.loading': 'Loading reply mode settings...',
+  'replyMode.fetchFailed': 'Failed to get reply modes',
+  'replyMode.fetchError': 'Error fetching reply modes',
+  'replyMode.getCurrentFailed': 'Failed to get current reply mode',
+  'replyMode.unknown.label': 'Unknown Mode',
+  'replyMode.unknown.description': 'No description available',
+  
+  // Reply mode option labels
+  'replyMode.ALL.label': 'All Reply',
+  'replyMode.PRIORITY.label': 'Priority Reply',
+  'replyMode.RANDOM.label': 'Random Reply',
+  'replyMode.AI_SELECT.label': 'Smart Select',
+  'replyMode.LAST_AT.label': 'Last Mentioned',
+  'replyMode.LAST_REPLY.label': 'Last Responder',
+  
+  // Reply mode option descriptions
+  'replyMode.ALL.description': 'All assistants respond simultaneously to user messages. Suitable for scenarios requiring multiple perspectives, but may lead to information redundancy and high token consumption.',
+  'replyMode.PRIORITY.description': 'The highest priority assistant responds. Suitable for systems with clear assistant role divisions.',
+  'replyMode.RANDOM.description': 'Randomly selects an assistant to respond. Suitable for maintaining interaction diversity.',
+  'replyMode.AI_SELECT.description': 'AI system intelligently determines the most suitable assistant based on context. Suitable for complex scenarios requiring smart distribution.',
+  'replyMode.LAST_AT.description': 'The last mentioned (@) assistant responds. Suitable when users want to continue interacting with a specific assistant.',
+  'replyMode.LAST_REPLY.description': 'The assistant who last replied to the user continues to respond. Suitable for maintaining conversation coherence.',
+  
+  // Reply mode settings
+  'project.chatSettings.replyMode': 'Reply Mode Settings',
+  'project.chatSettings.replyMode.description': 'Set how multiple AI assistants respond to user messages',
+  'project.chatSettings.replyMode.tooltip': 'Choose how AI assistants reply to user messages'
 };

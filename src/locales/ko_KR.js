@@ -875,4 +875,41 @@ export default {
   // Free model related
   'chat.freeModel': '무료 모델',
   'chat.freeModel.tooltip': '잔액 부족! 현재 무료 모델을 사용 중입니다. 구성된 고급 모델을 사용하려면 충전하세요. 무료 모델은 기능과 성능에 제한이 있을 수 있습니다.',
+
+  // 项目设置相关
+  'project.settings': '프로젝트 설정',
+  'project.settings.title': '프로젝트 설정',
+  'project.settings.save.success': '설정이 저장되었습니다',
+  'project.settings.save.failed': '설정 저장에 실패했습니다',
+  'project.settings.save.error': '설정 저장 중 오류가 발생했습니다',
+
+  // 回复模式相关文案
+  'replyMode.tab.label': '응답 모드',
+  'replyMode.loading': '응답 모드 설정 로드 중...',
+  'replyMode.fetchFailed': '응답 모드 가져오기 실패',
+  'replyMode.fetchError': '응답 모드 가져오기 중 오류 발생',
+  'replyMode.getCurrentFailed': '현재 응답 모드 가져오기 실패',
+  'replyMode.unknown.label': '알 수 없는 모드',
+  'replyMode.unknown.description': '설명 없음',
+  
+  // 回复模式选项标签
+  'replyMode.ALL.label': '모두 응답',
+  'replyMode.PRIORITY.label': '우선순위 응답',
+  'replyMode.RANDOM.label': '랜덤 응답',
+  'replyMode.AI_SELECT.label': '스마트 선택',
+  'replyMode.LAST_AT.label': '마지막 언급',
+  'replyMode.LAST_REPLY.label': '마지막 응답자',
+  
+  // 回复模式选项描述
+  'replyMode.ALL.description': '모든 어시스턴트가 사용자 메시지에 동시에 응답합니다. 다양한 관점의 해결책이 필요한 상황에 적합하지만, 정보 중복과 많은 토큰 소비를 초래할 수 있습니다.',
+  'replyMode.PRIORITY.description': '가장 높은 우선순위의 어시스턴트가 응답합니다. 명확한 역할 분담이 있는 어시스턴트 시스템에 적합합니다.',
+  'replyMode.RANDOM.description': '랜덤으로 선택된 어시스턴트가 응답합니다. 상호작용의 다양성을 유지하고 싶은 상황에 적합합니다.',
+  'replyMode.AI_SELECT.description': 'AI 시스템이 컨텍스트를 기반으로 가장 적합한 어시스턴트를 판단합니다. 지능적인 배포가 필요한 복잡한 상황에 적합합니다.',
+  'replyMode.LAST_AT.description': '마지막으로 언급된(@) 어시스턴트가 응답합니다. 사용자가 특정 어시스턴트와 계속 상호작용하고 싶을 때 적합합니다.',
+  'replyMode.LAST_REPLY.description': '마지막으로 사용자에게 응답한 어시스턴트가 계속 응답합니다. 대화의 일관성을 유지하는 데 적합합니다.',
+  
+  // 回复模式设置
+  'project.chatSettings.replyMode': '응답 모드 설정',
+  'project.chatSettings.replyMode.description': '여러 AI 어시스턴트가 사용자 메시지에 어떻게 응답할지 설정합니다',
+  'project.chatSettings.replyMode.tooltip': 'AI 어시스턴트가 사용자 메시지에 응답하는 방식을 선택합니다',
 };
