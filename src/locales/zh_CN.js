@@ -871,5 +871,6 @@ export default {
   // 回复模式设置
   'project.chatSettings.replyMode': '回复模式设置',
   'project.chatSettings.replyMode.description': '设置多个AI助手如何响应用户的消息',
-  'project.chatSettings.replyMode.tooltip': '选择AI助手回复用户消息的方式'
+  'project.chatSettings.replyMode.tooltip': '选择AI助手回复用户消息的方式',
+  'project.createdAt': '创建时间：{time}'
 }; 

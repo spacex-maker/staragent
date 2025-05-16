@@ -904,5 +904,6 @@ export default {
   // Reply mode settings
   'project.chatSettings.replyMode': 'Reply Mode Settings',
   'project.chatSettings.replyMode.description': 'Set how multiple AI assistants respond to user messages',
-  'project.chatSettings.replyMode.tooltip': 'Choose how AI assistants reply to user messages'
+  'project.chatSettings.replyMode.tooltip': 'Choose how AI assistants reply to user messages',
+  'project.createdAt': 'Created on: {time}'
 };

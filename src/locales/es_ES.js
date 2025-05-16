@@ -869,8 +869,6 @@ export default {
   'chat.freeModel.tooltip': '¡Saldo insuficiente! Actualmente está utilizando el modelo gratuito. Para usar el modelo avanzado configurado, por favor recargue. Los modelos gratuitos pueden tener limitaciones en funcionalidad y rendimiento.',
 
   // 项目设置相关
-  'project.settings': 'Configuración del proyecto',
-  'project.settings.title': 'Configuración del proyecto',
   'project.settings.save.success': 'Configuración guardada con éxito',
   'project.settings.save.failed': 'Error al guardar la configuración',
   'project.settings.save.error': 'Ocurrió un error al guardar la configuración',
@@ -904,4 +902,7 @@ export default {
   'project.chatSettings.replyMode': 'Configuración del modo de respuesta',
   'project.chatSettings.replyMode.description': 'Configurar cómo múltiples asistentes de IA responden a los mensajes del usuario',
   'project.chatSettings.replyMode.tooltip': 'Elija cómo los asistentes de IA responden a los mensajes del usuario',
+  
+  // 项目信息
+  'project.createdAt': 'Fecha de creación: {time}',
 };

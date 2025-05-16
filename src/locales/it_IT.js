@@ -882,4 +882,7 @@ export default {
   'project.chatSettings.replyMode': 'Impostazioni della modalità di risposta',
   'project.chatSettings.replyMode.description': 'Imposta come più assistenti AI rispondono ai messaggi dell\'utente',
   'project.chatSettings.replyMode.tooltip': 'Scegli come gli assistenti AI rispondono ai messaggi dell\'utente',
+  
+  // 项目信息
+  'project.createdAt': 'Data di creazione: {time}',
 };

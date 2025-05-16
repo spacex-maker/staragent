@@ -880,4 +880,7 @@ export default {
   'project.chatSettings.replyMode': 'Antwortmodus-Einstellungen',
   'project.chatSettings.replyMode.description': 'Legen Sie fest, wie mehrere KI-Assistenten auf Benutzernachrichten reagieren',
   'project.chatSettings.replyMode.tooltip': 'Wählen Sie, wie KI-Assistenten auf Benutzernachrichten antworten',
+  
+  // 项目信息
+  'project.createdAt': 'Erstellt am: {time}',
 };

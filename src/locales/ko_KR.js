@@ -912,4 +912,7 @@ export default {
   'project.chatSettings.replyMode': '응답 모드 설정',
   'project.chatSettings.replyMode.description': '여러 AI 어시스턴트가 사용자 메시지에 어떻게 응답할지 설정합니다',
   'project.chatSettings.replyMode.tooltip': 'AI 어시스턴트가 사용자 메시지에 응답하는 방식을 선택합니다',
+  
+  // 项目信息
+  'project.createdAt': '생성 날짜: {time}',
 };

@@ -836,4 +836,7 @@ export default {
   'project.chatSettings.replyMode': 'Configurações do modo de resposta',
   'project.chatSettings.replyMode.description': 'Definir como múltiplos assistentes de IA respondem às mensagens do usuário',
   'project.chatSettings.replyMode.tooltip': 'Escolha como os assistentes de IA respondem às mensagens do usuário',
+  
+  // 项目信息
+  'project.createdAt': 'Data de criação: {time}',
 };

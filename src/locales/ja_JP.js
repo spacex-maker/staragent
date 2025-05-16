@@ -837,8 +837,6 @@ export default {
   'chat.freeModel.tooltip': '残高不足！現在、無料モデルを使用しています。設定された高度なモデルを使用するには、チャージしてください。無料モデルは機能とパフォーマンスに制限がある場合があります。',
 
   // 项目设置相关
-  'project.settings': 'プロジェクト設定',
-  'project.settings.title': 'プロジェクト設定',
   'project.settings.save.success': '設定が保存されました',
   'project.settings.save.failed': '設定の保存に失敗しました',
   'project.settings.save.error': '設定の保存中にエラーが発生しました',
@@ -872,4 +870,7 @@ export default {
   'project.chatSettings.replyMode': '返信モード設定',
   'project.chatSettings.replyMode.description': '複数のAIアシスタントがユーザーメッセージにどのように応答するかを設定します',
   'project.chatSettings.replyMode.tooltip': 'AIアシスタントがユーザーメッセージに返信する方法を選択します',
+  
+  // 项目信息
+  'project.createdAt': '作成日時：{time}',
 };

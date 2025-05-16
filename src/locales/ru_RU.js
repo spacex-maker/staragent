@@ -866,4 +866,7 @@ export default {
   'project.chatSettings.replyMode': 'Настройки режима ответа',
   'project.chatSettings.replyMode.description': 'Настройка того, как несколько ИИ-ассистентов отвечают на сообщения пользователя',
   'project.chatSettings.replyMode.tooltip': 'Выберите, как ИИ-ассистенты отвечают на сообщения пользователя',
+  
+  // 项目信息
+  'project.createdAt': 'Дата создания: {time}',
 };

@@ -891,4 +891,7 @@ export default {
   'project.chatSettings.replyMode': 'إعدادات وضع الرد',
   'project.chatSettings.replyMode.description': 'تعيين كيفية رد مساعدي الذكاء الاصطناعي المتعددين على رسائل المستخدم',
   'project.chatSettings.replyMode.tooltip': 'اختر كيفية رد مساعدي الذكاء الاصطناعي على رسائل المستخدم',
+  
+  // 项目信息
+  'project.createdAt': 'تاريخ الإنشاء: {time}',
 };
