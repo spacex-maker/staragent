@@ -923,5 +923,10 @@ export default {
   'memory.context.label': 'Kontext:',
   'memory.relevance': 'Relevanz: {score}%',
   'memory.error.fetchVector': 'Fehler beim Abrufen der Vektorgedächtnisse',
-  'memory.error.fetchStructured': 'Fehler beim Abrufen der strukturierten Gedächtnisse'
+  'memory.error.fetchStructured': 'Fehler beim Abrufen der strukturierten Gedächtnisse',
+  'memory.delete.confirm.title': 'Löschen bestätigen',
+  'memory.delete.confirm.content': 'Sind Sie sicher, dass Sie diese Erinnerung löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.',
+  'memory.delete.success': 'Erinnerung erfolgreich gelöscht',
+  'memory.delete.failed': 'Löschen der Erinnerung fehlgeschlagen',
+  'memory.delete.error': 'Beim Löschen der Erinnerung ist ein Fehler aufgetreten'
 };

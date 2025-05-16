@@ -1,6 +1,6 @@
 import React, { useEffect, useState,  useRef } from 'react';
 import { Avatar, Spin, Tag, Tooltip } from 'antd';
-import { UserOutlined, RobotOutlined } from '@ant-design/icons';
+import { UserOutlined, RobotOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Message, FrontendMessage, ProjectAgent } from '../../types';
 import MessageContent from './MessageContent';
@@ -19,6 +19,7 @@ interface StyledProps {
 const StyledMessageList = styled.div`
   flex: 1;
   padding: 8px;
+  padding-bottom: 24px; /* 增加底部间距，与输入框保持距离 */
   width: 100%;
   overflow: visible;
   display: flex;
@@ -95,13 +96,14 @@ const StyledAvatar = styled(Avatar)<StyledProps>`
   }
 `;
 
-// 消息信息区域样式（用户名、时间等）
+// 消息信息区域样式
 const MessageInfo = styled.div<{ $isUser: boolean }>`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 4px;
   justify-content: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
+  flex-wrap: wrap;
 `;
 
 // 用户名样式
@@ -109,6 +111,7 @@ const UserName = styled.span<{ $isUser: boolean }>`
   font-size: 12px;
   color: var(--ant-color-text-secondary);
   font-weight: 500;
+  margin-right: 2px;
 `;
 
 // 加载状态容器样式
@@ -126,6 +129,50 @@ const AgentTag = styled(Tag)`
   padding: 0 8px;
   height: 20px;
   line-height: 18px;
+  border-radius: 10px;
+`;
+
+// 模型标签样式
+const ModelTag = styled(Tag)`
+  margin: 0;
+  font-size: 12px;
+  padding: 0 8px;
+  height: 20px;
+  line-height: 18px;
+  font-weight: 500;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+`;
+
+// 临时会话标签样式
+const TemporaryTag = styled(Tag)`
+  margin: 0;
+  font-size: 12px;
+  padding: 0 8px;
+  height: 20px;
+  line-height: 18px;
+  border-radius: 10px;
+  background: ${props => props.theme.mode === 'dark' 
+    ? 'rgba(250, 173, 20, 0.15)'
+    : 'rgba(250, 173, 20, 0.1)'};
+  color: ${props => props.theme.mode === 'dark'
+    ? 'rgba(250, 173, 20, 0.85)'
+    : 'rgba(250, 173, 20, 0.85)'};
+  border: 1px solid ${props => props.theme.mode === 'dark'
+    ? 'rgba(250, 173, 20, 0.3)'
+    : 'rgba(250, 173, 20, 0.3)'};
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: rgba(250, 173, 20, 0.6);
+  }
 `;
 
 // 消息内容包装器样式
@@ -241,6 +288,63 @@ const estimateTokens = (text: string): number => {
   return Math.max(1, Math.round(totalTokens));
 };
 
+// 根据模型类型选择颜色
+const getModelTagColor = (modelType: string): string => {
+  if (!modelType) return 'default';
+  
+  const lowerCaseType = modelType.toLowerCase();
+  
+  // OpenAI 模型
+  if (lowerCaseType.includes('gpt-4-turbo')) return 'purple';
+  if (lowerCaseType.includes('gpt-4-o')) return 'purple';
+  if (lowerCaseType.includes('gpt-4')) return 'purple';
+  if (lowerCaseType.includes('gpt-3.5-turbo')) return 'magenta';
+  if (lowerCaseType.includes('gpt-3')) return 'magenta';
+  if (lowerCaseType.includes('davinci')) return 'magenta';
+  
+  // Anthropic 模型
+  if (lowerCaseType.includes('claude-3')) return 'geekblue';
+  if (lowerCaseType.includes('claude-2')) return 'cyan';
+  if (lowerCaseType.includes('claude')) return 'cyan';
+  
+  // Google 模型
+  if (lowerCaseType.includes('gemini-pro')) return 'blue';
+  if (lowerCaseType.includes('gemini-ultra')) return 'blue';
+  if (lowerCaseType.includes('gemini')) return 'blue';
+  if (lowerCaseType.includes('palm')) return 'lime';
+  
+  // xAI 模型
+  if (lowerCaseType.includes('grok')) return 'orange';
+  
+  // Deepseek 模型
+  if (lowerCaseType.includes('deepseek-coder')) return 'green';
+  if (lowerCaseType.includes('deepseek')) return 'green';
+  
+  // Meta 模型
+  if (lowerCaseType.includes('llama-3')) return 'gold';
+  if (lowerCaseType.includes('llama-2')) return 'gold';
+  if (lowerCaseType.includes('llama')) return 'gold';
+  
+  // 百度模型
+  if (lowerCaseType.includes('ernie')) return 'red';
+  if (lowerCaseType.includes('wenxin')) return 'red';
+  
+  // 国内其他模型
+  if (lowerCaseType.includes('qwen')) return 'orange'; // 通义千问
+  if (lowerCaseType.includes('spark')) return 'volcano'; // 讯飞星火
+  if (lowerCaseType.includes('glm')) return 'geekblue'; // 智谱GLM
+  if (lowerCaseType.includes('baichuan')) return 'lime'; // 百川
+  if (lowerCaseType.includes('yi')) return 'purple'; // 01AI的Yi模型
+  
+  // 其他开源模型
+  if (lowerCaseType.includes('mistral')) return 'cyan';
+  if (lowerCaseType.includes('mixtral')) return 'cyan';
+  if (lowerCaseType.includes('stable')) return 'volcano';
+  if (lowerCaseType.includes('falcon')) return 'blue';
+  
+  return 'default';
+};
+
 // 消息列表组件
 const MessageList: React.FC<MessageListProps> = ({ 
   messages,
@@ -257,6 +361,68 @@ const MessageList: React.FC<MessageListProps> = ({
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const intl = useIntl(); // 使用react-intl的useIntl钩子获取国际化功能
   
+  // 滚动到消息列表底部
+  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+    if (messageListRef?.current) {
+      const container = messageListRef.current;
+      console.log('滚动到底部', container.scrollHeight);
+      
+      // 强制滚动到最底部 - 使用更可靠的方法
+      setTimeout(() => {
+        // 第一次滚动尝试
+        container.scrollTop = container.scrollHeight * 2; // 使用更大的值确保滚动到底部
+        
+        // 再次尝试滚动，确保到达底部
+        setTimeout(() => {
+          container.scrollTop = container.scrollHeight * 2;
+        }, 50);
+      }, 100);
+    }
+  };
+
+  // 使用消息ID检测新消息
+  const previousMessagesRef = useRef<{id: string|number, timestamp: number}[]>([]);
+  
+  useEffect(() => {
+    // 如果正在加载历史消息，不执行滚动
+    if (loadingMore) {
+      return;
+    }
+    
+    if (messages.length > 0) {
+      const currentTime = Date.now();
+      const lastMessage = messages[messages.length - 1];
+      
+      // 获取所有当前消息ID
+      const currentMessageIds = new Set(messages.map(msg => msg.id));
+      
+      // 筛选出之前没有的新消息ID
+      const newMessages = messages.filter(msg => 
+        !previousMessagesRef.current.some(prevMsg => prevMsg.id === msg.id)
+      );
+      
+      // 如果有新消息，并且是最后一条是新增的
+      if (newMessages.length > 0 && newMessages.some(msg => msg.id === lastMessage.id)) {
+        console.log('检测到底部新消息，滚动到底部', newMessages.length);
+        scrollToBottom();
+      }
+      
+      // 更新前一次的消息记录，带上时间戳
+      previousMessagesRef.current = messages.map(msg => ({
+        id: msg.id,
+        timestamp: currentTime
+      }));
+    }
+  }, [messages, loadingMore, activeSessionId]);
+  
+  // 首次加载时滚动到底部
+  useEffect(() => {
+    if (messages.length > 0 && !loadingMore && activeSessionId) {
+      console.log('首次加载会话，滚动到底部');
+      setTimeout(() => scrollToBottom(), 200);
+    }
+  }, [activeSessionId]);
+
   // 从父容器获取滚动事件
   useEffect(() => {
     if (!messageListRef?.current || !onLoadMore) return;
@@ -384,13 +550,22 @@ const MessageList: React.FC<MessageListProps> = ({
                       <>
                         <AgentTag color="blue">{msg.role || 'AI'}</AgentTag>
                         {msg.isFreeReq ? (
-                          <AgentTag color="purple">
+                          <ModelTag color="purple">
                             <Tooltip title={intl.formatMessage({ id: 'chat.freeModel.tooltip' })}>
                               {intl.formatMessage({ id: 'chat.freeModel' })}
                             </Tooltip>
-                          </AgentTag>
+                          </ModelTag>
                         ) : (
-                          msg.model && <AgentTag color="purple">{msg.model}</AgentTag>
+                          msg.model && 
+                          <ModelTag color={getModelTagColor(msg.model)}>
+                            {msg.model}
+                          </ModelTag>
+                        )}
+                        {msg.temporaryChat && (
+                          <TemporaryTag>
+                            <ClockCircleOutlined style={{ fontSize: '12px', marginRight: '4px' }} />
+                            {intl.formatMessage({ id: 'chat.temporary' })}
+                          </TemporaryTag>
                         )}
                       </>
                     )}
@@ -463,6 +638,14 @@ const MessageList: React.FC<MessageListProps> = ({
             </MessageItem>
           );
         })}
+        {/* 底部额外空间 */}
+        <div style={{ 
+          height: '10px', 
+          width: '100%', 
+          flexShrink: 0, 
+          marginBottom: '20px',
+          minHeight: '10px'
+        }}></div>
       </StyledMessageList>
     </>
   );

@@ -909,5 +909,10 @@ export default {
   'memory.context.label': 'Контекст:',
   'memory.relevance': 'Релевантность: {score}%',
   'memory.error.fetchVector': 'Не удалось получить векторную память',
-  'memory.error.fetchStructured': 'Не удалось получить структурированную память'
+  'memory.error.fetchStructured': 'Не удалось получить структурированную память',
+  'memory.delete.confirm.title': 'Подтверждение удаления',
+  'memory.delete.confirm.content': 'Вы уверены, что хотите удалить эту память? Это действие нельзя отменить.',
+  'memory.delete.success': 'Память успешно удалена',
+  'memory.delete.failed': 'Не удалось удалить память',
+  'memory.delete.error': 'При удалении памяти произошла ошибка'
 };

@@ -879,5 +879,10 @@ export default {
   'memory.context.label': 'Contexto:',
   'memory.relevance': 'Relevância: {score}%',
   'memory.error.fetchVector': 'Falha ao buscar memórias vetoriais',
-  'memory.error.fetchStructured': 'Falha ao buscar memórias estruturadas'
+  'memory.error.fetchStructured': 'Falha ao buscar memórias estruturadas',
+  'memory.delete.confirm.title': 'Confirmar Exclusão',
+  'memory.delete.confirm.content': 'Tem certeza que deseja excluir esta memória? Esta ação não pode ser desfeita.',
+  'memory.delete.success': 'Memória excluída com sucesso',
+  'memory.delete.failed': 'Falha ao excluir memória',
+  'memory.delete.error': 'Ocorreu um erro ao excluir a memória'
 };

@@ -913,5 +913,10 @@ export default {
   'memory.context.label': '上下文：',
   'memory.relevance': '相关度: {score}%',
   'memory.error.fetchVector': '获取向量记忆失败',
-  'memory.error.fetchStructured': '获取结构化记忆失败'
+  'memory.error.fetchStructured': '获取结构化记忆失败',
+  'memory.delete.confirm.title': '确认删除',
+  'memory.delete.confirm.content': '确定要删除这条记忆吗？此操作不可撤销。',
+  'memory.delete.success': '记忆删除成功',
+  'memory.delete.failed': '删除失败',
+  'memory.delete.error': '删除记忆时发生错误'
 }; 

@@ -954,4 +954,9 @@ export default {
   'memory.relevance': '관련도: {score}%',
   'memory.error.fetchVector': '벡터 메모리 가져오기 실패',
   'memory.error.fetchStructured': '구조화된 메모리 가져오기 실패',
+  'memory.delete.confirm.title': '삭제 확인',
+  'memory.delete.confirm.content': '이 메모리를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.',
+  'memory.delete.success': '메모리가 성공적으로 삭제되었습니다',
+  'memory.delete.failed': '메모리 삭제 실패',
+  'memory.delete.error': '메모리 삭제 중 오류가 발생했습니다',
 };

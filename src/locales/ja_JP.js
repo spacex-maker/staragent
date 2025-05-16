@@ -913,5 +913,10 @@ export default {
   'memory.context.label': 'コンテキスト：',
   'memory.relevance': '関連度: {score}%',
   'memory.error.fetchVector': 'ベクトルメモリーの取得に失敗しました',
-  'memory.error.fetchStructured': '構造化メモリーの取得に失敗しました'
+  'memory.error.fetchStructured': '構造化メモリーの取得に失敗しました',
+  'memory.delete.confirm.title': '削除の確認',
+  'memory.delete.confirm.content': 'このメモリーを削除してもよろしいですか？この操作は元に戻せません。',
+  'memory.delete.success': 'メモリーが正常に削除されました',
+  'memory.delete.failed': '削除に失敗しました',
+  'memory.delete.error': 'メモリーの削除中にエラーが発生しました'
 };

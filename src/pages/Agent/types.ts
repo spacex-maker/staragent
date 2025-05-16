@@ -45,6 +45,7 @@ export interface Message {
   completionCost?: number;
   unit?: string;
   isFreeReq?: boolean;
+  temporaryChat?: boolean;
 }
 
 // 前端消息类型，扩展基础消息接口
@@ -63,6 +64,7 @@ export interface FrontendMessage extends Partial<Message> {
   completionCost?: number;
   unit?: string;
   isFreeReq?: boolean;
+  temporaryChat?: boolean;
 }
 
 // 聊天会话接口

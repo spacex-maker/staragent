@@ -923,4 +923,9 @@ export default {
   'memory.relevance': 'Pertinence : {score}%',
   'memory.error.fetchVector': 'Échec de la récupération des mémoires vectorielles',
   'memory.error.fetchStructured': 'Échec de la récupération des mémoires structurées',
+  'memory.delete.confirm.title': 'Confirmer la suppression',
+  'memory.delete.confirm.content': 'Êtes-vous sûr de vouloir supprimer cette mémoire ? Cette action ne peut pas être annulée.',
+  'memory.delete.success': 'Mémoire supprimée avec succès',
+  'memory.delete.failed': 'Échec de la suppression de la mémoire',
+  'memory.delete.error': 'Une erreur s\'est produite lors de la suppression de la mémoire',
 };

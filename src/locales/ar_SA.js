@@ -932,4 +932,9 @@ export default {
   'memory.relevance': 'الصلة: {score}%',
   'memory.error.fetchVector': 'فشل في جلب الذاكرة المتجهية',
   'memory.error.fetchStructured': 'فشل في جلب الذاكرة المنظمة',
+  'memory.delete.confirm.title': 'تأكيد الحذف',
+  'memory.delete.confirm.content': 'هل أنت متأكد أنك تريد حذف هذه الذاكرة؟ لا يمكن التراجع عن هذا الإجراء.',
+  'memory.delete.success': 'تم حذف الذاكرة بنجاح',
+  'memory.delete.failed': 'فشل في حذف الذاكرة',
+  'memory.delete.error': 'حدث خطأ أثناء حذف الذاكرة',
 };

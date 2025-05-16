@@ -945,5 +945,10 @@ export default {
   'memory.context.label': 'Contexto:',
   'memory.relevance': 'Relevancia: {score}%',
   'memory.error.fetchVector': 'Error al obtener memorias vectoriales',
-  'memory.error.fetchStructured': 'Error al obtener memorias estructuradas'
+  'memory.error.fetchStructured': 'Error al obtener memorias estructuradas',
+  'memory.delete.confirm.title': 'Confirmar eliminación',
+  'memory.delete.confirm.content': '¿Está seguro de que desea eliminar esta memoria? Esta acción no se puede deshacer.',
+  'memory.delete.success': 'Memoria eliminada con éxito',
+  'memory.delete.failed': 'Error al eliminar la memoria',
+  'memory.delete.error': 'Se produjo un error al eliminar la memoria'
 };

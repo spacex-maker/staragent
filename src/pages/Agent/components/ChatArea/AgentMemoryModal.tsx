@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Input, List, Empty, Spin, Typography, Tag, Button, Space, Avatar, Tabs } from 'antd';
-import { SearchOutlined, ClockCircleOutlined, UserOutlined, BulbOutlined, BookOutlined } from '@ant-design/icons';
+import { Modal, Input, List, Empty, Spin, Typography, Tag, Button, Space, Avatar, Tabs, Popconfirm, message } from 'antd';
+import { SearchOutlined, ClockCircleOutlined, UserOutlined, BulbOutlined, BookOutlined, DeleteOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import instance from 'api/axios';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -72,6 +72,7 @@ const MemoryMeta = styled.div`
   gap: 8px;
   color: var(--ant-color-text-secondary);
   font-size: 12px;
+  flex-wrap: wrap;
 `;
 
 const RelevanceTag = styled(Tag)<{ $importance: number }>`
@@ -105,8 +106,24 @@ const StyledTabs = styled(Tabs)`
   }
 `;
 
+const ActionButton = styled(Button)`
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+`;
+
+const MemoryActions = styled.div`
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+`;
+
 interface Memory {
-  id: string;
+  id: string | number;
   content: string;
   context?: string;
   timestamp: string;
@@ -137,6 +154,7 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
   const [loadingStructured, setLoadingStructured] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [activeTab, setActiveTab] = useState('vector');
+  const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
 
   const fetchMemories = async (keyword: string) => {
     try {
@@ -181,12 +199,14 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
       } else {
         fetchStructuredMemories();
       }
+      setDeleteLoading(null);
     }
     return () => {
       if (!open) {
         setSearchValue('');
         setMemories([]);
         setStructuredMemories([]);
+        setDeleteLoading(null);
       }
     };
   }, [open, activeTab]);
@@ -210,7 +230,26 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
     setActiveTab(key);
   };
 
-  const renderMemoryList = (memoryList: Memory[], isLoading: boolean) => (
+  const handleDeleteMemory = async (id: string | number) => {
+    try {
+      setDeleteLoading(String(id));
+      const response = await instance.delete(`/productx/sa-ai-agent-memory/remove/${id}`);
+      
+      if (response.data.success) {
+        message.success(intl.formatMessage({ id: 'memory.delete.success' }));
+        setStructuredMemories(structuredMemories.filter(memory => String(memory.id) !== String(id)));
+      } else {
+        message.error(response.data.message || intl.formatMessage({ id: 'memory.delete.failed' }));
+      }
+    } catch (error) {
+      console.error(intl.formatMessage({ id: 'memory.delete.error' }), error);
+      message.error(intl.formatMessage({ id: 'memory.delete.error' }));
+    } finally {
+      setDeleteLoading(null);
+    }
+  };
+
+  const renderMemoryList = (memoryList: Memory[], isLoading: boolean, isStructured: boolean = false) => (
     <Spin spinning={isLoading}>
       {memoryList.length > 0 ? (
         <MemoryList
@@ -244,6 +283,25 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
                   {memory.tags?.split(',').filter(Boolean).map((tag, index) => (
                     <Tag key={index}>{tag}</Tag>
                   ))}
+                  
+                  {isStructured && (
+                    <MemoryActions>
+                      <Popconfirm
+                        title={<FormattedMessage id="memory.delete.confirm.title" />}
+                        description={<FormattedMessage id="memory.delete.confirm.content" />}
+                        onConfirm={() => handleDeleteMemory(memory.id)}
+                        okText={<FormattedMessage id="common.confirm" />}
+                        cancelText={<FormattedMessage id="common.cancel" />}
+                      >
+                        <ActionButton 
+                          type="text" 
+                          danger
+                          icon={<DeleteOutlined />} 
+                          loading={deleteLoading === String(memory.id)}
+                        />
+                      </Popconfirm>
+                    </MemoryActions>
+                  )}
                 </MemoryMeta>
               </div>
             </List.Item>
@@ -306,7 +364,7 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
           <BookOutlined /> <FormattedMessage id="memory.structured.tab" />
         </span>
       ),
-      children: renderMemoryList(structuredMemories, loadingStructured),
+      children: renderMemoryList(structuredMemories, loadingStructured, true),
     },
   ];
 

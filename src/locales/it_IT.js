@@ -925,4 +925,9 @@ export default {
   'memory.relevance': 'Rilevanza: {score}%',
   'memory.error.fetchVector': 'Impossibile recuperare le memorie vettoriali',
   'memory.error.fetchStructured': 'Impossibile recuperare le memorie strutturate',
+  'memory.delete.confirm.title': 'Conferma eliminazione',
+  'memory.delete.confirm.content': 'Sei sicuro di voler eliminare questa memoria? Questa azione non può essere annullata.',
+  'memory.delete.success': 'Memoria eliminata con successo',
+  'memory.delete.failed': 'Impossibile eliminare la memoria',
+  'memory.delete.error': 'Si è verificato un errore durante l\'eliminazione della memoria',
 };

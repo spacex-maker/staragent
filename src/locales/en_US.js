@@ -946,4 +946,9 @@ export default {
   'memory.relevance': 'Relevance: {score}%',
   'memory.error.fetchVector': 'Failed to fetch vector memories',
   'memory.error.fetchStructured': 'Failed to fetch structured memories',
+  'memory.delete.confirm.title': 'Confirm Delete',
+  'memory.delete.confirm.content': 'Are you sure you want to delete this memory? This action cannot be undone.',
+  'memory.delete.success': 'Memory deleted successfully',
+  'memory.delete.failed': 'Failed to delete memory',
+  'memory.delete.error': 'Error occurred while deleting memory',
 };
