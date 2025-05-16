@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Typography, Dropdown, Button, Space, Table, Avatar } from 'antd';
-import { ProjectOutlined, EllipsisOutlined, RobotOutlined, CloudSyncOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { Typography, Dropdown, Button, Space, Table, Avatar, Switch, Tooltip, Modal, List } from 'antd';
+import { ProjectOutlined, EllipsisOutlined, RobotOutlined, CloudSyncOutlined, SettingOutlined, UserOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Project, ProjectAgent } from '../../types';
 import { useProjectAgents } from 'hooks/useProjectAgents';
@@ -89,14 +89,22 @@ const AgentAvatar = styled(Avatar)`
 
 interface ProjectHeaderProps {
   project: Project;
+  onTemporaryChange?: (isTemporary: boolean) => void;
 }
 
-const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
+const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, onTemporaryChange }) => {
   const { projectAgents, loading, fetchAgents } = useProjectAgents(project.id);
   const [selectedAgent, setSelectedAgent] = useState<ProjectAgent | null>(null);
   const [memoryModalVisible, setMemoryModalVisible] = useState(false);
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
+  const [isTemporary, setIsTemporary] = useState(false);
+  const [temporaryHelpVisible, setTemporaryHelpVisible] = useState(false);
   const intl = useIntl();
+
+  const handleTemporaryChange = (checked: boolean) => {
+    setIsTemporary(checked);
+    onTemporaryChange?.(checked);
+  };
 
   const handleViewMemory = (agent: ProjectAgent) => {
     setSelectedAgent(agent);
@@ -105,7 +113,19 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
 
   const handleOpenSettings = () => {
     setSettingsModalVisible(true);
-    fetchAgents();
+  };
+
+  const renderFeaturesList = (items: string) => {
+    return (
+      <List
+        dataSource={items.split('||')}
+        renderItem={(item) => (
+          <List.Item>
+            <Typography.Text>• {item}</Typography.Text>
+          </List.Item>
+        )}
+      />
+    );
   };
 
   const columns = [
@@ -189,20 +209,59 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
         <ProjectIcon>
           <ProjectOutlined />
         </ProjectIcon>
-        <div style={{ overflow: 'hidden', flex: 1 }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <ProjectTitle level={4}>{project.name}</ProjectTitle>
           {project.description && (
-            <ProjectDescription>
-              {project.description}
-            </ProjectDescription>
+            <ProjectDescription>{project.description}</ProjectDescription>
           )}
         </div>
-        <MoreButton 
-          type="text" 
-          icon={<EllipsisOutlined />} 
-          onClick={handleOpenSettings}
-        />
+        <Space>
+          <Space size="small">
+            <Switch
+              checkedChildren={intl.formatMessage({ id: 'chat.temporary' })}
+              unCheckedChildren={intl.formatMessage({ id: 'chat.normal' })}
+              checked={isTemporary}
+              onChange={handleTemporaryChange}
+            />
+            <QuestionCircleOutlined 
+              onClick={() => setTemporaryHelpVisible(true)} 
+              style={{ cursor: 'pointer', fontSize: '16px' }} 
+            />
+          </Space>
+          <Dropdown
+            menu={{
+              items: dropdownItems,
+            }}
+            trigger={['click']}
+          >
+            <MoreButton type="text" icon={<EllipsisOutlined />} />
+          </Dropdown>
+        </Space>
       </ProjectTitleBar>
+
+      <Modal
+        title={intl.formatMessage({ id: 'chat.temporary.modal.title' })}
+        open={temporaryHelpVisible}
+        onCancel={() => setTemporaryHelpVisible(false)}
+        footer={null}
+        width={500}
+      >
+        <Typography.Paragraph>
+          {intl.formatMessage({ id: 'chat.temporary.modal.description' })}
+        </Typography.Paragraph>
+        
+        {renderFeaturesList(intl.formatMessage({ id: 'chat.temporary.modal.features' }))}
+        
+        <Typography.Title level={5} style={{ marginTop: 16 }}>
+          {intl.formatMessage({ id: 'chat.temporary.modal.scenarios.title' })}
+        </Typography.Title>
+        
+        {renderFeaturesList(intl.formatMessage({ id: 'chat.temporary.modal.scenarios' }))}
+        
+        <Typography.Paragraph type="secondary" style={{ marginTop: 16 }}>
+          {intl.formatMessage({ id: 'chat.temporary.modal.tip' })}
+        </Typography.Paragraph>
+      </Modal>
 
       {selectedAgent && (
         <AgentMemoryModal

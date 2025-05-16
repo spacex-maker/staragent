@@ -123,7 +123,7 @@ interface ChatAreaProps {
   inputValue: string;
   setInputValue: (value: string) => void;
   activeProject: Project | null;
-  handleSend: (sessionId?: string) => Promise<string | undefined>;
+  handleSend: (sessionId?: string, isTemporary?: boolean) => Promise<string | undefined>;
   sendLoading?: boolean;
   onCancelRequest?: () => void;
   onClearMessages?: () => void;
@@ -149,6 +149,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   const contentRef = useRef<HTMLDivElement>(null);
   const sessionListRef = useRef<SessionListRef>(null);
   const [hasMore, setHasMore] = useState(true);
+  const [isTemporary, setIsTemporary] = useState(false);
   const intl = useIntl();
 
   // 使用自定义 hooks 管理状态和逻辑
@@ -236,8 +237,8 @@ const ChatArea: React.FC<ChatAreaProps> = ({
 
     updateSessionMessages(prev => [...prev, tempMessage]);
     setInputValue('');
-    handleSend(activeSessionId);
-  }, [inputValue, activeSessionId, handleSend, setInputValue, updateSessionMessages]);
+    handleSend(activeSessionId, isTemporary);
+  }, [inputValue, activeSessionId, handleSend, setInputValue, updateSessionMessages, isTemporary]);
 
   // 获取输入框占位符
   const inputPlaceholder = useMemo(() => {
@@ -260,7 +261,10 @@ const ChatArea: React.FC<ChatAreaProps> = ({
       )}
 
       <StyledComponents.ChatMainArea>
-        {activeProject && <ProjectHeader project={activeProject} />}
+        {activeProject && <ProjectHeader 
+          project={activeProject} 
+          onTemporaryChange={setIsTemporary}
+        />}
 
         <StyledComponents.StyledContent ref={contentRef}>
           {activeProject ? (

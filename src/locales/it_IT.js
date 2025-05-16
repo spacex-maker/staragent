@@ -886,5 +886,29 @@ export default {
 
   'project.archived.error': 'Il progetto è stato archiviato. Si prega di riattivarlo prima di procedere.',
   'project.archived.error.chat': 'Questo progetto è stato archiviato. Si prega di contattare l\'amministratore del progetto per riattivarlo prima di continuare la conversazione.',
-  'chat.error.send': 'Spiacenti, l\'invio del messaggio non è riuscito. Si prega di riprovare più tardi.'
+  'chat.error.send': 'Spiacenti, l\'invio del messaggio non è riuscito. Si prega di riprovare più tardi.',
+
+  // Sessione temporanea
+  'chat.temporary': 'Sessione temporanea',
+  'chat.normal': 'Sessione normale',
+  'chat.temporary.tooltip': 'In modalità sessione temporanea:<br />• La cronologia della chat non viene salvata<br />• La funzione di memoria dell\'assistente IA non viene utilizzata<br />• Le informazioni contestuali non vengono caricate<br />• Il consumo di token è significativamente ridotto<br /><br />Scenari applicabili:<br />• Necessità di ottenere risposte rapidamente<br />• Contenuto della conversazione privato<br />• Necessità di risparmiare consumo di token<br />• Consulenza singola che non richiede connessione contestuale',
+  'chat.temporary.status': 'Attualmente in modalità sessione temporanea',
+  'chat.temporary.enabled': 'Sessione temporanea attivata',
+  'chat.temporary.disabled': 'Sessione temporanea disattivata',
+  'chat.temporary.modal.title': 'Cos\'è una sessione temporanea?',
+  'chat.temporary.modal.description': 'La sessione temporanea è una modalità di dialogo speciale con le seguenti caratteristiche:',
+  'chat.temporary.modal.features': [
+    'La cronologia della chat non viene salvata',
+    'La funzione di memoria dell\'assistente IA non viene utilizzata',
+    'Le informazioni contestuali non vengono caricate',
+    'Il consumo di token è significativamente ridotto'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': 'Scenari applicabili:',
+  'chat.temporary.modal.scenarios': [
+    'Necessità di ottenere risposte rapidamente',
+    'Contenuto della conversazione privato',
+    'Necessità di risparmiare consumo di token',
+    'Consulenza singola che non richiede connessione contestuale'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'Suggerimento: l\'attivazione della sessione temporanea può ridurre significativamente il consumo di token, ma l\'assistente IA non ricorderà i contenuti delle conversazioni precedenti.'
 };

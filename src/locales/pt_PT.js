@@ -842,4 +842,28 @@ export default {
   'project.archived.error': 'O projeto está arquivado. Por favor, reative-o antes de prosseguir.',
   'project.archived.error.chat': 'Este projeto foi arquivado. Por favor, contacte o administrador do projeto para reativá-lo antes de continuar a conversa.',
   'chat.error.send': 'Desculpe, falha no envio da mensagem. Por favor, tente novamente mais tarde.',
+
+  // Sessão temporária
+  'chat.temporary': 'Sessão Temporária',
+  'chat.normal': 'Sessão Normal',
+  'chat.temporary.tooltip': 'No modo de sessão temporária:<br />• O histórico de chat não é salvo<br />• A função de memória do assistente de IA não é utilizada<br />• As informações de contexto não são carregadas<br />• O consumo de tokens é significativamente reduzido<br /><br />Cenários de aplicação:<br />• Necessidade de obter respostas rapidamente<br />• Conteúdo de conversa privado<br />• Necessidade de economizar consumo de tokens<br />• Consultas pontuais que não requerem conexão contextual',
+  'chat.temporary.status': 'Atualmente em modo de sessão temporária',
+  'chat.temporary.enabled': 'Sessão temporária ativada',
+  'chat.temporary.disabled': 'Sessão temporária desativada',
+  'chat.temporary.modal.title': 'O que é uma Sessão Temporária?',
+  'chat.temporary.modal.description': 'A sessão temporária é um modo de diálogo especial com as seguintes características:',
+  'chat.temporary.modal.features': [
+    'O histórico de chat não é salvo',
+    'A função de memória do assistente de IA não é utilizada',
+    'As informações de contexto não são carregadas',
+    'O consumo de tokens é significativamente reduzido'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': 'Cenários de aplicação:',
+  'chat.temporary.modal.scenarios': [
+    'Necessidade de obter respostas rapidamente',
+    'Conteúdo de conversa privado',
+    'Necessidade de economizar consumo de tokens',
+    'Consultas pontuais que não requerem conexão contextual'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'Dica: Ativar a sessão temporária pode reduzir significativamente o consumo de tokens, mas o assistente de IA não se lembrará do conteúdo de conversas anteriores.'
 };

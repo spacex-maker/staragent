@@ -876,4 +876,28 @@ export default {
   'project.archived.error': 'プロジェクトはアーカイブされています。再開してから操作してください。',
   'project.archived.error.chat': 'このプロジェクトはアーカイブされています。プロジェクト管理者に連絡して再開してから会話を続けてください。',
   'chat.error.send': '申し訳ありません。メッセージの送信に失敗しました。後でもう一度お試しください。',
+
+  // 临时会话相关
+  'chat.temporary': '一時的なセッション',
+  'chat.normal': '通常セッション',
+  'chat.temporary.tooltip': '一時的なセッションモードでは:<br />• チャット履歴が保存されません<br />• AIアシスタントのメモリ機能が使用されません<br />• コンテキスト情報が読み込まれません<br />• トークン消費が大幅に削減されます<br /><br />適用シーン:<br />• 素早く回答を得る必要がある場合<br />• 会話内容がプライベートな場合<br />• トークン消費を節約する必要がある場合<br />• コンテキストの連続性が不要な一回限りの相談',
+  'chat.temporary.status': '現在、一時的なセッションモードです',
+  'chat.temporary.enabled': '一時的なセッションが有効になりました',
+  'chat.temporary.disabled': '一時的なセッションが無効になりました',
+  'chat.temporary.modal.title': '一時的なセッションとは？',
+  'chat.temporary.modal.description': '一時的なセッションは特別な対話モードで、以下の特徴があります：',
+  'chat.temporary.modal.features': [
+    'チャット履歴が保存されません',
+    'AIアシスタントのメモリ機能が使用されません',
+    'コンテキスト情報が読み込まれません',
+    'トークン消費が大幅に削減されます'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': '適用シーン：',
+  'chat.temporary.modal.scenarios': [
+    '素早く回答を得る必要がある場合',
+    '会話内容がプライベートな場合',
+    'トークン消費を節約する必要がある場合',
+    'コンテキストの連続性が不要な一回限りの相談'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'ヒント：一時的なセッションを有効にするとトークン消費を大幅に削減できますが、AIアシスタントは以前の会話内容を記憶できなくなります。'
 };

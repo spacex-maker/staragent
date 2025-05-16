@@ -908,4 +908,28 @@ export default {
   'project.archived.error': 'El proyecto está archivado. Por favor, reactívelo antes de continuar.',
   'project.archived.error.chat': 'Este proyecto ha sido archivado. Por favor, contacte al administrador del proyecto para reactivarlo antes de continuar la conversación.',
   'chat.error.send': 'Lo siento, el envío del mensaje falló. Por favor, inténtelo de nuevo más tarde.',
+
+  // Sesión temporal
+  'chat.temporary': 'Sesión temporal',
+  'chat.normal': 'Sesión normal',
+  'chat.temporary.tooltip': 'En el modo de sesión temporal:<br />• No se guarda el historial de chat<br />• No se utiliza la función de memoria del asistente de IA<br />• No se cargan datos de contexto<br />• Se reduce significativamente el consumo de tokens<br /><br />Escenarios de aplicación:<br />• Necesidad de obtener respuestas rápidamente<br />• Contenido de conversación privado<br />• Necesidad de ahorrar consumo de tokens<br />• Consultas puntuales que no requieren conexión contextual',
+  'chat.temporary.status': 'Actualmente en modo de sesión temporal',
+  'chat.temporary.enabled': 'Sesión temporal activada',
+  'chat.temporary.disabled': 'Sesión temporal desactivada',
+  'chat.temporary.modal.title': '¿Qué es una sesión temporal?',
+  'chat.temporary.modal.description': 'La sesión temporal es un modo de diálogo especial con las siguientes características:',
+  'chat.temporary.modal.features': [
+    'No se guarda el historial de chat',
+    'No se utiliza la función de memoria del asistente de IA',
+    'No se cargan datos de contexto',
+    'Se reduce significativamente el consumo de tokens'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': 'Escenarios de aplicación:',
+  'chat.temporary.modal.scenarios': [
+    'Necesidad de obtener respuestas rápidamente',
+    'Contenido de conversación privado',
+    'Necesidad de ahorrar consumo de tokens',
+    'Consultas puntuales que no requieren conexión contextual'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'Consejo: Activar la sesión temporal puede reducir significativamente el consumo de tokens, pero el asistente de IA no recordará el contenido de conversaciones anteriores.'
 };

@@ -875,5 +875,29 @@ export default {
   'project.createdAt': '创建时间：{time}',
   'project.archived.error': '项目已归档，请先重新开启项目后再操作',
   'project.archived.error.chat': '该项目已被归档，请联系项目管理员重新开启项目后再继续对话。',
-  'chat.error.send': '抱歉，消息发送失败。请稍后重试。'
+  'chat.error.send': '抱歉，消息发送失败。请稍后重试。',
+  
+  // 临时会话相关
+  'chat.temporary': '临时会话',
+  'chat.normal': '普通会话',
+  'chat.temporary.tooltip': '临时会话模式下:<br />• 不保存聊天历史记录<br />• 不使用AI助手的记忆功能<br />• 不加载上下文信息<br />• 显著降低token消耗<br /><br />适用场景:<br />• 需要快速获取答案<br />• 对话内容较为隐私<br />• 需要节省token开销<br />• 不需要上下文联系的单次咨询',
+  'chat.temporary.status': '当前为临时会话模式',
+  'chat.temporary.enabled': '已开启临时会话',
+  'chat.temporary.disabled': '已关闭临时会话',
+  'chat.temporary.modal.title': '什么是临时会话？',
+  'chat.temporary.modal.description': '临时会话是一种特殊的对话模式，具有以下特点：',
+  'chat.temporary.modal.features': [
+    '不保存聊天历史记录',
+    '不使用AI助手的记忆功能',
+    '不加载上下文信息',
+    '显著降低token消耗'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': '适用场景：',
+  'chat.temporary.modal.scenarios': [
+    '需要快速获取答案',
+    '对话内容较为隐私',
+    '需要节省token开销',
+    '不需要上下文联系的单次咨询'
+  ].join('||'),
+  'chat.temporary.modal.tip': '提示：开启临时会话可以显著降低token消耗，但AI助手将无法记住之前的对话内容。'
 }; 

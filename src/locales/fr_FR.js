@@ -885,4 +885,28 @@ export default {
   'project.archived.error': 'Le projet est archivé. Veuillez le réactiver avant de continuer.',
   'project.archived.error.chat': 'Ce projet a été archivé. Veuillez contacter l\'administrateur du projet pour le réactiver avant de poursuivre la conversation.',
   'chat.error.send': 'Désolé, l\'envoi du message a échoué. Veuillez réessayer plus tard.',
+
+  // Session temporaire
+  'chat.temporary': 'Session temporaire',
+  'chat.normal': 'Session normale',
+  'chat.temporary.tooltip': 'En mode session temporaire :<br />• L\'historique des conversations n\'est pas sauvegardé<br />• La fonction de mémoire de l\'assistant IA n\'est pas utilisée<br />• Les informations de contexte ne sont pas chargées<br />• La consommation de tokens est considérablement réduite<br /><br />Scénarios d\'application :<br />• Besoin d\'obtenir rapidement des réponses<br />• Contenu de conversation privé<br />• Besoin d\'économiser la consommation de tokens<br />• Consultation ponctuelle ne nécessitant pas de lien contextuel',
+  'chat.temporary.status': 'Actuellement en mode session temporaire',
+  'chat.temporary.enabled': 'Session temporaire activée',
+  'chat.temporary.disabled': 'Session temporaire désactivée',
+  'chat.temporary.modal.title': 'Qu\'est-ce qu\'une session temporaire ?',
+  'chat.temporary.modal.description': 'La session temporaire est un mode de dialogue spécial avec les caractéristiques suivantes :',
+  'chat.temporary.modal.features': [
+    'L\'historique des conversations n\'est pas sauvegardé',
+    'La fonction de mémoire de l\'assistant IA n\'est pas utilisée',
+    'Les informations de contexte ne sont pas chargées',
+    'La consommation de tokens est considérablement réduite'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': 'Scénarios d\'application :',
+  'chat.temporary.modal.scenarios': [
+    'Besoin d\'obtenir rapidement des réponses',
+    'Contenu de conversation privé',
+    'Besoin d\'économiser la consommation de tokens',
+    'Consultation ponctuelle ne nécessitant pas de lien contextuel'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'Conseil : Activer la session temporaire peut réduire considérablement la consommation de tokens, mais l\'assistant IA ne se souviendra pas du contenu des conversations précédentes.'
 };

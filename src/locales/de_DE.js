@@ -886,4 +886,28 @@ export default {
   'project.archived.error': 'Das Projekt ist archiviert. Bitte reaktivieren Sie es, bevor Sie fortfahren.',
   'project.archived.error.chat': 'Dieses Projekt wurde archiviert. Bitte kontaktieren Sie den Projektadministrator, um es zu reaktivieren, bevor Sie das Gespräch fortsetzen.',
   'chat.error.send': 'Entschuldigung, die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.',
+
+  // Temporäre Sitzung
+  'chat.temporary': 'Temporäre Sitzung',
+  'chat.normal': 'Normale Sitzung',
+  'chat.temporary.tooltip': 'Im temporären Sitzungsmodus:<br />• Wird der Chat-Verlauf nicht gespeichert<br />• Wird die Gedächtnisfunktion des KI-Assistenten nicht verwendet<br />• Werden keine Kontextinformationen geladen<br />• Wird der Token-Verbrauch deutlich reduziert<br /><br />Anwendungsszenarien:<br />• Schneller Erhalt von Antworten<br />• Private Gesprächsinhalte<br />• Einsparung von Token-Verbrauch<br />• Einmalige Beratungen ohne Kontextbeziehung',
+  'chat.temporary.status': 'Derzeit im temporären Sitzungsmodus',
+  'chat.temporary.enabled': 'Temporäre Sitzung aktiviert',
+  'chat.temporary.disabled': 'Temporäre Sitzung deaktiviert',
+  'chat.temporary.modal.title': 'Was ist eine temporäre Sitzung?',
+  'chat.temporary.modal.description': 'Die temporäre Sitzung ist ein spezieller Dialogmodus mit folgenden Merkmalen:',
+  'chat.temporary.modal.features': [
+    'Der Chat-Verlauf wird nicht gespeichert',
+    'Die Gedächtnisfunktion des KI-Assistenten wird nicht verwendet',
+    'Es werden keine Kontextinformationen geladen',
+    'Der Token-Verbrauch wird deutlich reduziert'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': 'Anwendungsszenarien:',
+  'chat.temporary.modal.scenarios': [
+    'Schneller Erhalt von Antworten',
+    'Private Gesprächsinhalte',
+    'Einsparung von Token-Verbrauch',
+    'Einmalige Beratungen ohne Kontextbeziehung'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'Tipp: Das Aktivieren der temporären Sitzung kann den Token-Verbrauch deutlich reduzieren, jedoch wird sich der KI-Assistent nicht an frühere Gesprächsinhalte erinnern.'
 };

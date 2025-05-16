@@ -13,24 +13,48 @@ const StyledModal = styled(Modal)`
   }
 `;
 
-const AgentTag = styled.span`
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 12px;
-  background: var(--ant-color-primary-bg);
-  color: var(--ant-color-primary);
-  margin-left: 8px;
+// 优化表格样式
+const StyledTable = styled(Table)`
+  .ant-table {
+    background-color: transparent;
+  }
+
+  .ant-table-thead > tr > th {
+    background-color: var(--ant-color-bg-subtle);
+    font-weight: 500;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--ant-color-border);
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--ant-color-border-secondary);
+  }
+
+  .ant-table-tbody > tr:hover > td {
+    background-color: var(--ant-color-bg-elevated);
+  }
+
+  .ant-table-tbody > tr:last-child > td {
+    border-bottom: none;
+  }
 `;
 
 const AgentActionButton = styled(Button)`
-  padding: 4px 8px;
-  height: 24px;
+  padding: 4px 10px;
+  height: 28px;
   font-size: 12px;
-  border-radius: 12px;
+  border-radius: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   
   &:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s ease;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .anticon {
+    margin-right: 3px;
   }
 `;
 
@@ -75,7 +99,75 @@ const FormTitle = styled.div`
 `;
 
 const AgentAvatar = styled(Avatar)`
-  margin-right: 8px;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ant-color-primary-border);
+  background-color: var(--ant-color-primary-bg);
+  font-size: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  }
+`;
+
+const AgentName = styled.span`
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.3;
+  color: var(--ant-color-text);
+`;
+
+const TagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: 52px;
+`;
+
+const AgentTag = styled.span`
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--ant-color-primary-bg);
+  color: var(--ant-color-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--ant-color-primary-bg-hover);
+  }
+`;
+
+const PriorityCell = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: var(--ant-color-primary);
+  background-color: var(--ant-color-primary-bg);
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+`;
+
+const ActionContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const ReplyModeCard = styled(Radio.Button)<{ $selected?: boolean }>`
@@ -118,6 +210,19 @@ const LoadingContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 200px;
+`;
+
+const AgentInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
+`;
+
+const AgentNameRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 interface ReplyModeOption {
@@ -273,20 +378,20 @@ const ProjectSettingsModal: React.FC<ProjectSettingsModalProps> = ({
       dataIndex: 'agentName',
       key: 'agentName',
       render: (text: string, record: ProjectAgent) => (
-        <Space direction="vertical" size={2}>
-          <Space>
+        <AgentInfoContainer>
+          <AgentNameRow>
             {record.avatarUrl ? (
               <AgentAvatar src={record.avatarUrl} />
             ) : (
               <AgentAvatar icon={<UserOutlined />} />
             )}
-            <span>{text}</span>
-          </Space>
-          <Space size={4} style={{ marginLeft: 38 }}>
+            <AgentName>{text}</AgentName>
+          </AgentNameRow>
+          <TagsContainer>
             <AgentTag>{record.role}</AgentTag>
             <AgentTag>{record.modelType}</AgentTag>
-          </Space>
-        </Space>
+          </TagsContainer>
+        </AgentInfoContainer>
       ),
     },
     {
@@ -295,23 +400,26 @@ const ProjectSettingsModal: React.FC<ProjectSettingsModalProps> = ({
       key: 'priority',
       width: 80,
       align: 'center' as const,
+      render: (priority: number) => <PriorityCell>{priority}</PriorityCell>,
     },
     {
       title: intl.formatMessage({ id: 'common.actions', defaultMessage: '操作' }),
       key: 'action',
-      width: 100,
+      width: 120,
       align: 'center' as const,
       render: (_: any, record: ProjectAgent) => (
-        <AgentActionButton
-          type="primary"
-          icon={<CloudSyncOutlined />}
-          onClick={(e) => {
-            e.stopPropagation();
-            onViewMemory(record);
-          }}
-        >
-          {intl.formatMessage({ id: 'agent.memory', defaultMessage: '记忆' })}
-        </AgentActionButton>
+        <ActionContainer>
+          <AgentActionButton
+            type="primary"
+            icon={<CloudSyncOutlined />}
+            onClick={(e) => {
+              e.stopPropagation();
+              onViewMemory(record);
+            }}
+          >
+            {intl.formatMessage({ id: 'agent.memory', defaultMessage: '记忆' })}
+          </AgentActionButton>
+        </ActionContainer>
       ),
     }
   ];
@@ -372,13 +480,13 @@ const ProjectSettingsModal: React.FC<ProjectSettingsModalProps> = ({
       ),
       children: (
         <div style={{ padding: '16px 0' }}>
-          <Table
+          <StyledTable
             dataSource={projectAgents}
             columns={columns}
             rowKey="id"
             loading={loading}
             pagination={false}
-            size="small"
+            size="middle"
             locale={{ emptyText: intl.formatMessage({ id: 'project.agent.empty', defaultMessage: '暂无助手' }) }}
           />
         </div>

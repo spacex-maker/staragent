@@ -908,5 +908,28 @@ export default {
   'project.createdAt': 'Created at: {time}',
   'project.archived.error': 'Project is archived. Please reactivate it before proceeding.',
   'project.archived.error.chat': 'This project has been archived. Please contact the project administrator to reactivate it before continuing the conversation.',
-  'chat.error.send': 'Sorry, message sending failed. Please try again later.'
+  'chat.error.send': 'Sorry, message sending failed. Please try again later.',
+
+  // Temporary chat related
+  'chat.temporary': 'Temporary Chat',
+  'chat.normal': 'Normal Chat',
+  'chat.temporary.modal.title': 'What is Temporary Chat?',
+  'chat.temporary.modal.description': 'Temporary chat is a special conversation mode with the following characteristics:',
+  'chat.temporary.modal.features': [
+    'Chat history is not saved',
+    'AI assistant memory is disabled',
+    'Context information is not loaded',
+    'Significantly reduces token consumption'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': 'Ideal for:',
+  'chat.temporary.modal.scenarios': [
+    'Quick answers',
+    'Private conversations',
+    'Token cost savings',
+    'One-time consultations without context'
+  ].join('||'),
+  'chat.temporary.modal.tip': 'Note: Enabling temporary chat significantly reduces token consumption, but AI assistants will not remember previous conversations.',
+  'chat.temporary.status': 'Currently in temporary chat mode',
+  'chat.temporary.enabled': 'Temporary chat enabled',
+  'chat.temporary.disabled': 'Temporary chat disabled'
 };

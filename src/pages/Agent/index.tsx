@@ -190,24 +190,23 @@ const AgentPage: React.FC = () => {
     }
   };
 
-  const handleSend = async (sessionId?: string): Promise<string | undefined> => {
-    if (!inputValue.trim() || !activeProjectId) return undefined;
-
-    // 如果有正在进行的请求，先取消
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
+  const handleSend = async (sessionId?: string, isTemporary?: boolean): Promise<string | undefined> => {
+    if (!activeProjectId) {
+      message.error(intl.formatMessage({ id: 'chat.error.noProject', defaultMessage: '请先选择一个项目' }));
+      return;
     }
 
-    // 创建新的AbortController
-    abortControllerRef.current = new AbortController();
-    const signal = abortControllerRef.current.signal;
+    const userMessage = inputValue.trim();
+    if (!userMessage) return;
 
-    // 保存用户消息并清空输入框
-    const userMessage = inputValue;
-    setInputValue('');
-    
-    // 发送消息到服务器
     setSendLoading(true);
+    setInputValue('');
+
+    // 创建新的AbortController
+    const controller = new AbortController();
+    const { signal } = controller;
+    abortControllerRef.current = controller;
+
     try {
       // 如果没有sessionId，先创建一个新的session
       let currentSessionId = sessionId;
@@ -229,7 +228,8 @@ const AgentPage: React.FC = () => {
       const response = await axios.post('/chat/send', {
         projectId: parseInt(activeProjectId),
         sessionId: currentSessionId,
-        content: userMessage
+        content: userMessage,
+        temporaryChat: isTemporary
       }, {
         timeout: 120000,
         signal

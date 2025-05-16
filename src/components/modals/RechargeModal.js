@@ -107,6 +107,26 @@ const PaymentButton = styled(Button)`
   font-size: 16px;
 `;
 
+const StyledRadioGroup = styled(Radio.Group)`
+  .ant-radio-button-wrapper {
+    border-radius: 20px !important;
+    margin-right: 8px;
+    
+    &:first-child {
+      border-radius: 20px !important;
+    }
+    
+    &:last-child {
+      border-radius: 20px !important;
+      margin-right: 0;
+    }
+    
+    &::before {
+      display: none !important;
+    }
+  }
+`;
+
 const TabContent = styled.div`
   padding: 16px 0;
 `;
@@ -526,7 +546,7 @@ const RechargeModal = ({ open, onClose }) => {
         >
           <TabContent>
             <Space style={{ marginBottom: 16 }}>
-              <Radio.Group
+              <StyledRadioGroup
                 value={changeType}
                 onChange={(e) => handleFilterChange('changeType', e.target.value)}
                 buttonStyle="solid"
@@ -540,9 +560,9 @@ const RechargeModal = ({ open, onClose }) => {
                 <Radio.Button value="RECHARGE">
                   {intl.formatMessage({ id: 'rechargeModal.changeType.recharge', defaultMessage: '充值' })}
                 </Radio.Button>
-              </Radio.Group>
+              </StyledRadioGroup>
               
-              <Radio.Group
+              <StyledRadioGroup
                 value={coinType}
                 onChange={(e) => handleFilterChange('coinType', e.target.value)}
                 buttonStyle="solid"
@@ -552,7 +572,7 @@ const RechargeModal = ({ open, onClose }) => {
                 </Radio.Button>
                 <Radio.Button value="CNY">CNY</Radio.Button>
                 <Radio.Button value="USD">USD</Radio.Button>
-              </Radio.Group>
+              </StyledRadioGroup>
             </Space>
             
             <Table

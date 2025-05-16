@@ -916,4 +916,28 @@ export default {
   'project.archived.error': '프로젝트가 보관되었습니다. 다시 활성화한 후 진행해 주세요.',
   'project.archived.error.chat': '이 프로젝트는 보관되었습니다. 프로젝트 관리자에게 연락하여 다시 활성화한 후 대화를 계속해 주세요.',
   'chat.error.send': '죄송합니다. 메시지 전송에 실패했습니다. 나중에 다시 시도해 주세요.',
+
+  // 임시 세션
+  'chat.temporary': '임시 세션',
+  'chat.normal': '일반 세션',
+  'chat.temporary.tooltip': '임시 세션 모드에서는:<br />• 채팅 기록이 저장되지 않습니다<br />• AI 어시스턴트의 메모리 기능이 사용되지 않습니다<br />• 컨텍스트 정보가 로드되지 않습니다<br />• 토큰 소비가 크게 감소합니다<br /><br />적용 시나리오:<br />• 빠른 답변이 필요한 경우<br />• 사적인 대화 내용<br />• 토큰 소비 절약이 필요한 경우<br />• 컨텍스트 연결이 필요 없는 일회성 상담',
+  'chat.temporary.status': '현재 임시 세션 모드입니다',
+  'chat.temporary.enabled': '임시 세션이 활성화되었습니다',
+  'chat.temporary.disabled': '임시 세션이 비활성화되었습니다',
+  'chat.temporary.modal.title': '임시 세션이란 무엇인가요?',
+  'chat.temporary.modal.description': '임시 세션은 다음과 같은 특징이 있는 특별한 대화 모드입니다:',
+  'chat.temporary.modal.features': [
+    '채팅 기록이 저장되지 않습니다',
+    'AI 어시스턴트의 메모리 기능이 사용되지 않습니다',
+    '컨텍스트 정보가 로드되지 않습니다',
+    '토큰 소비가 크게 감소합니다'
+  ].join('||'),
+  'chat.temporary.modal.scenarios.title': '적용 시나리오:',
+  'chat.temporary.modal.scenarios': [
+    '빠른 답변이 필요한 경우',
+    '사적인 대화 내용',
+    '토큰 소비 절약이 필요한 경우',
+    '컨텍스트 연결이 필요 없는 일회성 상담'
+  ].join('||'),
+  'chat.temporary.modal.tip': '팁: 임시 세션을 활성화하면 토큰 소비를 크게 줄일 수 있지만, AI 어시스턴트는 이전 대화 내용을 기억하지 못합니다.'
 };
