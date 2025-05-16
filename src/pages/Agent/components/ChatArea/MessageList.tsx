@@ -1,6 +1,6 @@
 import React, { useEffect, useState,  useRef } from 'react';
 import { Avatar, Spin, Tag, Tooltip } from 'antd';
-import { UserOutlined, RobotOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { UserOutlined, RobotOutlined, ClockCircleOutlined, LoadingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Message, FrontendMessage, ProjectAgent } from '../../types';
 import MessageContent from './MessageContent';
@@ -203,6 +203,28 @@ const MessageStatus = styled.div<{ $error?: boolean }>`
   color: ${props => props.$error ? 'var(--ant-color-error)' : 'var(--ant-color-text-secondary)'};
   margin-top: 4px;
   text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  
+  .anticon {
+    font-size: 14px;
+  }
+  
+  .loading-icon {
+    color: var(--ant-color-primary);
+    animation: loadingSpin 1s infinite linear;
+  }
+  
+  @keyframes loadingSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 // Token计数器样式
@@ -628,9 +650,17 @@ const MessageList: React.FC<MessageListProps> = ({
                   {/* 消息状态 */}
                   {(isSending || hasError) && (
                     <MessageStatus $error={hasError}>
-                      {isSending 
-                        ? intl.formatMessage({ id: 'chat.sending' }) 
-                        : intl.formatMessage({ id: 'chat.sendFailed' })}
+                      {isSending ? (
+                        <>
+                          <LoadingOutlined className="loading-icon" />
+                          {intl.formatMessage({ id: 'chat.sending' })}
+                        </>
+                      ) : (
+                        <>
+                          <ExclamationCircleOutlined />
+                          {intl.formatMessage({ id: 'chat.sendFailed' })}
+                        </>
+                      )}
                     </MessageStatus>
                   )}
                 </MessageContentWrapper>

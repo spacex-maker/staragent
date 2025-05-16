@@ -6,11 +6,24 @@ import {
   RetweetOutlined,
   ExportOutlined
 } from '@ant-design/icons';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import axios from '../../../../api/axios';
 import { AICompany, AIModel } from '../../types';
 
 const { Text } = Typography;
+
+// 全局样式，确保下拉菜单宽度受限
+const GlobalSelectStyle = createGlobalStyle`
+  .model-select-dropdown {
+    min-width: 400px !important;
+    max-width: 550px !important;
+    
+    .ant-select-item-option-content {
+      white-space: normal !important;
+      word-break: break-word;
+    }
+  }
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -40,12 +53,6 @@ const ModelSelect = styled(Select)`
   .ant-select-selector {
     border-radius: 20px !important;
   }
-
-  // 确保下拉菜单宽度与选择框一致
-  &.ant-select .ant-select-dropdown {
-    min-width: 100% !important;
-    width: 100% !important;
-  }
 `;
 
 const StyledOption = styled(Select.Option)`
@@ -68,8 +75,9 @@ const CompanyOption = styled.div`
 `;
 
 const ModelOption = styled.div`
-  padding: 4px 0;
+  padding: 8px 0;
   max-width: 100%;
+  width: 100%;
 `;
 
 const ModelName = styled(Text)`
@@ -85,11 +93,12 @@ const ModelDescription = styled(Text)`
   font-size: 12px;
   display: block;
   margin-top: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.5;
+  max-width: 100%;
 `;
 
 const ModelInfo = styled.div`
@@ -154,7 +163,6 @@ const LoadingContainer = styled.div`
 interface ModelSelectorProps {
   value?: string;
   onChange?: (value: string) => void;
-  dropdownMatchSelectWidth?: boolean;
 }
 
 const CurrencyIcon = ({ unit }: { unit: string }) => {
@@ -163,8 +171,7 @@ const CurrencyIcon = ({ unit }: { unit: string }) => {
 
 const ModelSelector: React.FC<ModelSelectorProps> = ({ 
   value, 
-  onChange,
-  dropdownMatchSelectWidth = false 
+  onChange 
 }) => {
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState<AICompany[]>([]);
@@ -230,6 +237,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
 
   return (
     <Container>
+      <GlobalSelectStyle />
       <CompanySelect
         placeholder="选择AI公司"
         value={selectedCompany}
@@ -262,9 +270,10 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
         value={value}
         onChange={handleModelChange}
         disabled={!selectedCompany}
-        dropdownMatchSelectWidth={dropdownMatchSelectWidth}
         listHeight={400}
         optionLabelProp="label"
+        popupMatchSelectWidth={false}
+        popupClassName="model-select-dropdown"
       >
         {availableModels.map(model => (
           <Select.Option 

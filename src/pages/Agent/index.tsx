@@ -231,7 +231,6 @@ const AgentPage: React.FC = () => {
         content: userMessage,
         temporaryChat: isTemporary
       }, {
-        timeout: 120000,
         signal
       });
       
