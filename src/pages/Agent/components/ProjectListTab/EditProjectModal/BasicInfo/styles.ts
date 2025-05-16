@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Cascader } from 'antd';
+import { Cascader, Select, Switch } from 'antd';
 
 export const StyledCascader = styled(Cascader)`
   .ant-select-selector {
@@ -90,5 +90,56 @@ export const StyledCascader = styled(Cascader)`
   .ant-tag-close-icon:hover {
     background-color: var(--ant-color-primary);
     color: var(--ant-color-primary-bg);
+  }
+`;
+
+export const StyledSelect = styled(Select)`
+  .ant-select-selector {
+    border-radius: 20px !important;
+  }
+  
+  .ant-select-dropdown {
+    border-radius: 12px;
+    padding: 4px;
+  }
+  
+  .ant-select-item {
+    border-radius: 6px;
+    padding: 5px 12px;
+    margin: 2px 0;
+  }
+  
+  .ant-select-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: var(--ant-color-primary-bg);
+  }
+`;
+
+export const StyledSwitch = styled(Switch)`
+  min-width: 56px;
+  height: 24px;
+  border-radius: 20px;
+  
+  .ant-switch-handle {
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+  }
+  
+  &.ant-switch-checked .ant-switch-handle {
+    left: calc(100% - 22px);
+  }
+  
+  .ant-switch-inner {
+    margin: 0 4px 0 24px;
+  }
+  
+  &.ant-switch-checked .ant-switch-inner {
+    margin: 0 24px 0 4px;
   }
 `; 

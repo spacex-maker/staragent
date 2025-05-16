@@ -10,5 +10,6 @@ export interface BasicInfoFormProps {
     status?: 'active' | 'inactive' | 'archived';
     industryIds?: number[];
     industries?: Industry[];
+    createdAt?: string;
   };
-} 
+}

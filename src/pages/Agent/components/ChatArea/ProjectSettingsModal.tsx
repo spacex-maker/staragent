@@ -497,4 +497,4 @@ const ProjectSettingsModal: React.FC<ProjectSettingsModalProps> = ({
   );
 };
 
-export default ProjectSettingsModal; 
+export default ProjectSettingsModal;

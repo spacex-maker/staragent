@@ -32,9 +32,13 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
       form.setFieldsValue({
         name: project.name,
         description: project.description,
-        visibility: project.visibility,
-        industries: project.industries
+        visibility: project.visibility === 'public',
+        industries: project.industries,
+        status: project.status
       });
+      
+      // 同时设置隐藏字段的值
+      form.setFieldValue('visibilityValue', project.visibility);
     }
   }, [visible, project, form]);
 
@@ -58,7 +62,8 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           id: project.id,
           name: values.name,
           description: values.description,
-          visibility: values.visibility,
+          // 使用保存的字符串值而不是布尔值
+          visibility: values.visibilityValue || (values.visibility ? 'public' : 'private'),
           industryIds: industryIds,
           status: values.status
         };
@@ -95,7 +100,10 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           children: (
             <BasicInfoForm
               form={form}
-              initialValues={project}
+              initialValues={{
+                ...project,
+                createdAt: project.createdAt
+              }}
             />
           )
         },
