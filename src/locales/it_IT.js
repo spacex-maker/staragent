@@ -847,8 +847,6 @@ export default {
   'chat.freeModel.tooltip': 'Saldo insufficiente! Attualmente stai utilizzando il modello gratuito. Per utilizzare il modello avanzato configurato, effettua una ricarica. I modelli gratuiti potrebbero avere limitazioni in termini di funzionalità e prestazioni.',
 
   // 项目设置相关
-  'project.settings': 'Impostazioni del progetto',
-  'project.settings.title': 'Impostazioni del progetto',
   'project.settings.save.success': 'Impostazioni salvate con successo',
   'project.settings.save.failed': 'Salvataggio delle impostazioni fallito',
   'project.settings.save.error': 'Si è verificato un errore durante il salvataggio delle impostazioni',

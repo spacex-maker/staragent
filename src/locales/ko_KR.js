@@ -877,8 +877,6 @@ export default {
   'chat.freeModel.tooltip': '잔액 부족! 현재 무료 모델을 사용 중입니다. 구성된 고급 모델을 사용하려면 충전하세요. 무료 모델은 기능과 성능에 제한이 있을 수 있습니다.',
 
   // 项目设置相关
-  'project.settings': '프로젝트 설정',
-  'project.settings.title': '프로젝트 설정',
   'project.settings.save.success': '설정이 저장되었습니다',
   'project.settings.save.failed': '설정 저장에 실패했습니다',
   'project.settings.save.error': '설정 저장 중 오류가 발생했습니다',
