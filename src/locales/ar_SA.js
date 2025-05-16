@@ -917,5 +917,19 @@ export default {
     'الحاجة لتوفير استهلاك الرموز',
     'استشارات لمرة واحدة لا تتطلب ارتباط سياقي'
   ].join('||'),
-  'chat.temporary.modal.tip': 'نصيحة: تفعيل الجلسة المؤقتة يمكن أن يقلل بشكل كبير من استهلاك الرموز، ولكن مساعد الذكاء الاصطناعي لن يتذكر محتوى المحادثات السابقة.'
+  'chat.temporary.modal.tip': 'نصيحة: تفعيل الجلسة المؤقتة يمكن أن يقلل بشكل كبير من استهلاك الرموز، ولكن مساعد الذكاء الاصطناعي لن يتذكر محتوى المحادثات السابقة.',
+
+  // Memory Modal
+  'memory.modal.title': 'مكتبة ذاكرة {agentName}',
+  'memory.vector.tab': 'ذاكرة متجهية',
+  'memory.structured.tab': 'ذاكرة منظمة',
+  'memory.search.placeholder': 'البحث في محتوى الذاكرة...',
+  'memory.search.button': 'بحث',
+  'memory.clear.button': 'مسح',
+  'memory.empty.withSearch': 'لم يتم العثور على ذكريات مطابقة',
+  'memory.empty.noData': 'لا توجد بيانات ذاكرة متاحة',
+  'memory.context.label': 'السياق:',
+  'memory.relevance': 'الصلة: {score}%',
+  'memory.error.fetchVector': 'فشل في جلب الذاكرة المتجهية',
+  'memory.error.fetchStructured': 'فشل في جلب الذاكرة المنظمة',
 };

@@ -908,5 +908,19 @@ export default {
     'Besoin d\'économiser la consommation de tokens',
     'Consultation ponctuelle ne nécessitant pas de lien contextuel'
   ].join('||'),
-  'chat.temporary.modal.tip': 'Conseil : Activer la session temporaire peut réduire considérablement la consommation de tokens, mais l\'assistant IA ne se souviendra pas du contenu des conversations précédentes.'
+  'chat.temporary.modal.tip': 'Conseil : Activer la session temporaire peut réduire considérablement la consommation de tokens, mais l\'assistant IA ne se souviendra pas du contenu des conversations précédentes.',
+
+  // Memory Modal
+  'memory.modal.title': 'Bibliothèque de mémoire de {agentName}',
+  'memory.vector.tab': 'Mémoire vectorielle',
+  'memory.structured.tab': 'Mémoire structurée',
+  'memory.search.placeholder': 'Rechercher dans le contenu de la mémoire...',
+  'memory.search.button': 'Rechercher',
+  'memory.clear.button': 'Effacer',
+  'memory.empty.withSearch': 'Aucune mémoire correspondante trouvée',
+  'memory.empty.noData': 'Aucune donnée de mémoire disponible',
+  'memory.context.label': 'Contexte :',
+  'memory.relevance': 'Pertinence : {score}%',
+  'memory.error.fetchVector': 'Échec de la récupération des mémoires vectorielles',
+  'memory.error.fetchStructured': 'Échec de la récupération des mémoires structurées',
 };

@@ -899,5 +899,19 @@ export default {
     'トークン消費を節約する必要がある場合',
     'コンテキストの連続性が不要な一回限りの相談'
   ].join('||'),
-  'chat.temporary.modal.tip': 'ヒント：一時的なセッションを有効にするとトークン消費を大幅に削減できますが、AIアシスタントは以前の会話内容を記憶できなくなります。'
+  'chat.temporary.modal.tip': 'ヒント：一時的なセッションを有効にするとトークン消費を大幅に削減できますが、AIアシスタントは以前の会話内容を記憶できなくなります。',
+
+  // Memory Modal
+  'memory.modal.title': '{agentName}のメモリーライブラリ',
+  'memory.vector.tab': 'ベクトルメモリー',
+  'memory.structured.tab': '構造化メモリー',
+  'memory.search.placeholder': 'メモリー内容を検索...',
+  'memory.search.button': '検索',
+  'memory.clear.button': 'クリア',
+  'memory.empty.withSearch': '該当するメモリーが見つかりません',
+  'memory.empty.noData': 'メモリーデータがありません',
+  'memory.context.label': 'コンテキスト：',
+  'memory.relevance': '関連度: {score}%',
+  'memory.error.fetchVector': 'ベクトルメモリーの取得に失敗しました',
+  'memory.error.fetchStructured': '構造化メモリーの取得に失敗しました'
 };

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Input, List, Empty, Spin, Typography, Tag, Button, Space, Avatar } from 'antd';
-import { SearchOutlined, ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { Modal, Input, List, Empty, Spin, Typography, Tag, Button, Space, Avatar, Tabs } from 'antd';
+import { SearchOutlined, ClockCircleOutlined, UserOutlined, BulbOutlined, BookOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import instance from 'api/axios';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const { Text } = Typography;
 
@@ -54,6 +55,17 @@ const MemoryContent = styled(Text)`
   display: block;
 `;
 
+const MemoryContext = styled(Text)`
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ant-color-text-secondary);
+  margin-bottom: 8px;
+  display: block;
+  padding: 8px;
+  background: var(--ant-color-bg-elevated);
+  border-radius: 8px;
+`;
+
 const MemoryMeta = styled.div`
   display: flex;
   align-items: center;
@@ -64,23 +76,17 @@ const MemoryMeta = styled.div`
 
 const RelevanceTag = styled(Tag)<{ $importance: number }>`
   background: ${props => {
-    if (props.$importance >= 0.8) return props.theme.mode === 'dark' ? '#064e3b' : '#ecfdf5';
-    if (props.$importance >= 0.5) return props.theme.mode === 'dark' ? '#1e3a8a' : '#eff6ff';
-    if (props.$importance >= 0.3) return props.theme.mode === 'dark' ? '#783c00' : '#fffbeb';
-    return props.theme.mode === 'dark' ? '#7f1d1d' : '#fef2f2';
+    if (props.$importance >= 0.8) return 'var(--ant-color-success-bg)';
+    if (props.$importance >= 0.5) return 'var(--ant-color-warning-bg)';
+    return 'var(--ant-color-info-bg)';
   }};
   color: ${props => {
-    if (props.$importance >= 0.8) return props.theme.mode === 'dark' ? '#10b981' : '#047857';
-    if (props.$importance >= 0.5) return props.theme.mode === 'dark' ? '#3b82f6' : '#1d4ed8';
-    if (props.$importance >= 0.3) return props.theme.mode === 'dark' ? '#f59e0b' : '#b45309';
-    return props.theme.mode === 'dark' ? '#ef4444' : '#b91c1c';
+    if (props.$importance >= 0.8) return 'var(--ant-color-success)';
+    if (props.$importance >= 0.5) return 'var(--ant-color-warning)';
+    return 'var(--ant-color-info)';
   }};
-  border: 1px solid ${props => {
-    if (props.$importance >= 0.8) return props.theme.mode === 'dark' ? '#059669' : '#6ee7b7';
-    if (props.$importance >= 0.5) return props.theme.mode === 'dark' ? '#2563eb' : '#93c5fd';
-    if (props.$importance >= 0.3) return props.theme.mode === 'dark' ? '#d97706' : '#fcd34d';
-    return props.theme.mode === 'dark' ? '#dc2626' : '#fca5a5';
-  }};
+  border: none;
+  border-radius: 10px;
 `;
 
 const AgentHeader = styled.div`
@@ -90,22 +96,23 @@ const AgentHeader = styled.div`
 `;
 
 const AgentAvatar = styled(Avatar)`
-  flex-shrink: 0;
+  border: 2px solid var(--ant-color-primary-border);
+`;
+
+const StyledTabs = styled(Tabs)`
+  .ant-tabs-nav {
+    margin-bottom: 16px;
+  }
 `;
 
 interface Memory {
   id: string;
-  agentId: number;
-  memoryType: string;
   content: string;
-  context: string | null;
+  context?: string;
   timestamp: string;
-  tags: string[] | null;
-  connections: any[] | null;
-  createTime: string | null;
-  updateTime: string | null;
-  agentName: string;
   importance: number;
+  tags: string;
+  memoryType: string;
 }
 
 interface AgentMemoryModalProps {
@@ -122,10 +129,14 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
   open,
   onClose,
   agent,
-}) => {
+}): JSX.Element => {
+  const intl = useIntl();
   const [memories, setMemories] = useState<Memory[]>([]);
+  const [structuredMemories, setStructuredMemories] = useState<Memory[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingStructured, setLoadingStructured] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [activeTab, setActiveTab] = useState('vector');
 
   const fetchMemories = async (keyword: string) => {
     try {
@@ -142,24 +153,43 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
         setMemories(response.data.data);
       }
     } catch (error) {
-      console.error('Failed to fetch memories:', error);
+      console.error(intl.formatMessage({ id: 'memory.error.fetchVector' }), error);
     } finally {
       setLoading(false);
     }
   };
 
-  // 在模态框打开时加载初始数据
+  const fetchStructuredMemories = async () => {
+    try {
+      setLoadingStructured(true);
+      const response = await instance.get(`/productx/sa-ai-agent-memory/list-by-agent/${agent.agentId}`);
+      
+      if (response.data.success) {
+        setStructuredMemories(response.data.data);
+      }
+    } catch (error) {
+      console.error(intl.formatMessage({ id: 'memory.error.fetchStructured' }), error);
+    } finally {
+      setLoadingStructured(false);
+    }
+  };
+
   useEffect(() => {
     if (open) {
-      fetchMemories('');
+      if (activeTab === 'vector') {
+        fetchMemories('');
+      } else {
+        fetchStructuredMemories();
+      }
     }
     return () => {
       if (!open) {
         setSearchValue('');
         setMemories([]);
+        setStructuredMemories([]);
       }
     };
-  }, [open]);
+  }, [open, activeTab]);
 
   const handleSearch = () => {
     fetchMemories(searchValue.trim());
@@ -176,6 +206,110 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
     fetchMemories('');
   };
 
+  const handleTabChange = (key: string) => {
+    setActiveTab(key);
+  };
+
+  const renderMemoryList = (memoryList: Memory[], isLoading: boolean) => (
+    <Spin spinning={isLoading}>
+      {memoryList.length > 0 ? (
+        <MemoryList
+          dataSource={memoryList}
+          renderItem={(memory: Memory) => (
+            <List.Item>
+              <div style={{ width: '100%' }}>
+                <MemoryContent>{memory.content}</MemoryContent>
+                {memory.context && (
+                  <MemoryContext>
+                    <Text type="secondary">
+                      <FormattedMessage id="memory.context.label" />
+                    </Text>
+                    {memory.context}
+                  </MemoryContext>
+                )}
+                <MemoryMeta>
+                  <ClockCircleOutlined />
+                  <span>{memory.timestamp}</span>
+                  {memory.importance > 0 && (
+                    <RelevanceTag $importance={memory.importance}>
+                      <FormattedMessage 
+                        id="memory.relevance" 
+                        values={{ score: (memory.importance * 100).toFixed(0) }}
+                      />
+                    </RelevanceTag>
+                  )}
+                  {memory.memoryType && (
+                    <Tag color="blue">{memory.memoryType}</Tag>
+                  )}
+                  {memory.tags?.split(',').filter(Boolean).map((tag, index) => (
+                    <Tag key={index}>{tag}</Tag>
+                  ))}
+                </MemoryMeta>
+              </div>
+            </List.Item>
+          )}
+        />
+      ) : (
+        <Empty
+          description={
+            activeTab === 'vector' && searchValue
+              ? intl.formatMessage({ id: 'memory.empty.withSearch' })
+              : intl.formatMessage({ id: 'memory.empty.noData' })
+          }
+        />
+      )}
+    </Spin>
+  );
+
+  const items = [
+    {
+      key: 'vector',
+      label: (
+        <span>
+          <BulbOutlined /> <FormattedMessage id="memory.vector.tab" />
+        </span>
+      ),
+      children: (
+        <>
+          <SearchContainer>
+            <SearchInput
+              placeholder={intl.formatMessage({ id: 'memory.search.placeholder' })}
+              prefix={<SearchOutlined />}
+              value={searchValue}
+              onChange={e => setSearchValue(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <Space>
+              <SearchButton 
+                type="primary"
+                onClick={handleSearch}
+                loading={loading}
+              >
+                <FormattedMessage id="memory.search.button" />
+              </SearchButton>
+              <SearchButton 
+                onClick={handleClear}
+                disabled={loading || (!searchValue && memories.length === 0)}
+              >
+                <FormattedMessage id="memory.clear.button" />
+              </SearchButton>
+            </Space>
+          </SearchContainer>
+          {renderMemoryList(memories, loading)}
+        </>
+      ),
+    },
+    {
+      key: 'structured',
+      label: (
+        <span>
+          <BookOutlined /> <FormattedMessage id="memory.structured.tab" />
+        </span>
+      ),
+      children: renderMemoryList(structuredMemories, loadingStructured),
+    },
+  ];
+
   return (
     <Modal
       title={
@@ -185,74 +319,25 @@ const AgentMemoryModal: React.FC<AgentMemoryModalProps> = ({
           ) : (
             <AgentAvatar icon={<UserOutlined />} size={32} />
           )}
-          <span>{`${agent.agentName}的记忆库`}</span>
+          <span>
+            <FormattedMessage 
+              id="memory.modal.title" 
+              values={{ agentName: agent.agentName }}
+            />
+          </span>
         </AgentHeader>
       }
       open={open}
       onCancel={onClose}
       footer={null}
-      width={600}
+      width={700}
       bodyStyle={{ maxHeight: '70vh', overflow: 'auto' }}
     >
-      <SearchContainer>
-        <SearchInput
-          placeholder="搜索记忆内容..."
-          prefix={<SearchOutlined />}
-          value={searchValue}
-          onChange={e => setSearchValue(e.target.value)}
-          onKeyPress={handleKeyPress}
-        />
-        <Space>
-          <SearchButton 
-            type="primary"
-            onClick={handleSearch}
-            loading={loading}
-          >
-            查询
-          </SearchButton>
-          <SearchButton 
-            onClick={handleClear}
-            disabled={loading || (!searchValue && memories.length === 0)}
-          >
-            清空
-          </SearchButton>
-        </Space>
-      </SearchContainer>
-      
-      <Spin spinning={loading}>
-        {memories.length > 0 ? (
-          <MemoryList
-            dataSource={memories}
-            renderItem={(memory: Memory) => (
-              <List.Item>
-                <div style={{ width: '100%' }}>
-                  <MemoryContent>{memory.content}</MemoryContent>
-                  <MemoryMeta>
-                    <ClockCircleOutlined />
-                    <span>{memory.timestamp}</span>
-                    {memory.importance > 0 && (
-                      <RelevanceTag $importance={memory.importance}>
-                        相关度: {(memory.importance * 100).toFixed(0)}%
-                      </RelevanceTag>
-                    )}
-                    {memory.tags?.map((tag, index) => (
-                      <Tag key={index}>{tag}</Tag>
-                    ))}
-                  </MemoryMeta>
-                </div>
-              </List.Item>
-            )}
-          />
-        ) : (
-          <Empty
-            description={
-              searchValue
-                ? "没有找到相关记忆"
-                : "暂无记忆数据"
-            }
-          />
-        )}
-      </Spin>
+      <StyledTabs 
+        activeKey={activeTab}
+        onChange={handleTabChange}
+        items={items}
+      />
     </Modal>
   );
 };

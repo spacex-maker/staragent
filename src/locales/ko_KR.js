@@ -939,5 +939,19 @@ export default {
     '토큰 소비 절약이 필요한 경우',
     '컨텍스트 연결이 필요 없는 일회성 상담'
   ].join('||'),
-  'chat.temporary.modal.tip': '팁: 임시 세션을 활성화하면 토큰 소비를 크게 줄일 수 있지만, AI 어시스턴트는 이전 대화 내용을 기억하지 못합니다.'
+  'chat.temporary.modal.tip': '팁: 임시 세션을 활성화하면 토큰 소비를 크게 줄일 수 있지만, AI 어시스턴트는 이전 대화 내용을 기억하지 못합니다.',
+
+  // Memory Modal
+  'memory.modal.title': '{agentName}의 메모리 라이브러리',
+  'memory.vector.tab': '벡터 메모리',
+  'memory.structured.tab': '구조화된 메모리',
+  'memory.search.placeholder': '메모리 내용 검색...',
+  'memory.search.button': '검색',
+  'memory.clear.button': '지우기',
+  'memory.empty.withSearch': '일치하는 메모리를 찾을 수 없습니다',
+  'memory.empty.noData': '메모리 데이터가 없습니다',
+  'memory.context.label': '컨텍스트:',
+  'memory.relevance': '관련도: {score}%',
+  'memory.error.fetchVector': '벡터 메모리 가져오기 실패',
+  'memory.error.fetchStructured': '구조화된 메모리 가져오기 실패',
 };

@@ -931,5 +931,19 @@ export default {
   'chat.temporary.modal.tip': 'Note: Enabling temporary chat significantly reduces token consumption, but AI assistants will not remember previous conversations.',
   'chat.temporary.status': 'Currently in temporary chat mode',
   'chat.temporary.enabled': 'Temporary chat enabled',
-  'chat.temporary.disabled': 'Temporary chat disabled'
+  'chat.temporary.disabled': 'Temporary chat disabled',
+
+  // Memory Modal
+  'memory.modal.title': '{agentName}\'s Memory Library',
+  'memory.vector.tab': 'Vector Memory',
+  'memory.structured.tab': 'Structured Memory',
+  'memory.search.placeholder': 'Search memory content...',
+  'memory.search.button': 'Search',
+  'memory.clear.button': 'Clear',
+  'memory.empty.withSearch': 'No matching memories found',
+  'memory.empty.noData': 'No memory data available',
+  'memory.context.label': 'Context:',
+  'memory.relevance': 'Relevance: {score}%',
+  'memory.error.fetchVector': 'Failed to fetch vector memories',
+  'memory.error.fetchStructured': 'Failed to fetch structured memories',
 };

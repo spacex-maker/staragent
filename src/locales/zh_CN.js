@@ -899,5 +899,19 @@ export default {
     '需要节省token开销',
     '不需要上下文联系的单次咨询'
   ].join('||'),
-  'chat.temporary.modal.tip': '提示：开启临时会话可以显著降低token消耗，但AI助手将无法记住之前的对话内容。'
+  'chat.temporary.modal.tip': '提示：开启临时会话可以显著降低token消耗，但AI助手将无法记住之前的对话内容。',
+
+  // Memory Modal
+  'memory.modal.title': '{agentName}的记忆库',
+  'memory.vector.tab': '向量记忆',
+  'memory.structured.tab': '结构化记忆',
+  'memory.search.placeholder': '搜索记忆内容...',
+  'memory.search.button': '查询',
+  'memory.clear.button': '清空',
+  'memory.empty.withSearch': '没有找到相关记忆',
+  'memory.empty.noData': '暂无记忆数据',
+  'memory.context.label': '上下文：',
+  'memory.relevance': '相关度: {score}%',
+  'memory.error.fetchVector': '获取向量记忆失败',
+  'memory.error.fetchStructured': '获取结构化记忆失败'
 }; 

@@ -909,5 +909,19 @@ export default {
     'Einsparung von Token-Verbrauch',
     'Einmalige Beratungen ohne Kontextbeziehung'
   ].join('||'),
-  'chat.temporary.modal.tip': 'Tipp: Das Aktivieren der temporären Sitzung kann den Token-Verbrauch deutlich reduzieren, jedoch wird sich der KI-Assistent nicht an frühere Gesprächsinhalte erinnern.'
+  'chat.temporary.modal.tip': 'Tipp: Das Aktivieren der temporären Sitzung kann den Token-Verbrauch deutlich reduzieren, jedoch wird sich der KI-Assistent nicht an frühere Gesprächsinhalte erinnern.',
+
+  // Memory Modal
+  'memory.modal.title': 'Gedächtnisbibliothek von {agentName}',
+  'memory.vector.tab': 'Vektorgedächtnis',
+  'memory.structured.tab': 'Strukturiertes Gedächtnis',
+  'memory.search.placeholder': 'Gedächtnisinhalt durchsuchen...',
+  'memory.search.button': 'Suchen',
+  'memory.clear.button': 'Löschen',
+  'memory.empty.withSearch': 'Keine passenden Erinnerungen gefunden',
+  'memory.empty.noData': 'Keine Gedächtnisdaten verfügbar',
+  'memory.context.label': 'Kontext:',
+  'memory.relevance': 'Relevanz: {score}%',
+  'memory.error.fetchVector': 'Fehler beim Abrufen der Vektorgedächtnisse',
+  'memory.error.fetchStructured': 'Fehler beim Abrufen der strukturierten Gedächtnisse'
 };
