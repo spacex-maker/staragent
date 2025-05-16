@@ -38,17 +38,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
     }
   }, [initialValues, industries, form]);
 
-  // 设置可见性的初始值
-  useEffect(() => {
-    // 将visibility字段转化为布尔值，public为true，private为false
-    // 默认为false（私有）
-    const visibilityValue = initialValues?.visibility === 'public';
-    setIsPublic(visibilityValue);
-    form.setFieldsValue({ 
-      visibility: visibilityValue,
-      visibilityValue: initialValues?.visibility || 'private'
-    });
-  }, [initialValues, form]);
+  // 处理可见性变化
+  const handleVisibilityChange = (checked: boolean) => {
+    setIsPublic(checked);
+    form.setFieldValue('visibility', checked ? 'public' : 'private');
+  };
 
   const findIndustryPath = (targetId: number, options: any[]): number[] | null => {
     for (const option of options) {
@@ -84,20 +78,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
     return null;
   };
 
-  // 处理可见性变化，将布尔值转换为字符串形式存储到表单
-  const handleVisibilityChange = (checked: boolean) => {
-    setIsPublic(checked);
-    // 在这里将布尔值转换回 'public' 或 'private' 字符串
-    const formValueToSave = checked ? 'public' : 'private';
-    
-    // 更新隐藏字段，用于表单提交
-    form.setFieldValue('visibilityValue', formValueToSave);
-  };
-
   return (
     <Form
       form={form}
       layout="vertical"
+      initialValues={initialValues}
     >
       <Row gutter={16}>
         <Col span={16}>
@@ -119,9 +104,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
             name="status"
             label={<FormattedMessage id="project.status" defaultMessage="项目状态" />}
             rules={[{ required: true, message: intl.formatMessage({ id: 'project.status.required', defaultMessage: '请选择项目状态' }) }]}
-            initialValue="active"
           >
-            <StyledSelect>
+            <StyledSelect
+              data-testid="project-status-select"
+            >
               <Option value="active">{intl.formatMessage({ id: 'project.status.active', defaultMessage: '启用' })}</Option>
               <Option value="inactive">{intl.formatMessage({ id: 'project.status.inactive', defaultMessage: '禁用' })}</Option>
               <Option value="archived">{intl.formatMessage({ id: 'project.status.archived', defaultMessage: '归档' })}</Option>
@@ -161,7 +147,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
       </Form.Item>
       
       <Row gutter={16} align="middle">
-        <Col span={19}>
+        <Col span={16}>
           <Form.Item
             name="industryIds"
             label={<FormattedMessage id="project.industry" defaultMessage="所属行业" />}
@@ -234,19 +220,17 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
             />
           </Form.Item>
         </Col>
-        <Col span={5} style={{ paddingLeft: 0 }}>
-          {/* 可见性开关控件 */}
+        <Col span={8} style={{ paddingLeft: 0 }}>
           <Form.Item
             name="visibility"
             label={<FormattedMessage id="project.visibility" defaultMessage="可见性" />}
             rules={[{ required: true, message: intl.formatMessage({ id: 'project.visibility.required', defaultMessage: '请选择可见性' }) }]}
-            valuePropName="checked"
           >
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
               <StyledSwitch 
                 checkedChildren={<GlobalOutlined />} 
                 unCheckedChildren={<LockOutlined />} 
-                defaultChecked={false}
+                checked={isPublic}
                 onChange={handleVisibilityChange}
               />
               {isPublic ? (
@@ -262,12 +246,8 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ form, initialValues }) =>
           </Form.Item>
         </Col>
       </Row>
-      
-      {/* 隐藏字段，用于保存可见性的实际值 */}
-      <Form.Item name="visibilityValue" hidden initialValue="private">
-        <Input />
-      </Form.Item>
     </Form>
   );
 };
+
 export default BasicInfoForm;

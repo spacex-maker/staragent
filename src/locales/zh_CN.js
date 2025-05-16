@@ -872,5 +872,8 @@ export default {
   'project.chatSettings.replyMode': '回复模式设置',
   'project.chatSettings.replyMode.description': '设置多个AI助手如何响应用户的消息',
   'project.chatSettings.replyMode.tooltip': '选择AI助手回复用户消息的方式',
-  'project.createdAt': '创建时间：{time}'
+  'project.createdAt': '创建时间：{time}',
+  'project.archived.error': '项目已归档，请先重新开启项目后再操作',
+  'project.archived.error.chat': '该项目已被归档，请联系项目管理员重新开启项目后再继续对话。',
+  'chat.error.send': '抱歉，消息发送失败。请稍后重试。'
 }; 

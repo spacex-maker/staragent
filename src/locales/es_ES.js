@@ -904,5 +904,8 @@ export default {
   'project.chatSettings.replyMode.tooltip': 'Elija cómo los asistentes de IA responden a los mensajes del usuario',
   
   // 项目信息
-  'project.createdAt': 'Fecha de creación: {time}',
+  'project.createdAt': 'Creado el: {time}',
+  'project.archived.error': 'El proyecto está archivado. Por favor, reactívelo antes de continuar.',
+  'project.archived.error.chat': 'Este proyecto ha sido archivado. Por favor, contacte al administrador del proyecto para reactivarlo antes de continuar la conversación.',
+  'chat.error.send': 'Lo siento, el envío del mensaje falló. Por favor, inténtelo de nuevo más tarde.',
 };

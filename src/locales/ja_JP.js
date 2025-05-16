@@ -873,4 +873,7 @@ export default {
   
   // 项目信息
   'project.createdAt': '作成日時：{time}',
+  'project.archived.error': 'プロジェクトはアーカイブされています。再開してから操作してください。',
+  'project.archived.error.chat': 'このプロジェクトはアーカイブされています。プロジェクト管理者に連絡して再開してから会話を続けてください。',
+  'chat.error.send': '申し訳ありません。メッセージの送信に失敗しました。後でもう一度お試しください。',
 };

@@ -29,18 +29,10 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
 
   React.useEffect(() => {
     if (visible && project) {
-      form.setFieldsValue({
-        name: project.name,
-        description: project.description,
-        visibility: project.visibility === 'public',
-        industries: project.industries,
-        status: project.status
-      });
-      
-      // 同时设置隐藏字段的值
-      form.setFieldValue('visibilityValue', project.visibility);
+      console.log('编辑项目:', project);
+      console.log('项目可见性:', project.visibility);
     }
-  }, [visible, project, form]);
+  }, [visible, project]);
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
@@ -62,8 +54,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
           id: project.id,
           name: values.name,
           description: values.description,
-          // 使用保存的字符串值而不是布尔值
-          visibility: values.visibilityValue || (values.visibility ? 'public' : 'private'),
+          visibility: values.visibility,
           industryIds: industryIds,
           status: values.status
         };
@@ -102,6 +93,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
               form={form}
               initialValues={{
                 ...project,
+                visibility: project.visibility as 'public' | 'private',
                 createdAt: project.createdAt
               }}
             />

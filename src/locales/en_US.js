@@ -905,5 +905,8 @@ export default {
   'project.chatSettings.replyMode': 'Reply Mode Settings',
   'project.chatSettings.replyMode.description': 'Set how multiple AI assistants respond to user messages',
   'project.chatSettings.replyMode.tooltip': 'Choose how AI assistants reply to user messages',
-  'project.createdAt': 'Created on: {time}'
+  'project.createdAt': 'Created at: {time}',
+  'project.archived.error': 'Project is archived. Please reactivate it before proceeding.',
+  'project.archived.error.chat': 'This project has been archived. Please contact the project administrator to reactivate it before continuing the conversation.',
+  'chat.error.send': 'Sorry, message sending failed. Please try again later.'
 };

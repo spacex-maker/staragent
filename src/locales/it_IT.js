@@ -883,4 +883,8 @@ export default {
   
   // 项目信息
   'project.createdAt': 'Data di creazione: {time}',
+
+  'project.archived.error': 'Il progetto è stato archiviato. Si prega di riattivarlo prima di procedere.',
+  'project.archived.error.chat': 'Questo progetto è stato archiviato. Si prega di contattare l\'amministratore del progetto per riattivarlo prima di continuare la conversazione.',
+  'chat.error.send': 'Spiacenti, l\'invio del messaggio non è riuscito. Si prega di riprovare più tardi.'
 };

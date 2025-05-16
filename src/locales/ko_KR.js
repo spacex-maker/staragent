@@ -913,4 +913,7 @@ export default {
   
   // 项目信息
   'project.createdAt': '생성 날짜: {time}',
+  'project.archived.error': '프로젝트가 보관되었습니다. 다시 활성화한 후 진행해 주세요.',
+  'project.archived.error.chat': '이 프로젝트는 보관되었습니다. 프로젝트 관리자에게 연락하여 다시 활성화한 후 대화를 계속해 주세요.',
+  'chat.error.send': '죄송합니다. 메시지 전송에 실패했습니다. 나중에 다시 시도해 주세요.',
 };

@@ -882,4 +882,7 @@ export default {
   
   // 项目信息
   'project.createdAt': 'Créé le: {time}',
+  'project.archived.error': 'Le projet est archivé. Veuillez le réactiver avant de continuer.',
+  'project.archived.error.chat': 'Ce projet a été archivé. Veuillez contacter l\'administrateur du projet pour le réactiver avant de poursuivre la conversation.',
+  'chat.error.send': 'Désolé, l\'envoi du message a échoué. Veuillez réessayer plus tard.',
 };

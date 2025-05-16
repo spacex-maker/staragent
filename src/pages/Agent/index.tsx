@@ -7,6 +7,7 @@ import ChatArea from './components/ChatArea';
 import { Message, Project } from './types';
 import axios from '../../api/axios';
 import { IndustryProvider } from './contexts/IndustryContext';
+import { useIntl } from 'react-intl';
 
 const StyledLayout = styled(Layout)`
   width: 100vw;
@@ -44,6 +45,7 @@ const AgentPage: React.FC = () => {
   const [controller, setController] = useState<AbortController | null>(null);
   const [projectListKey, setProjectListKey] = useState<string>('projects');
   const [shouldTriggerAddAgent, setShouldTriggerAddAgent] = useState(false);
+  const intl = useIntl();
 
   // 获取项目列表
   const fetchProjects = React.useCallback(async () => {
@@ -55,7 +57,8 @@ const AgentPage: React.FC = () => {
           id: project.id.toString(),
           name: project.name,
           description: project.description,
-          visibility: project.visibility,
+          visibility: project.visibility || 'private',
+          status: project.status,
           isActive: project.status === 'active',
           createdAt: project.createTime,
           updatedAt: project.updateTime,
@@ -157,14 +160,13 @@ const AgentPage: React.FC = () => {
         ...values
       });
       if (response.data.success) {
-        message.success('更新项目成功');
         fetchProjects();
       } else {
-        message.error(response.data.message || '更新项目失败');
+        message.error(response.data.message || intl.formatMessage({ id: 'project.update.error', defaultMessage: '更新项目失败' }));
       }
     } catch (error) {
       console.error('更新项目错误:', error);
-      message.error('更新项目失败，请稍后重试');
+      message.error(intl.formatMessage({ id: 'project.update.error', defaultMessage: '更新项目失败，请稍后重试' }));
     }
   };
 
@@ -252,26 +254,56 @@ const AgentPage: React.FC = () => {
             return newMessages;
           });
         }
-      } else {
-        message.error(response.data.message || '发送消息失败');
       }
     } catch (error) {
       console.error('发送消息错误:', error);
+      
+      // 只处理非取消请求的错误
       if (!(error instanceof Error && error.name === 'CanceledError')) {
-        message.error('发送消息失败，请稍后重试');
-        const errorMessage: Message = {
-          id: Date.now(),
-          userId: 0,
-          sessionId: sessionId || '',
-          role: 'assistant',
-          content: '抱歉，发送消息时出现错误，请稍后重试。',
-          createTime: new Date().toISOString(),
-          updateTime: new Date().toISOString(),
-          agentName: '系统',
-          agentId: 0,
-          model: null
-        };
-        setMessages(prev => [...prev, errorMessage]);
+        // 检查是否是项目已归档的错误
+        const isProjectArchived = error.response?.data?.message === 'PROJECT_ARCHIVED' || 
+                                (error instanceof Error && error.message === 'PROJECT_ARCHIVED');
+        
+        if (isProjectArchived) {
+          const errorMessage: Message = {
+            id: Date.now(),
+            userId: 0,
+            sessionId: sessionId || '',
+            role: 'assistant',
+            content: intl.formatMessage({ 
+              id: 'project.archived.error.chat',
+              defaultMessage: '该项目已被归档，请联系项目管理员重新开启项目后再继续对话。'
+            }),
+            createTime: new Date().toISOString(),
+            updateTime: new Date().toISOString(),
+            agentName: '系统',
+            agentId: 0,
+            model: null
+          };
+          setMessages(prev => [...prev, errorMessage]);
+          message.error(intl.formatMessage({ 
+            id: 'project.archived.error',
+            defaultMessage: '项目已归档，请先重新开启项目后再操作'
+          }));
+        } else {
+          // 其他错误的处理
+          const errorMessage: Message = {
+            id: Date.now(),
+            userId: 0,
+            sessionId: sessionId || '',
+            role: 'assistant',
+            content: intl.formatMessage({ 
+              id: 'chat.error.send',
+              defaultMessage: '抱歉，消息发送失败。请稍后重试。'
+            }),
+            createTime: new Date().toISOString(),
+            updateTime: new Date().toISOString(),
+            agentName: '系统',
+            agentId: 0,
+            model: null
+          };
+          setMessages(prev => [...prev, errorMessage]);
+        }
       }
     } finally {
       setSendLoading(false);
