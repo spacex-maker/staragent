@@ -72,6 +72,18 @@ export const PoweredByWrapper = styled.div`
   z-index: 10;
   white-space: nowrap;
   
+  .team-name {
+    color: var(--ant-color-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0 2px;
+    
+    &:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+  }
+  
   @media (max-width: 768px) {
     bottom: 0.5rem;
     font-size: 0.7rem;
@@ -82,5 +94,165 @@ export const PoweredByWrapper = styled.div`
     margin-top: 0.25rem;
     opacity: 0.7;
     font-size: 0.7rem;
+  }
+`;
+
+const shimmer = keyframes`
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+`;
+
+export const TeamMembersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+`;
+
+export const TeamMemberCard = styled.div`
+  position: relative;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(4px);
+    
+    .hover-effect {
+      opacity: 1;
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+
+  .role {
+    color: var(--ant-color-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.01em;
+  }
+
+  .hover-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: ${shimmer} 2s infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+`;
+
+export const JoinTeamCard = styled.div`
+  position: relative;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(var(--ant-primary-rgb), 0.15);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+
+  &:hover {
+    background: rgba(var(--ant-primary-rgb), 0.25);
+    transform: translateX(4px);
+    
+    .hover-effect {
+      opacity: 1;
+    }
+
+    .mail-icon {
+      transform: translateY(-2px);
+    }
+  }
+
+  .mail-icon {
+    font-size: 16px;
+    color: var(--ant-color-primary);
+    transition: transform 0.3s ease;
+  }
+
+  .text {
+    color: var(--ant-color-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .hover-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--ant-primary-rgb), 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: ${shimmer} 1.5s infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+`;
+
+export const EmailInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 4px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .icon {
+    font-size: 12px;
+    color: var(--ant-color-text-quaternary);
+  }
+
+  .email {
+    font-size: 12px;
+    color: var(--ant-color-text-quaternary);
+    font-family: monospace;
+    letter-spacing: 0.02em;
   }
 `; 
