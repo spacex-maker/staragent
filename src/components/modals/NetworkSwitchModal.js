@@ -80,6 +80,17 @@ const NetworkDescription = styled.div`
   color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.45)' : 'rgba(0, 0, 0, 0.45)'};
 `;
 
+const WarningText = styled.div`
+  display: block;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: ${props => props.theme.mode === 'dark' ? 'rgba(255, 77, 79, 0.1)' : 'rgba(255, 77, 79, 0.05)'};
+  color: #ff4d4f;
+  border: 1px solid rgba(255, 77, 79, 0.2);
+`;
+
 const StatusBadge = styled.div`
   position: absolute;
   top: 20px;
@@ -126,6 +137,7 @@ const NetworkSwitchModal = ({ open, onClose, currentNetwork, onNetworkChange }) 
           </NetworkTitle>
           <NetworkDescription>
             中国大陆地区优化线路，访问速度更快
+            <WarningText>注意：该节点无法使用OpenAI相关模型</WarningText>
           </NetworkDescription>
         </NetworkCard>
 

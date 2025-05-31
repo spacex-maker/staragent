@@ -303,7 +303,7 @@ const UserMenu = ({ userInfo, isDark, onLogout }) => {
   const [showModelsModal, setShowModelsModal] = useState(false);
   const [showRechargeModal, setShowRechargeModal] = useState(false);
   const [currentNetwork, setCurrentNetwork] = useState(() => 
-    localStorage.getItem('network') || 'china'
+    localStorage.getItem('network') || 'japan'
   );
 
   useEffect(() => {
