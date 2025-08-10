@@ -2,7 +2,7 @@ import axios from 'axios';
 import { message } from 'antd';
 
 // 获取当前网络设置
-const getCurrentNetwork = () => localStorage.getItem('network') || 'japan';
+const getCurrentNetwork = () => localStorage.getItem('network') || 'd';
 
 // 获取基地址
 const getBaseURL = () => {
