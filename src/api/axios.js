@@ -18,7 +18,7 @@ const getBaseURL = () => {
     case 'japan':
       return 'https://ja.api.aimatex.com';
     default:
-      return 'https://api.aimatex.com';
+      return 'https://api.anakkix.cn';
   }
 };
 
